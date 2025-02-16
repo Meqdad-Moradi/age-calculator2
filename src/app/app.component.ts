@@ -7,6 +7,4 @@ import { HomeComponent } from './components/home/home.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  title = 'age-calculator';
-}
+export class AppComponent {}
