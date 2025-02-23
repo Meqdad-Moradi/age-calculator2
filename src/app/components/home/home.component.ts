@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class HomeComponent {
   private readonly fb = inject(FormBuilder);
+  private readonly snackbar = inject(MatSnackBar);
 
   public result = 0;
 
@@ -33,7 +35,13 @@ export class HomeComponent {
     e.preventDefault();
 
     // If the form is invalid, do nothing
-    if (this.calculatorForm.invalid) return;
+    if (this.calculatorForm.invalid) {
+      this.snackbar.open('Please enter a valid date', 'Close', {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
+      return;
+    }
 
     // Get the value of the date input field
     const inputValue = this.calculatorForm.get('date')?.value;
