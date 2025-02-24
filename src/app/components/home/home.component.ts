@@ -36,10 +36,7 @@ export class HomeComponent {
 
     // If the form is invalid, do nothing
     if (this.calculatorForm.invalid) {
-      this.snackbar.open('Please enter a valid date', 'Close', {
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
-      });
+      this.displaySnackbar('Please enter a valid date');
       return;
     }
 
@@ -48,6 +45,9 @@ export class HomeComponent {
 
     // Calculate the age difference and set the result
     this.result = this.calculateDiff(inputValue || '');
+    if (this.result === 0) {
+      this.displaySnackbar('Your age is less than a year');
+    }
   }
 
   /**
@@ -67,5 +67,17 @@ export class HomeComponent {
     // Convert the time difference from milliseconds to years
     const age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
     return age;
+  }
+
+  /**
+   * displaySnackbar
+   * @param message string
+   * @returns void
+   */
+  private displaySnackbar(message: string): void {
+    this.snackbar.open(message, 'Close', {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
   }
 }
