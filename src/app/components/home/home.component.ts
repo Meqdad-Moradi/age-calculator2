@@ -7,13 +7,25 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
-  imports: [ReactiveFormsModule, FormsModule, MatButtonModule],
+  imports: [
+    ReactiveFormsModule,
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+  ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  providers: [provideNativeDateAdapter()],
 })
 export class HomeComponent {
   private readonly fb = inject(FormBuilder);

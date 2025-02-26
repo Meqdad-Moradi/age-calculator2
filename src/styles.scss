@@ -15,3 +15,14 @@ body {
 .dark-theme {
   background-color: var(--background-color) !important;
 }
+
+// angular material (mdc) styles
+button:where([mat-raised-button], [color="primary"]) {
+  background-color: var(--primary) !important;
+  color: var(--text-color) !important;
+}
+
+// remove none required border inside form field
+.mdc-notched-outline__notch {
+  border-right: none;
+}
