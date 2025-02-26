@@ -90,6 +90,7 @@ export class HomeComponent {
     this.snackbar.open(message, 'Close', {
       horizontalPosition: 'center',
       verticalPosition: 'top',
+      duration: 3000,
     });
   }
 }
