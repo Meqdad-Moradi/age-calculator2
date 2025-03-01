@@ -12,6 +12,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SwitchThemeComponent } from '../switch-theme/switch-theme.component';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +23,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
+    SwitchThemeComponent,
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],

@@ -9,15 +9,26 @@
   --text-color: #f0f0f0;
 }
 
+.light-theme {
+  --primary: #016fb9;
+  --secondary: #22aed1;
+  --tertiary: #182825;
+  --background-color: #f0f0f0;
+  --text-color: #101828;
+}
+
 html {
-  color-scheme: dark;
+  color-scheme: light !important;
   @include mat.theme(
     (
       color: (
-        theme-type: dark,
         primary: theme-colors.$primary-palette,
         tertiary: theme-colors.$tertiary-palette,
       ),
     )
   );
+}
+
+.light-theme {
+  color-scheme: dark !important;
 }
