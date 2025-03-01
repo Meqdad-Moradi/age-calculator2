@@ -1,0 +1,18 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Switch theme">
+  <mat-icon>{{ themeIcon() }}</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="toggleTheme('light')">
+    <mat-icon>light_mode</mat-icon>
+    <span>Light Mode</span>
+  </button>
+  <button mat-menu-item (click)="toggleTheme('dark')">
+    <mat-icon>dark_mode</mat-icon>
+    <span>Dark Mode</span>
+  </button>
+  <button mat-menu-item (click)="toggleTheme('system')">
+    <mat-icon>devices</mat-icon>
+    <span>System Mode</span>
+  </button>
+</mat-menu>
