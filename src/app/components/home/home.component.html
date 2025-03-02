@@ -44,40 +44,54 @@
 
     <div class="mt-4">
       <div class="flex flex-col justify-between">
-        <div class="flex items-center gap-2">
-          <h2
-            class="font-bold text-xl text-gray-700 dark:text-gray-300 min-w-20"
-          >
-            Years:
-          </h2>
-          <h2 class="font-bold text-2xl text-gray-700 dark:text-gray-300">
-            {{ age.years }}
-          </h2>
-        </div>
+        <!-- display years -->
+        @if (age.years) {
+        <ng-container
+          *ngTemplateOutlet="
+            result;
+            context: {
+              value: age.years,
+              label: age.years > 1 ? 'Years' : 'Year'
+            }
+          "
+        ></ng-container>
+        }
 
-        <div class="flex items-center gap-2">
-          <h2
-            class="font-bold text-xl text-gray-700 dark:text-gray-300 min-w-20"
-          >
-            Months:
-          </h2>
-          <h2 class="font-bold text-2xl text-gray-700 dark:text-gray-300">
-            {{ age.months }}
-          </h2>
-        </div>
+        <!-- display months -->
+        @if (age.months) {
+        <ng-container
+          *ngTemplateOutlet="
+            result;
+            context: {
+              value: age.months,
+              label: age.months > 1 ? 'Months' : 'Month'
+            }
+          "
+        ></ng-container>
+        }
 
-        <div class="flex items-center gap-2">
-          <h2
-            class="font-bold text-xl text-gray-700 dark:text-gray-300 min-w-20"
-          >
-            Days:
-          </h2>
-          <h2 class="font-bold text-2xl text-gray-700 dark:text-gray-300">
-            {{ age.days }}
-          </h2>
-        </div>
+        <!-- display days -->
+        @if (age.days) {
+        <ng-container
+          *ngTemplateOutlet="
+            result;
+            context: { value: age.days, label: age.days > 1 ? 'Days' : 'Day' }
+          "
+        ></ng-container>
+        }
       </div>
     </div>
   </div>
   }
 </section>
+
+<ng-template #result let-value="value" let-label="label">
+  <div class="flex items-center gap-2">
+    <h2 class="font-bold text-xl text-gray-700 dark:text-gray-300 min-w-20">
+      {{ label }}:
+    </h2>
+    <h2 class="font-bold text-2xl text-gray-700 dark:text-gray-300">
+      {{ value }}
+    </h2>
+  </div>
+</ng-template>

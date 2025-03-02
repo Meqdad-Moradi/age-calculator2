@@ -1,4 +1,4 @@
-import { formatDate } from '@angular/common';
+import { formatDate, NgTemplateOutlet } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
@@ -25,6 +25,7 @@ import { Age } from '../../helpers/age';
     MatInputModule,
     MatDatepickerModule,
     SwitchThemeComponent,
+    NgTemplateOutlet,
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
