@@ -16,7 +16,7 @@ body {
 // angular material (mdc) styles
 button:where([mat-raised-button], [color="primary"]) {
   background-color: var(--primary) !important;
-  color: #f0f0f0 !important;
+  color: var(--white-color) !important;
 }
 
 // remove none required border inside form field

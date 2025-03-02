@@ -7,6 +7,7 @@
   --tertiary: #182825;
   --background-color: #f0f0f0;
   --text-color: #101828;
+  --white-color: #f0f0f0;
 }
 
 .dark-theme {
@@ -15,6 +16,7 @@
   --tertiary: #182825;
   --background-color: #101828;
   --text-color: #f0f0f0;
+  --white-color: #f0f0f0;
 }
 
 html {
@@ -22,7 +24,6 @@ html {
   @include mat.theme(
     (
       color: (
-        // theme-type: dark,
         primary: theme-colors.$primary-palette,
         tertiary: theme-colors.$tertiary-palette,
       ),
