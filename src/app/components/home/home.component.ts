@@ -32,6 +32,7 @@ export class HomeComponent {
   private readonly snackbar = inject(MatSnackBar);
 
   public result = 0;
+  public currentDate = new Date();
 
   // Form group for the calculator form
   public calculatorForm = this.fb.group({
