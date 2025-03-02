@@ -60,28 +60,28 @@ export class HomeComponent {
   }
 
   /**
-   * calculateDiff
-   * Method to calculate the difference in years between the input date and the current date
+   * calculateAgeDiff
+   * Method to calculate the difference in years, months, and days between the input date and the current date
    * @param value string
-   * @returns number
+   * @returns void
    */
   private calculateAgeDiff(value: string): void {
     // Format the input date to 'yyyy-MM-dd'
-    const formatedDate = formatDate(value!, 'yyyy-MM-dd', 'de-DE');
-    // Create a Date object from the formatted date
-    const birthdate = moment(formatedDate);
+    const formattedDate = formatDate(value, 'yyyy-MM-dd', 'de-DE');
+    // Create a moment object from the formatted date
+    const birthdate = moment(formattedDate);
     const now = moment();
 
-    // Calculate full years.
+    // Calculate full years
     const years = now.diff(birthdate, 'years');
-    // Add years to birth date for the remaining diff.
+    // Add years to birth date for the remaining diff
     const updatedBirth = birthdate.clone().add(years, 'years');
 
-    // Calculate full months after years.
+    // Calculate full months after years
     const months = now.diff(updatedBirth, 'months');
     const updatedBirthWithMonths = updatedBirth.clone().add(months, 'months');
 
-    // Remaining days difference.
+    // Remaining days difference
     const days = now.diff(updatedBirthWithMonths, 'days');
 
     const result = { years, months, days };
@@ -95,6 +95,7 @@ export class HomeComponent {
 
   /**
    * displaySnackbar
+   * Method to display a snackbar with a given message
    * @param message string
    * @returns void
    */
