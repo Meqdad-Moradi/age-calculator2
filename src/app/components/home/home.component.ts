@@ -7,7 +7,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -27,7 +26,6 @@ import { SwitchThemeComponent } from '../switch-theme/switch-theme.component';
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  providers: [provideNativeDateAdapter()],
 })
 export class HomeComponent {
   private readonly fb = inject(FormBuilder);
@@ -49,10 +47,7 @@ export class HomeComponent {
     e.preventDefault();
 
     // If the form is invalid, do nothing
-    if (this.calculatorForm.invalid) {
-      this.displaySnackbar('Please enter a valid date');
-      return;
-    }
+    if (this.calculatorForm.invalid) return;
 
     // Get the value of the date input field
     const inputValue = this.calculatorForm.get('date')?.value;
@@ -72,7 +67,7 @@ export class HomeComponent {
    */
   private calculateDiff(value: string): number {
     // Format the input date to 'yyyy-MM-dd'
-    const formatedDate = formatDate(value!, 'yyyy-MM-dd', 'en-US');
+    const formatedDate = formatDate(value!, 'yyyy-MM-dd', 'de-DE');
     // Create a Date object from the formatted date
     const birthdate = new Date(formatedDate);
 

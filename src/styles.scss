@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @use "tailwindcss";
 @use "./scss/_theme.scss";
+@custom-variant dark (&:where(.dark-theme, .dark-theme *));
 
 html,
 body {
@@ -15,10 +16,15 @@ body {
 // angular material (mdc) styles
 button:where([mat-raised-button], [color="primary"]) {
   background-color: var(--primary) !important;
-  color: var(--text-color) !important;
+  color: #f0f0f0 !important;
 }
 
 // remove none required border inside form field
 .mdc-notched-outline__notch {
   border-right: none;
+}
+
+.mat-mdc-form-field-hint-wrapper,
+.mat-mdc-form-field-error-wrapper {
+  padding: 0 !important;
 }
