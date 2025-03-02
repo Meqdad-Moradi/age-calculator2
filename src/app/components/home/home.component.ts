@@ -12,6 +12,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SwitchThemeComponent } from '../switch-theme/switch-theme.component';
+import moment from 'moment';
+import { Age } from '../../helpers/age';
 
 @Component({
   selector: 'app-home',
@@ -31,7 +33,7 @@ export class HomeComponent {
   private readonly fb = inject(FormBuilder);
   private readonly snackbar = inject(MatSnackBar);
 
-  public result = 0;
+  public age!: Age;
   public currentDate = new Date();
 
   // Form group for the calculator form
@@ -54,10 +56,7 @@ export class HomeComponent {
     const inputValue = this.calculatorForm.get('date')?.value;
 
     // Calculate the age difference and set the result
-    this.result = this.calculateDiff(inputValue || '');
-    if (this.result === 0) {
-      this.displaySnackbar('Your age is less than a year');
-    }
+    this.calculateAgeDiff(inputValue || '');
   }
 
   /**
@@ -66,17 +65,32 @@ export class HomeComponent {
    * @param value string
    * @returns number
    */
-  private calculateDiff(value: string): number {
+  private calculateAgeDiff(value: string): void {
     // Format the input date to 'yyyy-MM-dd'
     const formatedDate = formatDate(value!, 'yyyy-MM-dd', 'de-DE');
     // Create a Date object from the formatted date
-    const birthdate = new Date(formatedDate);
+    const birthdate = moment(formatedDate);
+    const now = moment();
 
-    // Calculate the time difference in milliseconds
-    const timeDiff = Math.abs(Date.now() - birthdate.getTime());
-    // Convert the time difference from milliseconds to years
-    const age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
-    return age;
+    // Calculate full years.
+    const years = now.diff(birthdate, 'years');
+    // Add years to birth date for the remaining diff.
+    const updatedBirth = birthdate.clone().add(years, 'years');
+
+    // Calculate full months after years.
+    const months = now.diff(updatedBirth, 'months');
+    const updatedBirthWithMonths = updatedBirth.clone().add(months, 'months');
+
+    // Remaining days difference.
+    const days = now.diff(updatedBirthWithMonths, 'days');
+
+    const result = { years, months, days };
+    if (!result) {
+      this.displaySnackbar('No date or birthdate is selected!');
+      return;
+    }
+
+    this.age = result;
   }
 
   /**

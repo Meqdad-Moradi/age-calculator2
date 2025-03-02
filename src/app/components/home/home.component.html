@@ -1,5 +1,5 @@
 <section
-  class="max-w-md mx-auto shadow-lg rounded-lg p-8 pt-6 mt-8 bg-gray-100 dark:bg-gray-800"
+  class="max-w-md mx-auto shadow-lg rounded-lg p-8 pt-6 bg-gray-100 dark:bg-gray-800"
 >
   <div class="flex justify-between">
     <div>
@@ -38,13 +38,46 @@
   </form>
 
   <!-- display result -->
-  @if (result) {
+  @if (age) {
   <div class="mt-8">
-    <p class="text-gray-500 dark:text-gray-400">You are</p>
-    <h2 class="font-bold text-4xl text-gray-700 dark:text-gray-300">
-      {{ result }}
-    </h2>
-    <p class="text-gray-500 dark:text-gray-400">years old</p>
+    <p class="text-gray-500 dark:text-gray-400">You age is:</p>
+
+    <div class="mt-4">
+      <div class="flex flex-col justify-between">
+        <div class="flex items-center gap-2">
+          <h2
+            class="font-bold text-xl text-gray-700 dark:text-gray-300 min-w-20"
+          >
+            Years:
+          </h2>
+          <h2 class="font-bold text-2xl text-gray-700 dark:text-gray-300">
+            {{ age.years }}
+          </h2>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <h2
+            class="font-bold text-xl text-gray-700 dark:text-gray-300 min-w-20"
+          >
+            Months:
+          </h2>
+          <h2 class="font-bold text-2xl text-gray-700 dark:text-gray-300">
+            {{ age.months }}
+          </h2>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <h2
+            class="font-bold text-xl text-gray-700 dark:text-gray-300 min-w-20"
+          >
+            Days:
+          </h2>
+          <h2 class="font-bold text-2xl text-gray-700 dark:text-gray-300">
+            {{ age.days }}
+          </h2>
+        </div>
+      </div>
+    </div>
   </div>
   }
 </section>
