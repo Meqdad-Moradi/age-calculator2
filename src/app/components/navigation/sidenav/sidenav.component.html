@@ -1,0 +1,65 @@
+<app-header></app-header>
+<mat-drawer-container class="drawer-container" autosize>
+  <mat-drawer
+    #drawer
+    class="!rounded-none dark:!bg-gray-800 !shadow-sm"
+    mode="side"
+    [opened]="isSideNavOpen"
+  >
+    <mat-list>
+      <mat-list-item
+        class="!cursor-pointer"
+        [routerLink]="['/']"
+        routerLinkActive="active"
+        onclick="this.blur()"
+      >
+        <mat-icon matListItemIcon>home</mat-icon>
+        <span matListItemTitle>Overview</span>
+      </mat-list-item>
+
+      <mat-list-item
+        class="!cursor-pointer"
+        [routerLink]="['/transactions']"
+        routerLinkActive="!bg-teal-400"
+        onclick="this.blur()"
+      >
+        <mat-icon matListItemIcon>sync_alt</mat-icon>
+        <span matListItemTitle>Transactions</span>
+      </mat-list-item>
+
+      <mat-list-item
+        class="!cursor-pointer"
+        [routerLink]="['/budgets']"
+        routerLinkActive="!bg-teal-400"
+        onclick="this.blur()"
+      >
+        <mat-icon matListItemIcon>account_balance_wallet</mat-icon>
+        <span matListItemTitle>Budgets</span>
+      </mat-list-item>
+
+      <mat-list-item
+        class="!cursor-pointer"
+        [routerLink]="['/pots']"
+        routerLinkActive="!bg-teal-400"
+        onclick="this.blur()"
+      >
+        <mat-icon matListItemIcon>paid</mat-icon>
+        <span matListItemTitle>Pots</span>
+      </mat-list-item>
+
+      <mat-list-item
+        class="!cursor-pointer"
+        [routerLink]="['/recurringbills']"
+        routerLinkActive="!bg-teal-400"
+        onclick="this.blur()"
+      >
+        <mat-icon matListItemIcon>receipt_long</mat-icon>
+        <span matListItemTitle>Recurring Bills</span>
+      </mat-list-item>
+    </mat-list>
+  </mat-drawer>
+
+  <mat-drawer-content class="p-8 dark:bg-[#161c21]">
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

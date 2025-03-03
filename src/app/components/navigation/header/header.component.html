@@ -1,0 +1,12 @@
+<mat-toolbar class="toolbar">
+  <button mat-icon-button>
+    <mat-icon class="!text-gray-100">menu</mat-icon>
+  </button>
+  <span class="text-white" [routerLink]="['/']" role="button">
+    {{ title() }}
+  </span>
+
+  <span class="spacer"></span>
+
+  <app-switch-theme />
+</mat-toolbar>

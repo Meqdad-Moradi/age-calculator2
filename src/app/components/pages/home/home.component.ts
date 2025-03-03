@@ -11,9 +11,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SwitchThemeComponent } from '../switch-theme/switch-theme.component';
+
 import moment from 'moment';
-import { Age } from '../../helpers/age';
+import { Age } from '../../../helpers/age';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +24,6 @@ import { Age } from '../../helpers/age';
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    SwitchThemeComponent,
     NgTemplateOutlet,
   ],
   templateUrl: './home.component.html',
