@@ -1,9 +1,13 @@
 <section class="max-w-lg mx-auto">
-  <h1 class="font-bold text-2xl text-gray-700 dark:text-gray-100">
+  <h1 class="font-bold text-2xl text-gray-700 dark:text-gray-100 mb-6">
     Find your age
   </h1>
-  <p class="mt-2 text-gray-500 dark:text-gray-400">
+  <p class="text-gray-500 dark:text-gray-400">
     Welcome to the calculate age app!
+  </p>
+  <p class="mt-2 text-gray-500 dark:text-gray-400">
+    Simply by selecting your birthdate and pressing the "Calculate" button, you
+    will be able to find out how old you are. 😂
   </p>
 
   <!-- form -->
@@ -13,7 +17,7 @@
     (submit)="submit($event)"
   >
     <mat-form-field appearance="outline">
-      <mat-label>Choose a date</mat-label>
+      <mat-label>Birthdate</mat-label>
       <input
         matInput
         [matDatepicker]="picker"
