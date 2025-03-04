@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import moment from 'moment';
 import { Age } from '../../../helpers/age';
+import { SectionTitleComponent } from "../../shared/section-title/section-title.component";
 
 @Component({
   selector: 'app-home',
@@ -25,7 +26,8 @@ import { Age } from '../../../helpers/age';
     MatInputModule,
     MatDatepickerModule,
     NgTemplateOutlet,
-  ],
+    SectionTitleComponent
+],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })

@@ -3,8 +3,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
-import { SwitchThemeComponent } from '../../switch-theme/switch-theme.component';
 import { SidenavService } from '../../../services/sidenav.service';
+import { SwitchThemeComponent } from '../../shared/switch-theme/switch-theme.component';
 
 @Component({
   selector: 'app-header',

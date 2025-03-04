@@ -11,6 +11,7 @@
         class="!cursor-pointer"
         [routerLink]="['/']"
         routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
         onclick="this.blur()"
       >
         <mat-icon matListItemIcon>home</mat-icon>
@@ -19,42 +20,12 @@
 
       <mat-list-item
         class="!cursor-pointer"
-        [routerLink]="['/transactions']"
+        [routerLink]="['/character-counter']"
         routerLinkActive="active"
         onclick="this.blur()"
       >
-        <mat-icon matListItemIcon>sync_alt</mat-icon>
-        <span matListItemTitle>Transactions</span>
-      </mat-list-item>
-
-      <mat-list-item
-        class="!cursor-pointer"
-        [routerLink]="['/budgets']"
-        routerLinkActive="active"
-        onclick="this.blur()"
-      >
-        <mat-icon matListItemIcon>account_balance_wallet</mat-icon>
-        <span matListItemTitle>Budgets</span>
-      </mat-list-item>
-
-      <mat-list-item
-        class="!cursor-pointer"
-        [routerLink]="['/pots']"
-        routerLinkActive="active"
-        onclick="this.blur()"
-      >
-        <mat-icon matListItemIcon>paid</mat-icon>
-        <span matListItemTitle>Pots</span>
-      </mat-list-item>
-
-      <mat-list-item
-        class="!cursor-pointer"
-        [routerLink]="['/recurringbills']"
-        routerLinkActive="active"
-        onclick="this.blur()"
-      >
-        <mat-icon matListItemIcon>receipt_long</mat-icon>
-        <span matListItemTitle>Recurring Bills</span>
+        <mat-icon matListItemIcon>manage_search</mat-icon>
+        <span matListItemTitle>Character counter</span>
       </mat-list-item>
     </mat-list>
   </mat-drawer>
