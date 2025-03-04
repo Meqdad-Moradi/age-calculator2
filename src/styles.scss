@@ -17,6 +17,11 @@ body {
 button:where([mat-raised-button], [color="primary"]) {
   background-color: var(--primary) !important;
   color: var(--white-color) !important;
+
+  &:disabled {
+    background-color: var(--disable-color) !important;
+    color: var(--gray) !important;
+  }
 }
 
 // remove none required border inside form field

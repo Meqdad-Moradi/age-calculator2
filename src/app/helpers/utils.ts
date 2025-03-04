@@ -1,10 +1,10 @@
 export const matDateFormat = {
   parse: {
-    dateInput: ['l', 'LL'],
+    dateInput: 'DD.MM.YYYY',
   },
   display: {
-    dateInput: 'L',
-    monthYearLabel: 'MMM YYYY',
+    dateInput: 'DD.MM.YYYY',
+    monthYearLabel: 'MMMM YYYY',
     dateA11yLabel: 'LL',
     monthYearA11yLabel: 'MMMM YYYY',
   },
