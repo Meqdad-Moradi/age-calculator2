@@ -2,7 +2,11 @@
   <button mat-icon-button (click)="toggleSideNav()">
     <mat-icon class="!text-gray-100">menu</mat-icon>
   </button>
-  <span class="text-white" [routerLink]="['/']" role="button">
+  <span
+    class="text-(--white-color) font-pop font-semibold cursor-pointer"
+    [routerLink]="['/']"
+    role="button"
+  >
     {{ title() }}
   </span>
 
