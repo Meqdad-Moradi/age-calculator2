@@ -3,8 +3,8 @@
   <mat-drawer
     #drawer
     class="!rounded-none dark:!bg-(--forground-color) !shadow-sm"
-    mode="side"
-    [opened]="isSideNavOpen"
+    [mode]="drawerMode"
+    [opened]="isSideNavOpen()"
   >
     <mat-list>
       <mat-list-item

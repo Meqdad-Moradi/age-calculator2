@@ -1,5 +1,5 @@
 <mat-toolbar class="toolbar">
-  <button mat-icon-button>
+  <button mat-icon-button (click)="toggleSideNav()">
     <mat-icon class="!text-gray-100">menu</mat-icon>
   </button>
   <span class="text-white" [routerLink]="['/']" role="button">
