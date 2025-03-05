@@ -67,21 +67,31 @@
   </div>
 
   <!-- display density -->
+  @if (charUsed().length) {
   <div class="flex flex-col items-start justify-between gap-4 mt-6">
     <h1 class="font-pop font-semibold text-xl tracking-wide mb-2">
       Letter Density
     </h1>
 
-    <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-    <mat-progress-bar mode="determinate" value="20"></mat-progress-bar>
-    <mat-progress-bar mode="determinate" value="30"></mat-progress-bar>
-    <mat-progress-bar mode="determinate" value="50"></mat-progress-bar>
+    @for (char of filteredCharsUsed(); track $index) {
+    <div class="w-full grid grid-cols-[1em_1fr_2em] items-center gap-4">
+      <span>{{ char.toUpperCase() }}</span>
+      <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+      <span class="text-sm">111(40%)</span>
+    </div>
+    }
 
-    <button class="flex items-center cursor-pointer">
-      See more
-      <mat-icon>keyboard_arrow_down</mat-icon>
+    <!-- display "See more" button -->
+    @if (charUsed().length > 4) {
+    <button class="flex items-center cursor-pointer" (click)="onShowMore()">
+      {{ isCollapsed() ? "See more" : "See less" }}
+      <mat-icon>
+        {{ isCollapsed() ? "keyboard_arrow_down" : "keyboard_arrow_up" }}
+      </mat-icon>
     </button>
+    }
   </div>
+  }
 </section>
 
 <ng-template #result let-result="result" let-text="text" let-color="color">
