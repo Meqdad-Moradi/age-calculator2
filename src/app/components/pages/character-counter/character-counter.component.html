@@ -3,9 +3,92 @@
 
   <mat-form-field class="w-full" appearance="outline">
     <textarea
+      [(ngModel)]="characters"
       matInput
       placeholder="Start typing here...(or paste your text)"
       rows="8"
+      (input)="onInput()"
     ></textarea>
   </mat-form-field>
+
+  <!-- options -->
+  <div class="flex items-center justify-between">
+    <div>
+      <mat-checkbox
+        color="primary"
+        [checked]="excludeSpace"
+        (change)="excludeSpace = !excludeSpace; onInput()"
+      >
+        Exclude Spaces
+      </mat-checkbox>
+      <mat-checkbox
+        color="primary"
+        [checked]="characterLimit"
+        (change)="characterLimit = !characterLimit; onInput()"
+      >
+        Set characters limit
+      </mat-checkbox>
+    </div>
+    <span class="text-sm">Approx. reading time: 0 minute</span>
+  </div>
+
+  <!-- display result -->
+  <div class="flex items-center justify-between gap-8 mt-8">
+    <ng-container
+      *ngTemplateOutlet="
+        result;
+        context: {
+          result: totalCharacters,
+          text: 'Total Characters',
+          color: 'bg-violet-400'
+        }
+      "
+    ></ng-container>
+    <ng-container
+      *ngTemplateOutlet="
+        result;
+        context: {
+          result: totalWords,
+          text: 'Word Count',
+          color: 'bg-amber-500'
+        }
+      "
+    ></ng-container>
+    <ng-container
+      *ngTemplateOutlet="
+        result;
+        context: {
+          result: totalSentence,
+          text: 'Sentence Count',
+          color: 'bg-red-400'
+        }
+      "
+    ></ng-container>
+  </div>
+
+  <!-- display density -->
+  <div class="flex flex-col items-start justify-between gap-4 mt-6">
+    <h1 class="font-pop font-semibold text-xl tracking-wide mb-2">
+      Letter Density
+    </h1>
+
+    <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+    <mat-progress-bar mode="determinate" value="20"></mat-progress-bar>
+    <mat-progress-bar mode="determinate" value="30"></mat-progress-bar>
+    <mat-progress-bar mode="determinate" value="50"></mat-progress-bar>
+
+    <button class="flex items-center cursor-pointer">
+      See more
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </button>
+  </div>
 </section>
+
+<ng-template #result let-result="result" let-text="text" let-color="color">
+  <div class="w-full p-6 rounded-2xl" [ngClass]="color ? color : ''">
+    <p class="text-5xl text-gray-700 font-pop font-semibold">
+      {{ result.toString().padStart(2, "0") }}
+    </p>
+    <p class="text-xl text-gray-700">{{ text }}</p>
+  </div>
+</ng-template>
