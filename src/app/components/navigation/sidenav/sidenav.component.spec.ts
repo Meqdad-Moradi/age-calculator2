@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { RouterModule } from '@angular/router';
 import { SidenavComponent } from './sidenav.component';
 
 describe('SidenavComponent', () => {
@@ -8,9 +9,8 @@ describe('SidenavComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SidenavComponent]
-    })
-    .compileComponents();
+      imports: [SidenavComponent, RouterModule.forRoot([])],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SidenavComponent);
     component = fixture.componentInstance;
