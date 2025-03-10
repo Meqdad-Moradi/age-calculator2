@@ -93,7 +93,12 @@ export class CharacterCounterComponent {
    * @param text string
    */
   private countText(text: string): void {
-    let countSpaces = 0;
+    const countSpaces = this.countSpaces(text);
+
+    // Update total character count, excluding spaces if needed.
+    this.totalCharacters = this.excludeSpace
+      ? text.length - countSpaces
+      : text.length;
 
     // Use regex splitting to ignore extra whitespace and filter out empty strings.
     this.totalWords = text.split(/\s+/).filter((word) => word).length;
@@ -106,7 +111,8 @@ export class CharacterCounterComponent {
     // Count each character's frequency
     const frequency: Frequency = {};
     for (const char of text) {
-      frequency[char] = (frequency[char] || 0) + 1;
+      const charLower = char.toLocaleLowerCase();
+      frequency[charLower] = (frequency[charLower] || 0) + 1;
     }
 
     // Build the characterStats array with the frequency and percentage calculations
@@ -117,11 +123,6 @@ export class CharacterCounterComponent {
         ? (count / this.totalCharacters) * 100
         : 0;
 
-      // count spaces in the text
-      if (char === ' ') {
-        countSpaces++;
-      }
-
       // update characterState signal
       this.characterStats.update((value) => [
         ...value,
@@ -129,15 +130,26 @@ export class CharacterCounterComponent {
       ]);
     }
 
-    // Update total character count, excluding spaces if needed.
-    this.totalCharacters = this.excludeSpace
-      ? text.length - countSpaces
-      : text.length;
-
     // Optionally sort by frequency in descending order
     this.characterStats.update((values) => {
       return values.sort((a, b) => b.count - a.count);
     });
+  }
+
+  /**
+   * countSpaces
+   * @param text string -> input text
+   * @returns number
+   */
+  private countSpaces(text: string): number {
+    let ret = 0;
+    // loop through all text to find space in input texts
+    for (const char of text) {
+      if (char === ' ') {
+        ret++;
+      }
+    }
+    return ret;
   }
 
   /**
