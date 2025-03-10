@@ -76,7 +76,11 @@
     @for (item of (!isExpanded ? characterStats() : characterStats() |
     slice:0:4); track $index) {
     <div class="flex items-center gap-4 mt-2">
+      @if(item.char===' '){
+      <mat-icon class="!text-base">space_bar</mat-icon>
+      }@else {
       <span class="basis-[1em]">{{ item.char.toUpperCase() }}</span>
+      }
       <mat-progress-bar
         mode="determinate"
         [value]="item.count"
