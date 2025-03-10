@@ -12,7 +12,7 @@
   </mat-form-field>
 
   <!-- options -->
-  <div class="flex items-center justify-between">
+  <div class="flex flex-wrap md:flex-nowrap items-center justify-between">
     <div>
       <mat-checkbox
         color="primary"
@@ -33,7 +33,7 @@
   </div>
 
   <!-- display result -->
-  <div class="flex items-center justify-between gap-8 mt-8">
+  <div class="flex flex-wrap md:flex-nowrap justify-between gap-8 mt-8">
     <ng-container
       *ngTemplateOutlet="
         result;
@@ -67,26 +67,35 @@
   </div>
 
   <!-- display density -->
-  @if (charUsed().length) {
-  <div class="flex flex-col items-start justify-between gap-4 mt-6">
+  @if (characterStats().length) {
+  <div class="mt-6">
     <h1 class="font-pop font-semibold text-xl tracking-wide mb-2">
       Letter Density
     </h1>
 
-    @for (char of filteredCharsUsed(); track $index) {
-    <div class="w-full grid grid-cols-[1em_1fr_2em] items-center gap-4">
-      <span>{{ char.toUpperCase() }}</span>
-      <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-      <span class="text-sm">111(40%)</span>
+    @for (item of (!isExpanded ? characterStats() : characterStats() |
+    slice:0:4); track $index) {
+    <div class="flex items-center gap-4 mt-2">
+      <span class="basis-[1em]">{{ item.char.toUpperCase() }}</span>
+      <mat-progress-bar
+        mode="determinate"
+        [value]="item.count"
+      ></mat-progress-bar>
+      <span class="text-xs">
+        {{ item.count }}({{ item.percentage.toFixed(2) }})%
+      </span>
     </div>
     }
 
     <!-- display "See more" button -->
-    @if (charUsed().length > 4) {
-    <button class="flex items-center cursor-pointer" (click)="onShowMore()">
-      {{ isCollapsed() ? "See more" : "See less" }}
+    @if (characterStats().length > 4) {
+    <button
+      class="flex items-center cursor-pointer mt-4"
+      (click)="onShowMore()"
+    >
+      {{ isExpanded ? "See more" : "See less" }}
       <mat-icon>
-        {{ isCollapsed() ? "keyboard_arrow_down" : "keyboard_arrow_up" }}
+        {{ isExpanded ? "keyboard_arrow_down" : "keyboard_arrow_up" }}
       </mat-icon>
     </button>
     }
@@ -95,10 +104,10 @@
 </section>
 
 <ng-template #result let-result="result" let-text="text" let-color="color">
-  <div class="w-full p-6 rounded-2xl" [ngClass]="color ? color : ''">
+  <div class="w-full p-6 rounded-2xl truncate" [ngClass]="color ? color : ''">
     <p class="text-5xl text-gray-700 font-pop font-semibold">
       {{ result.toString().padStart(2, "0") }}
     </p>
-    <p class="text-xl text-gray-700">{{ text }}</p>
+    <p class="text-xl text-gray-700 truncate" [matTooltip]="text">{{ text }}</p>
   </div>
 </ng-template>

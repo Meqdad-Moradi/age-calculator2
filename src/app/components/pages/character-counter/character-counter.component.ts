@@ -1,14 +1,22 @@
-import { Component, computed, signal } from '@angular/core';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import { NgClass, NgTemplateOutlet, SlicePipe } from '@angular/common';
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { CharacterState, Frequency } from '../../models/character-counter';
 import { SectionTitleComponent } from '../../shared/section-title/section-title.component';
-import { MatButtonModule } from '@angular/material/button';
-import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { alphabetLower } from '../../models/character-counter';
 
 @Component({
   selector: 'app-character-counter',
@@ -21,12 +29,34 @@ import { alphabetLower } from '../../models/character-counter';
     MatIconModule,
     MatProgressBarModule,
     MatButtonModule,
+    MatTooltipModule,
     FormsModule,
     NgTemplateOutlet,
     NgClass,
+    SlicePipe,
   ],
   templateUrl: './character-counter.component.html',
   styleUrl: './character-counter.component.scss',
+  animations: [
+    trigger('slideToggle', [
+      state(
+        'collapsed',
+        style({
+          height: '0px',
+          opacity: 0,
+          overflow: 'hidden',
+        })
+      ),
+      state(
+        'expanded',
+        style({
+          height: '*',
+          opacity: 1,
+        })
+      ),
+      transition('collapsed <=> expanded', [animate('300ms ease-in-out')]),
+    ]),
+  ],
 })
 export class CharacterCounterComponent {
   // Input and configuration properties
@@ -37,72 +67,77 @@ export class CharacterCounterComponent {
   public totalWords = 0;
   public totalSentence = 0;
 
-  // Signals to manage state
-  public charUsed = signal<string[]>([]);
-  public endIndex = signal(4);
-
-  // Computed properties for UI binding
-  public filteredCharsUsed = computed(() =>
-    this.charUsed().slice(0, this.endIndex())
-  );
-  public isCollapsed = computed(() => this.filteredCharsUsed().length <= 4);
+  // signal properties
+  public characterStats = signal<CharacterState[]>([]);
+  public isExpanded = true;
 
   /**
    * onInput
    * Processes input text, updating counts for characters, words, and sentences.
    */
   public onInput(): void {
-    const trimmedInput = this.characters.trim();
+    const trimmedText = this.characters.trim();
 
     // If input is empty, reset counts and return early.
-    if (!trimmedInput) {
+    if (!trimmedText) {
       this.resetCounts();
       return;
     }
 
-    // Process the input text to update the list of used characters and count spaces.
-    const spaceCount = this.processCharacters(trimmedInput);
-
-    // Update total character count, excluding spaces if needed.
-    this.totalCharacters = this.excludeSpace
-      ? trimmedInput.length - spaceCount
-      : trimmedInput.length;
-
-    // Use regex splitting to ignore extra whitespace and filter out empty strings.
-    this.totalWords = trimmedInput.split(/\s+/).filter((word) => word).length;
-    // Simple sentence splitting assuming sentences end with a period followed by a space.
-    this.totalSentence = trimmedInput
-      .split('. ')
-      .filter((sentence) => sentence).length;
+    this.countText(trimmedText);
   }
 
   /**
-   * processCharacters
-   * Iterates through the text, updating the unique used characters list
-   * and counts the number of spaces.
-   * @param text - The trimmed input text.
-   * @returns The count of space characters.
+   * countText
+   * Counts characters, words, sentences, and character frequency
+   * @param text string
    */
-  private processCharacters(text: string): number {
-    let spaceCount = 0;
-    const usedChars: string[] = [];
+  private countText(text: string): void {
+    let countSpaces = 0;
 
+    // Use regex splitting to ignore extra whitespace and filter out empty strings.
+    this.totalWords = text.split(/\s+/).filter((word) => word).length;
+
+    // Simple sentence splitting assuming sentences end with a period followed by a space.
+    this.totalSentence = text
+      .split(/[.!?]+/)
+      .filter((sentence) => sentence.trim().length > 0).length;
+
+    // Count each character's frequency
+    const frequency: Frequency = {};
     for (const char of text) {
-      if (char === ' ') {
-        spaceCount++;
-      }
-      // Check if the character is a letter (ignoring case) and not already included.
-      if (
-        alphabetLower.includes(char.toLowerCase()) &&
-        !usedChars.includes(char)
-      ) {
-        usedChars.push(char);
-      }
+      frequency[char] = (frequency[char] || 0) + 1;
     }
 
-    // Update the signal with the unique characters.
-    this.charUsed.set(usedChars);
-    return spaceCount;
+    // Build the characterStats array with the frequency and percentage calculations
+    this.characterStats.set([]);
+    for (const char in frequency) {
+      const count = frequency[char];
+      const percentage = this.totalCharacters
+        ? (count / this.totalCharacters) * 100
+        : 0;
+
+      // count spaces in the text
+      if (char === ' ') {
+        countSpaces++;
+      }
+
+      // update characterState signal
+      this.characterStats.update((value) => [
+        ...value,
+        { char, count, percentage },
+      ]);
+    }
+
+    // Update total character count, excluding spaces if needed.
+    this.totalCharacters = this.excludeSpace
+      ? text.length - countSpaces
+      : text.length;
+
+    // Optionally sort by frequency in descending order
+    this.characterStats.update((values) => {
+      return values.sort((a, b) => b.count - a.count);
+    });
   }
 
   /**
@@ -111,13 +146,7 @@ export class CharacterCounterComponent {
    * and an expanded view (all used characters).
    */
   public onShowMore(): void {
-    if (this.filteredCharsUsed().length <= 4) {
-      // Expand: set the end index to the total number of unique characters.
-      this.endIndex.set(this.charUsed().length);
-    } else {
-      // Collapse: reset to showing only the first 4 characters.
-      this.endIndex.set(4);
-    }
+    this.isExpanded = !this.isExpanded;
   }
 
   /**
@@ -128,6 +157,6 @@ export class CharacterCounterComponent {
     this.totalCharacters = 0;
     this.totalWords = 0;
     this.totalSentence = 0;
-    this.charUsed.set([]);
+    this.characterStats.set([]);
   }
 }
