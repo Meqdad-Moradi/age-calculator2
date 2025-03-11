@@ -14,8 +14,8 @@
         [routerLinkActiveOptions]="{ exact: true }"
         onclick="this.blur()"
       >
-        <mat-icon matListItemIcon>home</mat-icon>
-        <span matListItemTitle>Overview</span>
+        <mat-icon matListItemIcon>calculate</mat-icon>
+        <span matListItemTitle>Calculate your age</span>
       </mat-list-item>
 
       <mat-list-item
@@ -27,10 +27,22 @@
         <mat-icon matListItemIcon>manage_search</mat-icon>
         <span matListItemTitle>Character counter</span>
       </mat-list-item>
+
+      <mat-list-item
+        class="!cursor-pointer"
+        [routerLink]="['/countries']"
+        routerLinkActive="active"
+        onclick="this.blur()"
+      >
+        <mat-icon matListItemIcon>travel_explore</mat-icon>
+        <span matListItemTitle>Search country</span>
+      </mat-list-item>
     </mat-list>
   </mat-drawer>
 
   <mat-drawer-content class="p-8 dark:bg-(--background-color)">
-    <router-outlet></router-outlet>
+    <div class="w-full max-w-[80%] mx-auto">
+      <router-outlet></router-outlet>
+    </div>
   </mat-drawer-content>
 </mat-drawer-container>
