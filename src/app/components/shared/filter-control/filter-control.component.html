@@ -1,0 +1,21 @@
+<div
+  class="flex flex-wrap md:flex-nowrap items-center justify-between md:gap-20"
+>
+  <mat-form-field class="w-full" appearance="outline">
+    <mat-label>Search country</mat-label>
+    <input matInput [(ngModel)]="searchQuery" />
+    <button mat-icon-button matIconSuffix>
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field class="w-md" appearance="outline">
+    <mat-label>Region</mat-label>
+    <mat-select>
+      <mat-option>Asia</mat-option>
+      <mat-option>Africa</mat-option>
+      <mat-option>America</mat-option>
+      <mat-option>Europe</mat-option>
+      <mat-option>Oceania</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

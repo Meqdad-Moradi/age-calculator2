@@ -1,1 +1,12 @@
-<p>countries works!</p>
+<section>
+  <app-filter-control
+    [searchQuery]="searchQuery()"
+    (searchQueryChange)="onSearchQueryChange($event!)"
+  ></app-filter-control>
+
+  <article class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+    @for (c of countriesSignal(); track $index) {
+    <app-country-card [countryInput]="c"></app-country-card>
+    }
+  </article>
+</section>

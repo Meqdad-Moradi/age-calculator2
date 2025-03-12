@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InputControlComponent } from './input-control.component';
+import { FilterControlComponent } from './filter-control.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('InputControlComponent', () => {
-  let component: InputControlComponent;
-  let fixture: ComponentFixture<InputControlComponent>;
+  let component: FilterControlComponent;
+  let fixture: ComponentFixture<FilterControlComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InputControlComponent, BrowserAnimationsModule],
+      imports: [FilterControlComponent, BrowserAnimationsModule],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(InputControlComponent);
+    fixture = TestBed.createComponent(FilterControlComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
