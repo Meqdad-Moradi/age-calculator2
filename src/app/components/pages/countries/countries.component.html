@@ -6,7 +6,14 @@
 
   <article class="grid grid-cols-(--grid-cols) gap-8 mt-8">
     @for (c of countries(); track $index) {
-    <app-country-card [countryInput]="c"></app-country-card>
+    <app-country-card
+      [countryInput]="c"
+      (countryClick)="displayCountryDetails($event)"
+    ></app-country-card>
+    }@empty(){
+    <div class="mx-auto">
+      <mat-spinner mode="indeterminate" diameter="36"></mat-spinner>
+    </div>
     }
   </article>
 </section>

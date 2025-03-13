@@ -2,15 +2,24 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { ApiCountriesService } from '../../../services/api/api-countries.service';
 import { CountryCardComponent } from '../../shared/country-card/country-card.component';
 import { FilterControlComponent } from '../../shared/filter-control/filter-control.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Country } from '../../models/country';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-countries',
-  imports: [FilterControlComponent, CountryCardComponent],
+  imports: [
+    FilterControlComponent,
+    CountryCardComponent,
+    MatProgressSpinnerModule,
+  ],
   templateUrl: './countries.component.html',
   styleUrl: './countries.component.scss',
 })
 export class CountriesComponent {
   private readonly apiCountriesService = inject(ApiCountriesService);
+  private readonly router = inject(Router);
+  private readonly activatedRoute = inject(ActivatedRoute);
 
   public countriesSignal = this.apiCountriesService.countries;
   public searchQuery = signal('');
@@ -44,4 +53,16 @@ export class CountriesComponent {
       return matchesSearch && matchesRegion;
     });
   });
+
+  /**
+   * displayCountry
+   * navigate to country page to display single country details
+   * @param country Country
+   */
+  public displayCountryDetails(country: Country): void {
+    this.router.navigate(['country'], {
+      relativeTo: this.activatedRoute,
+      state: country,
+    });
+  }
 }

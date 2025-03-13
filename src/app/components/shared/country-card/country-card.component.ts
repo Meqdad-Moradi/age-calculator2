@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Country } from '../../models/country';
 import { DecimalPipe } from '@angular/common';
@@ -11,4 +11,9 @@ import { DecimalPipe } from '@angular/common';
 })
 export class CountryCardComponent {
   public countryInput = input<Country>();
+  public countryClick = output<Country>();
+
+  public displayCountryDetails(): void {
+    this.countryClick.emit(this.countryInput()!);
+  }
 }
