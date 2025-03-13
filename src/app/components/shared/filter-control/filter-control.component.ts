@@ -24,4 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
 })
 export class FilterControlComponent {
   public searchQuery = model<string>();
+  public filterQuery = model<string>();
+
+  public filterOption = ['Asia', 'Africa', 'America', 'Europe', 'Oceania'];
 }

@@ -10,12 +10,10 @@
   </mat-form-field>
   <mat-form-field class="w-md" appearance="outline">
     <mat-label>Region</mat-label>
-    <mat-select>
-      <mat-option>Asia</mat-option>
-      <mat-option>Africa</mat-option>
-      <mat-option>America</mat-option>
-      <mat-option>Europe</mat-option>
-      <mat-option>Oceania</mat-option>
+    <mat-select [(value)]="filterQuery">
+      @for (option of filterOption; track $index) {
+      <mat-option [value]="option">{{ option }}</mat-option>
+      }
     </mat-select>
   </mat-form-field>
 </div>
