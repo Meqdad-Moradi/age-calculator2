@@ -17,14 +17,17 @@
   --active-color: #d7dbe8;
   --disable-color: #d5d7e1;
   --gray: #808080;
+
+  // global style
+  --grid-cols: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
 }
 
 .dark-theme {
   --primary: #016fb9;
   --secondary: #22aed1;
   --tertiary: #182825;
-  --background-color: #1a1f2b;
-  --forground-color: #161c29;
+  --background-color: #16181a;
+  --forground-color: #222428;
   --text-color: #f0f0f0;
   --white-color: #f0f0f0;
   --active-color: #232c40;
