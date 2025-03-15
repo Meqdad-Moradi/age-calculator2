@@ -4,7 +4,7 @@
     [(filterQuery)]="filterQuery"
   ></app-filter-control>
 
-  <article class="grid grid-cols-(--grid-cols) gap-8 mt-8">
+  <article class="grid grid-cols-(--grid-cols-auto-fill) gap-8 mt-8">
     @for (c of countries(); track $index) {
     <app-country-card
       [countryInput]="c"

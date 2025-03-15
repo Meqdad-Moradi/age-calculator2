@@ -19,7 +19,8 @@
   --gray: #808080;
 
   // global style
-  --grid-cols: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  --grid-cols-auto-fill: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
+  --grid-cols-auto-fit: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
 }
 
 .dark-theme {
