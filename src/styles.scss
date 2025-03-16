@@ -34,7 +34,7 @@ button:where([mat-raised-button], [color="primary"]) {
   padding: 0 !important;
 }
 
-.mat-mdc-form-field {
+.mat-mdc-form-field:not([appearance="outline"]) {
   //------- start default reseting --------//
   .mat-mdc-text-field-wrapper {
     background-color: transparent !important;
