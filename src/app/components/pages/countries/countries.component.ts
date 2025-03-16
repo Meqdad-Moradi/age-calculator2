@@ -5,6 +5,7 @@ import { FilterControlComponent } from '../../shared/filter-control/filter-contr
 import { ActivatedRoute, Router } from '@angular/router';
 import { Country } from '../../models/country';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { compare } from '../../../helpers/utils';
 
 @Component({
   selector: 'app-countries',
@@ -70,8 +71,27 @@ export class CountriesComponent {
     });
   }
 
-  public onSort(isAsc: boolean): void {
-    // sort countries asc/desc
-    console.log(isAsc);
+  /**
+   * sortControlChange
+   * sort countries based on sort option
+   * @param value string -> sort option
+   */
+  public sortControlChange(value: string): void {
+    const sortOption =
+      value === 'Name'
+        ? 'name.common'
+        : value === 'Capital'
+        ? 'capital[0]'
+        : value.toLocaleLowerCase();
+
+    this.countries().sort(compare(sortOption, 'asc'));
+  }
+
+  /**
+   * onSort
+   * sort countries asc/desc
+   */
+  public onSort(): void {
+    this.countries().reverse();
   }
 }
