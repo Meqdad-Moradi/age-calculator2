@@ -42,6 +42,10 @@ export class FilterControlComponent {
   ];
   public sortOptions = ['Name', 'Region', 'Capital'];
 
+  /**
+   * onSort
+   * this method will sort arrays ascending or descending depends on isAsc
+   */
   public onSort(): void {
     this.isAsc = !this.isAsc;
     this.isAscOutput.emit(this.isAsc);
