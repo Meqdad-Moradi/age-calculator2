@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import moment from 'moment';
-import { Age } from '../../../helpers/age';
+import { Age } from '../../models/age';
 import { SectionTitleComponent } from "../../shared/section-title/section-title.component";
 
 @Component({
