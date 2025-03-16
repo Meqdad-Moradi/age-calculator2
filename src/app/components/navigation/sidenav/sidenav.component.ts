@@ -6,6 +6,7 @@ import { MatDrawerMode, MatSidenavModule } from '@angular/material/sidenav';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { SidenavService } from '../../../services/sidenav.service';
 import { HeaderComponent } from '../header/header.component';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-sidenav',
@@ -18,6 +19,7 @@ import { HeaderComponent } from '../header/header.component';
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
+    NgClass,
   ],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss',
@@ -27,4 +29,15 @@ export class SidenavComponent {
 
   public isSideNavOpen = this.sideNavService.isSideNavOpen;
   public drawerMode: MatDrawerMode = 'side';
+  public taskManagerSidenav = this.sideNavService.taskManagerSidenav;
+  public isExpanded = false;
+
+  public onExpandTaskManager(value = true): void {
+    if (!value) {
+      this.isExpanded = value;
+      return;
+    }
+
+    this.isExpanded = !this.isExpanded;
+  }
 }

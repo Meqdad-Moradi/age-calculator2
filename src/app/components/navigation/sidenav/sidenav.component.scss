@@ -5,3 +5,19 @@
 .active {
   background-color: var(--active-color);
 }
+
+.task-manager-nav {
+  display: grid;
+  grid-template-rows: 0;
+  transition: grid-template-rows 0.3s ease-in-out;
+
+  &.expanded {
+    grid-template-rows: 1fr;
+  }
+
+  div {
+    padding-left: 2.4em;
+    background-color: var(--background-color);
+    overflow: hidden;
+  }
+}

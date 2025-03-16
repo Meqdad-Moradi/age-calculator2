@@ -4,6 +4,7 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { CharacterCounterComponent } from './components/pages/character-counter/character-counter.component';
 import { CountriesComponent } from './components/pages/countries/countries.component';
 import { CountryComponent } from './components/pages/countries/country/country.component';
+import { TasksComponent } from './components/pages/task-manager/tasks/tasks.component';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,11 @@ export const routes: Routes = [
         path: 'countries/country',
         pathMatch: 'full',
         component: CountryComponent,
+      },
+      {
+        path: 'task-manager',
+        pathMatch: 'full',
+        component: TasksComponent,
       },
     ],
   },

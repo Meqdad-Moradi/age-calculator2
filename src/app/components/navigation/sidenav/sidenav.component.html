@@ -13,6 +13,7 @@
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
         onclick="this.blur()"
+        (click)="onExpandTaskManager(false)"
       >
         <mat-icon matListItemIcon>calculate</mat-icon>
         <span matListItemTitle>Calculate your age</span>
@@ -23,6 +24,7 @@
         [routerLink]="['/character-counter']"
         routerLinkActive="active"
         onclick="this.blur()"
+        (click)="onExpandTaskManager(false)"
       >
         <mat-icon matListItemIcon>manage_search</mat-icon>
         <span matListItemTitle>Character counter</span>
@@ -33,10 +35,33 @@
         [routerLink]="['/countries']"
         routerLinkActive="active"
         onclick="this.blur()"
+        (click)="onExpandTaskManager(false)"
       >
         <mat-icon matListItemIcon>travel_explore</mat-icon>
         <span matListItemTitle>Search country</span>
       </mat-list-item>
+
+      <mat-list-item
+        class="!cursor-pointer"
+        [routerLink]="['/task-manager']"
+        routerLinkActive="active"
+        onclick="this.blur()"
+        (click)="onExpandTaskManager()"
+      >
+        <mat-icon matListItemIcon>format_list_bulleted</mat-icon>
+        <span matListItemTitle>Task manager boards</span>
+      </mat-list-item>
+
+      <div class="task-manager-nav" [ngClass]="{ expanded: isExpanded }">
+        <div>
+          @for (item of taskManagerSidenav(); track $index) {
+          <mat-list-item class="!cursor-pointer" onclick="this.blur()">
+            <mat-icon matListItemIcon>format_list_bulleted</mat-icon>
+            <span matListItemTitle>{{ item.name }}</span>
+          </mat-list-item>
+          }
+        </div>
+      </div>
     </mat-list>
   </mat-drawer>
 
