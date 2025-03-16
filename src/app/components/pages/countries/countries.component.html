@@ -2,6 +2,9 @@
   <app-filter-control
     [(searchQuery)]="searchQuery"
     [(filterQuery)]="filterQuery"
+    [(sortControl)]="sortQuery"
+    [itemsCount]="countriesSignal().length"
+    (isAscOutput)="onSort($event)"
   ></app-filter-control>
 
   <article class="grid grid-cols-(--grid-cols-auto-fill) gap-8 mt-8">

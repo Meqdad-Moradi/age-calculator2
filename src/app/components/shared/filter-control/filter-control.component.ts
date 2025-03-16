@@ -1,4 +1,4 @@
-import { Component, model } from '@angular/core';
+import { Component, input, model, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -23,8 +23,27 @@ import { MatSelectModule } from '@angular/material/select';
   providers: [provideNativeDateAdapter()],
 })
 export class FilterControlComponent {
-  public searchQuery = model<string>();
-  public filterQuery = model<string>();
+  public searchQuery = model.required<string>();
+  public filterQuery = model.required<string>();
+  public sortControl = model.required<string>();
+  public itemsCount = input.required<number | string>();
+  // output
+  public isAscOutput = output<boolean>();
 
-  public filterOption = ['Asia', 'Africa', 'America', 'Europe', 'Oceania'];
+  public isAsc = true;
+
+  public filterOptions = [
+    'All',
+    'Asia',
+    'Africa',
+    'America',
+    'Europe',
+    'Oceania',
+  ];
+  public sortOptions = ['Name', 'Region', 'Capital'];
+
+  public onSort(): void {
+    this.isAsc = !this.isAsc;
+    this.isAscOutput.emit(this.isAsc);
+  }
 }

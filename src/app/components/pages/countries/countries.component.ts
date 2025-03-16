@@ -23,7 +23,8 @@ export class CountriesComponent {
 
   public countriesSignal = this.apiCountriesService.countries;
   public searchQuery = signal('');
-  public filterQuery = signal('');
+  public filterQuery = signal('All');
+  public sortQuery = signal('Name');
 
   /**
    * Computed property to filter countries based on search and region filters.
@@ -31,7 +32,10 @@ export class CountriesComponent {
   public countries = computed(() => {
     // Normalize search and filter queries to lower case for case-insensitive comparison.
     const searchQuery = this.searchQuery().toLocaleLowerCase();
-    const filterQuery = this.filterQuery().toLocaleLowerCase();
+    const filterQuery =
+      this.filterQuery() === 'All'
+        ? ''
+        : this.filterQuery().toLocaleLowerCase();
 
     return this.countriesSignal().filter((item) => {
       // Normalize country names and region for comparison.
@@ -64,5 +68,10 @@ export class CountriesComponent {
       relativeTo: this.activatedRoute,
       state: country,
     });
+  }
+
+  public onSort(isAsc: boolean): void {
+    // sort countries asc/desc
+    console.log(isAsc);
   }
 }

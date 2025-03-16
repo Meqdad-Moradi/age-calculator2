@@ -33,3 +33,74 @@ button:where([mat-raised-button], [color="primary"]) {
 .mat-mdc-form-field-error-wrapper {
   padding: 0 !important;
 }
+
+.mat-mdc-form-field {
+  //------- start default reseting --------//
+  .mat-mdc-text-field-wrapper {
+    background-color: transparent !important;
+  }
+
+  .mat-icon,
+  .mdc-text-field {
+    padding: 0 !important;
+  }
+
+  .mat-mdc-form-field-infix {
+    padding-bottom: 0;
+
+    .mat-mdc-form-field-input-control {
+      margin-top: 0.44em;
+    }
+  }
+
+  .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label {
+    top: 38px;
+    font-size: 0.99rem;
+  }
+
+  .mat-mdc-form-field-icon-suffix {
+    align-self: flex-end;
+    padding-bottom: 0.2em;
+  }
+  //------ end default reset ---------//
+
+  &.no-hint {
+    .mat-mdc-form-field-subscript-wrapper,
+    .mat-mdc-form-field-bottom-align::before {
+      display: none;
+    }
+  }
+  &.no-arrow .mat-mdc-select-arrow-wrapper,
+  &.no-underline .mdc-line-ripple,
+  &.no-hover-effect .mat-mdc-form-field-focus-overlay {
+    display: none;
+  }
+  &.match-height {
+    .mat-mdc-form-field-infix {
+      min-height: auto;
+      padding: 0;
+    }
+  }
+  &.match-width {
+    .mat-mdc-form-field-infix {
+      width: auto;
+    }
+  }
+}
+
+.cdk-overlay-pane:has(.mat-mdc-option) {
+  width: auto !important;
+}
+
+.mat-mdc-select-trigger {
+  gap: 0.5em;
+}
+
+// FYI: it can be reset or removed for some cases
+.mat-mdc-option .mat-pseudo-checkbox-minimal {
+  color: red;
+}
+
+.no-checkbox .mat-mdc-option .mat-pseudo-checkbox-minimal {
+  display: none;
+}
