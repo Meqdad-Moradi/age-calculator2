@@ -2,11 +2,13 @@ import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatDialog } from '@angular/material/dialog';
 import { MatDrawerMode, MatSidenavModule } from '@angular/material/sidenav';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { SidenavService } from '../../../services/sidenav.service';
 import { HeaderComponent } from '../header/header.component';
 import { NgClass } from '@angular/common';
+import { CreateBoardDialogComponent } from '../../dialogs/create-board-dialog/create-board-dialog.component';
 
 @Component({
   selector: 'app-sidenav',
@@ -26,6 +28,7 @@ import { NgClass } from '@angular/common';
 })
 export class SidenavComponent {
   private readonly sideNavService = inject(SidenavService);
+  private readonly dialog = inject(MatDialog);
 
   public isSideNavOpen = this.sideNavService.isSideNavOpen;
   public drawerMode: MatDrawerMode = 'side';
@@ -39,5 +42,9 @@ export class SidenavComponent {
     }
 
     this.isExpanded = !this.isExpanded;
+  }
+
+  public createNewBoard(): void {
+    this.dialog.open(CreateBoardDialogComponent);
   }
 }

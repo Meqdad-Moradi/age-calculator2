@@ -60,13 +60,23 @@
             <span matListItemTitle>{{ item.name }}</span>
           </mat-list-item>
           }
+          <!-- create new board -->
+          <button
+            class="w-full flex items-center gap-4 pl-4 py-3 !cursor-pointer !text-(--primary)"
+            (click)="createNewBoard()"
+          >
+            <mat-icon matListItemIcon>format_list_bulleted</mat-icon>
+            <span class="!text-(--primary)" matListItemTitle>
+              + Create new board
+            </span>
+          </button>
         </div>
       </div>
     </mat-list>
   </mat-drawer>
 
   <mat-drawer-content class="p-8 dark:bg-(--background-color)">
-    <div class="w-full max-w-[80%] mx-auto">
+    <div class="w-full max-w-[90%] mx-auto">
       <router-outlet></router-outlet>
     </div>
   </mat-drawer-content>

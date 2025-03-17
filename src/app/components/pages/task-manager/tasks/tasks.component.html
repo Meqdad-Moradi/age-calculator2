@@ -1,2 +1,61 @@
-<p>tasks works!</p>
-<app-task></app-task>
+<section>
+  <div class="flex flex-wrap items-center justify-between gap-4">
+    <app-section-title title="Platform Launch"></app-section-title>
+    <button
+      class="ml-auto"
+      mat-raised-button
+      color="primary"
+      (click)="addNewTask()"
+    >
+      + Add New Task
+    </button>
+  </div>
+
+  <div class="grid grid-cols-(--grid-cols-auto-fit) justify-between gap-8 mt-8">
+    <article>
+      <ng-container
+        *ngTemplateOutlet="
+          header;
+          context: { text: 'todo', color: 'bg-teal-400' }
+        "
+      ></ng-container>
+
+      <div class="mt-4">
+        <app-task></app-task>
+      </div>
+    </article>
+
+    <article>
+      <ng-container
+        *ngTemplateOutlet="
+          header;
+          context: { text: 'doing', color: 'bg-violet-500' }
+        "
+      ></ng-container>
+
+      <div class="mt-4">
+        <app-task></app-task>
+      </div>
+    </article>
+
+    <article>
+      <ng-container
+        *ngTemplateOutlet="
+          header;
+          context: { text: 'done', color: 'bg-green-600' }
+        "
+      ></ng-container>
+
+      <div class="mt-4">
+        <app-task></app-task>
+      </div>
+    </article>
+  </div>
+</section>
+
+<ng-template #header let-text="text" let-color="color">
+  <div class="flex items-center gap-2">
+    <span class="block h-3 w-3 rounded-full" [ngClass]="color"></span>
+    <span class="uppercase tracking-widest font-pop">{{ text }}</span>
+  </div>
+</ng-template>
