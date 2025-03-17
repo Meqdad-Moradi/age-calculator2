@@ -5,6 +5,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
 import { SidenavService } from '../../../services/sidenav.service';
 import { SwitchThemeComponent } from '../../shared/switch-theme/switch-theme.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-header',
@@ -12,6 +13,7 @@ import { SwitchThemeComponent } from '../../shared/switch-theme/switch-theme.com
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
+    MatMenuModule,
     RouterLink,
     SwitchThemeComponent,
   ],
@@ -30,5 +32,12 @@ export class HeaderComponent {
   public toggleSideNav(): void {
     this.isSideNaveOpen = !this.isSideNaveOpen;
     this.sideNavService.isSideNavOpen.set(this.isSideNaveOpen);
+  }
+
+  /**
+   * onPrint -> print page
+   */
+  public onPrint(): void {
+    print();
   }
 }

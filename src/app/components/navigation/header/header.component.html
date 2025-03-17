@@ -13,4 +13,19 @@
   <span class="spacer"></span>
 
   <app-switch-theme />
+
+  <!-- menu -->
+  <button
+    class="!text-(--white-color)"
+    mat-icon-button
+    [matMenuTriggerFor]="menu"
+  >
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="onPrint()">
+      Print Page
+      <mat-icon>print</mat-icon>
+    </button>
+  </mat-menu>
 </mat-toolbar>

@@ -1,0 +1,55 @@
+@media only print {
+  body,
+  .apps-container {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+
+    .mat-mdc-menu-content {
+      display: none !important;
+    }
+
+    app-navbar {
+      display: none !important;
+    }
+
+    app-sidenav {
+      display: block !important;
+      width: auto !important;
+      height: auto !important;
+      overflow: visible !important;
+
+      mat-drawer-container {
+        display: block !important;
+        width: auto !important;
+        height: auto !important;
+        overflow: visible !important;
+
+        mat-drawer {
+          display: none !important;
+        }
+
+        mat-drawer-content {
+          display: block !important;
+          width: auto !important;
+          height: auto !important;
+          overflow: visible !important;
+          margin-left: 0 !important;
+
+          app-layout {
+            app-header {
+              display: none !important;
+            }
+
+            .print-header {
+              display: block !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
