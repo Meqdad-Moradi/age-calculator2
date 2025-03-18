@@ -1,6 +1,5 @@
 @media only print {
-  body,
-  .apps-container {
+  body {
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
     display: block !important;

@@ -75,7 +75,10 @@
     </mat-list>
   </mat-drawer>
 
-  <mat-drawer-content class="p-8 dark:bg-(--background-color)" id="pdf-content">
+  <mat-drawer-content
+    class="p-8 dark:bg-(--background-color) print:bg-white"
+    id="pdf-content"
+  >
     <div class="w-full max-w-[90%] mx-auto">
       <router-outlet></router-outlet>
     </div>
