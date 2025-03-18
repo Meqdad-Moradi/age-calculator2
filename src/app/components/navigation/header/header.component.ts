@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router';
 import { SidenavService } from '../../../services/sidenav.service';
 import { SwitchThemeComponent } from '../../shared/switch-theme/switch-theme.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { PdfService } from '../../../services/pdf.service';
 
 @Component({
   selector: 'app-header',
@@ -22,6 +23,7 @@ import { MatMenuModule } from '@angular/material/menu';
 })
 export class HeaderComponent {
   private readonly sideNavService = inject(SidenavService);
+  private readonly pdfService = inject(PdfService);
 
   public title = signal<string>('Age Calculator');
   public isSideNaveOpen = true;
@@ -39,5 +41,12 @@ export class HeaderComponent {
    */
   public onPrint(): void {
     print();
+  }
+
+  /**
+   * downloadPDF
+   */
+  public downloadPDF(): void {
+    this.pdfService.captureScreen();
   }
 }
