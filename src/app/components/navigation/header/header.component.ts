@@ -47,6 +47,6 @@ export class HeaderComponent {
    * downloadPDF
    */
   public downloadPDF(): void {
-    this.pdfService.captureScreen();
+    this.pdfService.downloadPDF();
   }
 }
