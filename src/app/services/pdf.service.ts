@@ -11,48 +11,125 @@ export class PdfService {
 
   /**
    * downloadPDF
-   * @returns void
+   * Generates a PDF from the HTML element with id 'pdf-content'
+   * and saves it as 'download.pdf'.
    */
-  public downloadPDF(): void {
+  public generatePDF(): void {
+    // Get the HTML element to capture as PDF
     const element = document.getElementById('pdf-content');
 
+    // If the element doesn't exist, display an error and exit the function
     if (!element) {
-      const errorMsg = `Element with id '${'pdf-content'}' not found.`;
+      const errorMsg = `Element with id 'pdf-content' not found.`;
       this.displayErrorMsg(errorMsg);
       return;
     }
 
-    // Use html2canvas-pro to capture the content as a canvas
-    html2canvas(element)
+    // Define PDF page settings (A4 dimensions in mm)
+    const margin = 15;
+    const pageWidth = 210; // A4 page width in mm
+    const pageHeight = 297 - margin * 2; // A4 page height in mm
+    const headerHeight = 20; // Height reserved for the header in mm
+    const headerSpacing = 5; // Space between header and content in mm
+    // Calculate the width available for the main content
+    const contentWidth = pageWidth - margin * 2;
+
+    html2canvas(element, {
+      useCORS: true,
+      allowTaint: false,
+      scale: 2,
+      backgroundColor: 'red',
+    })
       .then((canvas) => {
         const imgData = canvas.toDataURL('image/png');
 
-        // Initialize jsPDF. You can specify options like orientation or unit if needed.
+        // Calculate the height of the image in the PDF based on the scaling to the available width
+        const contentImgHeight = (canvas.height * contentWidth) / canvas.width;
+
+        // Calculate the height available for content on the first page (excluding header area and margins)
+        const firstPageContentHeight =
+          pageHeight - headerHeight - headerSpacing - margin * 2;
+        // For subsequent pages, the available content height is the page height minus top and bottom margins
+        const otherPagesContentHeight = pageHeight - margin * 2;
+
+        // Initialize the jsPDF document (portrait mode, mm units, A4 paper)
         const pdf = new jsPDF('p', 'mm', 'a4');
 
-        // Calculate width and height of PDF page
-        const imgWidth = 210; // A4 width in mm
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        // ---------------
+        // Build the Header
+        // ---------------
+        pdf.setFontSize(10); // Set small font for header text
 
-        const pageHeight = 295;
-        let heightLeft = imgHeight;
-        let position = 0;
+        // Get the current date (formatted in German locale) and add it to the header
+        const currentDate = new Date().toLocaleDateString('de');
+        pdf.text(currentDate, margin, headerHeight + margin - 4);
 
-        // If the content is longer than one page, you might need to split the content into multiple pages.
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        // Define an external logo image URL
+        const logoUrl =
+          'https://images.pexels.com/photos/30912294/pexels-photo-30912294/free-photo-of-serene-white-swan-gliding-on-foggy-pond-in-sintra.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load';
+        const logoWidth = 20; // Width of the logo in mm
+        const logoHeight = 20; // Height of the logo in mm
+        // Calculate the logo's X coordinate so it aligns to the right with a margin
+        const logoX = pageWidth - margin - logoWidth;
+        const logoY = margin; // Place the logo at the top margin
+        // Add the logo image to the PDF header
+        pdf.addImage(logoUrl, 'PNG', logoX, logoY, logoWidth, logoHeight);
 
-        heightLeft -= pageHeight;
+        // Add the company name text centered under the logo
+        pdf.setFontSize(16);
+        pdf.setFont('roboto', 'bold');
+        pdf.text('ADVOKAT Online', margin, margin);
 
-        while (heightLeft >= 0) {
-          position += heightLeft - imgHeight; // top padding for other pages
+        // Draw a bottom border for the header
+        pdf.setDrawColor(200); // Set border color
+        pdf.setLineWidth(0.2); // Set border thickness
+        pdf.line(
+          margin,
+          margin + headerHeight,
+          pageWidth - margin,
+          margin + headerHeight
+        );
+
+        // ---------------
+        // Insert the Captured Content
+        // ---------------
+        // Set the initial Y offset to start right after the header and its spacing
+        const yOffset = margin + headerHeight + headerSpacing;
+        // Add the full captured image to the first page at the calculated offset and scale it to the content width
+        pdf.addImage(
+          imgData,
+          'PNG',
+          margin,
+          yOffset,
+          contentWidth,
+          contentImgHeight
+        );
+
+        // 'position' tracks how much of the content image has been printed
+        let position = firstPageContentHeight;
+
+        // If the image height is larger than the first page's content area, add additional pages
+        while (position < contentImgHeight) {
           pdf.addPage();
-          pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-          heightLeft -= pageHeight;
+          // For subsequent pages, adjust the y offset to print the next part of the image.
+          // A negative y offset is used to "crop" the image so that only the next segment appears on the page.
+          pdf.addImage(
+            imgData,
+            'PNG',
+            margin,
+            margin - position,
+            contentWidth,
+            contentImgHeight
+          );
+          // Increase the position by the available content height on pages after the first
+          position += otherPagesContentHeight;
         }
 
+        // Save the generated PDF with the given filename
         pdf.save('download.pdf');
       })
       .catch((err) => {
+        // If an error occurs, display an error message with the error details
         this.displayErrorMsg('Error generating PDF: ' + err);
       });
   }
@@ -69,19 +146,3 @@ export class PdfService {
     });
   }
 }
-
-// html2canvas(element)
-//   .then((canvas) => {
-//     const imgData = canvas.toDataURL('image/png');
-//     const pdf = new jsPDF('p', 'mm', 'a4');
-
-//     // Get dimensions of the PDF page
-//     const pdfWidth = pdf.internal.pageSize.getWidth();
-//     const pdfPageHeight = pdf.internal.pageSize.getHeight();
-
-//     pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfPageHeight);
-//     pdf.save(pdfFilename);
-//   })
-//   .catch((err) => {
-//     this.displayErrorMsg('Error generating PDF: ' + err);
-//   });
