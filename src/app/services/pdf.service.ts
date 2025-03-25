@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import html2canvas from 'html2canvas-pro';
 import jsPDF from 'jspdf';
@@ -9,12 +9,15 @@ import jsPDF from 'jspdf';
 export class PdfService {
   private readonly snackBar = inject(MatSnackBar);
 
+  public isDownloading = signal(false);
+
   /**
    * downloadPDF
    * Generates a PDF from the HTML element with id 'pdf-content'
    * and saves it as 'download.pdf'.
    */
   public generatePDF(): void {
+    this.isDownloading.set(true);
     // Get the HTML element to capture as PDF
     const element = document.getElementById('pdf-content');
 
@@ -38,7 +41,6 @@ export class PdfService {
       useCORS: true,
       allowTaint: false,
       scale: 2,
-      backgroundColor: 'red',
     })
       .then((canvas) => {
         const imgData = canvas.toDataURL('image/png');
@@ -127,6 +129,7 @@ export class PdfService {
 
         // Save the generated PDF with the given filename
         pdf.save('download.pdf');
+        this.isDownloading.set(false);
       })
       .catch((err) => {
         // If an error occurs, display an error message with the error details
@@ -137,8 +140,9 @@ export class PdfService {
   /**
    * displayErrorMsg
    * @param msg string
-   */
+  */
   private displayErrorMsg(msg: string): void {
+    this.isDownloading.set(false);
     this.snackBar.open(msg, 'Close', {
       horizontalPosition: 'center',
       verticalPosition: 'top',
