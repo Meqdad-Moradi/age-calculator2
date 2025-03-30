@@ -6,15 +6,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatDrawerMode, MatSidenavModule } from '@angular/material/sidenav';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { ApiBoardService } from '../../../services/api/api-board.service';
+import { ErrorService } from '../../../services/error.service';
 import { SidenavService } from '../../../services/sidenav.service';
 import { CreateBoardDialogComponent } from '../../dialogs/create-board-dialog/create-board-dialog.component';
 import { Board } from '../../models/task-manager';
 import { HeaderComponent } from '../header/header.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ErrorService } from '../../../services/error.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sidenav',
@@ -35,9 +34,8 @@ import { Subscription } from 'rxjs';
 export class SidenavComponent {
   private readonly sideNavService = inject(SidenavService);
   private readonly apiBoardService = inject(ApiBoardService);
-  private readonly snackbarService = inject(ErrorService);
+  private readonly errorService = inject(ErrorService);
   private readonly dialog = inject(MatDialog);
-  private readonly snackbar = inject(MatSnackBar);
 
   private subscriptions: Subscription[] = [];
 
@@ -69,10 +67,9 @@ export class SidenavComponent {
     this.subscriptions.push(dialog.afterClosed().pipe(
       map(value => {
         if (!value) {
-          this.snackbarService.displayErrorMsg('No board name entered!')
-          this.subscriptions.forEach(sub => sub.unsubscribe())
+          this.subscriptions.forEach(sub => sub.unsubscribe());
           return
-        };
+        }
 
         const id = crypto.randomUUID();
         const newBoard: Board = { id, name: value }
@@ -82,7 +79,7 @@ export class SidenavComponent {
       tap(value => this.taskManagerSidenav().push(value)),
       catchError(error => {
         const msg = error.message;
-        throw this.snackbarService.displayErrorMsg(msg);
+        throw this.errorService.displayErrorMsg(msg);
       })
     ).subscribe());
   }

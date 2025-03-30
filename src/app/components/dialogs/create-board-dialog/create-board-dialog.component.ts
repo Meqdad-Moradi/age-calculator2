@@ -1,24 +1,22 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import {
-  MatDialogActions,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle
-} from '@angular/material/dialog';
+import { MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-create-board-dialog',
-  imports: [MatFormFieldModule,
+  imports: [
+    MatFormFieldModule,
     MatInputModule,
     FormsModule,
     MatButtonModule,
     MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
+    FormsModule,
+    ReactiveFormsModule
   ],
   templateUrl: './create-board-dialog.component.html',
   styleUrl: './create-board-dialog.component.scss',
@@ -26,7 +24,8 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class CreateBoardDialogComponent {
   private readonly dialogRef = inject(MatDialogRef<CreateBoardDialogComponent>);
-  public value = signal<string>('');
+
+  public control = new FormControl('', [Validators.required]);
 
   /**
    * onCancelClick
@@ -39,6 +38,7 @@ export class CreateBoardDialogComponent {
    * onOkClick
    */
   public onOkClick(): void {
-    this.dialogRef.close(this.value())
+    if (!this.control.value) return;
+    this.dialogRef.close(this.control.value);
   }
 }

@@ -7,7 +7,7 @@ import { ErrorService } from './error.service';
   providedIn: 'root',
 })
 export class PdfService {
-  private readonly snackbarService = inject(ErrorService);
+  private readonly errorService = inject(ErrorService);
 
   public isDownloading = signal(false);
 
@@ -25,7 +25,7 @@ export class PdfService {
     if (!element) {
       this.isDownloading.set(false);
       const errorMsg = `Element with id 'pdf-content' not found.`;
-      this.snackbarService.displayErrorMsg(errorMsg);
+      this.errorService.displayErrorMsg(errorMsg);
       return;
     }
 
@@ -145,7 +145,7 @@ export class PdfService {
       .catch((err) => {
         this.isDownloading.set(false);
         // If an error occurs, display an error message with the error details
-        this.snackbarService.displayErrorMsg('Error generating PDF: ' + err);
+        this.errorService.displayErrorMsg('Error generating PDF: ' + err);
       });
   }
 }

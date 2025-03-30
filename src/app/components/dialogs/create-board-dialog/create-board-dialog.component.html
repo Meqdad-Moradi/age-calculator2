@@ -5,9 +5,10 @@
     <input
       matInput
       cdkFocusInitial
-      [(ngModel)]="value"
+      [formControl]="control"
       (keyup.enter)="onOkClick()"
     />
+    <mat-error>Field is required!</mat-error>
   </mat-form-field>
 </mat-dialog-content>
 
