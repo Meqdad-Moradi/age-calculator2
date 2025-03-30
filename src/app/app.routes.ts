@@ -5,6 +5,7 @@ import { CharacterCounterComponent } from './components/pages/character-counter/
 import { CountriesComponent } from './components/pages/countries/countries.component';
 import { CountryComponent } from './components/pages/countries/country/country.component';
 import { TasksComponent } from './components/pages/task-manager/tasks/tasks.component';
+import { TaskManagerComponent } from './components/pages/task-manager/task-manager.component';
 
 export const routes: Routes = [
   {
@@ -30,7 +31,10 @@ export const routes: Routes = [
       {
         path: 'task-manager',
         pathMatch: 'full',
-        component: TasksComponent,
+        component: TaskManagerComponent,
+        children: [
+          { path: '', component: TasksComponent, pathMatch: 'full' }
+        ]
       },
     ],
   },
