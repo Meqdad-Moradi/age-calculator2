@@ -1,13 +1,13 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import html2canvas from 'html2canvas-pro';
 import jsPDF from 'jspdf';
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PdfService {
-  private readonly snackBar = inject(MatSnackBar);
+  private readonly snackbarService = inject(ErrorService);
 
   public isDownloading = signal(false);
 
@@ -23,8 +23,9 @@ export class PdfService {
 
     // If the element doesn't exist, display an error and exit the function
     if (!element) {
+      this.isDownloading.set(false);
       const errorMsg = `Element with id 'pdf-content' not found.`;
-      this.displayErrorMsg(errorMsg);
+      this.snackbarService.displayErrorMsg(errorMsg);
       return;
     }
 
@@ -142,21 +143,9 @@ export class PdfService {
         this.isDownloading.set(false);
       })
       .catch((err) => {
+        this.isDownloading.set(false);
         // If an error occurs, display an error message with the error details
-        this.displayErrorMsg('Error generating PDF: ' + err);
+        this.snackbarService.displayErrorMsg('Error generating PDF: ' + err);
       });
-  }
-
-  /**
-   * displayErrorMsg
-   * @param msg string
-  */
-  private displayErrorMsg(msg: string): void {
-    this.isDownloading.set(false);
-    this.snackBar.open(msg, 'Close', {
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-      duration: 10000,
-    });
   }
 }

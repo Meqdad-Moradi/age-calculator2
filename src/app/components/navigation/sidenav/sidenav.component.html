@@ -48,7 +48,7 @@
         onclick="this.blur()"
         (click)="onExpandTaskManager()"
       >
-        <mat-icon matListItemIcon>format_list_bulleted</mat-icon>
+        <mat-icon matListItemIcon>developer_board</mat-icon>
         <span matListItemTitle>Task manager boards</span>
         <div class="grid place-items-center" matListItemMeta>
           <mat-icon>
@@ -58,10 +58,10 @@
       </mat-list-item>
 
       <div class="task-manager-nav" [ngClass]="{ expanded: isExpanded }">
-        <div>
+        <div class="relative">
           @for (item of taskManagerSidenav(); track $index) {
           <mat-list-item class="!cursor-pointer" onclick="this.blur()">
-            <mat-icon matListItemIcon>format_list_bulleted</mat-icon>
+            <mat-icon matListItemIcon>grading</mat-icon>
             <span matListItemTitle>{{ item.name }}</span>
           </mat-list-item>
           }

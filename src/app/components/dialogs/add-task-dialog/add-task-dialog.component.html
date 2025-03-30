@@ -1,1 +1,14 @@
-<p>add-task-dialog works!</p>
+<h2 mat-dialog-title>Create new Task</h2>
+<mat-dialog-content class="!pt-4">
+  <mat-form-field class="w-full" appearance="outline">
+    <mat-label>Board name</mat-label>
+    <input matInput [(ngModel)]="boardName" />
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="boardName()" cdkFocusInitial>
+    Create
+  </button>
+</mat-dialog-actions>

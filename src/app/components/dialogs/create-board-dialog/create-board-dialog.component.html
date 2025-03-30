@@ -1,1 +1,17 @@
-<p>create-board-dialog works!</p>
+<h2 mat-dialog-title>Create new board</h2>
+<mat-dialog-content class="!pt-4">
+  <mat-form-field class="w-full" appearance="outline">
+    <mat-label>Board name</mat-label>
+    <input
+      matInput
+      cdkFocusInitial
+      [(ngModel)]="value"
+      (keyup.enter)="onOkClick()"
+    />
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-raised-button (click)="onOkClick()">Create</button>
+</mat-dialog-actions>

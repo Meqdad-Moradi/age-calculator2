@@ -1,4 +1,4 @@
-export interface TaskManagerSidenav {
+export interface Board {
   name: string;
   id: string;
 }
