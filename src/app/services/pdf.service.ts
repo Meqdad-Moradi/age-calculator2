@@ -80,7 +80,7 @@ export class PdfService {
         // Add the company name text centered under the logo
         pdf.setFontSize(16);
         pdf.setFont('roboto', 'bold');
-        pdf.text('ADVOKAT Online', margin, margin);
+        pdf.text('AGE Calculator', margin, margin);
 
         // Draw a bottom border for the header
         pdf.setDrawColor(200); // Set border color
@@ -107,6 +107,11 @@ export class PdfService {
           contentImgHeight
         );
 
+        // add footer
+        pdf.setFontSize(10);
+        pdf.text(new Date().toLocaleDateString('de'), margin, pageHeight + margin + 5);
+        pdf.text('Page 1 of 1', pageWidth - margin * 2, margin + pageHeight + 5)
+
         // 'position' tracks how much of the content image has been printed
         let position = firstPageContentHeight;
 
@@ -125,6 +130,11 @@ export class PdfService {
           );
           // Increase the position by the available content height on pages after the first
           position += otherPagesContentHeight;
+
+          // add footer
+          pdf.setFontSize(10);
+          pdf.text(new Date().toLocaleDateString('de'), margin, pageHeight + margin + 5);
+          pdf.text('Page 1 of 1', pageWidth - margin * 2, margin + pageHeight + 5)
         }
 
         // Save the generated PDF with the given filename
