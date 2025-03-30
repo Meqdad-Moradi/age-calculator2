@@ -57,20 +57,25 @@
         </div>
       </mat-list-item>
 
-      <div class="task-manager-nav" [ngClass]="{ expanded: isExpanded }">
-        <div class="relative">
+      <div class="boards" [ngClass]="{ expanded: isExpanded }">
+        <div>
           @for (item of taskManagerSidenav(); track $index) {
-          <mat-list-item class="!cursor-pointer" onclick="this.blur()">
-            <mat-icon matListItemIcon>grading</mat-icon>
+          <mat-list-item
+            class="!cursor-pointer"
+            [routerLink]="['/task-manager/', item.id]"
+            routerLinkActive="sub-link-active"
+            onclick="this.blur()"
+          >
+            <mat-icon matListItemIcon>space_dashboard</mat-icon>
             <span matListItemTitle>{{ item.name }}</span>
           </mat-list-item>
           }
           <!-- create new board -->
           <button
-            class="w-full flex items-center gap-4 pl-4 py-3 !cursor-pointer !text-(--primary)"
+            class="w-full flex items-center gap-4 pl-13.5 py-3 !cursor-pointer !text-(--primary)"
             (click)="createNewBoard()"
           >
-            <mat-icon matListItemIcon>format_list_bulleted</mat-icon>
+            <mat-icon matListItemIcon>space_dashboard</mat-icon>
             <span class="!text-(--primary)" matListItemTitle>
               + Create new board
             </span>

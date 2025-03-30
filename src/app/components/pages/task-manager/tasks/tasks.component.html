@@ -1,6 +1,5 @@
 <section>
   <div class="flex flex-wrap items-center justify-between gap-4">
-    <app-section-title title="Platform Launch"></app-section-title>
     <button
       class="ml-auto"
       mat-raised-button
@@ -11,7 +10,13 @@
     </button>
   </div>
 
-  <div class="grid grid-cols-(--grid-cols-auto-fit) justify-between gap-8 mt-8">
+  <!-- header -->
+  <header
+    class="flex items-center justify-between bg-gray-200 dark:bg-(--forground-color) mt-2 border-b border-b-gray-500 py-3"
+  ></header>
+
+  <!-- content -->
+  <div class="grid grid-cols-(--grid-cols-auto-fit) justify-between gap-8 mt-4">
     <article>
       <ng-container
         *ngTemplateOutlet="

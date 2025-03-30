@@ -8,4 +8,5 @@ import { Component, input } from '@angular/core';
 })
 export class SectionTitleComponent {
   title = input<string>('');
+  slogan = input<string>('');
 }

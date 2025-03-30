@@ -2,11 +2,12 @@
   height: calc(100% - 64px);
 }
 
+mat-list-item:hover,
 .active {
   background-color: var(--active-color);
 }
 
-.task-manager-nav {
+.boards {
   display: grid;
   grid-template-rows: 0;
   transition: grid-template-rows 0.3s ease-in-out;
@@ -15,9 +16,16 @@
     grid-template-rows: 1fr;
   }
 
+  .sub-link-active * {
+    color: var(--primary) !important;
+  }
+
   div {
-    padding-left: 2.4em;
     background-color: var(--background-color);
     overflow: hidden;
+
+    mat-list-item {
+      padding-left: 2.4em;
+    }
   }
 }

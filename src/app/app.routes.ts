@@ -32,10 +32,8 @@ export const routes: Routes = [
         path: 'task-manager',
         pathMatch: 'full',
         component: TaskManagerComponent,
-        children: [
-          { path: '', component: TasksComponent, pathMatch: 'full' }
-        ]
       },
+      { path: 'task-manager/:id', component: TasksComponent, pathMatch: 'full' }
     ],
   },
   {

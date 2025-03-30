@@ -1,16 +1,16 @@
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { SectionTitleComponent } from '../../../shared/section-title/section-title.component';
-import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { TaskComponent } from '../task/task.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTaskDialogComponent } from '../../../dialogs/add-task-dialog/add-task-dialog.component';
+import { TaskComponent } from '../task/task.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-tasks',
   imports: [
     MatButtonModule,
-    SectionTitleComponent,
+    MatIconModule,
     NgClass,
     NgTemplateOutlet,
     TaskComponent,
