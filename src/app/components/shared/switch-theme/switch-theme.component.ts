@@ -33,6 +33,7 @@ export class SwitchThemeComponent implements OnInit {
    * @param mode string
    */
   private setThemeIcon(mode: string): void {
-    this.themeIcon.set(mode === 'system' ? 'devices' : mode + '_mode');
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    this.themeIcon.set(mode === 'system' ? (isDarkMode ? 'dark_mode' : 'light_mode') : mode + '_mode');
   }
 }
