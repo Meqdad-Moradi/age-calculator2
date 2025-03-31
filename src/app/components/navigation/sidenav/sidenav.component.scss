@@ -10,7 +10,6 @@ mat-list-item:hover,
 .boards {
   display: grid;
   grid-template-rows: 0;
-  transition: grid-template-rows 0.3s ease-in-out;
 
   &.expanded {
     grid-template-rows: 1fr;
