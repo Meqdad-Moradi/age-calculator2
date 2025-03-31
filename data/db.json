@@ -8310,5 +8310,14 @@
       "id": "675f5bca-51b1-43c8-a934-68fb254582df",
       "name": "work on pdf download"
     }
+  ],
+  "tasks":[
+    {
+      "id":"02df",
+      "title":"task title",
+      "desc":"this is some description",
+      "boardId": "675f5bca-51b1-43c8-a934-68fb254582df",
+      "state": "todo"
+    }
   ]
 }
