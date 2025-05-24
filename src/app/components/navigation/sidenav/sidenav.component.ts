@@ -32,16 +32,16 @@ import { HeaderComponent } from '../header/header.component';
   styleUrl: './sidenav.component.scss',
 })
 export class SidenavComponent {
-  private readonly sideNavService = inject(SidenavService);
+  private readonly sidenavService = inject(SidenavService);
   private readonly apiBoardService = inject(ApiBoardService);
   private readonly errorService = inject(ErrorService);
   private readonly dialog = inject(MatDialog);
 
   private subscriptions: Subscription[] = [];
 
-  public isSideNavOpen = this.sideNavService.isSideNavOpen;
+  public isSideNavOpen = this.sidenavService.isSideNavOpen;
   public drawerMode: MatDrawerMode = 'side';
-  public taskManagerSidenav = this.sideNavService.taskManagerSidenav;
+  public taskManagerSidenav = this.sidenavService.taskManagerSidenav;
   public isExpanded = false;
 
   /**
@@ -82,5 +82,9 @@ export class SidenavComponent {
         throw this.errorService.displayErrorMsg(msg);
       })
     ).subscribe());
+
+    this.sidenavService.getSysName().subscribe(value => {
+      console.log(value)
+    })
   }
 }

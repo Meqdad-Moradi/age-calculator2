@@ -1,14 +1,35 @@
-<h2 mat-dialog-title>Create new Task</h2>
-<mat-dialog-content class="!pt-4">
-  <mat-form-field class="w-full" appearance="outline">
-    <mat-label>Board name</mat-label>
-    <input matInput [(ngModel)]="boardName" />
-  </mat-form-field>
-</mat-dialog-content>
+<h2 mat-dialog-title>Add New Task</h2>
+<form [formGroup]="addTaskForm" (submit)="onSubmit($event)">
+  <mat-dialog-content class="!pt-4 !grid !gap-4 !min-w-[500px]">
+    <!-- title -->
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" />
+      <mat-error>Field is required!</mat-error>
+    </mat-form-field>
 
-<mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-raised-button [mat-dialog-close]="boardName()" cdkFocusInitial>
-    Create
-  </button>
-</mat-dialog-actions>
+    <!-- description -->
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="desc" rows="3" cols="10"></textarea>
+      <mat-error>Field is required!</mat-error>
+    </mat-form-field>
+
+    <!-- status -->
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select class="w-full" panelClass="w-auto" formControlName="status">
+        @for (status of statusArr(); track $index) {
+        <mat-option [value]="status">{{ status }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button type="submit" [disabled]="addTaskForm.invalid">
+      Create
+    </button>
+  </mat-dialog-actions>
+</form>

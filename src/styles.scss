@@ -89,10 +89,6 @@ button:where([mat-raised-button], [color="primary"]) {
   }
 }
 
-.cdk-overlay-pane:has(.mat-mdc-option) {
-  width: auto !important;
-}
-
 .mat-mdc-select-trigger {
   gap: 0.5em;
 }
