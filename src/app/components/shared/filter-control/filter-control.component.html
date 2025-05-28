@@ -61,7 +61,15 @@
             {{ filterQuery() }}
             <mat-icon class="!text-base text-(--primary)">filter_alt</mat-icon>
           </mat-select-trigger>
-          @for (option of filterOptions; track $index) {
+
+          <mat-option>
+            <ngx-mat-select-search
+              [formControl]="searchControl"
+              placeholderLabel="Search..."
+            ></ngx-mat-select-search>
+          </mat-option>
+
+          @for (option of filteredOptions | async; track $index) {
           <mat-option [value]="option">
             @if (filterQuery() === option) {
             <div class="flex items-center justify-between gap-3 min-w-24">
