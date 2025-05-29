@@ -30,10 +30,12 @@ import { map, startWith } from 'rxjs/operators';
   providers: [provideNativeDateAdapter()],
 })
 export class FilterControlComponent implements OnInit {
-  public searchQuery = model.required<string>();
-  public filterQuery = model.required<string>();
-  public sortControl = model.required<string>();
-  public itemsCount = input.required<number | string>();
+  public searchQuery = model<string>();
+  public filterQuery = model<string>();
+  public sortControl = model<string>();
+  public itemsCount = input<number | string>();
+  public searchLabel = input<string>('Search countries...');
+  public isControlsVisible = input<boolean>(true);
   // output
   public isAscOutput = output<boolean>();
 

@@ -1,11 +1,14 @@
 <section>
-  <div class="flex flex-wrap items-center justify-between gap-4">
-    <button
-      class="ml-auto"
-      mat-raised-button
-      color="primary"
-      (click)="addNewTask()"
-    >
+  <div class="flex flex-wrap items-center gap-4">
+    <app-filter-control
+      class="w-full mb-4"
+      searchLabel="Search your favorite task..."
+      [isControlsVisible]="false"
+      [(searchQuery)]="searchQuery"
+    ></app-filter-control>
+
+    <!-- add task button -->
+    <button mat-raised-button color="primary" (click)="addNewTask()">
       + Add New Task
     </button>
   </div>
@@ -25,7 +28,7 @@
         "
       ></ng-container>
 
-      @for (item of tasksGroup()?.todo; track $index) {
+      @for (item of (tasksGroup$ | async)?.todo; track $index) {
       <div class="mt-4">
         <app-task [task]="item"></app-task>
       </div>
@@ -41,7 +44,7 @@
         "
       ></ng-container>
 
-      @for (item of tasksGroup()?.doing; track $index) {
+      @for (item of (tasksGroup$ | async)?.doing; track $index) {
       <div class="mt-4">
         <app-task [task]="item"></app-task>
       </div>
@@ -57,7 +60,7 @@
         "
       ></ng-container>
 
-      @for (item of tasksGroup()?.done; track $index) {
+      @for (item of (tasksGroup$ | async)?.done; track $index) {
       <div class="mt-4">
         <app-task [task]="item"></app-task>
       </div>

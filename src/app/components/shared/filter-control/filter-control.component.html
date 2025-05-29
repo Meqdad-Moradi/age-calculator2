@@ -30,7 +30,7 @@
         type="search"
         id="default-search"
         class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-100 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        placeholder="Search countries..."
+        [placeholder]="searchLabel()"
         [(ngModel)]="searchQuery"
       />
       <button
@@ -42,6 +42,7 @@
     </div>
   </article>
 
+  @if (isControlsVisible()) {
   <article
     class="flex items-center justify-between py-2 border-b border-b-gray-300 dark:border-b-gray-700"
   >
@@ -128,4 +129,5 @@
       </button>
     </div>
   </article>
+  }
 </section>

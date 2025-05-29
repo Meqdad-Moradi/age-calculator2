@@ -3,7 +3,7 @@
     [(searchQuery)]="searchQuery"
     [(filterQuery)]="filterQuery"
     [sortControl]="sortQuery()"
-    (sortControlChange)="sortControlChange($event)"
+    (sortControlChange)="sortControlChange($event!)"
     [itemsCount]="countriesSignal().length"
     (isAscOutput)="onSort()"
   ></app-filter-control>
