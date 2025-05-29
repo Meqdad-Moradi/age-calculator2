@@ -8,5 +8,5 @@ import { Task } from '../../../models/task-manager';
   styleUrl: './task.component.scss',
 })
 export class TaskComponent {
-  public task = input<Task>();
+  public task = input.required<Task>();
 }

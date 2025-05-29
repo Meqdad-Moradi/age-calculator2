@@ -8,10 +8,10 @@ export interface Task {
   title: string;
   desc: string;
   boardId: string;
-  state: TaskState;
+  status: TaskStatus;
 }
 
-export type TaskState = 'todo' | 'doing' | 'done'
+export type TaskStatus = 'todo' | 'doing' | 'done'
 
 export interface TasksGroup {
   todo: Task[];

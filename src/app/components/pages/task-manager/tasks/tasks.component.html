@@ -25,9 +25,9 @@
         "
       ></ng-container>
 
-      @for (item of tasksGroup().todo; track $index) {
+      @for (item of tasksGroup()?.todo; track $index) {
       <div class="mt-4">
-        <app-task></app-task>
+        <app-task [task]="item"></app-task>
       </div>
       }
     </article>
@@ -41,9 +41,9 @@
         "
       ></ng-container>
 
-      @for (item of tasksGroup().doing; track $index) {
+      @for (item of tasksGroup()?.doing; track $index) {
       <div class="mt-4">
-        <app-task></app-task>
+        <app-task [task]="item"></app-task>
       </div>
       }
     </article>
@@ -57,9 +57,9 @@
         "
       ></ng-container>
 
-      @for (item of tasksGroup().done; track $index) {
+      @for (item of tasksGroup()?.done; track $index) {
       <div class="mt-4">
-        <app-task></app-task>
+        <app-task [task]="item"></app-task>
       </div>
       }
     </article>
