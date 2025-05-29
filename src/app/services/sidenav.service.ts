@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Board } from '../components/models/task-manager';
 import { Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { Board } from '../components/models/task-manager';
 import { ErrorService } from './error.service';
 
 @Injectable({
@@ -37,7 +37,7 @@ export class SidenavService {
     return this.http
       .get('/', { observe: 'response', responseType: 'text' })
       .pipe(
-        map((resp) => resp.headers.get('x-forwarded-for')),
+        map((resp) => resp.headers.get('x-forwarded-for'))
         // catchError(
         //   this.errorService.displayErrorMsg('health.service::getSysName')
         // )

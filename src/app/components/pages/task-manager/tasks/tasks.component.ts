@@ -1,13 +1,12 @@
 import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
-import { EMPTY, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, EMPTY, Observable } from 'rxjs';
 import {
   catchError,
-  concatMap,
   distinctUntilChanged,
   filter,
   map,
@@ -44,23 +43,22 @@ export class TasksComponent implements OnInit {
   private readonly errorService = inject(ErrorService);
 
   public tasksGroup$!: Observable<TasksGroup>;
-  public filteredTasks$!: Observable<TasksGroup>;
-  public searchQuery = signal('');
+  public searchTerm = new BehaviorSubject<string>('');
 
   ngOnInit(): void {
-    this.getTasks();
+    this.initTaskStreams();
   }
 
   /**
-   * getTasks
+   * initTaskStreams
+   * watch route 'id' and fetch tasks, grouping them by status.
+   * combine grouped tasks with the current search term.
+   * emits updated filtered task groups reactively.
    */
-  private getTasks(): void {
-    this.tasksGroup$ = this.activatedRoute.paramMap.pipe(
-      // grab the board ID (non-null asserted because your route always has it)
+  private initTaskStreams(): void {
+    const tasks$ = this.activatedRoute.paramMap.pipe(
       map((params) => params.get('id')!),
-      // only react when the ID actually changes
       distinctUntilChanged(),
-      // cancel previous fetch if a new ID comes in
       switchMap((boardId) =>
         this.apiTasksService
           .getTasks(boardId)
@@ -70,7 +68,15 @@ export class TasksComponent implements OnInit {
       shareReplay({ bufferSize: 1, refCount: true })
     );
 
-    this.filteredTasks$ = this.tasksGroup$;
+    // combine your grouped tasks with the current search term:
+    this.tasksGroup$ = combineLatest([tasks$, this.searchTerm]).pipe(
+      map(([groups, term]) => ({
+        todo: this.filterBySearch(groups.todo, term),
+        doing: this.filterBySearch(groups.doing, term),
+        done: this.filterBySearch(groups.done, term),
+      })),
+      shareReplay({ bufferSize: 1, refCount: true })
+    );
   }
 
   /**
@@ -97,6 +103,27 @@ export class TasksComponent implements OnInit {
   }
 
   /**
+   * fitlerBySearch
+   * returns only those tasks whose title or description includes the search term
+   * @param tasks Task[]
+   * @param term string
+   * @returns Task[]
+   */
+  private filterBySearch(tasks: Task[], term: string): Task[] {
+    if (!term) return tasks;
+
+    return tasks.filter((t) => t.title.toLocaleLowerCase().includes(term));
+  }
+
+  /**
+   * onSearchTask
+   * @param searchTerm string
+   */
+  public onSearchTask(searchTerm: string): void {
+    this.searchTerm.next(searchTerm.toLocaleLowerCase());
+  }
+
+  /**
    * addNewTask
    */
   public addNewTask(): void {
@@ -118,36 +145,8 @@ export class TasksComponent implements OnInit {
             })
           )
         ),
-        tap(() => this.getTasks())
+        tap(() => this.initTaskStreams())
       )
       .subscribe();
-  }
-
-  /**
-   * onSearchTask
-   * @param value string
-   */
-  public onSearchTask(value: string): void {
-    const searchValue = value.toLocaleLowerCase();
-
-    this.tasksGroup$ = of(searchValue).pipe(
-      concatMap((value) =>
-        this.filteredTasks$.pipe(
-          map((tasks) => {
-            const todo = tasks.todo.filter((x) =>
-              x.title.toLocaleLowerCase().includes(value)
-            );
-            const doing = tasks.doing.filter((x) =>
-              x.title.toLocaleLowerCase().includes(value)
-            );
-            const done = tasks.done.filter((x) =>
-              x.title.toLocaleLowerCase().includes(value)
-            );
-
-            return { todo, doing, done };
-          })
-        )
-      )
-    );
   }
 }
