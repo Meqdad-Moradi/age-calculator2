@@ -1,11 +1,10 @@
 <section>
-  <div class="flex flex-wrap items-center gap-4">
-    <app-filter-control
-      class="w-full mb-4"
+  <div class="flex flex-wrap items-center gap-4 mb-4">
+    <app-custom-search
+      class="w-full"
       searchLabel="Search your favorite task..."
-      [isControlsVisible]="false"
-      [(searchQuery)]="searchQuery"
-    ></app-filter-control>
+      (searchQuery)="onSearchTask($event)"
+    ></app-custom-search>
 
     <!-- add task button -->
     <button mat-raised-button color="primary" (click)="addNewTask()">

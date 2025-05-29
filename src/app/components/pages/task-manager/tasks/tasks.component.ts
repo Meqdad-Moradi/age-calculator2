@@ -4,9 +4,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
-import { EMPTY, Observable } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import {
   catchError,
+  concatMap,
   distinctUntilChanged,
   filter,
   map,
@@ -18,8 +19,8 @@ import {
 import { ApiTasksService } from '../../../../services/api/api-tasks.service';
 import { ErrorService } from '../../../../services/error.service';
 import { AddTaskDialogComponent } from '../../../dialogs/add-task-dialog/add-task-dialog.component';
-import { TasksGroup } from '../../../models/task-manager';
-import { FilterControlComponent } from '../../../shared/filter-control/filter-control.component';
+import { Task, TasksGroup, TaskStatus } from '../../../models/task-manager';
+import { CustomSearchComponent } from '../../../shared/custom-search/custom-search.component';
 import { TaskComponent } from '../task/task.component';
 
 @Component({
@@ -30,8 +31,8 @@ import { TaskComponent } from '../task/task.component';
     NgClass,
     NgTemplateOutlet,
     TaskComponent,
-    FilterControlComponent,
     AsyncPipe,
+    CustomSearchComponent,
   ],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.scss',
@@ -43,6 +44,7 @@ export class TasksComponent implements OnInit {
   private readonly errorService = inject(ErrorService);
 
   public tasksGroup$!: Observable<TasksGroup>;
+  public filteredTasks$!: Observable<TasksGroup>;
   public searchQuery = signal('');
 
   ngOnInit(): void {
@@ -60,17 +62,38 @@ export class TasksComponent implements OnInit {
       distinctUntilChanged(),
       // cancel previous fetch if a new ID comes in
       switchMap((boardId) =>
-        this.apiTasksService.getTasks(boardId).pipe(
-          map((tasks) => ({
-            todo: tasks.filter((t) => t.status === 'todo'),
-            doing: tasks.filter((t) => t.status === 'doing'),
-            done: tasks.filter((t) => t.status === 'done'),
-          }))
-        )
+        this.apiTasksService
+          .getTasks(boardId)
+          .pipe(map((tasks) => this.groupTasksByStatus(tasks)))
       ),
       // replay the latest grouped result to any new subscribers
       shareReplay({ bufferSize: 1, refCount: true })
     );
+
+    this.filteredTasks$ = this.tasksGroup$;
+  }
+
+  /**
+   * groupTasksByStatus
+   * @param tasks Task[]
+   * @returns TaskGroup
+   */
+  private groupTasksByStatus(tasks: Task[]): TasksGroup {
+    return {
+      todo: this.filterByStatus(tasks, 'todo'),
+      doing: this.filterByStatus(tasks, 'doing'),
+      done: this.filterByStatus(tasks, 'done'),
+    };
+  }
+
+  /**
+   * filterByStatus
+   * @param tasks Task[]
+   * @param status TaskStatus
+   * @returns Task[]
+   */
+  private filterByStatus(tasks: Task[], status: TaskStatus): Task[] {
+    return tasks.filter((t) => t.status === status);
   }
 
   /**
@@ -100,7 +123,31 @@ export class TasksComponent implements OnInit {
       .subscribe();
   }
 
-  public onSearch(): void {
-    console.log('foo on ssearch');
+  /**
+   * onSearchTask
+   * @param value string
+   */
+  public onSearchTask(value: string): void {
+    const searchValue = value.toLocaleLowerCase();
+
+    this.tasksGroup$ = of(searchValue).pipe(
+      concatMap((value) =>
+        this.filteredTasks$.pipe(
+          map((tasks) => {
+            const todo = tasks.todo.filter((x) =>
+              x.title.toLocaleLowerCase().includes(value)
+            );
+            const doing = tasks.doing.filter((x) =>
+              x.title.toLocaleLowerCase().includes(value)
+            );
+            const done = tasks.done.filter((x) =>
+              x.title.toLocaleLowerCase().includes(value)
+            );
+
+            return { todo, doing, done };
+          })
+        )
+      )
+    );
   }
 }
