@@ -1,1 +1,39 @@
-<p>view-task-dialog works!</p>
+<div class="flex items-start justify-between pt-4 pr-2 pl-6">
+  <h2
+    class="text-lg font-semibold font-pop text-gray-600 dark:text-gray-300 first-letter:uppercase mt-1"
+  >
+    {{ task.title }}
+  </h2>
+
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu" xPosition="before">
+    <button mat-menu-item class="!text-red-500 dark:!text-red-300">
+      <mat-icon class="!text-red-500 dark:!text-red-300">delete</mat-icon>
+      Delete Task
+    </button>
+  </mat-menu>
+</div>
+
+<mat-dialog-content class="!pt-2">
+  <!-- content -->
+  <p class="mb-4 text-gray-500 dark:text-gray-400">{{ task.desc }}</p>
+
+  <!-- status -->
+  <mat-form-field class="w-full" appearance="outline">
+    <mat-label>Status</mat-label>
+    <mat-select class="w-full" panelClass="w-auto" [formControl]="statusControl">
+      @for (status of statusArr(); track $index) {
+      <mat-option [value]="status">{{ status }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-raised-button cdkFocusInitial (click)="onOkClick()">
+    Update task
+  </button>
+</mat-dialog-actions>

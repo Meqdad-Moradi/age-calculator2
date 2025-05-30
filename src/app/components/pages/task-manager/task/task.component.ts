@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Task } from '../../../models/task-manager';
 
 @Component({
@@ -9,4 +9,13 @@ import { Task } from '../../../models/task-manager';
 })
 export class TaskComponent {
   public task = input.required<Task>();
+  public viewTask = output<Task>();
+
+  /**
+   * onViewTask
+   * @param task Task
+   */
+  public onViewTask(): void {
+    this.viewTask.emit(this.task());
+  }
 }

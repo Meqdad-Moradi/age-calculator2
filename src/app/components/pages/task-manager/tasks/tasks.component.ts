@@ -21,6 +21,7 @@ import { AddTaskDialogComponent } from '../../../dialogs/add-task-dialog/add-tas
 import { Task, TasksGroup, TaskStatus } from '../../../models/task-manager';
 import { CustomSearchComponent } from '../../../shared/custom-search/custom-search.component';
 import { TaskComponent } from '../task/task.component';
+import { ViewTaskDialogComponent } from '../../../dialogs/view-task-dialog/view-task-dialog.component';
 
 @Component({
   selector: 'app-tasks',
@@ -148,5 +149,17 @@ export class TasksComponent implements OnInit {
         tap(() => this.initTaskStreams())
       )
       .subscribe();
+  }
+
+  /**
+   * viewTask
+   * click on this method will show the selected task in a dialog for further action
+   * @param task Task
+   */
+  public viewTask(task: Task): void {
+    this.dialog.open(ViewTaskDialogComponent, {
+      data: task,
+      maxWidth:'500px'
+    });
   }
 }
