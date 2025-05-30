@@ -22,6 +22,7 @@ import { Task, TasksGroup, TaskStatus } from '../../../models/task-manager';
 import { CustomSearchComponent } from '../../../shared/custom-search/custom-search.component';
 import { TaskComponent } from '../task/task.component';
 import { ViewTaskDialogComponent } from '../../../dialogs/view-task-dialog/view-task-dialog.component';
+import { cloneDeep, isEqual } from 'lodash';
 
 @Component({
   selector: 'app-tasks',
@@ -157,9 +158,29 @@ export class TasksComponent implements OnInit {
    * @param task Task
    */
   public viewTask(task: Task): void {
-    this.dialog.open(ViewTaskDialogComponent, {
-      data: task,
-      maxWidth:'500px'
-    });
+    const originalTask = task;
+
+    this.dialog
+      .open(ViewTaskDialogComponent, {
+        data: cloneDeep(task),
+        maxWidth: '500px',
+      })
+      .afterClosed()
+      .pipe(
+        take(1),
+        filter(
+          (updatedTask) => !!updatedTask && !isEqual(updatedTask, originalTask)
+        ),
+        switchMap((updatedTask) =>
+          this.apiTasksService.updateTask(updatedTask).pipe(
+            tap(() => this.initTaskStreams()),
+            catchError((err) => {
+              this.errorService.displayErrorMsg(err.message);
+              throw EMPTY;
+            })
+          )
+        )
+      )
+      .subscribe();
   }
 }

@@ -23,7 +23,11 @@
   <!-- status -->
   <mat-form-field class="w-full" appearance="outline">
     <mat-label>Status</mat-label>
-    <mat-select class="w-full" panelClass="w-auto" [formControl]="statusControl">
+    <mat-select
+      class="w-full"
+      panelClass="w-auto"
+      [formControl]="statusControl"
+    >
       @for (status of statusArr(); track $index) {
       <mat-option [value]="status">{{ status }}</mat-option>
       }
@@ -33,7 +37,12 @@
 
 <mat-dialog-actions>
   <button mat-button (click)="onCancelClick()">Cancel</button>
-  <button mat-raised-button cdkFocusInitial (click)="onOkClick()">
+  <button
+    mat-raised-button
+    cdkFocusInitial
+    [disabled]="isDisabled"
+    (click)="onOkClick()"
+  >
     Update task
   </button>
 </mat-dialog-actions>

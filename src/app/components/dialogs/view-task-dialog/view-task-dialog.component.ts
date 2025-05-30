@@ -40,6 +40,10 @@ export class ViewTaskDialogComponent {
   public statusArr = signal(['todo', 'doing', 'done']);
   public statusControl = new FormControl(this.task.status);
 
+  public get isDisabled(): boolean {
+    return this.statusControl.value === this.task.status;
+  }
+
   /**
    * onCancelClick
    */
@@ -51,7 +55,7 @@ export class ViewTaskDialogComponent {
    * onOkClick
    */
   public onOkClick(): void {
-    if (!this.statusControl.value) return;
+    if (!this.statusControl.value || this.isDisabled) return;
     this.task.status = this.statusControl.value;
     this.dialogRef.close(this.task);
   }
