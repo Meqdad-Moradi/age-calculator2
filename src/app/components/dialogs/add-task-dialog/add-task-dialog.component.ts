@@ -45,10 +45,10 @@ export class AddTaskDialogComponent {
   public addTaskForm = this.fb.group({
     title: ['', [Validators.required]],
     desc: ['', [Validators.required]],
-    status: ['', [Validators.required]],
+    status: ['todo', [Validators.required]],
   });
 
-  public statusArr = signal(['todo', 'doing', 'done']);
+  public statusArr = signal(['todo']);
 
   /**
    * onSubmit

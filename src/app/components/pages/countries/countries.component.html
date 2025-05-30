@@ -1,4 +1,5 @@
 <section>
+  <app-custom-search (searchQuery)="onSearch($event)"></app-custom-search>
   <app-filter-control
     [(filterQuery)]="filterQuery"
     [sortControl]="sortQuery()"

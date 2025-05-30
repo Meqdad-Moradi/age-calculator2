@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Country } from '../../models/country';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { compare } from '../../../helpers/utils';
+import { CustomSearchComponent } from '../../shared/custom-search/custom-search.component';
 
 @Component({
   selector: 'app-countries',
@@ -13,6 +14,7 @@ import { compare } from '../../../helpers/utils';
     FilterControlComponent,
     CountryCardComponent,
     MatProgressSpinnerModule,
+    CustomSearchComponent,
   ],
   templateUrl: './countries.component.html',
   styleUrl: './countries.component.scss',
@@ -93,5 +95,13 @@ export class CountriesComponent {
    */
   public onSort(): void {
     this.countries().reverse();
+  }
+
+  /**
+   * onSearch
+   * @param value string
+   */
+  public onSearch(value: string): void {
+    this.searchQuery.set(value);
   }
 }
