@@ -9,7 +9,11 @@
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu" xPosition="before">
-    <button mat-menu-item class="!text-red-500 dark:!text-red-300">
+    <button
+      mat-menu-item
+      class="!text-red-500 dark:!text-red-300"
+      (click)="onDeleteClic()"
+    >
       <mat-icon class="!text-red-500 dark:!text-red-300">delete</mat-icon>
       Delete Task
     </button>
@@ -28,7 +32,7 @@
       panelClass="w-auto"
       [formControl]="statusControl"
     >
-      @for (status of statusArr(); track $index) {
+      @for (status of statusArr; track $index) {
       <mat-option [value]="status">{{ status }}</mat-option>
       }
     </mat-select>
@@ -37,12 +41,7 @@
 
 <mat-dialog-actions>
   <button mat-button (click)="onCancelClick()">Cancel</button>
-  <button
-    mat-raised-button
-    cdkFocusInitial
-    [disabled]="isDisabled"
-    (click)="onOkClick()"
-  >
+  <button mat-raised-button [disabled]="isDisabled" (click)="onOkClick()">
     Update task
   </button>
 </mat-dialog-actions>

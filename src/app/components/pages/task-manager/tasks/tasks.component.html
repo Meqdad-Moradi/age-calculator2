@@ -29,7 +29,7 @@
 
       @for (item of (tasksGroup$ | async)?.todo; track $index) {
       <div class="mt-4">
-        <app-task [task]="item" (viewTask)="viewTask($event)"></app-task>
+        <app-task [task]="item" (updateTask)="onUpdateTask($event)"></app-task>
       </div>
       }
     </article>
@@ -45,7 +45,7 @@
 
       @for (item of (tasksGroup$ | async)?.doing; track $index) {
       <div class="mt-4">
-        <app-task [task]="item" (viewTask)="viewTask($event)"></app-task>
+        <app-task [task]="item" (updateTask)="onUpdateTask($event)"></app-task>
       </div>
       }
     </article>
@@ -61,7 +61,7 @@
 
       @for (item of (tasksGroup$ | async)?.done; track $index) {
       <div class="mt-4">
-        <app-task [task]="item" (viewTask)="viewTask($event)"></app-task>
+        <app-task [task]="item" (updateTask)="onUpdateTask($event)"></app-task>
       </div>
       }
     </article>

@@ -1,4 +1,5 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
@@ -10,10 +11,10 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { Task } from '../../models/task-manager';
 import { MatMenuModule } from '@angular/material/menu';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { ApiTasksService } from '../../../services/api/api-tasks.service';
+import { Task, TaskStatus } from '../../models/task-manager';
 
 @Component({
   selector: 'app-view-task-dialog',
@@ -34,11 +35,12 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './view-task-dialog.component.scss',
 })
 export class ViewTaskDialogComponent {
+  private readonly apiTaskService = inject(ApiTasksService);
   private readonly dialogRef = inject(MatDialogRef<ViewTaskDialogComponent>);
   public task = inject<Task>(MAT_DIALOG_DATA);
 
-  public statusArr = signal(['todo', 'doing', 'done']);
-  public statusControl = new FormControl(this.task.status);
+  public statusArr = ['todo', 'doing', 'done'];
+  public statusControl = new FormControl<TaskStatus>(this.task.status);
 
   public get isDisabled(): boolean {
     return this.statusControl.value === this.task.status;
@@ -58,5 +60,13 @@ export class ViewTaskDialogComponent {
     if (!this.statusControl.value || this.isDisabled) return;
     this.task.status = this.statusControl.value;
     this.dialogRef.close(this.task);
+  }
+
+  /**
+   * onDeleteClic
+   */
+  public onDeleteClic(): void {
+    this.apiTaskService.requestDelete(this.task);
+    this.dialogRef.close();
   }
 }

@@ -1,12 +1,20 @@
 import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, combineLatest, EMPTY, Observable } from 'rxjs';
+import { cloneDeep, isEqual } from 'lodash';
+import {
+  BehaviorSubject,
+  combineLatest,
+  EMPTY,
+  Observable,
+  Subscription,
+} from 'rxjs';
 import {
   catchError,
+  concatMap,
   distinctUntilChanged,
   filter,
   map,
@@ -18,11 +26,10 @@ import {
 import { ApiTasksService } from '../../../../services/api/api-tasks.service';
 import { ErrorService } from '../../../../services/error.service';
 import { AddTaskDialogComponent } from '../../../dialogs/add-task-dialog/add-task-dialog.component';
+import { ViewTaskDialogComponent } from '../../../dialogs/view-task-dialog/view-task-dialog.component';
 import { Task, TasksGroup, TaskStatus } from '../../../models/task-manager';
 import { CustomSearchComponent } from '../../../shared/custom-search/custom-search.component';
 import { TaskComponent } from '../task/task.component';
-import { ViewTaskDialogComponent } from '../../../dialogs/view-task-dialog/view-task-dialog.component';
-import { cloneDeep, isEqual } from 'lodash';
 
 @Component({
   selector: 'app-tasks',
@@ -38,7 +45,7 @@ import { cloneDeep, isEqual } from 'lodash';
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.scss',
 })
-export class TasksComponent implements OnInit {
+export class TasksComponent implements OnInit, OnDestroy {
   private readonly dialog = inject(MatDialog);
   private readonly apiTasksService = inject(ApiTasksService);
   private readonly activatedRoute = inject(ActivatedRoute);
@@ -47,8 +54,15 @@ export class TasksComponent implements OnInit {
   public tasksGroup$!: Observable<TasksGroup>;
   public searchTerm = new BehaviorSubject<string>('');
 
+  private deleteSubscription!: Subscription;
+
   ngOnInit(): void {
     this.initTaskStreams();
+    this.onDeleteTask();
+  }
+
+  ngOnDestroy(): void {
+    this.deleteSubscription.unsubscribe();
   }
 
   /**
@@ -153,11 +167,11 @@ export class TasksComponent implements OnInit {
   }
 
   /**
-   * viewTask
+   * onUpdateTask
    * click on this method will show the selected task in a dialog for further action
    * @param task Task
    */
-  public viewTask(task: Task): void {
+  public onUpdateTask(task: Task): void {
     const originalTask = task;
 
     this.dialog
@@ -177,6 +191,26 @@ export class TasksComponent implements OnInit {
             catchError((err) => {
               this.errorService.displayErrorMsg(err.message);
               throw EMPTY;
+            })
+          )
+        )
+      )
+      .subscribe();
+  }
+
+  /**
+   * onDeleteTask
+   */
+  private onDeleteTask(): void {
+    this.deleteSubscription = this.apiTasksService.triggerDeleteTask$
+      .pipe(
+        filter((task) => !!task),
+        concatMap((task) =>
+          this.apiTasksService.deleteTask(task.id).pipe(
+            tap(() => this.initTaskStreams()),
+            catchError((err) => {
+              this.errorService.displayErrorMsg(err.message);
+              return EMPTY;
             })
           )
         )
