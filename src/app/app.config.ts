@@ -15,7 +15,8 @@ import {
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { routes } from './app.routes';
 import { matDateFormat } from './helpers/utils';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
+import { httpErrorsInterceptor } from './interceptors/http-errors.interceptor';
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 const matTooltipDefaultOptions = MAT_TOOLTIP_DEFAULT_OPTIONS_FACTORY();
@@ -34,6 +35,11 @@ export const appConfig: ApplicationConfig = {
         ...matTooltipDefaultOptions,
         disableTooltipInteractivity: true,
       },
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useValue: httpErrorsInterceptor,
+      multi: true,
     },
   ],
 };

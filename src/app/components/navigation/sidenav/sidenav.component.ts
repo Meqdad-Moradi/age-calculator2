@@ -76,10 +76,11 @@ export class SidenavComponent implements OnInit {
    * createNewBoard
    */
   public createNewBoard(): void {
-    const dialog = this.dialog.open(CreateBoardDialogComponent);
-
     this.subscriptions.push(
-      dialog
+      this.dialog
+        .open(CreateBoardDialogComponent, {
+          maxWidth: 500,
+        })
         .afterClosed()
         .pipe(
           map((value) => {
@@ -96,7 +97,7 @@ export class SidenavComponent implements OnInit {
           tap((value) => this.taskManagerSidenav().push(value)),
           catchError((error) => {
             const msg = error.message;
-            throw this.errorService.displayErrorMsg(msg);
+            throw this.errorService.handleError(msg);
           })
         )
         .subscribe()

@@ -2,13 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Board } from '../../components/models/task-manager';
+import { ErrorService } from '../error.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiBoardService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = 'http://localhost:3000/boards'
+  private readonly errorService = inject(ErrorService);
+  private readonly baseUrl = 'http://localhost:3000/boards';
 
   /**
    * createNewBoard
@@ -16,6 +18,25 @@ export class ApiBoardService {
    * @returns Observable<Board>
    */
   public createNewBoard(value: Board): Observable<Board> {
-    return this.http.post<Board>(this.baseUrl, value);
+    return this.http.post<Board>(this.baseUrl, value).pipe(
+      this.errorService.handleError<Board>('createNewBoard', {
+        showInDialog: true,
+      })
+    );
+  }
+
+  /**
+   * deleteBoard
+   * @param boardId string
+   * @returns Observable<Board>
+   */
+  public deleteBoad(boardId: string): Observable<Board> {
+    return this.http
+      .delete<Board>(this.baseUrl + '/' + boardId)
+      .pipe(
+        this.errorService.handleError<Board>('deleteBoard', {
+          showInDialog: true,
+        })
+      );
   }
 }

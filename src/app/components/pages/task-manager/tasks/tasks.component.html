@@ -6,10 +6,31 @@
       (searchQuery)="onSearchTask($event)"
     ></app-custom-search>
 
-    <!-- add task button -->
-    <button mat-raised-button color="primary" (click)="addNewTask()">
-      + Add New Task
-    </button>
+    <div class="w-full flex items-center justify-between gap-8">
+      <!-- add task button -->
+      <button mat-raised-button color="primary" (click)="addNewTask()">
+        + Add New Task
+      </button>
+
+      <!-- page menu -->
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        matTooltip="Page management"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button
+          mat-menu-item
+          class="!text-red-500 dark:!text-red-300"
+          (click)="deleteBoard()"
+        >
+          <mat-icon class="!text-red-500 dark:!text-red-300">delete</mat-icon>
+          Delete current board
+        </button>
+      </mat-menu>
+    </div>
   </div>
 
   <!-- header -->

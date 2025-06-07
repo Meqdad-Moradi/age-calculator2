@@ -30,12 +30,18 @@ import { ViewTaskDialogComponent } from '../../../dialogs/view-task-dialog/view-
 import { Task, TasksGroup, TaskStatus } from '../../../models/task-manager';
 import { CustomSearchComponent } from '../../../shared/custom-search/custom-search.component';
 import { TaskComponent } from '../task/task.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ApiBoardService } from '../../../../services/api/api-board.service';
+import { ConfirmationDialogComponent } from '../../../dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-tasks',
   imports: [
     MatButtonModule,
     MatIconModule,
+    MatMenuModule,
+    MatTooltipModule,
     NgClass,
     NgTemplateOutlet,
     TaskComponent,
@@ -48,6 +54,7 @@ import { TaskComponent } from '../task/task.component';
 export class TasksComponent implements OnInit, OnDestroy {
   private readonly dialog = inject(MatDialog);
   private readonly apiTasksService = inject(ApiTasksService);
+  private readonly apiBoardService = inject(ApiBoardService);
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly errorService = inject(ErrorService);
 
@@ -156,7 +163,7 @@ export class TasksComponent implements OnInit, OnDestroy {
           this.apiTasksService.createTask(taskWithBoard).pipe(
             catchError((error) => {
               // show error and swallow so stream completes
-              this.errorService.displayErrorMsg(error.message);
+              this.errorService.handleError(error.message);
               return EMPTY;
             })
           )
@@ -177,7 +184,7 @@ export class TasksComponent implements OnInit, OnDestroy {
     this.dialog
       .open(ViewTaskDialogComponent, {
         data: cloneDeep(task),
-        maxWidth: '500px',
+        maxWidth: 500,
       })
       .afterClosed()
       .pipe(
@@ -189,7 +196,7 @@ export class TasksComponent implements OnInit, OnDestroy {
           this.apiTasksService.updateTask(updatedTask).pipe(
             tap(() => this.initTaskStreams()),
             catchError((err) => {
-              this.errorService.displayErrorMsg(err.message);
+              this.errorService.handleError(err.message);
               throw EMPTY;
             })
           )
@@ -209,9 +216,35 @@ export class TasksComponent implements OnInit, OnDestroy {
           this.apiTasksService.deleteTask(task.id).pipe(
             tap(() => this.initTaskStreams()),
             catchError((err) => {
-              this.errorService.displayErrorMsg(err.message);
+              this.errorService.handleError(err.message);
               return EMPTY;
             })
+          )
+        )
+      )
+      .subscribe();
+  }
+
+  /**
+   * deleteBoard
+   */
+  public deleteBoard(): void {
+    this.dialog
+      .open(ConfirmationDialogComponent, {
+        data: {
+          title: 'Delete Current Board',
+          description:
+            "Deleting the current board will delete all its content. which means all it's tasks will be permanently deleted!",
+        },
+        maxWidth: 500,
+      })
+      .afterClosed()
+      .pipe(
+        filter((value) => !!value),
+        switchMap(() =>
+          this.activatedRoute.paramMap.pipe(
+            map((params) => params.get('id')!),
+            concatMap((boardId) => this.apiBoardService.deleteBoad(boardId))
           )
         )
       )

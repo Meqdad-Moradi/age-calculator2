@@ -25,7 +25,7 @@ export class PdfService {
     if (!element) {
       this.isDownloading.set(false);
       const errorMsg = `Element with id 'pdf-content' not found.`;
-      this.errorService.displayErrorMsg(errorMsg);
+      this.errorService.handleError(errorMsg);
       return;
     }
 
@@ -110,8 +110,16 @@ export class PdfService {
 
         // add footer
         pdf.setFontSize(10);
-        pdf.text(new Date().toLocaleDateString('de'), margin, pageHeight + margin + 5);
-        pdf.text('Page 1 of 1', pageWidth - margin * 2, margin + pageHeight + 5)
+        pdf.text(
+          new Date().toLocaleDateString('de'),
+          margin,
+          pageHeight + margin + 5
+        );
+        pdf.text(
+          'Page 1 of 1',
+          pageWidth - margin * 2,
+          margin + pageHeight + 5
+        );
 
         // 'position' tracks how much of the content image has been printed
         let position = firstPageContentHeight;
@@ -134,8 +142,16 @@ export class PdfService {
 
           // add footer
           pdf.setFontSize(10);
-          pdf.text(new Date().toLocaleDateString('de'), margin, pageHeight + margin + 5);
-          pdf.text('Page 1 of 1', pageWidth - margin * 2, margin + pageHeight + 5)
+          pdf.text(
+            new Date().toLocaleDateString('de'),
+            margin,
+            pageHeight + margin + 5
+          );
+          pdf.text(
+            'Page 1 of 1',
+            pageWidth - margin * 2,
+            margin + pageHeight + 5
+          );
         }
 
         // Save the generated PDF with the given filename
@@ -145,7 +161,7 @@ export class PdfService {
       .catch((err) => {
         this.isDownloading.set(false);
         // If an error occurs, display an error message with the error details
-        this.errorService.displayErrorMsg('Error generating PDF: ' + err);
+        this.errorService.handleError('Error generating PDF: ' + err);
       });
   }
 }
