@@ -20,14 +20,14 @@ import {
 } from 'rxjs/operators';
 import { ApiBoardService } from '../../../../services/api/api-board.service';
 import { ApiTasksService } from '../../../../services/api/api-tasks.service';
-import { ErrorService } from '../../../../services/error.service';
+import { SidenavService } from '../../../../services/sidenav.service';
 import { AddTaskDialogComponent } from '../../../dialogs/add-task-dialog/add-task-dialog.component';
 import { ConfirmationDialogComponent } from '../../../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ViewTaskDialogComponent } from '../../../dialogs/view-task-dialog/view-task-dialog.component';
 import { Task, TasksGroup, TaskStatus } from '../../../models/task-manager';
 import { CustomSearchComponent } from '../../../shared/custom-search/custom-search.component';
-import { TaskComponent } from '../task/task.component';
 import { NothingFoundComponent } from '../../../shared/nothing-found/nothing-found.component';
+import { TaskComponent } from '../task/task.component';
 
 @Component({
   selector: 'app-tasks',
@@ -51,7 +51,7 @@ export class TasksComponent implements OnInit, OnDestroy {
   private readonly apiTasksService = inject(ApiTasksService);
   private readonly apiBoardService = inject(ApiBoardService);
   private readonly activatedRoute = inject(ActivatedRoute);
-  private readonly errorService = inject(ErrorService);
+  private readonly sidenavService = inject(SidenavService);
 
   public tasksGroup$!: Observable<TasksGroup>;
   public searchTerm = new BehaviorSubject<string>('');
@@ -225,7 +225,8 @@ export class TasksComponent implements OnInit, OnDestroy {
         switchMap(() =>
           this.activatedRoute.paramMap.pipe(
             map((params) => params.get('id')!),
-            concatMap((boardId) => this.apiBoardService.deleteBoad(boardId))
+            concatMap((boardId) => this.apiBoardService.deleteBoad(boardId)),
+            tap(() => this.sidenavService.requestGetBoards(true))
           )
         )
       )

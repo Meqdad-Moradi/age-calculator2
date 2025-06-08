@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ErrorService } from './error.service';
 
@@ -11,7 +11,21 @@ export class SidenavService {
   private readonly http = inject(HttpClient);
   private readonly errorService = inject(ErrorService);
 
+  private trigerGetBoardSubject = new BehaviorSubject<boolean>(false);
+
   public isSideNavOpen = signal<boolean>(true);
+  
+  public get triggerGetBoard(): Observable<boolean> {
+    return this.trigerGetBoardSubject.asObservable();
+  }
+
+  /**
+   * requestGetBoards
+   * @param value boolean
+   */
+  public requestGetBoards(value: boolean): void {
+    this.trigerGetBoardSubject.next(value);
+  }
 
   /**
    * getSysName

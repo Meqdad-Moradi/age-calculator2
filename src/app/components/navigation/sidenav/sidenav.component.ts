@@ -12,9 +12,8 @@ import {
   RouterOutlet,
 } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { concatMap, map, tap } from 'rxjs/operators';
+import { concatMap, filter, map, switchMap, take, tap } from 'rxjs/operators';
 import { ApiBoardService } from '../../../services/api/api-board.service';
-import { ErrorService } from '../../../services/error.service';
 import { SidenavService } from '../../../services/sidenav.service';
 import { CreateBoardDialogComponent } from '../../dialogs/create-board-dialog/create-board-dialog.component';
 import { Board } from '../../models/task-manager';
@@ -40,7 +39,6 @@ import { HeaderComponent } from '../header/header.component';
 export class SidenavComponent implements OnInit {
   private readonly sidenavService = inject(SidenavService);
   private readonly apiBoardService = inject(ApiBoardService);
-  private readonly errorService = inject(ErrorService);
   private readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
 
@@ -65,7 +63,9 @@ export class SidenavComponent implements OnInit {
    * getBoards
    */
   private getBoards(): void {
-    this.boards$ = this.apiBoardService.getBoards();
+    this.boards$ = this.sidenavService.triggerGetBoard.pipe(
+      switchMap(() => this.apiBoardService.getBoards())
+    );
   }
 
   /**
@@ -86,28 +86,28 @@ export class SidenavComponent implements OnInit {
    * createNewBoard
    */
   public createNewBoard(): void {
-    this.subscriptions.push(
-      this.dialog
-        .open(CreateBoardDialogComponent, {
-          maxWidth: 500,
-        })
-        .afterClosed()
-        .pipe(
-          map((value) => {
-            if (!value) {
-              this.subscriptions.forEach((sub) => sub.unsubscribe());
-              return;
-            }
+    this.dialog
+      .open(CreateBoardDialogComponent, {
+        maxWidth: 500,
+      })
+      .afterClosed()
+      .pipe(
+        take(1),
+        filter((value) => !!value),
+        map((value) => {
+          if (!value) {
+            this.subscriptions.forEach((sub) => sub.unsubscribe());
+            return;
+          }
 
-            const id = crypto.randomUUID();
-            const newBoard: Board = { id, name: value };
-            return newBoard;
-          }),
-          concatMap((value) => this.apiBoardService.createNewBoard(value!)),
-          tap(() => this.getBoards())
-        )
-        .subscribe()
-    );
+          const id = crypto.randomUUID();
+          const newBoard: Board = { id, name: value };
+          return newBoard;
+        }),
+        concatMap((value) => this.apiBoardService.createNewBoard(value!)),
+        tap(() => this.getBoards())
+      )
+      .subscribe();
   }
 
   /**

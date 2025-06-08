@@ -8301,34 +8301,21 @@
       "id": "1d22"
     }
   ],
-  "boards": [
-    {
-      "id": "7126eeb7-f735-4881-bbe0-24475bd77f61",
-      "name": "Krankenhaus Termine"
-    },
-    {
-      "id": "675f5bca-51b1-43c8-a934-68fb254582df",
-      "name": "work on pdf download"
-    },
-    {
-      "id": "5eeab223-45b1-4f96-a216-320cca9395c3",
-      "name": "work on filter tasks"
-    }
-  ],
+  "boards": [],
   "tasks": [
     {
       "id": "7c1e13c2-72c5-45b1-83a7-b2def7d4feff",
       "title": "delete task should implemented",
       "desc": "in the api task service I should create a subject observable to trigger delete method in the tasks component because it will be easer to delete and after delete refresh the tasksGroup or UI to see visually which a task is deleted.",
       "status": "done",
-      "boardId": "5eeab223-45b1-4f96-a216-320cca9395c3"
+      "boardId": null
     },
     {
       "id": "33a8a4dd-8838-49d9-a869-d326dc63e09e",
       "title": "Refactor add, update and task methods",
       "desc": "In this methods I should refactor the codes which when a CRUD is happening, after that, api call should happen. It should be just UI refreshed.",
       "status": "doing",
-      "boardId": "5eeab223-45b1-4f96-a216-320cca9395c3"
+      "boardId": null
     }
   ]
 }
