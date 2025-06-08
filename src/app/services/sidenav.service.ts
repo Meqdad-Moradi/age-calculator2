@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Board } from '../components/models/task-manager';
 import { ErrorService } from './error.service';
 
 @Injectable({
@@ -13,20 +11,7 @@ export class SidenavService {
   private readonly http = inject(HttpClient);
   private readonly errorService = inject(ErrorService);
 
-  private readonly taskManagerSidenavUrl = 'http://localhost:3000/boards';
   public isSideNavOpen = signal<boolean>(true);
-
-  public taskManagerSidenav = toSignal(this.getTaskManagerSidenav(), {
-    initialValue: [],
-  });
-
-  /**
-   * getTaskManagerSidenav
-   * @returns Observable<Board[]>
-   */
-  public getTaskManagerSidenav(): Observable<Board[]> {
-    return this.http.get<Board[]>(this.taskManagerSidenavUrl);
-  }
 
   /**
    * getSysName
@@ -37,10 +22,8 @@ export class SidenavService {
     return this.http
       .get('/', { observe: 'response', responseType: 'text' })
       .pipe(
-        map((resp) => resp.headers.get('x-forwarded-for'))
-        // catchError(
-        //   this.errorService.displayErrorMsg('health.service::getSysName')
-        // )
+        map((resp) => resp.headers.get('x-forwarded-for')),
+        this.errorService.handleError('health.service::getSysName')
       );
   }
 }

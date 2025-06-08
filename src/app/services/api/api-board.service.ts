@@ -13,15 +13,30 @@ export class ApiBoardService {
   private readonly baseUrl = 'http://localhost:3000/boards';
 
   /**
+   * getBoards
+   * @returns Observable<Board[]>
+   */
+  public getBoards(): Observable<Board[]> {
+    return this.http.get<Board[]>(this.baseUrl).pipe(
+      this.errorService.handleError<Board[]>('api-board.service::getBoards', {
+        showInDialog: true,
+      })
+    );
+  }
+
+  /**
    * createNewBoard
    * @param value Board
    * @returns Observable<Board>
    */
   public createNewBoard(value: Board): Observable<Board> {
     return this.http.post<Board>(this.baseUrl, value).pipe(
-      this.errorService.handleError<Board>('createNewBoard', {
-        showInDialog: true,
-      })
+      this.errorService.handleError<Board>(
+        'api-board.service::createNewBoard',
+        {
+          showInDialog: true,
+        }
+      )
     );
   }
 
@@ -31,12 +46,10 @@ export class ApiBoardService {
    * @returns Observable<Board>
    */
   public deleteBoad(boardId: string): Observable<Board> {
-    return this.http
-      .delete<Board>(this.baseUrl + '/' + boardId)
-      .pipe(
-        this.errorService.handleError<Board>('deleteBoard', {
-          showInDialog: true,
-        })
-      );
+    return this.http.delete<Board>(this.baseUrl + '/' + boardId).pipe(
+      this.errorService.handleError<Board>('api-board.service::deleteBoad', {
+        showInDialog: true,
+      })
+    );
   }
 }

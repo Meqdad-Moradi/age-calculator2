@@ -62,7 +62,7 @@
 
       <div class="boards" [ngClass]="{ expanded: isExpanded }">
         <div>
-          @for (item of taskManagerSidenav(); track $index) {
+          @for (item of boards$ | async; track $index) {
           <mat-list-item
             class="!cursor-pointer"
             [routerLink]="['/task-manager/', item.id]"

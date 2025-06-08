@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,8 +11,8 @@ import {
   RouterLinkActive,
   RouterOutlet,
 } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { catchError, concatMap, map, tap } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { concatMap, map, tap } from 'rxjs/operators';
 import { ApiBoardService } from '../../../services/api/api-board.service';
 import { ErrorService } from '../../../services/error.service';
 import { SidenavService } from '../../../services/sidenav.service';
@@ -32,6 +32,7 @@ import { HeaderComponent } from '../header/header.component';
     RouterLink,
     RouterLinkActive,
     NgClass,
+    AsyncPipe,
   ],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss',
@@ -47,7 +48,7 @@ export class SidenavComponent implements OnInit {
 
   public isSideNavOpen = this.sidenavService.isSideNavOpen;
   public drawerMode: MatDrawerMode = 'side';
-  public taskManagerSidenav = this.sidenavService.taskManagerSidenav;
+  public boards$!: Observable<Board[]>;
   public isExpanded = false;
 
   ngOnInit(): void {
@@ -56,6 +57,15 @@ export class SidenavComponent implements OnInit {
     if (isBoardPageOpen) {
       this.onExpandTaskManager(isBoardPageOpen);
     }
+
+    this.getBoards();
+  }
+
+  /**
+   * getBoards
+   */
+  private getBoards(): void {
+    this.boards$ = this.apiBoardService.getBoards();
   }
 
   /**
@@ -94,15 +104,16 @@ export class SidenavComponent implements OnInit {
             return newBoard;
           }),
           concatMap((value) => this.apiBoardService.createNewBoard(value!)),
-          tap((value) => this.taskManagerSidenav().push(value)),
-          catchError((error) => {
-            const msg = error.message;
-            throw this.errorService.handleError(msg);
-          })
+          tap(() => this.getBoards())
         )
         .subscribe()
     );
+  }
 
+  /**
+   * getSystemInfo
+   */
+  private getSystemInfo(): void {
     this.sidenavService.getSysName().subscribe((value) => {
       console.log(value);
     });

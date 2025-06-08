@@ -3,17 +3,12 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute } from '@angular/router';
 import { cloneDeep, isEqual } from 'lodash';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import {
-  BehaviorSubject,
-  combineLatest,
-  EMPTY,
-  Observable,
-  Subscription,
-} from 'rxjs';
-import {
-  catchError,
   concatMap,
   distinctUntilChanged,
   filter,
@@ -23,17 +18,16 @@ import {
   take,
   tap,
 } from 'rxjs/operators';
+import { ApiBoardService } from '../../../../services/api/api-board.service';
 import { ApiTasksService } from '../../../../services/api/api-tasks.service';
 import { ErrorService } from '../../../../services/error.service';
 import { AddTaskDialogComponent } from '../../../dialogs/add-task-dialog/add-task-dialog.component';
+import { ConfirmationDialogComponent } from '../../../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ViewTaskDialogComponent } from '../../../dialogs/view-task-dialog/view-task-dialog.component';
 import { Task, TasksGroup, TaskStatus } from '../../../models/task-manager';
 import { CustomSearchComponent } from '../../../shared/custom-search/custom-search.component';
 import { TaskComponent } from '../task/task.component';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { ApiBoardService } from '../../../../services/api/api-board.service';
-import { ConfirmationDialogComponent } from '../../../dialogs/confirmation-dialog/confirmation-dialog.component';
+import { NothingFoundComponent } from '../../../shared/nothing-found/nothing-found.component';
 
 @Component({
   selector: 'app-tasks',
@@ -47,6 +41,7 @@ import { ConfirmationDialogComponent } from '../../../dialogs/confirmation-dialo
     TaskComponent,
     AsyncPipe,
     CustomSearchComponent,
+    NothingFoundComponent,
   ],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.scss',
@@ -160,13 +155,7 @@ export class TasksComponent implements OnInit, OnDestroy {
         filter((newTask) => !!newTask),
         map((newTask) => ({ ...newTask, boardId })),
         switchMap((taskWithBoard) =>
-          this.apiTasksService.createTask(taskWithBoard).pipe(
-            catchError((error) => {
-              // show error and swallow so stream completes
-              this.errorService.handleError(error.message);
-              return EMPTY;
-            })
-          )
+          this.apiTasksService.createTask(taskWithBoard)
         ),
         tap(() => this.initTaskStreams())
       )
@@ -193,13 +182,9 @@ export class TasksComponent implements OnInit, OnDestroy {
           (updatedTask) => !!updatedTask && !isEqual(updatedTask, originalTask)
         ),
         switchMap((updatedTask) =>
-          this.apiTasksService.updateTask(updatedTask).pipe(
-            tap(() => this.initTaskStreams()),
-            catchError((err) => {
-              this.errorService.handleError(err.message);
-              throw EMPTY;
-            })
-          )
+          this.apiTasksService
+            .updateTask(updatedTask)
+            .pipe(tap(() => this.initTaskStreams()))
         )
       )
       .subscribe();
@@ -213,13 +198,9 @@ export class TasksComponent implements OnInit, OnDestroy {
       .pipe(
         filter((task) => !!task),
         concatMap((task) =>
-          this.apiTasksService.deleteTask(task.id).pipe(
-            tap(() => this.initTaskStreams()),
-            catchError((err) => {
-              this.errorService.handleError(err.message);
-              return EMPTY;
-            })
-          )
+          this.apiTasksService
+            .deleteTask(task.id)
+            .pipe(tap(() => this.initTaskStreams()))
         )
       )
       .subscribe();

@@ -70,14 +70,19 @@ export class ErrorService {
     operation: string
   ): ErrorResponse {
     if (error.error instanceof ErrorEvent) {
-      return new ErrorResponse(0, `Network error: ${error.error.message}`);
+      return new ErrorResponse(
+        0,
+        `Local network error: ${error.error.message}`
+      );
     }
 
-    const serverMessage = error.message || error.statusText;
     return new ErrorResponse(
       error.status,
       `${operation} failed: ${error.url}`,
-      { message: serverMessage, raw: error.error }
+      {
+        message: error.message,
+        raw: error.error,
+      }
     );
   }
 

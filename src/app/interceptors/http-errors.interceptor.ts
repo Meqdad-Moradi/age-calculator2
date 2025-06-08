@@ -1,8 +1,11 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { inject } from '@angular/core';
-import { ErrorService } from '../services/error.service';
 
 export const httpErrorsInterceptor: HttpInterceptorFn = (req, next) => {
-  const errorService = inject(ErrorService);
-  return next(req).pipe(errorService.handleError('err.message'));
+  return next(req);
+  //   .pipe(
+  //   retry({
+  //     count: 3,
+  //     delay: (error, retryCounter) => timer(retryCounter * 1000),
+  //   })
+  // );
 };

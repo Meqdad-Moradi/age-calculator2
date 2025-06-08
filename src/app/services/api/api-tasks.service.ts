@@ -2,12 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Task } from '../../components/models/task-manager';
+import { ErrorService } from '../error.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiTasksService {
   private readonly http = inject(HttpClient);
+  private readonly errorService = inject(ErrorService);
   private readonly baseUrl = 'http://localhost:3000/tasks';
 
   private triggerDeleteTaskSubject$ = new Subject<Task>();
@@ -29,7 +31,11 @@ export class ApiTasksService {
    * @returns Observable<Task[]>
    */
   public getTasks(boardId: string): Observable<Task[]> {
-    return this.http.get<Task[]>(this.baseUrl + '?boardId=' + boardId);
+    return this.http.get<Task[]>(this.baseUrl + '?boardId=' + boardId).pipe(
+      this.errorService.handleError<Task[]>('api-tasks.service::getTasks', {
+        showInDialog: true,
+      })
+    );
   }
 
   /**
@@ -38,7 +44,11 @@ export class ApiTasksService {
    * @returns Observable<Task>
    */
   public createTask(task: Task): Observable<Task> {
-    return this.http.post<Task>(this.baseUrl, task);
+    return this.http.post<Task>(this.baseUrl, task).pipe(
+      this.errorService.handleError<Task>('api-tasks.service::createTask', {
+        showInDialog: true,
+      })
+    );
   }
 
   /**
@@ -47,7 +57,11 @@ export class ApiTasksService {
    * @returns Observable<Task>
    */
   public updateTask(task: Task): Observable<Task> {
-    return this.http.put<Task>(this.baseUrl + '/' + task.id, task);
+    return this.http.put<Task>(this.baseUrl + '/' + task.id, task).pipe(
+      this.errorService.handleError<Task>('api-tasks.service::updateTask', {
+        showInDialog: true,
+      })
+    );
   }
 
   /**
@@ -56,6 +70,10 @@ export class ApiTasksService {
    * @returns Observable<Task>
    */
   public deleteTask(id: string): Observable<Task> {
-    return this.http.delete<Task>(this.baseUrl + '/' + id);
+    return this.http.delete<Task>(this.baseUrl + '/' + id).pipe(
+      this.errorService.handleError<Task>('api-tasks.service::deleteTask', {
+        showInDialog: true,
+      })
+    );
   }
 }

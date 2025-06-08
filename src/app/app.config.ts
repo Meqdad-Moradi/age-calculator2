@@ -2,6 +2,7 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { registerLocaleData } from '@angular/common';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
 import {
@@ -15,7 +16,6 @@ import {
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { routes } from './app.routes';
 import { matDateFormat } from './helpers/utils';
-import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { httpErrorsInterceptor } from './interceptors/http-errors.interceptor';
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
@@ -26,7 +26,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([httpErrorsInterceptor])),
     provideNativeDateAdapter(matDateFormat),
     { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },
     {
@@ -35,11 +35,6 @@ export const appConfig: ApplicationConfig = {
         ...matTooltipDefaultOptions,
         disableTooltipInteractivity: true,
       },
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useValue: httpErrorsInterceptor,
-      multi: true,
     },
   ],
 };

@@ -24,7 +24,9 @@
           }
         }
       },
-      "capital": ["Kabul"],
+      "capital": [
+        "Kabul"
+      ],
       "region": "Asia",
       "languages": {
         "prs": "Dari",
@@ -33,7 +35,9 @@
       },
       "area": 652230,
       "population": 40218234,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "3f5d"
     },
     {
@@ -52,14 +56,18 @@
           }
         }
       },
-      "capital": ["Tirana"],
+      "capital": [
+        "Tirana"
+      ],
       "region": "Europe",
       "languages": {
         "sqi": "Albanian"
       },
       "area": 28748,
       "population": 2837743,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "0a7b"
     },
     {
@@ -78,14 +86,18 @@
           }
         }
       },
-      "capital": ["Algiers"],
+      "capital": [
+        "Algiers"
+      ],
       "region": "Africa",
       "languages": {
         "ara": "Arabic"
       },
       "area": 2381741,
       "population": 44700000,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "d822"
     },
     {
@@ -108,7 +120,9 @@
           }
         }
       },
-      "capital": ["Pago Pago"],
+      "capital": [
+        "Pago Pago"
+      ],
       "region": "Oceania",
       "languages": {
         "eng": "English",
@@ -116,7 +130,9 @@
       },
       "area": 199,
       "population": 55197,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "ce11"
     },
     {
@@ -135,14 +151,18 @@
           }
         }
       },
-      "capital": ["Andorra la Vella"],
+      "capital": [
+        "Andorra la Vella"
+      ],
       "region": "Europe",
       "languages": {
         "cat": "Catalan"
       },
       "area": 468,
       "population": 77265,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "1d3b"
     },
     {
@@ -161,14 +181,18 @@
           }
         }
       },
-      "capital": ["Luanda"],
+      "capital": [
+        "Luanda"
+      ],
       "region": "Africa",
       "languages": {
         "por": "Portuguese"
       },
       "area": 1246700,
       "population": 32866268,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "6774"
     },
     {
@@ -187,14 +211,18 @@
           }
         }
       },
-      "capital": ["The Valley"],
+      "capital": [
+        "The Valley"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English"
       },
       "area": 91,
       "population": 13452,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "6e07"
     },
     {
@@ -213,7 +241,9 @@
       "languages": {},
       "area": 14000000,
       "population": 1000,
-      "continents": ["Antarctica"],
+      "continents": [
+        "Antarctica"
+      ],
       "id": "a00c"
     },
     {
@@ -232,14 +262,18 @@
           }
         }
       },
-      "capital": ["Saint John's"],
+      "capital": [
+        "Saint John's"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English"
       },
       "area": 442,
       "population": 97928,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "02df"
     },
     {
@@ -262,7 +296,9 @@
           }
         }
       },
-      "capital": ["Buenos Aires"],
+      "capital": [
+        "Buenos Aires"
+      ],
       "region": "Americas",
       "languages": {
         "grn": "Guaraní",
@@ -270,7 +306,9 @@
       },
       "area": 2780400,
       "population": 45376763,
-      "continents": ["South America"],
+      "continents": [
+        "South America"
+      ],
       "id": "3a69"
     },
     {
@@ -289,14 +327,18 @@
           }
         }
       },
-      "capital": ["Yerevan"],
+      "capital": [
+        "Yerevan"
+      ],
       "region": "Asia",
       "languages": {
         "hye": "Armenian"
       },
       "area": 29743,
       "population": 2963234,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "6945"
     },
     {
@@ -319,7 +361,9 @@
           }
         }
       },
-      "capital": ["Oranjestad"],
+      "capital": [
+        "Oranjestad"
+      ],
       "region": "Americas",
       "languages": {
         "nld": "Dutch",
@@ -327,7 +371,9 @@
       },
       "area": 180,
       "population": 106766,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "9f60"
     },
     {
@@ -346,14 +392,18 @@
           }
         }
       },
-      "capital": ["Canberra"],
+      "capital": [
+        "Canberra"
+      ],
       "region": "Oceania",
       "languages": {
         "eng": "English"
       },
       "area": 7692024,
       "population": 25687041,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "489c"
     },
     {
@@ -372,14 +422,18 @@
           }
         }
       },
-      "capital": ["Vienna"],
+      "capital": [
+        "Vienna"
+      ],
       "region": "Europe",
       "languages": {
         "de": "German"
       },
       "area": 83871,
       "population": 8917205,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "ea83"
     },
     {
@@ -398,14 +452,19 @@
           }
         }
       },
-      "capital": ["Baku"],
+      "capital": [
+        "Baku"
+      ],
       "region": "Asia",
       "languages": {
         "aze": "Azerbaijani"
       },
       "area": 86600,
       "population": 10110116,
-      "continents": ["Europe", "Asia"],
+      "continents": [
+        "Europe",
+        "Asia"
+      ],
       "id": "e5f5"
     },
     {
@@ -424,14 +483,18 @@
           }
         }
       },
-      "capital": ["Nassau"],
+      "capital": [
+        "Nassau"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English"
       },
       "area": 13943,
       "population": 393248,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "eb19"
     },
     {
@@ -450,14 +513,18 @@
           }
         }
       },
-      "capital": ["Manama"],
+      "capital": [
+        "Manama"
+      ],
       "region": "Asia",
       "languages": {
         "ara": "Arabic"
       },
       "area": 765,
       "population": 1701583,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "9800"
     },
     {
@@ -476,14 +543,18 @@
           }
         }
       },
-      "capital": ["Dhaka"],
+      "capital": [
+        "Dhaka"
+      ],
       "region": "Asia",
       "languages": {
         "ben": "Bengali"
       },
       "area": 147570,
       "population": 164689383,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "78d5"
     },
     {
@@ -502,14 +573,18 @@
           }
         }
       },
-      "capital": ["Bridgetown"],
+      "capital": [
+        "Bridgetown"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English"
       },
       "area": 430,
       "population": 287371,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "2c84"
     },
     {
@@ -532,7 +607,9 @@
           }
         }
       },
-      "capital": ["Minsk"],
+      "capital": [
+        "Minsk"
+      ],
       "region": "Europe",
       "languages": {
         "bel": "Belarusian",
@@ -540,7 +617,9 @@
       },
       "area": 207600,
       "population": 9398861,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "0e07"
     },
     {
@@ -567,7 +646,9 @@
           }
         }
       },
-      "capital": ["Brussels"],
+      "capital": [
+        "Brussels"
+      ],
       "region": "Europe",
       "languages": {
         "deu": "German",
@@ -576,7 +657,9 @@
       },
       "area": 30528,
       "population": 11555997,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "b3df"
     },
     {
@@ -603,7 +686,9 @@
           }
         }
       },
-      "capital": ["Belmopan"],
+      "capital": [
+        "Belmopan"
+      ],
       "region": "Americas",
       "languages": {
         "bjz": "Belizean Creole",
@@ -612,7 +697,9 @@
       },
       "area": 22966,
       "population": 397621,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "0350"
     },
     {
@@ -631,14 +718,18 @@
           }
         }
       },
-      "capital": ["Porto-Novo"],
+      "capital": [
+        "Porto-Novo"
+      ],
       "region": "Africa",
       "languages": {
         "fra": "French"
       },
       "area": 112622,
       "population": 12123198,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "4220"
     },
     {
@@ -657,14 +748,18 @@
           }
         }
       },
-      "capital": ["Hamilton"],
+      "capital": [
+        "Hamilton"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English"
       },
       "area": 54,
       "population": 63903,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "d2d0"
     },
     {
@@ -683,14 +778,18 @@
           }
         }
       },
-      "capital": ["Thimphu"],
+      "capital": [
+        "Thimphu"
+      ],
       "region": "Asia",
       "languages": {
         "dzo": "Dzongkha"
       },
       "area": 38394,
       "population": 771612,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "115d"
     },
     {
@@ -721,7 +820,9 @@
           }
         }
       },
-      "capital": ["Sucre"],
+      "capital": [
+        "Sucre"
+      ],
       "region": "Americas",
       "languages": {
         "aym": "Aymara",
@@ -731,7 +832,9 @@
       },
       "area": 1098581,
       "population": 11673029,
-      "continents": ["South America"],
+      "continents": [
+        "South America"
+      ],
       "id": "bbbf"
     },
     {
@@ -758,7 +861,9 @@
           }
         }
       },
-      "capital": ["Sarajevo"],
+      "capital": [
+        "Sarajevo"
+      ],
       "region": "Europe",
       "languages": {
         "bos": "Bosnian",
@@ -767,7 +872,9 @@
       },
       "area": 51209,
       "population": 3280815,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "4f26"
     },
     {
@@ -790,7 +897,9 @@
           }
         }
       },
-      "capital": ["Gaborone"],
+      "capital": [
+        "Gaborone"
+      ],
       "region": "Africa",
       "languages": {
         "eng": "English",
@@ -798,7 +907,9 @@
       },
       "area": 582000,
       "population": 2351625,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "165a"
     },
     {
@@ -824,7 +935,9 @@
       },
       "area": 49,
       "population": 0,
-      "continents": ["Antarctica"],
+      "continents": [
+        "Antarctica"
+      ],
       "id": "4c3a"
     },
     {
@@ -843,14 +956,18 @@
           }
         }
       },
-      "capital": ["Brasília"],
+      "capital": [
+        "Brasília"
+      ],
       "region": "Americas",
       "languages": {
         "por": "Portuguese"
       },
       "area": 8515767,
       "population": 212559409,
-      "continents": ["South America"],
+      "continents": [
+        "South America"
+      ],
       "id": "8167"
     },
     {
@@ -869,14 +986,18 @@
           }
         }
       },
-      "capital": ["Diego Garcia"],
+      "capital": [
+        "Diego Garcia"
+      ],
       "region": "Africa",
       "languages": {
         "eng": "English"
       },
       "area": 60,
       "population": 3000,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "febe"
     },
     {
@@ -895,14 +1016,18 @@
           }
         }
       },
-      "capital": ["Road Town"],
+      "capital": [
+        "Road Town"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English"
       },
       "area": 151,
       "population": 30237,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "cb6e"
     },
     {
@@ -921,14 +1046,18 @@
           }
         }
       },
-      "capital": ["Bandar Seri Begawan"],
+      "capital": [
+        "Bandar Seri Begawan"
+      ],
       "region": "Asia",
       "languages": {
         "msa": "Malay"
       },
       "area": 5765,
       "population": 437483,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "217f"
     },
     {
@@ -947,14 +1076,18 @@
           }
         }
       },
-      "capital": ["Sofia"],
+      "capital": [
+        "Sofia"
+      ],
       "region": "Europe",
       "languages": {
         "bul": "Bulgarian"
       },
       "area": 110879,
       "population": 6927288,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "29b0"
     },
     {
@@ -973,14 +1106,18 @@
           }
         }
       },
-      "capital": ["Ouagadougou"],
+      "capital": [
+        "Ouagadougou"
+      ],
       "region": "Africa",
       "languages": {
         "fra": "French"
       },
       "area": 272967,
       "population": 20903278,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "9869"
     },
     {
@@ -1003,7 +1140,9 @@
           }
         }
       },
-      "capital": ["Gitega"],
+      "capital": [
+        "Gitega"
+      ],
       "region": "Africa",
       "languages": {
         "fra": "French",
@@ -1011,7 +1150,9 @@
       },
       "area": 27834,
       "population": 11890781,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "897f"
     },
     {
@@ -1030,14 +1171,18 @@
           }
         }
       },
-      "capital": ["Phnom Penh"],
+      "capital": [
+        "Phnom Penh"
+      ],
       "region": "Asia",
       "languages": {
         "khm": "Khmer"
       },
       "area": 181035,
       "population": 16718971,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "eceb"
     },
     {
@@ -1060,7 +1205,9 @@
           }
         }
       },
-      "capital": ["Yaoundé"],
+      "capital": [
+        "Yaoundé"
+      ],
       "region": "Africa",
       "languages": {
         "eng": "English",
@@ -1068,7 +1215,9 @@
       },
       "area": 475442,
       "population": 26545864,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "6b72"
     },
     {
@@ -1091,7 +1240,9 @@
           }
         }
       },
-      "capital": ["Ottawa"],
+      "capital": [
+        "Ottawa"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English",
@@ -1099,7 +1250,9 @@
       },
       "area": 9984670,
       "population": 38005238,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "6b3c"
     },
     {
@@ -1118,14 +1271,18 @@
           }
         }
       },
-      "capital": ["Praia"],
+      "capital": [
+        "Praia"
+      ],
       "region": "Africa",
       "languages": {
         "por": "Portuguese"
       },
       "area": 4033,
       "population": 555988,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "5047"
     },
     {
@@ -1148,7 +1305,9 @@
           }
         }
       },
-      "capital": ["Kralendijk"],
+      "capital": [
+        "Kralendijk"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English",
@@ -1157,7 +1316,9 @@
       },
       "area": 328,
       "population": 25987,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "b424"
     },
     {
@@ -1176,14 +1337,18 @@
           }
         }
       },
-      "capital": ["George Town"],
+      "capital": [
+        "George Town"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English"
       },
       "area": 264,
       "population": 65720,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "f45b"
     },
     {
@@ -1206,7 +1371,9 @@
           }
         }
       },
-      "capital": ["Bangui"],
+      "capital": [
+        "Bangui"
+      ],
       "region": "Africa",
       "languages": {
         "fra": "French",
@@ -1214,7 +1381,9 @@
       },
       "area": 622984,
       "population": 4829764,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "1518"
     },
     {
@@ -1237,7 +1406,9 @@
           }
         }
       },
-      "capital": ["N'Djamena"],
+      "capital": [
+        "N'Djamena"
+      ],
       "region": "Africa",
       "languages": {
         "ara": "Arabic",
@@ -1245,7 +1416,9 @@
       },
       "area": 1284000,
       "population": 16425859,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "ada9"
     },
     {
@@ -1264,14 +1437,18 @@
           }
         }
       },
-      "capital": ["Santiago"],
+      "capital": [
+        "Santiago"
+      ],
       "region": "Americas",
       "languages": {
         "spa": "Spanish"
       },
       "area": 756102,
       "population": 19116209,
-      "continents": ["South America"],
+      "continents": [
+        "South America"
+      ],
       "id": "cd95"
     },
     {
@@ -1290,14 +1467,18 @@
           }
         }
       },
-      "capital": ["Beijing"],
+      "capital": [
+        "Beijing"
+      ],
       "region": "Asia",
       "languages": {
         "zho": "Chinese"
       },
       "area": 9706961,
       "population": 1402112000,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "4e99"
     },
     {
@@ -1316,14 +1497,18 @@
           }
         }
       },
-      "capital": ["Flying Fish Cove"],
+      "capital": [
+        "Flying Fish Cove"
+      ],
       "region": "Oceania",
       "languages": {
         "eng": "English"
       },
       "area": 135,
       "population": 2072,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "553c"
     },
     {
@@ -1342,14 +1527,18 @@
           }
         }
       },
-      "capital": ["West Island"],
+      "capital": [
+        "West Island"
+      ],
       "region": "Oceania",
       "languages": {
         "eng": "English"
       },
       "area": 14,
       "population": 544,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "95c6"
     },
     {
@@ -1368,14 +1557,18 @@
           }
         }
       },
-      "capital": ["Bogotá"],
+      "capital": [
+        "Bogotá"
+      ],
       "region": "Americas",
       "languages": {
         "spa": "Spanish"
       },
       "area": 1141748,
       "population": 50882884,
-      "continents": ["South America"],
+      "continents": [
+        "South America"
+      ],
       "id": "a362"
     },
     {
@@ -1402,7 +1595,9 @@
           }
         }
       },
-      "capital": ["Moroni"],
+      "capital": [
+        "Moroni"
+      ],
       "region": "Africa",
       "languages": {
         "ara": "Arabic",
@@ -1411,7 +1606,9 @@
       },
       "area": 1862,
       "population": 869595,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "66bd"
     },
     {
@@ -1434,7 +1631,9 @@
           }
         }
       },
-      "capital": ["Avarua"],
+      "capital": [
+        "Avarua"
+      ],
       "region": "Oceania",
       "languages": {
         "eng": "English",
@@ -1442,7 +1641,9 @@
       },
       "area": 236,
       "population": 18100,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "bc01"
     },
     {
@@ -1461,14 +1662,18 @@
           }
         }
       },
-      "capital": ["San José"],
+      "capital": [
+        "San José"
+      ],
       "region": "Americas",
       "languages": {
         "spa": "Spanish"
       },
       "area": 51100,
       "population": 5094114,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "58ed"
     },
     {
@@ -1487,14 +1692,18 @@
           }
         }
       },
-      "capital": ["Zagreb"],
+      "capital": [
+        "Zagreb"
+      ],
       "region": "Europe",
       "languages": {
         "hrv": "Croatian"
       },
       "area": 56594,
       "population": 4047200,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "27a1"
     },
     {
@@ -1513,14 +1722,18 @@
           }
         }
       },
-      "capital": ["Havana"],
+      "capital": [
+        "Havana"
+      ],
       "region": "Americas",
       "languages": {
         "spa": "Spanish"
       },
       "area": 109884,
       "population": 11326616,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "ebb0"
     },
     {
@@ -1547,7 +1760,9 @@
           }
         }
       },
-      "capital": ["Willemstad"],
+      "capital": [
+        "Willemstad"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English",
@@ -1556,7 +1771,9 @@
       },
       "area": 444,
       "population": 155014,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "f7b7"
     },
     {
@@ -1579,7 +1796,9 @@
           }
         }
       },
-      "capital": ["Nicosia"],
+      "capital": [
+        "Nicosia"
+      ],
       "region": "Europe",
       "languages": {
         "ell": "Greek",
@@ -1587,7 +1806,9 @@
       },
       "area": 9251,
       "population": 1207361,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "b6c3"
     },
     {
@@ -1610,7 +1831,9 @@
           }
         }
       },
-      "capital": ["Prague"],
+      "capital": [
+        "Prague"
+      ],
       "region": "Europe",
       "languages": {
         "ces": "Czech",
@@ -1618,7 +1841,9 @@
       },
       "area": 78865,
       "population": 10698896,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "b34a"
     },
     {
@@ -1653,7 +1878,9 @@
           }
         }
       },
-      "capital": ["Kinshasa"],
+      "capital": [
+        "Kinshasa"
+      ],
       "region": "Africa",
       "languages": {
         "fra": "French",
@@ -1664,7 +1891,9 @@
       },
       "area": 2344858,
       "population": 108407721,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "d8a5"
     },
     {
@@ -1683,14 +1912,18 @@
           }
         }
       },
-      "capital": ["Copenhagen"],
+      "capital": [
+        "Copenhagen"
+      ],
       "region": "Europe",
       "languages": {
         "dan": "Danish"
       },
       "area": 43094,
       "population": 5831404,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "1284"
     },
     {
@@ -1713,7 +1946,9 @@
           }
         }
       },
-      "capital": ["Djibouti"],
+      "capital": [
+        "Djibouti"
+      ],
       "region": "Africa",
       "languages": {
         "ara": "Arabic",
@@ -1721,7 +1956,9 @@
       },
       "area": 23200,
       "population": 988002,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "44b8"
     },
     {
@@ -1740,14 +1977,18 @@
           }
         }
       },
-      "capital": ["Roseau"],
+      "capital": [
+        "Roseau"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English"
       },
       "area": 751,
       "population": 71991,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "167b"
     },
     {
@@ -1766,14 +2007,18 @@
           }
         }
       },
-      "capital": ["Santo Domingo"],
+      "capital": [
+        "Santo Domingo"
+      ],
       "region": "Americas",
       "languages": {
         "spa": "Spanish"
       },
       "area": 48671,
       "population": 10847904,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "08e9"
     },
     {
@@ -1792,14 +2037,18 @@
           }
         }
       },
-      "capital": ["Quito"],
+      "capital": [
+        "Quito"
+      ],
       "region": "Americas",
       "languages": {
         "spa": "Spanish"
       },
       "area": 276841,
       "population": 17643060,
-      "continents": ["South America"],
+      "continents": [
+        "South America"
+      ],
       "id": "efd7"
     },
     {
@@ -1818,14 +2067,18 @@
           }
         }
       },
-      "capital": ["Cairo"],
+      "capital": [
+        "Cairo"
+      ],
       "region": "Africa",
       "languages": {
         "ara": "Arabic"
       },
       "area": 1002450,
       "population": 102334403,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "e751"
     },
     {
@@ -1844,14 +2097,18 @@
           }
         }
       },
-      "capital": ["San Salvador"],
+      "capital": [
+        "San Salvador"
+      ],
       "region": "Americas",
       "languages": {
         "spa": "Spanish"
       },
       "area": 21041,
       "population": 6486201,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "914f"
     },
     {
@@ -1878,7 +2135,9 @@
           }
         }
       },
-      "capital": ["Malabo"],
+      "capital": [
+        "Malabo"
+      ],
       "region": "Africa",
       "languages": {
         "fra": "French",
@@ -1887,7 +2146,9 @@
       },
       "area": 28051,
       "population": 1402985,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "16cb"
     },
     {
@@ -1914,7 +2175,9 @@
           }
         }
       },
-      "capital": ["Asmara"],
+      "capital": [
+        "Asmara"
+      ],
       "region": "Africa",
       "languages": {
         "ara": "Arabic",
@@ -1923,7 +2186,9 @@
       },
       "area": 117600,
       "population": 5352000,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "d855"
     },
     {
@@ -1942,14 +2207,18 @@
           }
         }
       },
-      "capital": ["Tallinn"],
+      "capital": [
+        "Tallinn"
+      ],
       "region": "Europe",
       "languages": {
         "est": "Estonian"
       },
       "area": 45227,
       "population": 1331057,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "27a6"
     },
     {
@@ -1972,7 +2241,9 @@
           }
         }
       },
-      "capital": ["Mbabane"],
+      "capital": [
+        "Mbabane"
+      ],
       "region": "Africa",
       "languages": {
         "eng": "English",
@@ -1980,7 +2251,9 @@
       },
       "area": 17364,
       "population": 1160164,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "410c"
     },
     {
@@ -1999,14 +2272,18 @@
           }
         }
       },
-      "capital": ["Addis Ababa"],
+      "capital": [
+        "Addis Ababa"
+      ],
       "region": "Africa",
       "languages": {
         "amh": "Amharic"
       },
       "area": 1104300,
       "population": 114963583,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "639d"
     },
     {
@@ -2025,14 +2302,18 @@
           }
         }
       },
-      "capital": ["Stanley"],
+      "capital": [
+        "Stanley"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English"
       },
       "area": 12173,
       "population": 2563,
-      "continents": ["South America"],
+      "continents": [
+        "South America"
+      ],
       "id": "10ff"
     },
     {
@@ -2055,7 +2336,9 @@
           }
         }
       },
-      "capital": ["Tórshavn"],
+      "capital": [
+        "Tórshavn"
+      ],
       "region": "Europe",
       "languages": {
         "dan": "Danish",
@@ -2063,7 +2346,9 @@
       },
       "area": 1393,
       "population": 48865,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "9171"
     },
     {
@@ -2090,7 +2375,9 @@
           }
         }
       },
-      "capital": ["Suva"],
+      "capital": [
+        "Suva"
+      ],
       "region": "Oceania",
       "languages": {
         "eng": "English",
@@ -2099,7 +2386,9 @@
       },
       "area": 18272,
       "population": 896444,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "ad2a"
     },
     {
@@ -2122,7 +2411,9 @@
           }
         }
       },
-      "capital": ["Helsinki"],
+      "capital": [
+        "Helsinki"
+      ],
       "region": "Europe",
       "languages": {
         "fin": "Finnish",
@@ -2130,7 +2421,9 @@
       },
       "area": 338424,
       "population": 5530719,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "6408"
     },
     {
@@ -2149,14 +2442,18 @@
           }
         }
       },
-      "capital": ["Paris"],
+      "capital": [
+        "Paris"
+      ],
       "region": "Europe",
       "languages": {
         "fra": "French"
       },
       "area": 551695,
       "population": 67391582,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "0f21"
     },
     {
@@ -2175,14 +2472,18 @@
           }
         }
       },
-      "capital": ["Cayenne"],
+      "capital": [
+        "Cayenne"
+      ],
       "region": "Americas",
       "languages": {
         "fra": "French"
       },
       "area": 83534,
       "population": 254541,
-      "continents": ["South America"],
+      "continents": [
+        "South America"
+      ],
       "id": "d83c"
     },
     {
@@ -2201,14 +2502,18 @@
           }
         }
       },
-      "capital": ["Papeetē"],
+      "capital": [
+        "Papeetē"
+      ],
       "region": "Oceania",
       "languages": {
         "fra": "French"
       },
       "area": 4167,
       "population": 280904,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "cb45"
     },
     {
@@ -2227,14 +2532,18 @@
           }
         }
       },
-      "capital": ["Port-aux-Français"],
+      "capital": [
+        "Port-aux-Français"
+      ],
       "region": "Antarctic",
       "languages": {
         "fra": "French"
       },
       "area": 7747,
       "population": 400,
-      "continents": ["Antarctica"],
+      "continents": [
+        "Antarctica"
+      ],
       "id": "367f"
     },
     {
@@ -2253,14 +2562,18 @@
           }
         }
       },
-      "capital": ["Libreville"],
+      "capital": [
+        "Libreville"
+      ],
       "region": "Africa",
       "languages": {
         "fra": "French"
       },
       "area": 267668,
       "population": 2225728,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "a316"
     },
     {
@@ -2279,14 +2592,18 @@
           }
         }
       },
-      "capital": ["Banjul"],
+      "capital": [
+        "Banjul"
+      ],
       "region": "Africa",
       "languages": {
         "eng": "English"
       },
       "area": 10689,
       "population": 2416664,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "4220"
     },
     {
@@ -2305,14 +2622,18 @@
           }
         }
       },
-      "capital": ["Tbilisi"],
+      "capital": [
+        "Tbilisi"
+      ],
       "region": "Asia",
       "languages": {
         "kat": "Georgian"
       },
       "area": 69700,
       "population": 3714000,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "9ceb"
     },
     {
@@ -2331,14 +2652,18 @@
           }
         }
       },
-      "capital": ["Berlin"],
+      "capital": [
+        "Berlin"
+      ],
       "region": "Europe",
       "languages": {
         "deu": "German"
       },
       "area": 357114,
       "population": 83240525,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "6895"
     },
     {
@@ -2357,14 +2682,18 @@
           }
         }
       },
-      "capital": ["Accra"],
+      "capital": [
+        "Accra"
+      ],
       "region": "Africa",
       "languages": {
         "eng": "English"
       },
       "area": 238533,
       "population": 31072945,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "93b4"
     },
     {
@@ -2383,14 +2712,18 @@
           }
         }
       },
-      "capital": ["Gibraltar"],
+      "capital": [
+        "Gibraltar"
+      ],
       "region": "Europe",
       "languages": {
         "eng": "English"
       },
       "area": 6,
       "population": 33691,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "0929"
     },
     {
@@ -2409,14 +2742,18 @@
           }
         }
       },
-      "capital": ["Athens"],
+      "capital": [
+        "Athens"
+      ],
       "region": "Europe",
       "languages": {
         "ell": "Greek"
       },
       "area": 131990,
       "population": 10715549,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "e504"
     },
     {
@@ -2435,14 +2772,18 @@
           }
         }
       },
-      "capital": ["Nuuk"],
+      "capital": [
+        "Nuuk"
+      ],
       "region": "Americas",
       "languages": {
         "kal": "Greenlandic"
       },
       "area": 2166086,
       "population": 56367,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "ca7a"
     },
     {
@@ -2461,14 +2802,18 @@
           }
         }
       },
-      "capital": ["St. George's"],
+      "capital": [
+        "St. George's"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English"
       },
       "area": 344,
       "population": 112519,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "6284"
     },
     {
@@ -2487,14 +2832,18 @@
           }
         }
       },
-      "capital": ["Basse-Terre"],
+      "capital": [
+        "Basse-Terre"
+      ],
       "region": "Americas",
       "languages": {
         "fra": "French"
       },
       "area": 1628,
       "population": 400132,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "95d3"
     },
     {
@@ -2521,7 +2870,9 @@
           }
         }
       },
-      "capital": ["Hagåtña"],
+      "capital": [
+        "Hagåtña"
+      ],
       "region": "Oceania",
       "languages": {
         "cha": "Chamorro",
@@ -2530,7 +2881,9 @@
       },
       "area": 549,
       "population": 168783,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "2988"
     },
     {
@@ -2549,14 +2902,18 @@
           }
         }
       },
-      "capital": ["Guatemala City"],
+      "capital": [
+        "Guatemala City"
+      ],
       "region": "Americas",
       "languages": {
         "spa": "Spanish"
       },
       "area": 108889,
       "population": 16858333,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "d5b9"
     },
     {
@@ -2583,7 +2940,9 @@
           }
         }
       },
-      "capital": ["St. Peter Port"],
+      "capital": [
+        "St. Peter Port"
+      ],
       "region": "Europe",
       "languages": {
         "eng": "English",
@@ -2592,7 +2951,9 @@
       },
       "area": 78,
       "population": 62999,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "f5c7"
     },
     {
@@ -2611,14 +2972,18 @@
           }
         }
       },
-      "capital": ["Conakry"],
+      "capital": [
+        "Conakry"
+      ],
       "region": "Africa",
       "languages": {
         "fra": "French"
       },
       "area": 245857,
       "population": 13132792,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "2eb7"
     },
     {
@@ -2641,7 +3006,9 @@
           }
         }
       },
-      "capital": ["Bissau"],
+      "capital": [
+        "Bissau"
+      ],
       "region": "Africa",
       "languages": {
         "por": "Portuguese",
@@ -2649,7 +3016,9 @@
       },
       "area": 36125,
       "population": 1967998,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "98b2"
     },
     {
@@ -2668,14 +3037,18 @@
           }
         }
       },
-      "capital": ["Georgetown"],
+      "capital": [
+        "Georgetown"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English"
       },
       "area": 214969,
       "population": 786559,
-      "continents": ["South America"],
+      "continents": [
+        "South America"
+      ],
       "id": "993b"
     },
     {
@@ -2698,7 +3071,9 @@
           }
         }
       },
-      "capital": ["Port-au-Prince"],
+      "capital": [
+        "Port-au-Prince"
+      ],
       "region": "Americas",
       "languages": {
         "fra": "French",
@@ -2706,7 +3081,9 @@
       },
       "area": 27750,
       "population": 11402533,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "326a"
     },
     {
@@ -2732,7 +3109,9 @@
       },
       "area": 412,
       "population": 0,
-      "continents": ["Antarctica"],
+      "continents": [
+        "Antarctica"
+      ],
       "id": "1e86"
     },
     {
@@ -2751,14 +3130,18 @@
           }
         }
       },
-      "capital": ["Tegucigalpa"],
+      "capital": [
+        "Tegucigalpa"
+      ],
       "region": "Americas",
       "languages": {
         "spa": "Spanish"
       },
       "area": 112492,
       "population": 9904608,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "d481"
     },
     {
@@ -2781,7 +3164,9 @@
           }
         }
       },
-      "capital": ["City of Victoria"],
+      "capital": [
+        "City of Victoria"
+      ],
       "region": "Asia",
       "languages": {
         "eng": "English",
@@ -2789,7 +3174,9 @@
       },
       "area": 1104,
       "population": 7500700,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "ade3"
     },
     {
@@ -2808,14 +3195,18 @@
           }
         }
       },
-      "capital": ["Budapest"],
+      "capital": [
+        "Budapest"
+      ],
       "region": "Europe",
       "languages": {
         "hun": "Hungarian"
       },
       "area": 93028,
       "population": 9749763,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "34ac"
     },
     {
@@ -2834,14 +3225,18 @@
           }
         }
       },
-      "capital": ["Reykjavik"],
+      "capital": [
+        "Reykjavik"
+      ],
       "region": "Europe",
       "languages": {
         "isl": "Icelandic"
       },
       "area": 103000,
       "population": 366425,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "0d9a"
     },
     {
@@ -2868,7 +3263,9 @@
           }
         }
       },
-      "capital": ["New Delhi"],
+      "capital": [
+        "New Delhi"
+      ],
       "region": "Asia",
       "languages": {
         "eng": "English",
@@ -2877,7 +3274,9 @@
       },
       "area": 3287590,
       "population": 1380004385,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "b06f"
     },
     {
@@ -2896,14 +3295,18 @@
           }
         }
       },
-      "capital": ["Jakarta"],
+      "capital": [
+        "Jakarta"
+      ],
       "region": "Asia",
       "languages": {
         "ind": "Indonesian"
       },
       "area": 1904569,
       "population": 273523621,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "2793"
     },
     {
@@ -2922,14 +3325,18 @@
           }
         }
       },
-      "capital": ["Tehran"],
+      "capital": [
+        "Tehran"
+      ],
       "region": "Asia",
       "languages": {
         "fas": "Persian (Farsi)"
       },
       "area": 1648195,
       "population": 83992953,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "0ba8"
     },
     {
@@ -2956,7 +3363,9 @@
           }
         }
       },
-      "capital": ["Baghdad"],
+      "capital": [
+        "Baghdad"
+      ],
       "region": "Asia",
       "languages": {
         "ara": "Arabic",
@@ -2965,7 +3374,9 @@
       },
       "area": 438317,
       "population": 40222503,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "ac2c"
     },
     {
@@ -2988,7 +3399,9 @@
           }
         }
       },
-      "capital": ["Dublin"],
+      "capital": [
+        "Dublin"
+      ],
       "region": "Europe",
       "languages": {
         "eng": "English",
@@ -2996,7 +3409,9 @@
       },
       "area": 70273,
       "population": 4994724,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "8467"
     },
     {
@@ -3019,7 +3434,9 @@
           }
         }
       },
-      "capital": ["Douglas"],
+      "capital": [
+        "Douglas"
+      ],
       "region": "Europe",
       "languages": {
         "eng": "English",
@@ -3027,7 +3444,9 @@
       },
       "area": 572,
       "population": 85032,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "e6a8"
     },
     {
@@ -3050,7 +3469,9 @@
           }
         }
       },
-      "capital": ["Jerusalem"],
+      "capital": [
+        "Jerusalem"
+      ],
       "region": "Asia",
       "languages": {
         "ara": "Arabic",
@@ -3058,7 +3479,9 @@
       },
       "area": 20770,
       "population": 9216900,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "28a8"
     },
     {
@@ -3077,14 +3500,18 @@
           }
         }
       },
-      "capital": ["Rome"],
+      "capital": [
+        "Rome"
+      ],
       "region": "Europe",
       "languages": {
         "ita": "Italian"
       },
       "area": 301336,
       "population": 59554023,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "6387"
     },
     {
@@ -3103,14 +3530,18 @@
           }
         }
       },
-      "capital": ["Yamoussoukro"],
+      "capital": [
+        "Yamoussoukro"
+      ],
       "region": "Africa",
       "languages": {
         "fra": "French"
       },
       "area": 322463,
       "population": 26378275,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "5c76"
     },
     {
@@ -3133,7 +3564,9 @@
           }
         }
       },
-      "capital": ["Kingston"],
+      "capital": [
+        "Kingston"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English",
@@ -3141,7 +3574,9 @@
       },
       "area": 10991,
       "population": 2961161,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "f831"
     },
     {
@@ -3160,14 +3595,18 @@
           }
         }
       },
-      "capital": ["Tokyo"],
+      "capital": [
+        "Tokyo"
+      ],
       "region": "Asia",
       "languages": {
         "jpn": "Japanese"
       },
       "area": 377930,
       "population": 125836021,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "81cd"
     },
     {
@@ -3194,7 +3633,9 @@
           }
         }
       },
-      "capital": ["Saint Helier"],
+      "capital": [
+        "Saint Helier"
+      ],
       "region": "Europe",
       "languages": {
         "eng": "English",
@@ -3203,7 +3644,9 @@
       },
       "area": 116,
       "population": 100800,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "0b5a"
     },
     {
@@ -3222,14 +3665,18 @@
           }
         }
       },
-      "capital": ["Amman"],
+      "capital": [
+        "Amman"
+      ],
       "region": "Asia",
       "languages": {
         "ara": "Arabic"
       },
       "area": 89342,
       "population": 10203140,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "8284"
     },
     {
@@ -3252,7 +3699,9 @@
           }
         }
       },
-      "capital": ["Nur-Sultan"],
+      "capital": [
+        "Nur-Sultan"
+      ],
       "region": "Asia",
       "languages": {
         "kaz": "Kazakh",
@@ -3260,7 +3709,9 @@
       },
       "area": 2724900,
       "population": 18754440,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "d426"
     },
     {
@@ -3283,7 +3734,9 @@
           }
         }
       },
-      "capital": ["Nairobi"],
+      "capital": [
+        "Nairobi"
+      ],
       "region": "Africa",
       "languages": {
         "eng": "English",
@@ -3291,7 +3744,9 @@
       },
       "area": 580367,
       "population": 53771300,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "1b13"
     },
     {
@@ -3314,7 +3769,9 @@
           }
         }
       },
-      "capital": ["South Tarawa"],
+      "capital": [
+        "South Tarawa"
+      ],
       "region": "Oceania",
       "languages": {
         "eng": "English",
@@ -3322,7 +3779,9 @@
       },
       "area": 811,
       "population": 119446,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "bcfd"
     },
     {
@@ -3345,7 +3804,9 @@
           }
         }
       },
-      "capital": ["Pristina"],
+      "capital": [
+        "Pristina"
+      ],
       "region": "Europe",
       "languages": {
         "sqi": "Albanian",
@@ -3353,7 +3814,9 @@
       },
       "area": 10908,
       "population": 1775378,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "1e91"
     },
     {
@@ -3372,14 +3835,18 @@
           }
         }
       },
-      "capital": ["Kuwait City"],
+      "capital": [
+        "Kuwait City"
+      ],
       "region": "Asia",
       "languages": {
         "ara": "Arabic"
       },
       "area": 17818,
       "population": 4270563,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "d98f"
     },
     {
@@ -3402,7 +3869,9 @@
           }
         }
       },
-      "capital": ["Bishkek"],
+      "capital": [
+        "Bishkek"
+      ],
       "region": "Asia",
       "languages": {
         "kir": "Kyrgyz",
@@ -3410,7 +3879,9 @@
       },
       "area": 199951,
       "population": 6591600,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "59f9"
     },
     {
@@ -3429,14 +3900,18 @@
           }
         }
       },
-      "capital": ["Vientiane"],
+      "capital": [
+        "Vientiane"
+      ],
       "region": "Asia",
       "languages": {
         "lao": "Lao"
       },
       "area": 236800,
       "population": 7275556,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "29e5"
     },
     {
@@ -3455,14 +3930,18 @@
           }
         }
       },
-      "capital": ["Riga"],
+      "capital": [
+        "Riga"
+      ],
       "region": "Europe",
       "languages": {
         "lav": "Latvian"
       },
       "area": 64559,
       "population": 1901548,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "c859"
     },
     {
@@ -3485,7 +3964,9 @@
           }
         }
       },
-      "capital": ["Beirut"],
+      "capital": [
+        "Beirut"
+      ],
       "region": "Asia",
       "languages": {
         "ara": "Arabic",
@@ -3493,7 +3974,9 @@
       },
       "area": 10452,
       "population": 6825442,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "c76f"
     },
     {
@@ -3516,7 +3999,9 @@
           }
         }
       },
-      "capital": ["Maseru"],
+      "capital": [
+        "Maseru"
+      ],
       "region": "Africa",
       "languages": {
         "eng": "English",
@@ -3524,7 +4009,9 @@
       },
       "area": 30355,
       "population": 2142252,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "6720"
     },
     {
@@ -3543,14 +4030,18 @@
           }
         }
       },
-      "capital": ["Monrovia"],
+      "capital": [
+        "Monrovia"
+      ],
       "region": "Africa",
       "languages": {
         "eng": "English"
       },
       "area": 111369,
       "population": 5057677,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "5c53"
     },
     {
@@ -3569,14 +4060,18 @@
           }
         }
       },
-      "capital": ["Tripoli"],
+      "capital": [
+        "Tripoli"
+      ],
       "region": "Africa",
       "languages": {
         "ara": "Arabic"
       },
       "area": 1759540,
       "population": 6871287,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "1878"
     },
     {
@@ -3595,14 +4090,18 @@
           }
         }
       },
-      "capital": ["Vaduz"],
+      "capital": [
+        "Vaduz"
+      ],
       "region": "Europe",
       "languages": {
         "deu": "German"
       },
       "area": 160,
       "population": 38137,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "4431"
     },
     {
@@ -3621,14 +4120,18 @@
           }
         }
       },
-      "capital": ["Vilnius"],
+      "capital": [
+        "Vilnius"
+      ],
       "region": "Europe",
       "languages": {
         "lit": "Lithuanian"
       },
       "area": 65300,
       "population": 2794700,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "051d"
     },
     {
@@ -3655,7 +4158,9 @@
           }
         }
       },
-      "capital": ["Luxembourg"],
+      "capital": [
+        "Luxembourg"
+      ],
       "region": "Europe",
       "languages": {
         "deu": "German",
@@ -3664,7 +4169,9 @@
       },
       "area": 2586,
       "population": 632275,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "1235"
     },
     {
@@ -3695,7 +4202,9 @@
       },
       "area": 30,
       "population": 649342,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "5899"
     },
     {
@@ -3718,7 +4227,9 @@
           }
         }
       },
-      "capital": ["Antananarivo"],
+      "capital": [
+        "Antananarivo"
+      ],
       "region": "Africa",
       "languages": {
         "fra": "French",
@@ -3726,7 +4237,9 @@
       },
       "area": 587041,
       "population": 27691019,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "a3a5"
     },
     {
@@ -3749,7 +4262,9 @@
           }
         }
       },
-      "capital": ["Lilongwe"],
+      "capital": [
+        "Lilongwe"
+      ],
       "region": "Africa",
       "languages": {
         "eng": "English",
@@ -3757,7 +4272,9 @@
       },
       "area": 118484,
       "population": 19129955,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "5d73"
     },
     {
@@ -3780,7 +4297,9 @@
           }
         }
       },
-      "capital": ["Kuala Lumpur"],
+      "capital": [
+        "Kuala Lumpur"
+      ],
       "region": "Asia",
       "languages": {
         "eng": "English",
@@ -3788,7 +4307,9 @@
       },
       "area": 330803,
       "population": 32365998,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "cb67"
     },
     {
@@ -3807,14 +4328,18 @@
           }
         }
       },
-      "capital": ["Malé"],
+      "capital": [
+        "Malé"
+      ],
       "region": "Asia",
       "languages": {
         "div": "Maldivian"
       },
       "area": 300,
       "population": 540542,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "c319"
     },
     {
@@ -3833,14 +4358,18 @@
           }
         }
       },
-      "capital": ["Bamako"],
+      "capital": [
+        "Bamako"
+      ],
       "region": "Africa",
       "languages": {
         "fra": "French"
       },
       "area": 1240192,
       "population": 20250834,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "70d5"
     },
     {
@@ -3863,7 +4392,9 @@
           }
         }
       },
-      "capital": ["Valletta"],
+      "capital": [
+        "Valletta"
+      ],
       "region": "Europe",
       "languages": {
         "eng": "English",
@@ -3871,7 +4402,9 @@
       },
       "area": 316,
       "population": 525285,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "f4f2"
     },
     {
@@ -3894,7 +4427,9 @@
           }
         }
       },
-      "capital": ["Majuro"],
+      "capital": [
+        "Majuro"
+      ],
       "region": "Oceania",
       "languages": {
         "eng": "English",
@@ -3902,7 +4437,9 @@
       },
       "area": 181,
       "population": 59194,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "57d5"
     },
     {
@@ -3921,14 +4458,18 @@
           }
         }
       },
-      "capital": ["Fort-de-France"],
+      "capital": [
+        "Fort-de-France"
+      ],
       "region": "Americas",
       "languages": {
         "fra": "French"
       },
       "area": 1128,
       "population": 378243,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "2966"
     },
     {
@@ -3947,14 +4488,18 @@
           }
         }
       },
-      "capital": ["Nouakchott"],
+      "capital": [
+        "Nouakchott"
+      ],
       "region": "Africa",
       "languages": {
         "ara": "Arabic"
       },
       "area": 1030700,
       "population": 4649660,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "b153"
     },
     {
@@ -3981,7 +4526,9 @@
           }
         }
       },
-      "capital": ["Port Louis"],
+      "capital": [
+        "Port Louis"
+      ],
       "region": "Africa",
       "languages": {
         "eng": "English",
@@ -3990,7 +4537,9 @@
       },
       "area": 2040,
       "population": 1265740,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "b2c4"
     },
     {
@@ -4009,14 +4558,18 @@
           }
         }
       },
-      "capital": ["Mamoudzou"],
+      "capital": [
+        "Mamoudzou"
+      ],
       "region": "Africa",
       "languages": {
         "fra": "French"
       },
       "area": 374,
       "population": 226915,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "ac28"
     },
     {
@@ -4035,14 +4588,18 @@
           }
         }
       },
-      "capital": ["Mexico City"],
+      "capital": [
+        "Mexico City"
+      ],
       "region": "Americas",
       "languages": {
         "spa": "Spanish"
       },
       "area": 1964375,
       "population": 128932753,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "5b45"
     },
     {
@@ -4061,14 +4618,18 @@
           }
         }
       },
-      "capital": ["Palikir"],
+      "capital": [
+        "Palikir"
+      ],
       "region": "Oceania",
       "languages": {
         "eng": "English"
       },
       "area": 702,
       "population": 115021,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "77bd"
     },
     {
@@ -4087,14 +4648,18 @@
           }
         }
       },
-      "capital": ["Chișinău"],
+      "capital": [
+        "Chișinău"
+      ],
       "region": "Europe",
       "languages": {
         "ron": "Romanian"
       },
       "area": 33846,
       "population": 2617820,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "1a9b"
     },
     {
@@ -4113,14 +4678,18 @@
           }
         }
       },
-      "capital": ["Monaco"],
+      "capital": [
+        "Monaco"
+      ],
       "region": "Europe",
       "languages": {
         "fra": "French"
       },
       "area": 2.02,
       "population": 39244,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "84b3"
     },
     {
@@ -4139,14 +4708,18 @@
           }
         }
       },
-      "capital": ["Ulan Bator"],
+      "capital": [
+        "Ulan Bator"
+      ],
       "region": "Asia",
       "languages": {
         "mon": "Mongolian"
       },
       "area": 1564110,
       "population": 3278292,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "1a04"
     },
     {
@@ -4165,14 +4738,18 @@
           }
         }
       },
-      "capital": ["Podgorica"],
+      "capital": [
+        "Podgorica"
+      ],
       "region": "Europe",
       "languages": {
         "cnr": "Montenegrin"
       },
       "area": 13812,
       "population": 621718,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "6f32"
     },
     {
@@ -4191,14 +4768,18 @@
           }
         }
       },
-      "capital": ["Plymouth"],
+      "capital": [
+        "Plymouth"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English"
       },
       "area": 102,
       "population": 4922,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "7a97"
     },
     {
@@ -4221,7 +4802,9 @@
           }
         }
       },
-      "capital": ["Rabat"],
+      "capital": [
+        "Rabat"
+      ],
       "region": "Africa",
       "languages": {
         "ara": "Arabic",
@@ -4229,7 +4812,9 @@
       },
       "area": 446550,
       "population": 36910558,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "10c2"
     },
     {
@@ -4248,14 +4833,18 @@
           }
         }
       },
-      "capital": ["Maputo"],
+      "capital": [
+        "Maputo"
+      ],
       "region": "Africa",
       "languages": {
         "por": "Portuguese"
       },
       "area": 801590,
       "population": 31255435,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "454c"
     },
     {
@@ -4274,14 +4863,18 @@
           }
         }
       },
-      "capital": ["Naypyidaw"],
+      "capital": [
+        "Naypyidaw"
+      ],
       "region": "Asia",
       "languages": {
         "mya": "Burmese"
       },
       "area": 676578,
       "population": 54409794,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "fdd6"
     },
     {
@@ -4332,7 +4925,9 @@
           }
         }
       },
-      "capital": ["Windhoek"],
+      "capital": [
+        "Windhoek"
+      ],
       "region": "Africa",
       "languages": {
         "afr": "Afrikaans",
@@ -4347,7 +4942,9 @@
       },
       "area": 825615,
       "population": 2540916,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "6500"
     },
     {
@@ -4370,7 +4967,9 @@
           }
         }
       },
-      "capital": ["Yaren"],
+      "capital": [
+        "Yaren"
+      ],
       "region": "Oceania",
       "languages": {
         "eng": "English",
@@ -4378,7 +4977,9 @@
       },
       "area": 21,
       "population": 10834,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "3f63"
     },
     {
@@ -4397,14 +4998,18 @@
           }
         }
       },
-      "capital": ["Kathmandu"],
+      "capital": [
+        "Kathmandu"
+      ],
       "region": "Asia",
       "languages": {
         "nep": "Nepali"
       },
       "area": 147181,
       "population": 29136808,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "cac8"
     },
     {
@@ -4423,14 +5028,18 @@
           }
         }
       },
-      "capital": ["Amsterdam"],
+      "capital": [
+        "Amsterdam"
+      ],
       "region": "Europe",
       "languages": {
         "nld": "Dutch"
       },
       "area": 41850,
       "population": 16655799,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "c05c"
     },
     {
@@ -4449,14 +5058,18 @@
           }
         }
       },
-      "capital": ["Nouméa"],
+      "capital": [
+        "Nouméa"
+      ],
       "region": "Oceania",
       "languages": {
         "fra": "French"
       },
       "area": 18575,
       "population": 271960,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "103c"
     },
     {
@@ -4483,7 +5096,9 @@
           }
         }
       },
-      "capital": ["Wellington"],
+      "capital": [
+        "Wellington"
+      ],
       "region": "Oceania",
       "languages": {
         "eng": "English",
@@ -4492,7 +5107,9 @@
       },
       "area": 270467,
       "population": 5084300,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "c6bc"
     },
     {
@@ -4511,14 +5128,18 @@
           }
         }
       },
-      "capital": ["Managua"],
+      "capital": [
+        "Managua"
+      ],
       "region": "Americas",
       "languages": {
         "spa": "Spanish"
       },
       "area": 130373,
       "population": 6624554,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "9610"
     },
     {
@@ -4537,14 +5158,18 @@
           }
         }
       },
-      "capital": ["Niamey"],
+      "capital": [
+        "Niamey"
+      ],
       "region": "Africa",
       "languages": {
         "fra": "French"
       },
       "area": 1267000,
       "population": 24206636,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "e6bc"
     },
     {
@@ -4563,14 +5188,18 @@
           }
         }
       },
-      "capital": ["Abuja"],
+      "capital": [
+        "Abuja"
+      ],
       "region": "Africa",
       "languages": {
         "eng": "English"
       },
       "area": 923768,
       "population": 206139587,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "a889"
     },
     {
@@ -4593,7 +5222,9 @@
           }
         }
       },
-      "capital": ["Alofi"],
+      "capital": [
+        "Alofi"
+      ],
       "region": "Oceania",
       "languages": {
         "eng": "English",
@@ -4601,7 +5232,9 @@
       },
       "area": 260,
       "population": 1470,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "9e84"
     },
     {
@@ -4624,7 +5257,9 @@
           }
         }
       },
-      "capital": ["Kingston"],
+      "capital": [
+        "Kingston"
+      ],
       "region": "Oceania",
       "languages": {
         "eng": "English",
@@ -4632,7 +5267,9 @@
       },
       "area": 36,
       "population": 2302,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "0ba7"
     },
     {
@@ -4651,14 +5288,18 @@
           }
         }
       },
-      "capital": ["Pyongyang"],
+      "capital": [
+        "Pyongyang"
+      ],
       "region": "Asia",
       "languages": {
         "kor": "Korean"
       },
       "area": 120538,
       "population": 25778815,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "cc0f"
     },
     {
@@ -4677,14 +5318,18 @@
           }
         }
       },
-      "capital": ["Skopje"],
+      "capital": [
+        "Skopje"
+      ],
       "region": "Europe",
       "languages": {
         "mkd": "Macedonian"
       },
       "area": 25713,
       "population": 2077132,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "0f8e"
     },
     {
@@ -4711,7 +5356,9 @@
           }
         }
       },
-      "capital": ["Saipan"],
+      "capital": [
+        "Saipan"
+      ],
       "region": "Oceania",
       "languages": {
         "cal": "Carolinian",
@@ -4720,7 +5367,9 @@
       },
       "area": 464,
       "population": 57557,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "10f8"
     },
     {
@@ -4747,7 +5396,9 @@
           }
         }
       },
-      "capital": ["Oslo"],
+      "capital": [
+        "Oslo"
+      ],
       "region": "Europe",
       "languages": {
         "nno": "Norwegian Nynorsk",
@@ -4756,7 +5407,9 @@
       },
       "area": 323802,
       "population": 5379475,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "75cf"
     },
     {
@@ -4775,14 +5428,18 @@
           }
         }
       },
-      "capital": ["Muscat"],
+      "capital": [
+        "Muscat"
+      ],
       "region": "Asia",
       "languages": {
         "ara": "Arabic"
       },
       "area": 309500,
       "population": 5106622,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "83c3"
     },
     {
@@ -4805,7 +5462,9 @@
           }
         }
       },
-      "capital": ["Islamabad"],
+      "capital": [
+        "Islamabad"
+      ],
       "region": "Asia",
       "languages": {
         "eng": "English",
@@ -4813,7 +5472,9 @@
       },
       "area": 881912,
       "population": 220892331,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "b8a3"
     },
     {
@@ -4836,7 +5497,9 @@
           }
         }
       },
-      "capital": ["Ngerulmud"],
+      "capital": [
+        "Ngerulmud"
+      ],
       "region": "Oceania",
       "languages": {
         "eng": "English",
@@ -4844,7 +5507,9 @@
       },
       "area": 459,
       "population": 18092,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "d0dc"
     },
     {
@@ -4863,14 +5528,19 @@
           }
         }
       },
-      "capital": ["Ramallah", "Jerusalem"],
+      "capital": [
+        "Ramallah",
+        "Jerusalem"
+      ],
       "region": "Asia",
       "languages": {
         "ara": "Arabic"
       },
       "area": 6220,
       "population": 4803269,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "bebe"
     },
     {
@@ -4889,14 +5559,18 @@
           }
         }
       },
-      "capital": ["Panama City"],
+      "capital": [
+        "Panama City"
+      ],
       "region": "Americas",
       "languages": {
         "spa": "Spanish"
       },
       "area": 75417,
       "population": 4314768,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "65e0"
     },
     {
@@ -4923,7 +5597,9 @@
           }
         }
       },
-      "capital": ["Port Moresby"],
+      "capital": [
+        "Port Moresby"
+      ],
       "region": "Oceania",
       "languages": {
         "eng": "English",
@@ -4932,7 +5608,9 @@
       },
       "area": 462840,
       "population": 8947027,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "e868"
     },
     {
@@ -4955,7 +5633,9 @@
           }
         }
       },
-      "capital": ["Asunción"],
+      "capital": [
+        "Asunción"
+      ],
       "region": "Americas",
       "languages": {
         "grn": "Guaraní",
@@ -4963,7 +5643,9 @@
       },
       "area": 406752,
       "population": 7132530,
-      "continents": ["South America"],
+      "continents": [
+        "South America"
+      ],
       "id": "40e5"
     },
     {
@@ -4990,7 +5672,9 @@
           }
         }
       },
-      "capital": ["Lima"],
+      "capital": [
+        "Lima"
+      ],
       "region": "Americas",
       "languages": {
         "aym": "Aymara",
@@ -4999,7 +5683,9 @@
       },
       "area": 1285216,
       "population": 32971846,
-      "continents": ["South America"],
+      "continents": [
+        "South America"
+      ],
       "id": "8b00"
     },
     {
@@ -5022,7 +5708,9 @@
           }
         }
       },
-      "capital": ["Manila"],
+      "capital": [
+        "Manila"
+      ],
       "region": "Asia",
       "languages": {
         "eng": "English",
@@ -5030,7 +5718,9 @@
       },
       "area": 342353,
       "population": 109581085,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "ea05"
     },
     {
@@ -5049,14 +5739,18 @@
           }
         }
       },
-      "capital": ["Adamstown"],
+      "capital": [
+        "Adamstown"
+      ],
       "region": "Oceania",
       "languages": {
         "eng": "English"
       },
       "area": 47,
       "population": 56,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "c46d"
     },
     {
@@ -5075,14 +5769,18 @@
           }
         }
       },
-      "capital": ["Warsaw"],
+      "capital": [
+        "Warsaw"
+      ],
       "region": "Europe",
       "languages": {
         "pol": "Polish"
       },
       "area": 312679,
       "population": 37950802,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "c965"
     },
     {
@@ -5101,14 +5799,18 @@
           }
         }
       },
-      "capital": ["Lisbon"],
+      "capital": [
+        "Lisbon"
+      ],
       "region": "Europe",
       "languages": {
         "por": "Portuguese"
       },
       "area": 92090,
       "population": 10305564,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "fc5f"
     },
     {
@@ -5131,7 +5833,9 @@
           }
         }
       },
-      "capital": ["San Juan"],
+      "capital": [
+        "San Juan"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English",
@@ -5139,7 +5843,9 @@
       },
       "area": 8870,
       "population": 3194034,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "5301"
     },
     {
@@ -5158,14 +5864,18 @@
           }
         }
       },
-      "capital": ["Doha"],
+      "capital": [
+        "Doha"
+      ],
       "region": "Asia",
       "languages": {
         "ara": "Arabic"
       },
       "area": 11586,
       "population": 2881060,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "e475"
     },
     {
@@ -5192,7 +5902,9 @@
           }
         }
       },
-      "capital": ["Brazzaville"],
+      "capital": [
+        "Brazzaville"
+      ],
       "region": "Africa",
       "languages": {
         "fra": "French",
@@ -5201,7 +5913,9 @@
       },
       "area": 342000,
       "population": 5657000,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "4d58"
     },
     {
@@ -5220,14 +5934,18 @@
           }
         }
       },
-      "capital": ["Bucharest"],
+      "capital": [
+        "Bucharest"
+      ],
       "region": "Europe",
       "languages": {
         "ron": "Romanian"
       },
       "area": 238391,
       "population": 19286123,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "1e75"
     },
     {
@@ -5246,14 +5964,19 @@
           }
         }
       },
-      "capital": ["Moscow"],
+      "capital": [
+        "Moscow"
+      ],
       "region": "Europe",
       "languages": {
         "rus": "Russian"
       },
       "area": 17098242,
       "population": 144104080,
-      "continents": ["Europe", "Asia"],
+      "continents": [
+        "Europe",
+        "Asia"
+      ],
       "id": "e21b"
     },
     {
@@ -5280,7 +6003,9 @@
           }
         }
       },
-      "capital": ["Kigali"],
+      "capital": [
+        "Kigali"
+      ],
       "region": "Africa",
       "languages": {
         "eng": "English",
@@ -5289,7 +6014,9 @@
       },
       "area": 26338,
       "population": 12952209,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "ef21"
     },
     {
@@ -5308,14 +6035,18 @@
           }
         }
       },
-      "capital": ["Saint-Denis"],
+      "capital": [
+        "Saint-Denis"
+      ],
       "region": "Africa",
       "languages": {
         "fra": "French"
       },
       "area": 2511,
       "population": 840974,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "6f1b"
     },
     {
@@ -5334,14 +6065,18 @@
           }
         }
       },
-      "capital": ["Gustavia"],
+      "capital": [
+        "Gustavia"
+      ],
       "region": "Americas",
       "languages": {
         "fra": "French"
       },
       "area": 21,
       "population": 4255,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "224d"
     },
     {
@@ -5360,14 +6095,18 @@
           }
         }
       },
-      "capital": ["Jamestown"],
+      "capital": [
+        "Jamestown"
+      ],
       "region": "Africa",
       "languages": {
         "eng": "English"
       },
       "area": 394,
       "population": 53192,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "d657"
     },
     {
@@ -5386,14 +6125,18 @@
           }
         }
       },
-      "capital": ["Basseterre"],
+      "capital": [
+        "Basseterre"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English"
       },
       "area": 261,
       "population": 53192,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "44a2"
     },
     {
@@ -5412,14 +6155,18 @@
           }
         }
       },
-      "capital": ["Castries"],
+      "capital": [
+        "Castries"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English"
       },
       "area": 616,
       "population": 183629,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "ba4c"
     },
     {
@@ -5438,14 +6185,18 @@
           }
         }
       },
-      "capital": ["Marigot"],
+      "capital": [
+        "Marigot"
+      ],
       "region": "Americas",
       "languages": {
         "fra": "French"
       },
       "area": 53,
       "population": 38659,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "2ff7"
     },
     {
@@ -5464,14 +6215,18 @@
           }
         }
       },
-      "capital": ["Saint-Pierre"],
+      "capital": [
+        "Saint-Pierre"
+      ],
       "region": "Americas",
       "languages": {
         "fra": "French"
       },
       "area": 242,
       "population": 6069,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "938f"
     },
     {
@@ -5490,14 +6245,18 @@
           }
         }
       },
-      "capital": ["Kingstown"],
+      "capital": [
+        "Kingstown"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English"
       },
       "area": 389,
       "population": 110947,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "ebc5"
     },
     {
@@ -5520,7 +6279,9 @@
           }
         }
       },
-      "capital": ["Apia"],
+      "capital": [
+        "Apia"
+      ],
       "region": "Oceania",
       "languages": {
         "eng": "English",
@@ -5528,7 +6289,9 @@
       },
       "area": 2842,
       "population": 198410,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "b94d"
     },
     {
@@ -5547,14 +6310,18 @@
           }
         }
       },
-      "capital": ["City of San Marino"],
+      "capital": [
+        "City of San Marino"
+      ],
       "region": "Europe",
       "languages": {
         "ita": "Italian"
       },
       "area": 61,
       "population": 33938,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "64c8"
     },
     {
@@ -5573,14 +6340,18 @@
           }
         }
       },
-      "capital": ["Riyadh"],
+      "capital": [
+        "Riyadh"
+      ],
       "region": "Asia",
       "languages": {
         "ara": "Arabic"
       },
       "area": 2149690,
       "population": 34813867,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "fb46"
     },
     {
@@ -5599,14 +6370,18 @@
           }
         }
       },
-      "capital": ["Dakar"],
+      "capital": [
+        "Dakar"
+      ],
       "region": "Africa",
       "languages": {
         "fra": "French"
       },
       "area": 196722,
       "population": 16743930,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "6162"
     },
     {
@@ -5625,14 +6400,18 @@
           }
         }
       },
-      "capital": ["Belgrade"],
+      "capital": [
+        "Belgrade"
+      ],
       "region": "Europe",
       "languages": {
         "srp": "Serbian"
       },
       "area": 88361,
       "population": 6908224,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "cad2"
     },
     {
@@ -5659,7 +6438,9 @@
           }
         }
       },
-      "capital": ["Victoria"],
+      "capital": [
+        "Victoria"
+      ],
       "region": "Africa",
       "languages": {
         "crs": "Seychellois Creole",
@@ -5668,7 +6449,9 @@
       },
       "area": 452,
       "population": 98462,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "bc8f"
     },
     {
@@ -5687,14 +6470,18 @@
           }
         }
       },
-      "capital": ["Freetown"],
+      "capital": [
+        "Freetown"
+      ],
       "region": "Africa",
       "languages": {
         "eng": "English"
       },
       "area": 71740,
       "population": 7976985,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "213c"
     },
     {
@@ -5725,7 +6512,9 @@
           }
         }
       },
-      "capital": ["Singapore"],
+      "capital": [
+        "Singapore"
+      ],
       "region": "Asia",
       "languages": {
         "eng": "English",
@@ -5735,7 +6524,9 @@
       },
       "area": 710,
       "population": 5685807,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "9264"
     },
     {
@@ -5762,7 +6553,9 @@
           }
         }
       },
-      "capital": ["Philipsburg"],
+      "capital": [
+        "Philipsburg"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English",
@@ -5771,7 +6564,9 @@
       },
       "area": 34,
       "population": 40812,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "ae5e"
     },
     {
@@ -5790,14 +6585,18 @@
           }
         }
       },
-      "capital": ["Bratislava"],
+      "capital": [
+        "Bratislava"
+      ],
       "region": "Europe",
       "languages": {
         "slk": "Slovak"
       },
       "area": 49037,
       "population": 5458827,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "6305"
     },
     {
@@ -5816,14 +6615,18 @@
           }
         }
       },
-      "capital": ["Ljubljana"],
+      "capital": [
+        "Ljubljana"
+      ],
       "region": "Europe",
       "languages": {
         "slv": "Slovene"
       },
       "area": 20273,
       "population": 2100126,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "5ab9"
     },
     {
@@ -5842,14 +6645,18 @@
           }
         }
       },
-      "capital": ["Honiara"],
+      "capital": [
+        "Honiara"
+      ],
       "region": "Oceania",
       "languages": {
         "eng": "English"
       },
       "area": 28896,
       "population": 686878,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "353e"
     },
     {
@@ -5872,7 +6679,9 @@
           }
         }
       },
-      "capital": ["Mogadishu"],
+      "capital": [
+        "Mogadishu"
+      ],
       "region": "Africa",
       "languages": {
         "ara": "Arabic",
@@ -5880,7 +6689,9 @@
       },
       "area": 637657,
       "population": 15893219,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "eba6"
     },
     {
@@ -5939,7 +6750,11 @@
           }
         }
       },
-      "capital": ["Pretoria", "Bloemfontein", "Cape Town"],
+      "capital": [
+        "Pretoria",
+        "Bloemfontein",
+        "Cape Town"
+      ],
       "region": "Africa",
       "languages": {
         "afr": "Afrikaans",
@@ -5956,7 +6771,9 @@
       },
       "area": 1221037,
       "population": 59308690,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "b447"
     },
     {
@@ -5975,14 +6792,18 @@
           }
         }
       },
-      "capital": ["King Edward Point"],
+      "capital": [
+        "King Edward Point"
+      ],
       "region": "Antarctic",
       "languages": {
         "eng": "English"
       },
       "area": 3903,
       "population": 30,
-      "continents": ["Antarctica"],
+      "continents": [
+        "Antarctica"
+      ],
       "id": "80f1"
     },
     {
@@ -6001,14 +6822,18 @@
           }
         }
       },
-      "capital": ["Seoul"],
+      "capital": [
+        "Seoul"
+      ],
       "region": "Asia",
       "languages": {
         "kor": "Korean"
       },
       "area": 100210,
       "population": 51780579,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "31f9"
     },
     {
@@ -6027,14 +6852,18 @@
           }
         }
       },
-      "capital": ["Juba"],
+      "capital": [
+        "Juba"
+      ],
       "region": "Africa",
       "languages": {
         "eng": "English"
       },
       "area": 619745,
       "population": 11193729,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "476a"
     },
     {
@@ -6053,7 +6882,9 @@
           }
         }
       },
-      "capital": ["Madrid"],
+      "capital": [
+        "Madrid"
+      ],
       "region": "Europe",
       "languages": {
         "spa": "Spanish",
@@ -6063,7 +6894,9 @@
       },
       "area": 505992,
       "population": 47351567,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "82cc"
     },
     {
@@ -6086,7 +6919,9 @@
           }
         }
       },
-      "capital": ["Sri Jayawardenepura Kotte"],
+      "capital": [
+        "Sri Jayawardenepura Kotte"
+      ],
       "region": "Asia",
       "languages": {
         "sin": "Sinhala",
@@ -6094,7 +6929,9 @@
       },
       "area": 65610,
       "population": 21919000,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "2e47"
     },
     {
@@ -6117,7 +6954,9 @@
           }
         }
       },
-      "capital": ["Khartoum"],
+      "capital": [
+        "Khartoum"
+      ],
       "region": "Africa",
       "languages": {
         "ara": "Arabic",
@@ -6125,7 +6964,9 @@
       },
       "area": 1886068,
       "population": 43849269,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "d72a"
     },
     {
@@ -6144,14 +6985,18 @@
           }
         }
       },
-      "capital": ["Paramaribo"],
+      "capital": [
+        "Paramaribo"
+      ],
       "region": "Americas",
       "languages": {
         "nld": "Dutch"
       },
       "area": 163820,
       "population": 586634,
-      "continents": ["South America"],
+      "continents": [
+        "South America"
+      ],
       "id": "4c86"
     },
     {
@@ -6170,14 +7015,18 @@
           }
         }
       },
-      "capital": ["Longyearbyen"],
+      "capital": [
+        "Longyearbyen"
+      ],
       "region": "Europe",
       "languages": {
         "nor": "Norwegian"
       },
       "area": 61399,
       "population": 2562,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "0a30"
     },
     {
@@ -6196,14 +7045,18 @@
           }
         }
       },
-      "capital": ["Stockholm"],
+      "capital": [
+        "Stockholm"
+      ],
       "region": "Europe",
       "languages": {
         "swe": "Swedish"
       },
       "area": 450295,
       "population": 10353442,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "3856"
     },
     {
@@ -6234,7 +7087,9 @@
           }
         }
       },
-      "capital": ["Bern"],
+      "capital": [
+        "Bern"
+      ],
       "region": "Europe",
       "languages": {
         "fra": "French",
@@ -6244,7 +7099,9 @@
       },
       "area": 41284,
       "population": 8654622,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "acbf"
     },
     {
@@ -6263,14 +7120,18 @@
           }
         }
       },
-      "capital": ["Damascus"],
+      "capital": [
+        "Damascus"
+      ],
       "region": "Asia",
       "languages": {
         "ara": "Arabic"
       },
       "area": 185180,
       "population": 17500657,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "7d14"
     },
     {
@@ -6289,14 +7150,18 @@
           }
         }
       },
-      "capital": ["São Tomé"],
+      "capital": [
+        "São Tomé"
+      ],
       "region": "Africa",
       "languages": {
         "por": "Portuguese"
       },
       "area": 964,
       "population": 219161,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "03ed"
     },
     {
@@ -6315,14 +7180,18 @@
           }
         }
       },
-      "capital": ["Taipei"],
+      "capital": [
+        "Taipei"
+      ],
       "region": "Asia",
       "languages": {
         "zho": "Chinese"
       },
       "area": 36193,
       "population": 23503349,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "723d"
     },
     {
@@ -6345,7 +7214,9 @@
           }
         }
       },
-      "capital": ["Dushanbe"],
+      "capital": [
+        "Dushanbe"
+      ],
       "region": "Asia",
       "languages": {
         "rus": "Russian",
@@ -6353,7 +7224,9 @@
       },
       "area": 143100,
       "population": 9537642,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "c4d4"
     },
     {
@@ -6376,7 +7249,9 @@
           }
         }
       },
-      "capital": ["Dodoma"],
+      "capital": [
+        "Dodoma"
+      ],
       "region": "Africa",
       "languages": {
         "eng": "English",
@@ -6384,7 +7259,9 @@
       },
       "area": 945087,
       "population": 59734213,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "f9e6"
     },
     {
@@ -6403,14 +7280,18 @@
           }
         }
       },
-      "capital": ["Bangkok"],
+      "capital": [
+        "Bangkok"
+      ],
       "region": "Asia",
       "languages": {
         "tha": "Thai"
       },
       "area": 513120,
       "population": 69799978,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "dc5d"
     },
     {
@@ -6433,7 +7314,9 @@
           }
         }
       },
-      "capital": ["Dili"],
+      "capital": [
+        "Dili"
+      ],
       "region": "Asia",
       "languages": {
         "por": "Portuguese",
@@ -6441,7 +7324,9 @@
       },
       "area": 14874,
       "population": 1318442,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "7ffd"
     },
     {
@@ -6460,14 +7345,18 @@
           }
         }
       },
-      "capital": ["Lomé"],
+      "capital": [
+        "Lomé"
+      ],
       "region": "Africa",
       "languages": {
         "fra": "French"
       },
       "area": 56785,
       "population": 8278737,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "a1d8"
     },
     {
@@ -6494,7 +7383,9 @@
           }
         }
       },
-      "capital": ["Fakaofo"],
+      "capital": [
+        "Fakaofo"
+      ],
       "region": "Oceania",
       "languages": {
         "eng": "English",
@@ -6503,7 +7394,9 @@
       },
       "area": 12,
       "population": 1411,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "b34c"
     },
     {
@@ -6526,7 +7419,9 @@
           }
         }
       },
-      "capital": ["Nuku'alofa"],
+      "capital": [
+        "Nuku'alofa"
+      ],
       "region": "Oceania",
       "languages": {
         "eng": "English",
@@ -6534,7 +7429,9 @@
       },
       "area": 747,
       "population": 105697,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "de51"
     },
     {
@@ -6553,14 +7450,18 @@
           }
         }
       },
-      "capital": ["Port of Spain"],
+      "capital": [
+        "Port of Spain"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English"
       },
       "area": 5130,
       "population": 1399491,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "92c4"
     },
     {
@@ -6579,14 +7480,18 @@
           }
         }
       },
-      "capital": ["Tunis"],
+      "capital": [
+        "Tunis"
+      ],
       "region": "Africa",
       "languages": {
         "ara": "Arabic"
       },
       "area": 163610,
       "population": 11818618,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "4586"
     },
     {
@@ -6605,14 +7510,19 @@
           }
         }
       },
-      "capital": ["Ankara"],
+      "capital": [
+        "Ankara"
+      ],
       "region": "Asia",
       "languages": {
         "tur": "Turkish"
       },
       "area": 783562,
       "population": 84339067,
-      "continents": ["Europe", "Asia"],
+      "continents": [
+        "Europe",
+        "Asia"
+      ],
       "id": "17a4"
     },
     {
@@ -6635,7 +7545,9 @@
           }
         }
       },
-      "capital": ["Ashgabat"],
+      "capital": [
+        "Ashgabat"
+      ],
       "region": "Asia",
       "languages": {
         "rus": "Russian",
@@ -6643,7 +7555,9 @@
       },
       "area": 488100,
       "population": 6031187,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "4d14"
     },
     {
@@ -6662,14 +7576,18 @@
           }
         }
       },
-      "capital": ["Cockburn Town"],
+      "capital": [
+        "Cockburn Town"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English"
       },
       "area": 948,
       "population": 38718,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "a570"
     },
     {
@@ -6692,7 +7610,9 @@
           }
         }
       },
-      "capital": ["Funafuti"],
+      "capital": [
+        "Funafuti"
+      ],
       "region": "Oceania",
       "languages": {
         "eng": "English",
@@ -6700,7 +7620,9 @@
       },
       "area": 26,
       "population": 11792,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "c780"
     },
     {
@@ -6723,7 +7645,9 @@
           }
         }
       },
-      "capital": ["Kampala"],
+      "capital": [
+        "Kampala"
+      ],
       "region": "Africa",
       "languages": {
         "eng": "English",
@@ -6731,7 +7655,9 @@
       },
       "area": 241550,
       "population": 45741000,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "b8dd"
     },
     {
@@ -6750,14 +7676,18 @@
           }
         }
       },
-      "capital": ["Kyiv"],
+      "capital": [
+        "Kyiv"
+      ],
       "region": "Europe",
       "languages": {
         "ukr": "Ukrainian"
       },
       "area": 603500,
       "population": 44134693,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "31e5"
     },
     {
@@ -6776,14 +7706,18 @@
           }
         }
       },
-      "capital": ["Abu Dhabi"],
+      "capital": [
+        "Abu Dhabi"
+      ],
       "region": "Asia",
       "languages": {
         "ara": "Arabic"
       },
       "area": 83600,
       "population": 9890400,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "e62b"
     },
     {
@@ -6802,14 +7736,18 @@
           }
         }
       },
-      "capital": ["London"],
+      "capital": [
+        "London"
+      ],
       "region": "Europe",
       "languages": {
         "eng": "English"
       },
       "area": 242900,
       "population": 67215293,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "7fa1"
     },
     {
@@ -6828,14 +7766,18 @@
           }
         }
       },
-      "capital": ["Washington, D.C."],
+      "capital": [
+        "Washington, D.C."
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English"
       },
       "area": 9372610,
       "population": 329484123,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "97a0"
     },
     {
@@ -6854,14 +7796,18 @@
           }
         }
       },
-      "capital": ["Washington DC"],
+      "capital": [
+        "Washington DC"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English"
       },
       "area": 34.2,
       "population": 300,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "06ad"
     },
     {
@@ -6880,14 +7826,18 @@
           }
         }
       },
-      "capital": ["Charlotte Amalie"],
+      "capital": [
+        "Charlotte Amalie"
+      ],
       "region": "Americas",
       "languages": {
         "eng": "English"
       },
       "area": 347,
       "population": 106290,
-      "continents": ["North America"],
+      "continents": [
+        "North America"
+      ],
       "id": "4dbc"
     },
     {
@@ -6906,14 +7856,18 @@
           }
         }
       },
-      "capital": ["Montevideo"],
+      "capital": [
+        "Montevideo"
+      ],
       "region": "Americas",
       "languages": {
         "spa": "Spanish"
       },
       "area": 181034,
       "population": 3473727,
-      "continents": ["South America"],
+      "continents": [
+        "South America"
+      ],
       "id": "8bf8"
     },
     {
@@ -6936,7 +7890,9 @@
           }
         }
       },
-      "capital": ["Tashkent"],
+      "capital": [
+        "Tashkent"
+      ],
       "region": "Asia",
       "languages": {
         "rus": "Russian",
@@ -6944,7 +7900,9 @@
       },
       "area": 447400,
       "population": 34232050,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "7493"
     },
     {
@@ -6971,7 +7929,9 @@
           }
         }
       },
-      "capital": ["Port Vila"],
+      "capital": [
+        "Port Vila"
+      ],
       "region": "Oceania",
       "languages": {
         "bis": "Bislama",
@@ -6980,7 +7940,9 @@
       },
       "area": 12189,
       "population": 307150,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "15ae"
     },
     {
@@ -7003,7 +7965,9 @@
           }
         }
       },
-      "capital": ["Vatican City"],
+      "capital": [
+        "Vatican City"
+      ],
       "region": "Europe",
       "languages": {
         "ita": "Italian",
@@ -7011,7 +7975,9 @@
       },
       "area": 0.44,
       "population": 451,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "5f44"
     },
     {
@@ -7030,14 +7996,18 @@
           }
         }
       },
-      "capital": ["Caracas"],
+      "capital": [
+        "Caracas"
+      ],
       "region": "Americas",
       "languages": {
         "spa": "Spanish"
       },
       "area": 916445,
       "population": 28435943,
-      "continents": ["South America"],
+      "continents": [
+        "South America"
+      ],
       "id": "4b1e"
     },
     {
@@ -7056,14 +8026,18 @@
           }
         }
       },
-      "capital": ["Hanoi"],
+      "capital": [
+        "Hanoi"
+      ],
       "region": "Asia",
       "languages": {
         "vie": "Vietnamese"
       },
       "area": 331212,
       "population": 97338583,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "95d9"
     },
     {
@@ -7082,14 +8056,18 @@
           }
         }
       },
-      "capital": ["Mata-Utu"],
+      "capital": [
+        "Mata-Utu"
+      ],
       "region": "Oceania",
       "languages": {
         "fra": "French"
       },
       "area": 142,
       "population": 11750,
-      "continents": ["Oceania"],
+      "continents": [
+        "Oceania"
+      ],
       "id": "b7ec"
     },
     {
@@ -7116,7 +8094,9 @@
           }
         }
       },
-      "capital": ["El Aaiún"],
+      "capital": [
+        "El Aaiún"
+      ],
       "region": "Africa",
       "languages": {
         "ber": "Berber",
@@ -7125,7 +8105,9 @@
       },
       "area": 266000,
       "population": 510713,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "874e"
     },
     {
@@ -7144,14 +8126,18 @@
           }
         }
       },
-      "capital": ["Sana'a"],
+      "capital": [
+        "Sana'a"
+      ],
       "region": "Asia",
       "languages": {
         "ara": "Arabic"
       },
       "area": 527968,
       "population": 29825968,
-      "continents": ["Asia"],
+      "continents": [
+        "Asia"
+      ],
       "id": "9dc9"
     },
     {
@@ -7170,14 +8156,18 @@
           }
         }
       },
-      "capital": ["Lusaka"],
+      "capital": [
+        "Lusaka"
+      ],
       "region": "Africa",
       "languages": {
         "eng": "English"
       },
       "area": 752612,
       "population": 18383956,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "1728"
     },
     {
@@ -7252,7 +8242,9 @@
           }
         }
       },
-      "capital": ["Harare"],
+      "capital": [
+        "Harare"
+      ],
       "region": "Africa",
       "languages": {
         "bwg": "Chibarwe",
@@ -7273,7 +8265,9 @@
       },
       "area": 390757,
       "population": 14862927,
-      "continents": ["Africa"],
+      "continents": [
+        "Africa"
+      ],
       "id": "ef9d"
     },
     {
@@ -7292,14 +8286,18 @@
           }
         }
       },
-      "capital": ["Mariehamn"],
+      "capital": [
+        "Mariehamn"
+      ],
       "region": "Europe",
       "languages": {
         "swe": "Swedish"
       },
       "area": 1580,
       "population": 29458,
-      "continents": ["Europe"],
+      "continents": [
+        "Europe"
+      ],
       "id": "1d22"
     }
   ],
