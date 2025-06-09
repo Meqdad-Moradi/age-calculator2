@@ -52,7 +52,7 @@ export class SidenavComponent implements OnInit {
   public isExpanded = false;
 
   ngOnInit(): void {
-    // if a board's page is open, the boards menus should also be visible
+    // if a board's page is open, the boards menus should also be expanded
     if (this.isBoardPageOpen()) {
       this.onExpandTaskManager(this.isBoardPageOpen());
     }
