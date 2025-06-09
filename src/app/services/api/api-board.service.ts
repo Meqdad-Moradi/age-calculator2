@@ -45,9 +45,9 @@ export class ApiBoardService {
    * @param boardId string
    * @returns Observable<Board>
    */
-  public deleteBoad(boardId: string): Observable<Board> {
+  public deleteBoard(boardId: string): Observable<Board> {
     return this.http.delete<Board>(this.baseUrl + '/' + boardId).pipe(
-      this.errorService.handleError<Board>('api-board.service::deleteBoad', {
+      this.errorService.handleError<Board>('api-board.service::deleteBoard', {
         showInDialog: true,
       })
     );

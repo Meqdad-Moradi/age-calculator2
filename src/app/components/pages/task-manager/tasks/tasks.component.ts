@@ -117,7 +117,7 @@ export class TasksComponent implements OnInit, OnDestroy {
    * @returns Task[]
    */
   private filterByStatus(tasks: Task[], status: TaskStatus): Task[] {
-    return tasks.filter((t) => t.status === status);
+    return tasks.filter((t) => t.status === status && t.boardId);
   }
 
   /**
@@ -208,9 +208,13 @@ export class TasksComponent implements OnInit, OnDestroy {
 
   /**
    * deleteBoard
+   * Opens a confirmation dialog, and if the user confirms:
+   *   1. Deletes every task on the current board.
+   *   2. Deletes the board itself.
+   *   3. Refreshes the sidebar’s board list.
    */
   public deleteBoard(): void {
-    this.dialog
+    const dialogRef = this.dialog
       .open(ConfirmationDialogComponent, {
         data: {
           title: 'Delete Current Board',
@@ -221,15 +225,22 @@ export class TasksComponent implements OnInit, OnDestroy {
       })
       .afterClosed()
       .pipe(
-        filter((value) => !!value),
-        switchMap(() =>
-          this.activatedRoute.paramMap.pipe(
-            map((params) => params.get('id')!),
-            concatMap((boardId) => this.apiBoardService.deleteBoad(boardId)),
-            tap(() => this.sidenavService.requestGetBoards(true))
-          )
-        )
+        filter(Boolean),
+        concatMap(() => {
+          const boardId = this.activatedRoute.snapshot.paramMap.get('id')!;
+
+          // first delete all tasks, then delete the board itself
+          return this.apiTasksService
+            .deleteTasksByBoardId(boardId)
+            .pipe(concatMap(() => this.apiBoardService.deleteBoard(boardId)));
+        }),
+        tap(() => this.sidenavService.requestGetBoards(true))
       )
-      .subscribe();
+      .subscribe({
+        complete: () => {
+          this.initTaskStreams();
+          dialogRef.unsubscribe();
+        },
+      });
   }
 }

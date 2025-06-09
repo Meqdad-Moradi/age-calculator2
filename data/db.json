@@ -8301,21 +8301,11 @@
       "id": "1d22"
     }
   ],
-  "boards": [],
-  "tasks": [
+  "boards": [
     {
-      "id": "7c1e13c2-72c5-45b1-83a7-b2def7d4feff",
-      "title": "delete task should implemented",
-      "desc": "in the api task service I should create a subject observable to trigger delete method in the tasks component because it will be easer to delete and after delete refresh the tasksGroup or UI to see visually which a task is deleted.",
-      "status": "done",
-      "boardId": null
-    },
-    {
-      "id": "33a8a4dd-8838-49d9-a869-d326dc63e09e",
-      "title": "Refactor add, update and task methods",
-      "desc": "In this methods I should refactor the codes which when a CRUD is happening, after that, api call should happen. It should be just UI refreshed.",
-      "status": "doing",
-      "boardId": null
+      "id": "1077f932-a076-4ed7-a7d5-1406f2017482",
+      "name": "asdfsf"
     }
-  ]
+  ],
+  "tasks": []
 }

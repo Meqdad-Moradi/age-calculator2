@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatDrawerMode, MatSidenavModule } from '@angular/material/sidenav';
 import {
+  ActivatedRoute,
   Router,
   RouterLink,
   RouterLinkActive,
@@ -41,6 +42,7 @@ export class SidenavComponent implements OnInit {
   private readonly apiBoardService = inject(ApiBoardService);
   private readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
+  private readonly activatedRoute = inject(ActivatedRoute);
 
   private subscriptions: Subscription[] = [];
 
@@ -51,12 +53,15 @@ export class SidenavComponent implements OnInit {
 
   ngOnInit(): void {
     // if a board's page is open, the boards menus should also be visible
-    const isBoardPageOpen = this.router.url.includes('task-manager/');
-    if (isBoardPageOpen) {
-      this.onExpandTaskManager(isBoardPageOpen);
+    if (this.isBoardPageOpen()) {
+      this.onExpandTaskManager(this.isBoardPageOpen());
     }
 
     this.getBoards();
+  }
+
+  private isBoardPageOpen(): boolean {
+    return this.router.url.includes('task-manager/');
   }
 
   /**
@@ -64,7 +69,12 @@ export class SidenavComponent implements OnInit {
    */
   private getBoards(): void {
     this.boards$ = this.sidenavService.triggerGetBoard.pipe(
-      switchMap(() => this.apiBoardService.getBoards())
+      switchMap(() => this.apiBoardService.getBoards()),
+      tap((boards) => {
+        if (!boards.length && this.isBoardPageOpen()) {
+          this.router.navigate(['task-manager']);
+        }
+      })
     );
   }
 
