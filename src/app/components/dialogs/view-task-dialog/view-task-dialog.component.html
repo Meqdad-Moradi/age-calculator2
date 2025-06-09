@@ -41,7 +41,12 @@
 
 <mat-dialog-actions>
   <button mat-button (click)="onCancelClick()">Cancel</button>
-  <button mat-raised-button [disabled]="isDisabled" (click)="onOkClick()">
+  <button
+    mat-raised-button
+    cdkFocusInitial
+    [disabled]="isDisabled"
+    (click)="onOkClick()"
+  >
     Update task
   </button>
 </mat-dialog-actions>
