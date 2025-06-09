@@ -6,7 +6,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatDrawerMode, MatSidenavModule } from '@angular/material/sidenav';
 import {
-  ActivatedRoute,
   Router,
   RouterLink,
   RouterLinkActive,
@@ -42,7 +41,6 @@ export class SidenavComponent implements OnInit {
   private readonly apiBoardService = inject(ApiBoardService);
   private readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
-  private readonly activatedRoute = inject(ActivatedRoute);
 
   private subscriptions: Subscription[] = [];
 
@@ -69,13 +67,18 @@ export class SidenavComponent implements OnInit {
    */
   private getBoards(): void {
     this.boards$ = this.sidenavService.triggerGetBoard.pipe(
-      switchMap(() => this.apiBoardService.getBoards()),
-      tap((boards) => {
-        if (!boards.length && this.isBoardPageOpen()) {
-          this.router.navigate(['task-manager']);
-        }
-      })
+      switchMap(() => this.apiBoardService.getBoards())
     );
+  }
+
+  /**
+   * sendIndex
+   * after click on a board to navigate to task-manger page, we need to understand it's index
+   * to determine after delete the current board, select automatically the next board
+   * @param index number => board index
+   */
+  public sendIndex(index: number): void {
+    this.sidenavService.boardIndex.set(index);
   }
 
   /**

@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { cloneDeep, isEqual } from 'lodash';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import {
@@ -24,7 +24,12 @@ import { SidenavService } from '../../../../services/sidenav.service';
 import { AddTaskDialogComponent } from '../../../dialogs/add-task-dialog/add-task-dialog.component';
 import { ConfirmationDialogComponent } from '../../../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ViewTaskDialogComponent } from '../../../dialogs/view-task-dialog/view-task-dialog.component';
-import { Task, TasksGroup, TaskStatus } from '../../../models/task-manager';
+import {
+  Board,
+  Task,
+  TasksGroup,
+  TaskStatus,
+} from '../../../models/task-manager';
 import { CustomSearchComponent } from '../../../shared/custom-search/custom-search.component';
 import { NothingFoundComponent } from '../../../shared/nothing-found/nothing-found.component';
 import { TaskComponent } from '../task/task.component';
@@ -48,6 +53,7 @@ import { TaskComponent } from '../task/task.component';
 })
 export class TasksComponent implements OnInit, OnDestroy {
   private readonly dialog = inject(MatDialog);
+  private readonly router = inject(Router);
   private readonly apiTasksService = inject(ApiTasksService);
   private readonly apiBoardService = inject(ApiBoardService);
   private readonly activatedRoute = inject(ActivatedRoute);
@@ -234,7 +240,22 @@ export class TasksComponent implements OnInit, OnDestroy {
             .deleteTasksByBoardId(boardId)
             .pipe(concatMap(() => this.apiBoardService.deleteBoard(boardId)));
         }),
-        tap(() => this.sidenavService.requestGetBoards(true))
+        // fetch updated list of boards to handle select next board and if there is no board any more,
+        // redirect to the task-manager page
+        concatMap(() => this.apiBoardService.getBoards()),
+        tap((boards: Board[]) => {
+          if (boards.length) {
+            // get the deleted board index and after delete it will be the index of next board
+            const index =
+              this.sidenavService.boardIndex() === boards.length
+                ? 0
+                : this.sidenavService.boardIndex();
+            this.router.navigate(['task-manager', boards[index].id]);
+          } else {
+            this.router.navigate(['task-manager']);
+          }
+          this.sidenavService.requestGetBoards(true);
+        })
       )
       .subscribe({
         complete: () => {

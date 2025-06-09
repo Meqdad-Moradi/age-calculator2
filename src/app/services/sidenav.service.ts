@@ -14,7 +14,8 @@ export class SidenavService {
   private trigerGetBoardSubject = new BehaviorSubject<boolean>(false);
 
   public isSideNavOpen = signal<boolean>(true);
-  
+  public boardIndex = signal<number>(0);
+
   public get triggerGetBoard(): Observable<boolean> {
     return this.trigerGetBoardSubject.asObservable();
   }

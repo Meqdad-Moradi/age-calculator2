@@ -68,6 +68,7 @@
             [routerLink]="['/task-manager/', item.id]"
             routerLinkActive="sub-link-active"
             onclick="this.blur()"
+            (click)="sendIndex($index)"
           >
             <mat-icon matListItemIcon>space_dashboard</mat-icon>
             <span matListItemTitle>{{ item.name }}</span>
