@@ -4,7 +4,7 @@
 
 mat-list-item:hover,
 .active {
-  background-color: var(--active-color);
+  background-color: var(--forground-color);
 }
 
 .boards {
@@ -13,10 +13,6 @@ mat-list-item:hover,
 
   &.expanded {
     grid-template-rows: 1fr;
-  }
-
-  .sub-link-active * {
-    color: var(--primary) !important;
   }
 
   div {

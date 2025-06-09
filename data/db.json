@@ -8305,7 +8305,33 @@
     {
       "id": "a052977f-bc8f-4499-b526-31232b086527",
       "name": "new board"
+    },
+    {
+      "id": "66197a65-2dfb-4310-828e-481071905b03",
+      "name": "last board"
     }
   ],
-  "tasks": []
+  "tasks": [
+    {
+      "id": "715f5b12-ef09-49ea-bb1f-235e724ce1ed",
+      "title": "title board new one",
+      "desc": "this is some description about this task...",
+      "status": "todo",
+      "boardId": "66197a65-2dfb-4310-828e-481071905b03"
+    },
+    {
+      "id": "8e86cfef-0201-47c6-8c18-1763ae0cae0d",
+      "title": "add new task",
+      "desc": "I should add a new task",
+      "status": "todo",
+      "boardId": "66197a65-2dfb-4310-828e-481071905b03"
+    },
+    {
+      "id": "71493ee7-f615-4649-ae98-26437b8dee1d",
+      "title": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum dolorum adipisci, veritatis non aliquam dicta!",
+      "desc": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum dolorum adipisci, veritatis non aliquam dicta!",
+      "status": "todo",
+      "boardId": "66197a65-2dfb-4310-828e-481071905b03"
+    }
+  ]
 }
