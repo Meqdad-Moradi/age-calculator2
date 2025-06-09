@@ -38,7 +38,11 @@
     class="flex items-center justify-between bg-gray-200 dark:bg-(--forground-color) mt-2 border-b border-b-gray-500 py-3"
   ></header>
 
-  @if (tasksGroup$ | async) { @let tasksGroup = tasksGroup$ | async;
+  @if (tasksGroup$ | async) { @let tasksGroup = (tasksGroup$ | async)!; @if (
+  !tasksGroup.todo.length && !tasksGroup.doing.length &&
+  !tasksGroup.done.length) {
+  <app-nothing-found></app-nothing-found>
+  } @else {
   <!-- content -->
   <div class="grid grid-cols-(--grid-cols-auto-fit) justify-between gap-8 mt-4">
     <article>
@@ -49,7 +53,7 @@
         "
       ></ng-container>
 
-      @for (item of tasksGroup?.todo; track $index) {
+      @for (item of tasksGroup.todo; track $index) {
       <div class="mt-4">
         <app-task [task]="item" (updateTask)="onUpdateTask($event)"></app-task>
       </div>
@@ -65,7 +69,7 @@
         "
       ></ng-container>
 
-      @for (item of tasksGroup?.doing; track $index) {
+      @for (item of tasksGroup.doing; track $index) {
       <div class="mt-4">
         <app-task [task]="item" (updateTask)="onUpdateTask($event)"></app-task>
       </div>
@@ -81,14 +85,14 @@
         "
       ></ng-container>
 
-      @for (item of tasksGroup?.done; track $index) {
+      @for (item of tasksGroup.done; track $index) {
       <div class="mt-4">
         <app-task [task]="item" (updateTask)="onUpdateTask($event)"></app-task>
       </div>
       }
     </article>
   </div>
-  }@else {
+  } }@else {
   <app-nothing-found></app-nothing-found>
   }
 </section>
