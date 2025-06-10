@@ -25,3 +25,16 @@ export interface ErrorOption {
   showInDialog?: boolean;
   showInSnackbar?: boolean;
 }
+
+export class ErrorResponses<T> {
+  constructor(public status: number, public value: T | string) {}
+}
+
+export interface ErrorAction<T> {
+  logError?: boolean;
+  customErrorMessage?: string;
+  showErrorInDialog?: boolean;
+  showErrorInSnackbar?: boolean;
+  valueToReturn?: T;
+  statusCodesWhitelist?: number[];
+}
