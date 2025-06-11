@@ -1,14 +1,14 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { catchError, Observable, OperatorFunction, throwError } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { ErrorDialogComponent } from '../components/dialogs/error-dialog/error-dialog.component';
 import {
   ErrorOption,
   ErrorResponse,
   ShowErrorMessage,
 } from '../components/models/error-response.model';
-import { MatDialog } from '@angular/material/dialog';
-import { ErrorDialogComponent } from '../components/dialogs/error-dialog/error-dialog.component';
 
 @Injectable({
   providedIn: 'root',
@@ -40,23 +40,35 @@ export class ErrorService {
     });
   }
 
-  /**
-   * Returns an RxJS operator that catches HTTP errors, wraps them
-   * in an ErrorResponse, optionally shows them, and re-throws.
-   */
   public handleError<T>(
-    operation = 'operation',
+    operation: string,
     options: ErrorOption = {}
-  ): OperatorFunction<T, T> {
-    return (source: Observable<T>) =>
-      source.pipe(
-        catchError((error) => {
-          const errResp = this.buildErrorResponse(error, operation);
-          this.displayError(errResp, options);
-          return throwError(() => errResp);
-        })
-      );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ): (error: any) => Observable<ErrorResponse<T>> {
+    return (error) => {
+      const errorResp = this.buildErrorResponse(error, operation);
+      this.displayError(errorResp, options);
+      return of(new ErrorResponse<T>(errorResp.status, errorResp.message));
+    };
   }
+
+  // /**
+  //  * Returns an RxJS operator that catches HTTP errors, wraps them
+  //  * in an ErrorResponse, optionally shows them, and re-throws.
+  //  */
+  // public handleError<T>(
+  //   operation = 'operation',
+  //   options: ErrorOption = {}
+  // ): OperatorFunction<T, T> {
+  //   return (source: Observable<T>) =>
+  //     source.pipe(
+  //       catchError((error) => {
+  //         const errResp = this.buildErrorResponse(error, operation);
+  //         this.displayError(errResp, options);
+  //         return throwError(() => errResp);
+  //       })
+  //     );
+  // }
 
   /**
    * buildErrorResponse
@@ -65,24 +77,24 @@ export class ErrorService {
    * @param operation
    * @returns void
    */
-  private buildErrorResponse(
+  private buildErrorResponse<T>(
     error: HttpErrorResponse,
     operation: string
-  ): ErrorResponse {
+  ): ErrorResponse<T> {
     if (error.error instanceof ErrorEvent) {
-      return new ErrorResponse(
+      return new ErrorResponse<T>(
         0,
         `Local network error: ${error.error.message}`
       );
     }
 
-    return new ErrorResponse(
+    return new ErrorResponse<T>(
       error.status,
       `${operation} failed: ${error.url}`,
       {
         message: error.message,
         raw: error.error,
-      }
+      } as unknown as T
     );
   }
 
@@ -93,8 +105,8 @@ export class ErrorService {
    * @param options ErrorOptions
    * @returns void
    */
-  private displayError(
-    errorResponse: ErrorResponse,
+  private displayError<T>(
+    errorResponse: ErrorResponse<T>,
     options: ErrorOption
   ): void {
     const { showInDialog, showInSnackbar } = options;

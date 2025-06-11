@@ -33,6 +33,7 @@ import {
 import { CustomSearchComponent } from '../../../shared/custom-search/custom-search.component';
 import { NothingFoundComponent } from '../../../shared/nothing-found/nothing-found.component';
 import { TaskComponent } from '../task/task.component';
+import { ErrorResponse } from '../../../models/error-response.model';
 
 @Component({
   selector: 'app-tasks',
@@ -86,7 +87,13 @@ export class TasksComponent implements OnInit, OnDestroy {
       switchMap((boardId) =>
         this.apiTasksService
           .getTasks(boardId)
-          .pipe(map((tasks) => this.groupTasksByStatus(tasks)))
+          .pipe(
+            map((tasks) =>
+              tasks instanceof ErrorResponse
+                ? this.groupTasksByStatus([])
+                : this.groupTasksByStatus(tasks)
+            )
+          )
       ),
       // replay the latest grouped result to any new subscribers
       shareReplay({ bufferSize: 1, refCount: true })
@@ -242,7 +249,13 @@ export class TasksComponent implements OnInit, OnDestroy {
         }),
         // fetch updated list of boards to handle select next board and if there is no board any more,
         // redirect to the task-manager page
-        concatMap(() => this.apiBoardService.getBoards()),
+        concatMap(() =>
+          this.apiBoardService
+            .getBoards()
+            .pipe(
+              map((boards) => (boards instanceof ErrorResponse ? [] : boards))
+            )
+        ),
         tap((boards: Board[]) => {
           if (boards.length) {
             // get the deleted board index and after delete it will be the index of next board

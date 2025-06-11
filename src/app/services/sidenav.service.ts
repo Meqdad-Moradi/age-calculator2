@@ -36,9 +36,6 @@ export class SidenavService {
   public getSysName(): Observable<string | null> {
     return this.http
       .get('/', { observe: 'response', responseType: 'text' })
-      .pipe(
-        map((resp) => resp.headers.get('x-forwarded-for')),
-        this.errorService.handleError('health.service::getSysName')
-      );
+      .pipe(map((resp) => resp.headers.get('x-forwarded-for')));
   }
 }

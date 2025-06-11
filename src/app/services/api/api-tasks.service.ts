@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { forkJoin, Observable, of, Subject } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import { Task } from '../../components/models/task-manager';
 import { ErrorService } from '../error.service';
+import { ErrorResponse } from '../../components/models/error-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -31,11 +32,13 @@ export class ApiTasksService {
    * getTasks
    * @returns Observable<Task[]>
    */
-  public getTasks(boardId: string): Observable<Task[]> {
+  public getTasks(boardId: string): Observable<Task[] | ErrorResponse<string>> {
     return this.http.get<Task[]>(this.baseUrl + '?boardId=' + boardId).pipe(
-      this.errorService.handleError<Task[]>('api-tasks.service::getTasks', {
-        showInDialog: true,
-      })
+      catchError(
+        this.errorService.handleError<Task[]>('api-tasks.service::getTasks', {
+          showInDialog: true,
+        })
+      )
     );
   }
 
@@ -44,11 +47,13 @@ export class ApiTasksService {
    * @param task Task
    * @returns Observable<Task>
    */
-  public createTask(task: Task): Observable<Task> {
+  public createTask(task: Task): Observable<Task | ErrorResponse<string>> {
     return this.http.post<Task>(this.baseUrl, task).pipe(
-      this.errorService.handleError<Task>('api-tasks.service::createTask', {
-        showInDialog: true,
-      })
+      catchError(
+        this.errorService.handleError<Task>('api-tasks.service::createTask', {
+          showInDialog: true,
+        })
+      )
     );
   }
 
@@ -57,11 +62,13 @@ export class ApiTasksService {
    * @param task Task
    * @returns Observable<Task>
    */
-  public updateTask(task: Task): Observable<Task> {
+  public updateTask(task: Task): Observable<Task | ErrorResponse<string>> {
     return this.http.put<Task>(this.baseUrl + '/' + task.id, task).pipe(
-      this.errorService.handleError<Task>('api-tasks.service::updateTask', {
-        showInDialog: true,
-      })
+      catchError(
+        this.errorService.handleError<Task>('api-tasks.service::updateTask', {
+          showInDialog: true,
+        })
+      )
     );
   }
 
@@ -70,11 +77,13 @@ export class ApiTasksService {
    * @param id string -> task id
    * @returns Observable<Task>
    */
-  public deleteTask(id: string): Observable<Task> {
+  public deleteTask(id: string): Observable<Task | ErrorResponse<string>> {
     return this.http.delete<Task>(this.baseUrl + '/' + id).pipe(
-      this.errorService.handleError<Task>('api-tasks.service::deleteTask', {
-        showInDialog: true,
-      })
+      catchError(
+        this.errorService.handleError<Task>('api-tasks.service::deleteTask', {
+          showInDialog: true,
+        })
+      )
     );
   }
 
@@ -92,11 +101,13 @@ export class ApiTasksService {
    * @param boardId The UUID of the board whose tasks should all be removed.
    * @returns An Observable that completes once every matching task has been deleted.
    */
-  public deleteTasksByBoardId(boardId: string): Observable<void> {
+  public deleteTasksByBoardId(
+    boardId: string
+  ): Observable<void | ErrorResponse<string>> {
     return this.getTasks(boardId).pipe(
       // for each task call DELETE /tasks/:id
       mergeMap((tasks) => {
-        if (!tasks.length) {
+        if (tasks instanceof ErrorResponse || !tasks.length) {
           // nothing to delete → just complete
           return of([]);
         }
@@ -106,10 +117,11 @@ export class ApiTasksService {
       }),
       // map the array of voids → void
       map(() => void 0),
-      // your existing error‐handler
-      this.errorService.handleError<void>(
-        'api-tasks.service::deleteTasksByBoardId',
-        { showInDialog: true }
+      catchError(
+        this.errorService.handleError<void>(
+          'api-tasks.service::deleteTasksByBoardId',
+          { showInDialog: true }
+        )
       )
     );
   }

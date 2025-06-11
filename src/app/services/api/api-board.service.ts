@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
+import { ErrorResponse } from '../../components/models/error-response.model';
 import { Board } from '../../components/models/task-manager';
 import { ErrorService } from '../error.service';
 
@@ -16,11 +17,13 @@ export class ApiBoardService {
    * getBoards
    * @returns Observable<Board[]>
    */
-  public getBoards(): Observable<Board[]> {
+  public getBoards(): Observable<Board[] | ErrorResponse<string>> {
     return this.http.get<Board[]>(this.baseUrl).pipe(
-      this.errorService.handleError<Board[]>('api-board.service::getBoards', {
-        showInDialog: true,
-      })
+      catchError(
+        this.errorService.handleError<Board[]>('api-board.service::getBoards', {
+          showInDialog: true,
+        })
+      )
     );
   }
 
@@ -29,13 +32,17 @@ export class ApiBoardService {
    * @param value Board
    * @returns Observable<Board>
    */
-  public createNewBoard(value: Board): Observable<Board> {
+  public createNewBoard(
+    value: Board
+  ): Observable<Board | ErrorResponse<string>> {
     return this.http.post<Board>(this.baseUrl, value).pipe(
-      this.errorService.handleError<Board>(
-        'api-board.service::createNewBoard',
-        {
-          showInDialog: true,
-        }
+      catchError(
+        this.errorService.handleError<Board>(
+          'api-board.service::createNewBoard',
+          {
+            showInDialog: true,
+          }
+        )
       )
     );
   }
@@ -45,11 +52,15 @@ export class ApiBoardService {
    * @param boardId string
    * @returns Observable<Board>
    */
-  public deleteBoard(boardId: string): Observable<Board> {
+  public deleteBoard(
+    boardId: string
+  ): Observable<Board | ErrorResponse<string>> {
     return this.http.delete<Board>(this.baseUrl + '/' + boardId).pipe(
-      this.errorService.handleError<Board>('api-board.service::deleteBoard', {
-        showInDialog: true,
-      })
+      catchError(
+        this.errorService.handleError<Board>('api-board.service::deleteBoard', {
+          showInDialog: true,
+        })
+      )
     );
   }
 }

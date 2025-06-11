@@ -1,10 +1,9 @@
-export class ErrorResponse extends Error {
+export class ErrorResponse<T> extends Error {
   status: number;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   details?: any;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  constructor(status: number, message: string, details?: any) {
+  constructor(status: number, message: string, details?: T) {
     super(message);
     this.name = 'ErrorResponse';
     this.status = status;

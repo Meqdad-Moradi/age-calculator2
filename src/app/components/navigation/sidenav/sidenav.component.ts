@@ -16,6 +16,7 @@ import { concatMap, filter, map, switchMap, take, tap } from 'rxjs/operators';
 import { ApiBoardService } from '../../../services/api/api-board.service';
 import { SidenavService } from '../../../services/sidenav.service';
 import { CreateBoardDialogComponent } from '../../dialogs/create-board-dialog/create-board-dialog.component';
+import { ErrorResponse } from '../../models/error-response.model';
 import { Board } from '../../models/task-manager';
 import { HeaderComponent } from '../header/header.component';
 
@@ -58,6 +59,10 @@ export class SidenavComponent implements OnInit {
     this.getBoards();
   }
 
+  /**
+   * isBoardPageOpen
+   * @returns boolean
+   */
   private isBoardPageOpen(): boolean {
     return this.router.url.includes('task-manager/');
   }
@@ -67,7 +72,11 @@ export class SidenavComponent implements OnInit {
    */
   private getBoards(): void {
     this.boards$ = this.sidenavService.triggerGetBoard.pipe(
-      switchMap(() => this.apiBoardService.getBoards())
+      switchMap(() =>
+        this.apiBoardService
+          .getBoards()
+          .pipe(map((res) => (res instanceof ErrorResponse ? [] : res)))
+      )
     );
   }
 
