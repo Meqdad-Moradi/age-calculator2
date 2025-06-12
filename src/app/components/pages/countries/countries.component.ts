@@ -5,7 +5,7 @@ import { FilterControlComponent } from '../../shared/filter-control/filter-contr
 import { ActivatedRoute, Router } from '@angular/router';
 import { Country } from '../../models/country';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { compare } from '../../../helpers/utils';
+import { compare, isValidInput } from '../../../helpers/utils';
 import { CustomSearchComponent } from '../../shared/custom-search/custom-search.component';
 
 @Component({
@@ -99,9 +99,12 @@ export class CountriesComponent {
 
   /**
    * onSearch
+   * Handles search input changes and updates the search query.
+   * Validates input to prevent XSS and other security issues.
    * @param value string
    */
   public onSearch(value: string): void {
+    if (!isValidInput(value)) return;
     this.searchQuery.set(value);
   }
 }

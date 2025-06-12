@@ -34,6 +34,7 @@ import { CustomSearchComponent } from '../../../shared/custom-search/custom-sear
 import { NothingFoundComponent } from '../../../shared/nothing-found/nothing-found.component';
 import { TaskComponent } from '../task/task.component';
 import { ErrorResponse } from '../../../models/error-response.model';
+import { isValidInput } from '../../../../helpers/utils';
 
 @Component({
   selector: 'app-tasks',
@@ -151,6 +152,7 @@ export class TasksComponent implements OnInit, OnDestroy {
    * @param searchTerm string
    */
   public onSearchTask(searchTerm: string): void {
+    if (!isValidInput(searchTerm)) return;
     this.searchTerm.next(searchTerm.toLocaleLowerCase());
   }
 

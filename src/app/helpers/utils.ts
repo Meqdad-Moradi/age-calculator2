@@ -58,3 +58,19 @@ export function compare(propertyPath: string, order: 'asc' | 'desc' = 'asc') {
     return 0;
   };
 }
+
+/**
+ * Validates input against security rules
+ * @param value The input string to validate
+ * @returns boolean indicating if input meets security requirements
+ */
+export function isValidInput(value: string): boolean {
+  const trimmedValue = value.trim();
+  const searchQueryMaxLength = 50;
+  const inputPattern = /^[a-zA-Z0-9\s-]*$/;
+  // Prevent buffer overflow attacks and restrict input characters
+  return (
+    trimmedValue.length <= searchQueryMaxLength &&
+    inputPattern.test(trimmedValue)
+  );
+}
