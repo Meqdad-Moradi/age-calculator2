@@ -8301,6 +8301,19 @@
       "id": "1d22"
     }
   ],
-  "boards": [],
-  "tasks": []
+  "boards": [
+    {
+      "id": "adce7ae5-3070-4ec4-a202-906108c1ea91",
+      "name": "test"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "b6d48f33-b74b-4dfb-bb4a-34a8d13f4378",
+      "title": "add new task",
+      "desc": "description",
+      "status": "todo",
+      "boardId": "adce7ae5-3070-4ec4-a202-906108c1ea91"
+    }
+  ]
 }
