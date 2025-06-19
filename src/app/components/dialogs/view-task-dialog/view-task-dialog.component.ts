@@ -37,13 +37,58 @@ import { Task, TaskStatus } from '../../models/task-manager';
 export class ViewTaskDialogComponent {
   private readonly apiTaskService = inject(ApiTasksService);
   private readonly dialogRef = inject(MatDialogRef<ViewTaskDialogComponent>);
-  public task = inject<Task>(MAT_DIALOG_DATA);
+  public readonly task = inject<Task>(MAT_DIALOG_DATA);
 
-  public statusArr = ['todo', 'doing', 'done'];
-  public statusControl = new FormControl<TaskStatus>(this.task.status);
+  public readonly statusArr = ['todo', 'doing', 'done'];
+  public statusControl = new FormControl<TaskStatus>(this.task.status, {
+    nonNullable: true,
+  });
+  public titleControl = new FormControl<string>(this.task.title, {
+    nonNullable: true,
+  });
+  public descControl = new FormControl<string>(this.task.desc, {
+    nonNullable: true,
+  });
+
+  public isTitleEditing = false;
+  public isDescEditing = false;
 
   public get isDisabled(): boolean {
-    return this.statusControl.value === this.task.status;
+    return (
+      this.statusControl.value === this.task.status &&
+      this.titleControl.value === this.task.title &&
+      this.descControl.value === this.task.desc
+    );
+  }
+
+  /**
+   * onTitleClick
+   */
+  public onTitleClick(): void {
+    this.isTitleEditing = true;
+    this.titleControl.setValue(this.task.title);
+    this.onFocus('titleInput');
+  }
+
+  /**
+   * onDescClick
+   */
+  public onDescClick(): void {
+    this.isDescEditing = true;
+    this.descControl.setValue(this.task.desc);
+    this.onFocus('descInput');
+  }
+
+  private onFocus(elId: string): void {
+    setTimeout(() => document.getElementById(elId)?.focus(), 0);
+  }
+
+  /**
+   * onTitleBlur
+   */
+  public onBlure(): void {
+    this.isTitleEditing = false;
+    this.isDescEditing = false;
   }
 
   /**
@@ -57,9 +102,15 @@ export class ViewTaskDialogComponent {
    * onOkClick
    */
   public onOkClick(): void {
-    if (!this.statusControl.value || this.isDisabled) return;
-    this.task.status = this.statusControl.value;
-    this.dialogRef.close(this.task);
+    if (this.isDisabled) return;
+
+    const updatedTask = {
+      ...this.task,
+      title: this.titleControl.value,
+      desc: this.descControl.value,
+      status: this.statusControl.value,
+    };
+    this.dialogRef.close(updatedTask);
   }
 
   /**
