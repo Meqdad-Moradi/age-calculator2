@@ -8,6 +8,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { Todo } from '../../../models/todos';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-todo',
@@ -16,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatIconModule,
     MatCheckboxModule,
     MatButtonModule,
+    MatTooltipModule,
     DatePipe,
     NgClass,
   ],

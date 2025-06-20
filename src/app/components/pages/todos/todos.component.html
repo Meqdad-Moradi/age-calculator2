@@ -3,7 +3,7 @@
   <app-filter-control
     [(filterQuery)]="filterQuery"
     [filterOptions]="filterOptions"
-    [itemsCountLabel]="todos().length + ' | Todos'"
+    [itemsCountLabel]="todos().length + ' | items left'"
     [isSearchBoxVisible]="false"
     (isAscOutput)="onSort()"
   ></app-filter-control>
@@ -33,7 +33,11 @@
     </div>
     <mat-accordion multi>
       @for (todo of todosSignal(); track todo.id) {
-      <app-todo [todo]="todo" (complete)="updateTodo($event)" (delete)="deleteTodo($event)"></app-todo>
+      <app-todo
+        [todo]="todo"
+        (complete)="updateTodo($event)"
+        (delete)="deleteTodo($event)"
+      ></app-todo>
       } @empty {
       <app-nothing-found
         message="No item is matching with your filter option..."

@@ -8,12 +8,17 @@
     </mat-panel-title>
     <mat-panel-description class="justify-between !flex-grow-0">
       <span class="mr-4">{{ todo().dueDate | date : "dd.MM.yyyy" }}</span>
+
       <mat-checkbox
+        matTooltip="
+        {{ todo().completed ? 'Mark as incomplete' : 'Mark as completed' }}"
         [checked]="todo().completed"
         (change)="toggleCompletion($event)"
         (click)="$event.preventDefault(); $event.stopPropagation()"
       ></mat-checkbox>
+
       <button
+        matTooltip="Delete this todo"
         mat-icon-button
         (click)="
           deleteTodo(todo().id);
@@ -26,5 +31,5 @@
       </button>
     </mat-panel-description>
   </mat-expansion-panel-header>
-  <p>{{ todo().description }}</p>
+  <p class="text-gray-500 dark:text-gray-400">{{ todo().description }}</p>
 </mat-expansion-panel>
