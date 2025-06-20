@@ -4,15 +4,26 @@
       class="!flex-1 truncate"
       [ngClass]="{ 'line-through !text-gray-400': todo().completed }"
     >
-      {{ todo().title }} {{ todo().completed }}
+      {{ todo().title }}
     </mat-panel-title>
-    <mat-panel-description class="justify-between !flex-grow-0 gap-5">
-      {{ todo().dueDate | date : "dd.MM.yyyy" }}
+    <mat-panel-description class="justify-between !flex-grow-0">
+      <span class="mr-4">{{ todo().dueDate | date : "dd.MM.yyyy" }}</span>
       <mat-checkbox
         [checked]="todo().completed"
         (change)="toggleCompletion($event)"
         (click)="$event.preventDefault(); $event.stopPropagation()"
       ></mat-checkbox>
+      <button
+        mat-icon-button
+        (click)="
+          deleteTodo(todo().id);
+          $event.preventDefault();
+          $event.stopPropagation()
+        "
+        [disabled]="!todo().completed"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
     </mat-panel-description>
   </mat-expansion-panel-header>
   <p>{{ todo().description }}</p>

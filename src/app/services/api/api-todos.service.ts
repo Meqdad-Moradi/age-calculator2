@@ -59,4 +59,34 @@ export class ApiTodosService {
       )
     );
   }
+
+  /**
+   * addTodo
+   * @param todo Todo item to be added
+   * @returns Observable<Todo | ErrorResponse<string>>
+   */
+  public addTodo(todo: Todo): Observable<Todo | ErrorResponse<string>> {
+    return this.http.post<Todo>(this.baseUrl, todo).pipe(
+      catchError(
+        this.errorService.handleError<Todo>('api-todos.service::addTodo', {
+          showInDialog: true,
+        })
+      )
+    );
+  }
+
+  /**
+   * deleteTodo
+   * @param id ID of the todo to be deleted
+   * @returns Observable<void | ErrorResponse<string>>
+   */
+  public deleteTodo(id: string): Observable<void | ErrorResponse<string>> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`).pipe(
+      catchError(
+        this.errorService.handleError<void>('api-todos.service::deleteTodo', {
+          showInDialog: true,
+        })
+      )
+    );
+  }
 }

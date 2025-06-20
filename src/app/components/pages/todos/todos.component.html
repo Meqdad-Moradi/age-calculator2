@@ -27,11 +27,13 @@
       >
         Collapse All
       </button>
-      <button mat-button class="ml-auto">Create new todo</button>
+      <button mat-button class="ml-auto" (click)="addNewTodo()">
+        Create new todo
+      </button>
     </div>
     <mat-accordion multi>
       @for (todo of todosSignal(); track todo.id) {
-      <app-todo [todo]="todo" (complete)="updateTodo($event)"></app-todo>
+      <app-todo [todo]="todo" (complete)="updateTodo($event)" (delete)="deleteTodo($event)"></app-todo>
       } @empty {
       <app-nothing-found
         message="No item is matching with your filter option..."

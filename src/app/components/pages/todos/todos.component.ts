@@ -1,12 +1,15 @@
 import { Component, computed, inject, signal, viewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { ApiTodosService } from '../../../services/api/api-todos.service';
+import { AddTodoDialogComponent } from '../../dialogs/add-todo-dialog/add-todo-dialog.component';
 import { Todo } from '../../models/todos';
 import { CustomSearchComponent } from '../../shared/custom-search/custom-search.component';
 import { FilterControlComponent } from '../../shared/filter-control/filter-control.component';
 import { NothingFoundComponent } from '../../shared/nothing-found/nothing-found.component';
 import { TodoComponent } from './todo/todo.component';
+import { filter, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-todos',
@@ -23,6 +26,7 @@ import { TodoComponent } from './todo/todo.component';
 })
 export class TodosComponent {
   private readonly apiTodosService = inject(ApiTodosService);
+  private readonly dialog = inject(MatDialog);
 
   public accordion = viewChild.required(MatAccordion);
   public todos = this.apiTodosService.todos;
@@ -106,5 +110,47 @@ export class TodosComponent {
    */
   public onSearch(value: string): void {
     this.searchQuery.set(value);
+  }
+
+  /**
+   * addNewTodo
+   * This method opens a dialog to add a new todo.
+   */
+  public addNewTodo(): void {
+    const sub = this.dialog
+      .open(AddTodoDialogComponent)
+      .afterClosed()
+      .pipe(
+        filter((todo) => !!todo),
+        switchMap((todo) => this.apiTodosService.addTodo(todo)),
+        tap((todo) => {
+          if (!todo || todo instanceof Error) {
+            sub.unsubscribe();
+            return;
+          }
+          this.apiTodosService.todos.update((todos) => [...todos, todo]);
+        })
+      )
+      .subscribe({ complete: () => sub.unsubscribe() });
+  }
+
+  /**
+   * deleteTodo
+   * @param id ID of the todo to be deleted.
+   * @returns void
+   */
+  public deleteTodo(id: string): void {
+    // if the id is not provided, return early
+    if (!id) {
+      return;
+    }
+    // remove the todo from the local todos array
+    this.apiTodosService.todos.update((todos) =>
+      todos.filter((todo) => todo.id !== id)
+    );
+    // delete the todo from the API
+    const sub = this.apiTodosService.deleteTodo(id).subscribe({
+      complete: () => sub.unsubscribe(),
+    });
   }
 }

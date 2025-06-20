@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>Add New Todo</h2>
+<form [formGroup]="addTodoForm" (submit)="onSubmit($event)">
+  <mat-dialog-content class="!pt-4 !grid !gap-4 !min-w-[500px]">
+    <!-- title -->
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" />
+      <mat-error>Field is required!</mat-error>
+    </mat-form-field>
+
+    <!-- description -->
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+        rows="3"
+        cols="10"
+      ></textarea>
+      <mat-error>Field is required!</mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button type="submit" [disabled]="addTodoForm.invalid">
+      Create
+    </button>
+  </mat-dialog-actions>
+</form>

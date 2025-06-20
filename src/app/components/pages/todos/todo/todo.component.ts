@@ -7,6 +7,7 @@ import {
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { Todo } from '../../../models/todos';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-todo',
@@ -14,6 +15,7 @@ import { Todo } from '../../../models/todos';
     MatExpansionModule,
     MatIconModule,
     MatCheckboxModule,
+    MatButtonModule,
     DatePipe,
     NgClass,
   ],
@@ -23,6 +25,7 @@ import { Todo } from '../../../models/todos';
 export class TodoComponent {
   public todo = input.required<Todo>();
   public complete = output<Todo>();
+  public delete = output<string>();
 
   /**
    * toggleCompletion
@@ -31,5 +34,13 @@ export class TodoComponent {
   public toggleCompletion(e: MatCheckboxChange): void {
     const updatedTodo = { ...this.todo(), completed: e.checked };
     this.complete.emit(updatedTodo);
+  }
+
+  /**
+   * deleteTodo
+   * @param id ID of the todo to be deleted.
+   */
+  public deleteTodo(id: string): void {
+    this.delete.emit(id);
   }
 }
