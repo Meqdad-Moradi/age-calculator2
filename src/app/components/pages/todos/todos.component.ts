@@ -25,7 +25,7 @@ export class TodosComponent {
   private readonly apiTodosService = inject(ApiTodosService);
 
   public accordion = viewChild.required(MatAccordion);
-  public todos = this.apiTodosService.todosSignal;
+  public todos = this.apiTodosService.todos;
 
   public searchQuery = signal('');
   public filterQuery = signal('All');
@@ -73,10 +73,21 @@ export class TodosComponent {
 
   /**
    * updateTodo
-   * @param todo Todo item to be updated
+   * @param todoParam Todo item to be updated
    */
-  public updateTodo(todo: Todo): void {
-    const sub = this.apiTodosService.updateTodo(todo).subscribe({
+  public updateTodo(todoParam: Todo): void {
+    // if the todo is not provided, return early
+    if (!todoParam) {
+      return;
+    }
+    // toggle the completed status of the todo
+    this.apiTodosService.todos.update((todos) =>
+      todos.map((t) =>
+        t.id === todoParam.id ? { ...t, completed: todoParam.completed } : t
+      )
+    );
+    // update todo in the API
+    const sub = this.apiTodosService.updateTodo(todoParam).subscribe({
       complete: () => sub.unsubscribe(),
     });
   }
