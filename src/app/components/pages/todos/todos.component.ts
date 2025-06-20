@@ -1,18 +1,7 @@
-import { AsyncPipe } from '@angular/common';
-import {
-  Component,
-  DestroyRef,
-  inject,
-  OnInit,
-  signal,
-  viewChild,
-} from '@angular/core';
+import { Component, computed, inject, signal, viewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
-import { Observable } from 'rxjs';
-import { map, shareReplay, tap } from 'rxjs/operators';
 import { ApiTodosService } from '../../../services/api/api-todos.service';
-import { ErrorResponse } from '../../models/error-response.model';
 import { Todo } from '../../models/todos';
 import { CustomSearchComponent } from '../../shared/custom-search/custom-search.component';
 import { FilterControlComponent } from '../../shared/filter-control/filter-control.component';
@@ -25,7 +14,6 @@ import { TodoComponent } from './todo/todo.component';
     MatExpansionModule,
     MatButtonModule,
     CustomSearchComponent,
-    AsyncPipe,
     NothingFoundComponent,
     TodoComponent,
     FilterControlComponent,
@@ -33,51 +21,64 @@ import { TodoComponent } from './todo/todo.component';
   templateUrl: './todos.component.html',
   styleUrl: './todos.component.scss',
 })
-export class TodosComponent implements OnInit {
+export class TodosComponent {
   private readonly apiTodosService = inject(ApiTodosService);
-  private desctoryRef = inject(DestroyRef);
 
   public accordion = viewChild.required(MatAccordion);
+  public todos = this.apiTodosService.todosSignal;
 
-  public todos$!: Observable<Todo[]>;
   public searchQuery = signal('');
   public filterQuery = signal('All');
   public filterOptions = ['All', 'Completed', 'Pending'];
 
-  ngOnInit(): void {
-    this.getTodos();
-  }
-
   /**
-   * getTodos
-   * Fetches the list of todos from the API and maps the response to an observable of
+   * todosSignal
+   * This computed signal filters the todos based on the search query and filter criteria.
+   * It returns an array of todos that match the search query and filter criteria.
+   * If there are no todos, it returns an empty array.
+   * If the search query is empty and the filter is set to 'All', it returns all todos.
+   * If the search query is not empty, it filters todos based on whether their title includes all search terms
+   * and whether they match the filter criteria (completed or pending).
+   * @returns Todo[] - Filtered array of todos based on search and filter criteria.
    */
-  private getTodos(): void {
-    this.todos$ = this.apiTodosService.getTodos().pipe(
-      map((todos) => (todos instanceof ErrorResponse ? [] : todos)),
-      shareReplay({ bufferSize: 1, refCount: true })
-    );
-  }
+  public todosSignal = computed(() => {
+    const searchLower = this.searchQuery()
+      .trim()
+      .toLocaleLowerCase()
+      .split(' ');
+    const filterLower =
+      this.filterQuery() === 'All'
+        ? ''
+        : this.filterQuery().toLocaleLowerCase();
+
+    // if there are no todos, return an empty array
+    if (!this.todos()) {
+      return [];
+    }
+    // if search is empty and filter is 'All', return all todos
+    if (searchLower.length === 0 && filterLower === '') {
+      return this.todos();
+    }
+    // filter todos based on search and filter criteria
+    return this.todos()?.filter((todo) => {
+      const titleLower = todo.title.toLocaleLowerCase();
+      const completed = todo.completed ? 'completed' : 'pending';
+      const matchesSearch = searchLower.every((sl) => titleLower.includes(sl));
+      const matchesFilter =
+        filterLower === '' || completed.includes(filterLower);
+
+      return matchesSearch && matchesFilter;
+    });
+  });
 
   /**
    * updateTodo
    * @param todo Todo item to be updated
    */
   public updateTodo(todo: Todo): void {
-    const sub = this.apiTodosService
-      .updateTodo(todo)
-      .pipe(
-        tap((updatedTodo) => {
-          if (updatedTodo instanceof ErrorResponse) {
-            sub.unsubscribe();
-            return;
-          }
-          this.getTodos();
-        })
-      )
-      .subscribe({
-        complete: () => sub.unsubscribe(),
-      });
+    const sub = this.apiTodosService.updateTodo(todo).subscribe({
+      complete: () => sub.unsubscribe(),
+    });
   }
 
   /**
@@ -85,7 +86,7 @@ export class TodosComponent implements OnInit {
    * This method will sort the todos in reverse order
    */
   public onSort(): void {
-    this.todos$ = this.todos$.pipe(map((todos) => todos.reverse()));
+    this.todosSignal().reverse();
   }
 
   /**

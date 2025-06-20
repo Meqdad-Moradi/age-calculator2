@@ -1,7 +1,10 @@
 <mat-expansion-panel>
   <mat-expansion-panel-header>
-    <mat-panel-title class="!flex-1 truncate">
-      {{ todo().title }}
+    <mat-panel-title
+      class="!flex-1 truncate"
+      [ngClass]="{ 'line-through !text-gray-400': todo().completed }"
+    >
+      {{ todo().title }} {{ todo().completed }}
     </mat-panel-title>
     <mat-panel-description class="justify-between !flex-grow-0 gap-5">
       {{ todo().dueDate | date : "dd.MM.yyyy" }}

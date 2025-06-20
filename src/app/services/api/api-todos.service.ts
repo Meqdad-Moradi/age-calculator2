@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { ErrorService } from '../error.service';
-import { Todo } from '../../components/models/todos';
-import { catchError } from 'rxjs/operators';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { ErrorResponse } from '../../components/models/error-response.model';
+import { Todo } from '../../components/models/todos';
+import { ErrorService } from '../error.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,11 +15,18 @@ export class ApiTodosService {
   private readonly errorService = inject(ErrorService);
   private readonly baseUrl = 'http://localhost:3000/todos';
 
+  public todosSignal = toSignal(
+    this.getTodos().pipe(
+      map((values) => (values instanceof ErrorResponse ? [] : values))
+    ),
+    { initialValue: [] as Todo[] }
+  );
+
   /**
    * getTodos
    * @returns Observable<Todo[] | ErrorResponse<string>>
    */
-  public getTodos(): Observable<Todo[] | ErrorResponse<string>> {
+  private getTodos(): Observable<Todo[] | ErrorResponse<string>> {
     return this.http.get<Todo[]>(this.baseUrl).pipe(
       catchError(
         this.errorService.handleError<Todo[]>('api-todos.service::getTodos', {

@@ -13,11 +13,15 @@
       <mat-select [(value)]="filterQuery">
         <mat-select-trigger
           class="flex items-center justify-between gap-0 truncate text-(--primary)"
+          [ngClass]="{
+            'text-red-500 dark:text-red-400 font-medium':
+              filterQuery() !== 'All'
+          }"
         >
           {{ filterQuery() }}
           <mat-icon class="!text-base text-(--primary)">filter_alt</mat-icon>
         </mat-select-trigger>
-
+        @if (isSearchBoxVisible()) {
         <mat-option>
           <ngx-mat-select-search
             [formControl]="searchControl"
@@ -25,8 +29,7 @@
             noEntriesFoundLabel="No entries found!"
           ></ngx-mat-select-search>
         </mat-option>
-
-        @for (option of filteredOptions | async; track $index) {
+        } @for (option of filteredOptions | async; track $index) {
         <mat-option [value]="option">
           @if (filterQuery() === option) {
           <div class="flex items-center justify-between gap-3 min-w-24">
@@ -51,6 +54,9 @@
       <mat-select panelClass="no-checkbox" [(value)]="sortControl">
         <mat-select-trigger
           class="flex items-center justify-between gap-1 truncate text-(--primary)"
+          [ngClass]="{
+            'text-red-500 dark:text-red-400 font-medium': sortControl() !== sortOptions()?.[0]
+          }"
         >
           {{ sortControl() }}
           <mat-icon class="!text-base text-(--primary)">sort</mat-icon>

@@ -6,11 +6,17 @@ import {
   MatCheckboxChange,
   MatCheckboxModule,
 } from '@angular/material/checkbox';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-todo',
-  imports: [MatExpansionModule, MatIconModule, MatCheckboxModule, DatePipe],
+  imports: [
+    MatExpansionModule,
+    MatIconModule,
+    MatCheckboxModule,
+    DatePipe,
+    NgClass,
+  ],
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.scss',
 })

@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { Component, input, model, OnInit, output } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,6 +24,7 @@ import { map, startWith } from 'rxjs/operators';
     ReactiveFormsModule,
     NgxMatSelectSearchModule,
     AsyncPipe,
+    NgClass,
   ],
   templateUrl: './filter-control.component.html',
   styleUrl: './filter-control.component.scss',
@@ -35,6 +36,7 @@ export class FilterControlComponent implements OnInit {
   public itemsCountLabel = input<number | string>();
   public filterOptions = input.required<string[]>();
   public sortOptions = input<string[]>();
+  public isSearchBoxVisible = input<boolean>(true);
   // output
   public isAscOutput = output<boolean>();
 
