@@ -2,7 +2,7 @@
   class="flex items-center justify-between py-2 border-b border-b-gray-300 dark:border-b-gray-700"
 >
   <!-- count items -->
-  <span>{{ itemsCount() }} Countries</span>
+  <span>{{ itemsCountLabel() }}</span>
 
   <div class="flex items-center">
     <!-- filter controls -->
@@ -40,6 +40,7 @@
       </mat-select>
     </mat-form-field>
 
+    @if (sortOptions()?.length) {
     <!-- seprate line -->
     <span class="pl-2 pr-4 text-gray-400">|</span>
 
@@ -55,7 +56,7 @@
           <mat-icon class="!text-base text-(--primary)">sort</mat-icon>
         </mat-select-trigger>
 
-        @for (option of sortOptions; track $index) {
+        @for (option of sortOptions(); track $index) {
         <mat-option [value]="option">
           @if (sortControl() === option) {
           <div class="flex items-center justify-between gap-3 min-w-24">
@@ -69,6 +70,7 @@
         }
       </mat-select>
     </mat-form-field>
+    }
 
     <!-- seprate line -->
     <span class="px-2 text-gray-400">|</span>

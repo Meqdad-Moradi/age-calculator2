@@ -3,8 +3,10 @@
   <app-filter-control
     [(filterQuery)]="filterQuery"
     [sortControl]="sortQuery()"
+    [filterOptions]="filterOptions"
+    [sortOptions]="sortOptions"
     (sortControlChange)="sortControlChange($event!)"
-    [itemsCount]="countriesSignal().length"
+    [itemsCountLabel]="countriesSignal().length + ' | Countries'"
     (isAscOutput)="onSort()"
   ></app-filter-control>
 

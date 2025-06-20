@@ -32,13 +32,13 @@ import { map, startWith } from 'rxjs/operators';
 export class FilterControlComponent implements OnInit {
   public filterQuery = model<string>();
   public sortControl = model<string>();
-  public itemsCount = input<number | string>();
+  public itemsCountLabel = input<number | string>();
+  public filterOptions = input.required<string[]>();
+  public sortOptions = input<string[]>();
   // output
   public isAscOutput = output<boolean>();
 
   public isAsc = true;
-  public options = ['All', 'Asia', 'Africa', 'America', 'Europe', 'Oceania'];
-  public sortOptions = ['Name', 'Region', 'Capital'];
   public filteredOptions!: Observable<string[]>;
   public searchControl: FormControl = new FormControl('');
 
@@ -46,7 +46,7 @@ export class FilterControlComponent implements OnInit {
     // search for specific option
     this.filteredOptions = this.searchControl.valueChanges.pipe(
       startWith(''),
-      map((value) => this.filterOptions(value || ''))
+      map((value) => this.onFilter(value || ''))
     );
   }
 
@@ -60,14 +60,14 @@ export class FilterControlComponent implements OnInit {
   }
 
   /**
-   * filterOptions
+   * onFilter
    * @param value string
    * @returns string[]
    */
-  private filterOptions(value: string): string[] {
+  private onFilter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.options.filter((option) =>
+    return this.filterOptions().filter((option) =>
       option.toLowerCase().includes(filterValue)
     );
   }

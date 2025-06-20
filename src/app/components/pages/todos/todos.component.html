@@ -1,21 +1,28 @@
 <section>
   <app-custom-search></app-custom-search>
+  <app-filter-control
+    [(filterQuery)]="filterQuery"
+    [filterOptions]="filterOptions"
+    [itemsCountLabel]="(todos$ | async)?.length + ' | Todos'"
+    (isAscOutput)="onSort()"
+  ></app-filter-control>
 
   <!-- todos list -->
   @if(todos$ | async) { @let todos = todos$ | async;
 
-  <mat-accordion class="example-headers-align" multi>
-    @for (todo of todos; track todo.id) {
-    <app-todo [todo]="todo" (complete)="updateTodo($event)"></app-todo>
-    }
-  </mat-accordion>
+  <div class="mt-8">
+    <div>
+      <button mat-button (click)="accordion().openAll()">Expand All</button>
+      <button mat-button (click)="accordion().closeAll()">Collapse All</button>
+    </div>
+    <mat-accordion multi>
+      @for (todo of todos; track todo.id) {
+      <app-todo [todo]="todo" (complete)="updateTodo($event)"></app-todo>
+      }
+    </mat-accordion>
+  </div>
 
   } @else {
   <app-nothing-found></app-nothing-found>
   }
-
-  <div class="mt-16">
-    <button mat-button (click)="accordion().openAll()">Expand All</button>
-    <button mat-button (click)="accordion().closeAll()">Collapse All</button>
-  </div>
 </section>

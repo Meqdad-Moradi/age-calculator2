@@ -28,6 +28,15 @@ export class CountriesComponent {
   public searchQuery = signal('');
   public filterQuery = signal('All');
   public sortQuery = signal('Name');
+  public filterOptions = [
+    'All',
+    'Asia',
+    'Africa',
+    'America',
+    'Europe',
+    'Oceania',
+  ];
+  public sortOptions = ['Name', 'Region', 'Capital'];
 
   /**
    * Computed property to filter countries based on search and region filters.
