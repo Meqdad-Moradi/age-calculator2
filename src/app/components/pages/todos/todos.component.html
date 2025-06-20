@@ -13,18 +13,34 @@
 
   <div class="mt-8">
     <div class="flex">
-      <button mat-button (click)="accordion().openAll()">Expand All</button>
-      <button mat-button (click)="accordion().closeAll()">Collapse All</button>
+      <button
+        mat-button
+        (click)="accordion().openAll()"
+        [disabled]="!todosSignal().length"
+      >
+        Expand All
+      </button>
+      <button
+        mat-button
+        (click)="accordion().closeAll()"
+        [disabled]="!todosSignal().length"
+      >
+        Collapse All
+      </button>
       <button mat-button class="ml-auto">Create new todo</button>
     </div>
     <mat-accordion multi>
       @for (todo of todosSignal(); track todo.id) {
       <app-todo [todo]="todo" (complete)="updateTodo($event)"></app-todo>
+      } @empty {
+      <app-nothing-found
+        message="No item is matching with your filter option..."
+      />
       }
     </mat-accordion>
   </div>
 
   } @else {
-  <app-nothing-found></app-nothing-found>
+  <app-nothing-found />
   }
 </section>
