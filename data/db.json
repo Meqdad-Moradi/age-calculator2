@@ -8308,7 +8308,7 @@
       "id": "1",
       "title": "Complete the project documentation",
       "description": "Ensure all sections are filled out and reviewed.",
-      "completed": false,
+      "completed": true,
       "dueDate": "2023-11-30"
     },
     {
