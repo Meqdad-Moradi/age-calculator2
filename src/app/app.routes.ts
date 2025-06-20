@@ -6,6 +6,7 @@ import { CountriesComponent } from './components/pages/countries/countries.compo
 import { CountryComponent } from './components/pages/countries/country/country.component';
 import { TasksComponent } from './components/pages/task-manager/tasks/tasks.component';
 import { TaskManagerComponent } from './components/pages/task-manager/task-manager.component';
+import { TodosComponent } from './components/pages/todos/todos.component';
 
 export const routes: Routes = [
   {
@@ -33,7 +34,12 @@ export const routes: Routes = [
         pathMatch: 'full',
         component: TaskManagerComponent,
       },
-      { path: 'task-manager/:id', component: TasksComponent, pathMatch: 'full' }
+      {
+        path: 'task-manager/:id',
+        component: TasksComponent,
+        pathMatch: 'full',
+      },
+      { path: 'todos', component: TodosComponent, pathMatch: 'full' },
     ],
   },
   {

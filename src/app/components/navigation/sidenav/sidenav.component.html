@@ -43,6 +43,17 @@
 
       <mat-list-item
         class="!cursor-pointer"
+        [routerLink]="['/todos']"
+        routerLinkActive="active"
+        onclick="this.blur()"
+        (click)="onExpandTaskManager(false)"
+      >
+        <mat-icon matListItemIcon>border_color</mat-icon>
+        <span matListItemTitle>Todos</span>
+      </mat-list-item>
+
+      <mat-list-item
+        class="!cursor-pointer"
         [routerLink]="['/task-manager']"
         routerLinkActive="active"
         onclick="this.blur()"

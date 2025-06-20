@@ -1,0 +1,16 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title class="!flex-1 truncate">
+      {{ todo().title }}
+    </mat-panel-title>
+    <mat-panel-description class="justify-between !flex-grow-0 gap-5">
+      {{ todo().dueDate | date : "dd.MM.yyyy" }}
+      <mat-checkbox
+        [checked]="todo().completed"
+        (change)="toggleCompletion($event)"
+        (click)="$event.preventDefault(); $event.stopPropagation()"
+      ></mat-checkbox>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <p>{{ todo().description }}</p>
+</mat-expansion-panel>
