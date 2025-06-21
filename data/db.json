@@ -8351,62 +8351,6 @@
       "description": "Gather all necessary reports and updates.",
       "completed": false,
       "dueDate": "2023-12-01"
-    },
-    {
-      "id": "2fb8f0a6-5c89-440c-9702-1a0e5a825cdf",
-      "title": "New item",
-      "description": "new item is added",
-      "completed": false,
-      "dueDate": "2025-06-20T21:39:50.572Z"
-    },
-    {
-      "id": "d6a4fd62-3605-4f1b-a3fc-32d77c587774",
-      "title": "sds",
-      "description": "sds",
-      "completed": false,
-      "dueDate": "2025-06-21T09:30:10.853Z"
-    },
-    {
-      "id": "321e9059-5826-4c99-b30c-ecba52840df2",
-      "title": "lksd",
-      "description": "sd",
-      "completed": false,
-      "dueDate": "2025-06-21T09:30:16.886Z"
-    },
-    {
-      "id": "0c67add0-7c2b-4831-9908-70f7d506c749",
-      "title": "sdss",
-      "description": "sdf",
-      "completed": false,
-      "dueDate": "2025-06-21T09:30:23.302Z"
-    },
-    {
-      "id": "ce2473a6-1a86-4496-9693-a9ea7e4bad30",
-      "title": "sdsd",
-      "description": "sds",
-      "completed": false,
-      "dueDate": "2025-06-21T09:30:29.953Z"
-    },
-    {
-      "id": "4e550f0c-e787-40d2-932d-9b2200eea1a4",
-      "title": "sdsiosdd",
-      "description": "sds",
-      "completed": false,
-      "dueDate": "2025-06-21T09:30:37.207Z"
-    },
-    {
-      "id": "fff23ccf-eed9-40d4-9b8b-f7c34ed460e8",
-      "title": "sdsd90lksd",
-      "description": "sdd",
-      "completed": false,
-      "dueDate": "2025-06-21T09:30:45.969Z"
-    },
-    {
-      "id": "5bb1aabe-79de-4c30-a4a1-57d4726aaeb0",
-      "title": "asfs",
-      "description": "sfa",
-      "completed": false,
-      "dueDate": "2025-06-21T09:31:56.652Z"
     }
   ]
 }

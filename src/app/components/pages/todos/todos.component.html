@@ -30,6 +30,25 @@
       <button mat-button class="ml-auto" (click)="addNewTodo()">
         Create new todo
       </button>
+
+      <!-- page menu -->
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        matTooltip="Page management"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button
+          mat-menu-item
+          class="!text-red-400 dark:!text-red-300"
+          (click)="clearCompleted()"
+        >
+          <mat-icon class="!text-red-400 dark:!text-red-300">delete</mat-icon>
+          Delete all completed
+        </button>
+      </mat-menu>
     </div>
     <mat-accordion multi>
       @for (todo of todosSignal(); track todo.id) {

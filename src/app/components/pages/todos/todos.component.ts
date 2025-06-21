@@ -1,7 +1,19 @@
-import { Component, computed, inject, signal, viewChild } from '@angular/core';
+import {
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { forkJoin } from 'rxjs';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { ApiTodosService } from '../../../services/api/api-todos.service';
 import { AddTodoDialogComponent } from '../../dialogs/add-todo-dialog/add-todo-dialog.component';
 import { Todo } from '../../models/todos';
@@ -9,13 +21,14 @@ import { CustomSearchComponent } from '../../shared/custom-search/custom-search.
 import { FilterControlComponent } from '../../shared/filter-control/filter-control.component';
 import { NothingFoundComponent } from '../../shared/nothing-found/nothing-found.component';
 import { TodoComponent } from './todo/todo.component';
-import { filter, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-todos',
   imports: [
     MatExpansionModule,
     MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
     CustomSearchComponent,
     NothingFoundComponent,
     TodoComponent,
@@ -27,6 +40,7 @@ import { filter, switchMap, tap } from 'rxjs/operators';
 export class TodosComponent {
   private readonly apiTodosService = inject(ApiTodosService);
   private readonly dialog = inject(MatDialog);
+  private readonly destroyRef = inject(DestroyRef);
 
   public accordion = viewChild.required(MatAccordion);
   public todos = this.apiTodosService.todos;
@@ -101,9 +115,10 @@ export class TodosComponent {
       )
     );
     // update todo in the API
-    const sub = this.apiTodosService.updateTodo(todoParam).subscribe({
-      complete: () => sub.unsubscribe(),
-    });
+    this.apiTodosService
+      .updateTodo(todoParam)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
   }
 
   /**
@@ -127,21 +142,19 @@ export class TodosComponent {
    * This method opens a dialog to add a new todo.
    */
   public addNewTodo(): void {
-    const sub = this.dialog
+    this.dialog
       .open(AddTodoDialogComponent)
       .afterClosed()
       .pipe(
+        takeUntilDestroyed(this.destroyRef),
         filter((todo) => !!todo),
         switchMap((todo) => this.apiTodosService.addTodo(todo)),
         tap((todo) => {
-          if (!todo || todo instanceof Error) {
-            sub.unsubscribe();
-            return;
-          }
+          if (!todo || todo instanceof Error) return;
           this.apiTodosService.todos.update((todos) => [...todos, todo]);
         })
       )
-      .subscribe({ complete: () => sub.unsubscribe() });
+      .subscribe();
   }
 
   /**
@@ -159,8 +172,41 @@ export class TodosComponent {
       todos.filter((todo) => todo.id !== id)
     );
     // delete the todo from the API
-    const sub = this.apiTodosService.deleteTodo(id).subscribe({
-      complete: () => sub.unsubscribe(),
-    });
+    this.apiTodosService
+      .deleteTodo(id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
+  }
+
+  /**
+   * clearCompleted
+   * @returns void
+   */
+  public clearCompleted(): void {
+    // get all completed todos from the local todos array
+    const todos = this.todosSignal();
+    const completedIds = todos
+      .filter((todo) => todo.completed)
+      .map((todo) => todo.id);
+
+    // if there are no completed todos, return early
+    if (!completedIds.length) return;
+
+    // filter out completed todos from the local todos array
+    this.apiTodosService.todos.update((todos) =>
+      todos.filter((todo) => !todo.completed)
+    );
+
+    // Fire off all delete calls in parallel, subscribe once
+    const deleteRequests = completedIds.map((id) =>
+      this.apiTodosService.deleteTodo(id)
+    );
+
+    forkJoin(deleteRequests)
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        map(() => void 0)
+      )
+      .subscribe();
   }
 }
