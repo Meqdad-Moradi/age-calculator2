@@ -8301,8 +8301,42 @@
       "id": "1d22"
     }
   ],
-  "boards": [],
-  "tasks": [],
+  "boards": [
+    {
+      "id": "7069ca93-d60c-4fd7-a458-115992511f26",
+      "name": "creat todo app"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1a4b6726-c016-4e5e-8b02-1458569557ca",
+      "title": "create todo header",
+      "desc": "in todo header, the items like fliter sort and search todos should be added and handled it's functionality",
+      "status": "done",
+      "boardId": "7069ca93-d60c-4fd7-a458-115992511f26"
+    },
+    {
+      "id": "4dd2f2d4-6da0-4da4-9a6f-47c5b92a7948",
+      "title": "Fetch todos",
+      "desc": "fetching todos as an Observable and turn it into signal to handle filter search or sort items/todos",
+      "status": "done",
+      "boardId": "7069ca93-d60c-4fd7-a458-115992511f26"
+    },
+    {
+      "id": "c6371860-3716-4fad-8852-dc42064caf34",
+      "title": "update and delete todo",
+      "desc": "in this time it should be handled to update or delete a todo if it's completed",
+      "status": "done",
+      "boardId": "7069ca93-d60c-4fd7-a458-115992511f26"
+    },
+    {
+      "id": "fa108940-f895-4b2a-8ad3-b6602e983223",
+      "title": "delete all completed todos",
+      "desc": "there should be a button in a menu and click on it should check all completed todos. if exist, than we should be able to delete all of them one by one.",
+      "status": "todo",
+      "boardId": "7069ca93-d60c-4fd7-a458-115992511f26"
+    }
+  ],
   "todos": [
     {
       "id": "1",
@@ -8324,6 +8358,55 @@
       "description": "new item is added",
       "completed": false,
       "dueDate": "2025-06-20T21:39:50.572Z"
+    },
+    {
+      "id": "d6a4fd62-3605-4f1b-a3fc-32d77c587774",
+      "title": "sds",
+      "description": "sds",
+      "completed": false,
+      "dueDate": "2025-06-21T09:30:10.853Z"
+    },
+    {
+      "id": "321e9059-5826-4c99-b30c-ecba52840df2",
+      "title": "lksd",
+      "description": "sd",
+      "completed": false,
+      "dueDate": "2025-06-21T09:30:16.886Z"
+    },
+    {
+      "id": "0c67add0-7c2b-4831-9908-70f7d506c749",
+      "title": "sdss",
+      "description": "sdf",
+      "completed": false,
+      "dueDate": "2025-06-21T09:30:23.302Z"
+    },
+    {
+      "id": "ce2473a6-1a86-4496-9693-a9ea7e4bad30",
+      "title": "sdsd",
+      "description": "sds",
+      "completed": false,
+      "dueDate": "2025-06-21T09:30:29.953Z"
+    },
+    {
+      "id": "4e550f0c-e787-40d2-932d-9b2200eea1a4",
+      "title": "sdsiosdd",
+      "description": "sds",
+      "completed": false,
+      "dueDate": "2025-06-21T09:30:37.207Z"
+    },
+    {
+      "id": "fff23ccf-eed9-40d4-9b8b-f7c34ed460e8",
+      "title": "sdsd90lksd",
+      "description": "sdd",
+      "completed": false,
+      "dueDate": "2025-06-21T09:30:45.969Z"
+    },
+    {
+      "id": "5bb1aabe-79de-4c30-a4a1-57d4726aaeb0",
+      "title": "asfs",
+      "description": "sfa",
+      "completed": false,
+      "dueDate": "2025-06-21T09:31:56.652Z"
     }
   ]
 }

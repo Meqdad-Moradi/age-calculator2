@@ -76,6 +76,16 @@ export class TodosComponent {
   });
 
   /**
+   * handleCountTodos
+   * This computed signal returns a string indicating the number of todos left.
+   */
+  public handleCountTodos = computed(() => {
+    const todos = this.todos();
+    const length = ('0' + this.todos().length).slice(-2);
+    return todos.length > 0 ? `${length} | items left` : 0;
+  });
+
+  /**
    * updateTodo
    * @param todoParam Todo item to be updated
    */

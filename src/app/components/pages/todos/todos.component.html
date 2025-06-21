@@ -3,7 +3,7 @@
   <app-filter-control
     [(filterQuery)]="filterQuery"
     [filterOptions]="filterOptions"
-    [itemsCountLabel]="todos().length + ' | items left'"
+    [itemsCountLabel]="handleCountTodos()"
     [isSearchBoxVisible]="false"
     (isAscOutput)="onSort()"
   ></app-filter-control>

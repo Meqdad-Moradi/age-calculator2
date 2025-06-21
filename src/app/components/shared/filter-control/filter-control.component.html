@@ -2,7 +2,11 @@
   class="flex items-center justify-between py-2 border-b border-b-gray-300 dark:border-b-gray-700"
 >
   <!-- count items -->
-  <span>{{ itemsCountLabel() }}</span>
+  <span
+    matTooltip="{{ !itemsCountLabel() ? itemsCountLabel() + ' items' : '' }}"
+  >
+    {{ itemsCountLabel() }}
+  </span>
 
   <div class="flex items-center">
     <!-- filter controls -->
@@ -10,17 +14,20 @@
       class="no-arrow no-hint no-underline no-hover-effect match-height match-width"
       appearance="fill"
     >
-      <mat-select [(value)]="filterQuery">
+      <mat-select [(value)]="filterQuery" [disabled]="!itemsCountLabel()">
         <mat-select-trigger
           class="flex items-center justify-between gap-0 truncate text-(--primary)"
           [ngClass]="{
             'text-red-500 dark:text-red-400 font-medium':
-              filterQuery() !== 'All'
+              filterQuery() !== 'All',
+            'text-gray-400 dark:text-gray-500': !itemsCountLabel()
           }"
         >
           {{ filterQuery() }}
           <mat-icon class="!text-base text-(--primary)">filter_alt</mat-icon>
         </mat-select-trigger>
+
+        <!-- filter options -->
         @if (isSearchBoxVisible()) {
         <mat-option>
           <ngx-mat-select-search
@@ -51,11 +58,16 @@
     <mat-form-field
       class="no-arrow no-hover-effect no-hint no-underline match-height match-width"
     >
-      <mat-select panelClass="no-checkbox" [(value)]="sortControl">
+      <mat-select
+        panelClass="no-checkbox"
+        [(value)]="sortControl"
+        [disabled]="!itemsCountLabel()"
+      >
         <mat-select-trigger
           class="flex items-center justify-between gap-1 truncate text-(--primary)"
           [ngClass]="{
-            'text-red-500 dark:text-red-400 font-medium': sortControl() !== sortOptions()?.[0]
+            'text-red-500 dark:text-red-400 font-medium': sortControl() !== sortOptions()?.[0],
+            'text-gray-400 dark:text-gray-500': !itemsCountLabel()
           }"
         >
           {{ sortControl() }}
@@ -82,7 +94,12 @@
     <span class="px-2 text-gray-400">|</span>
 
     <!-- sort asc/desc -->
-    <button class="text-(--primary) h-[24px] cursor-pointer" (click)="onSort()">
+    <button
+      class="text-(--primary) h-[24px] cursor-pointer"
+      [ngClass]="{ 'text-gray-400 dark:text-gray-500': !itemsCountLabel() }"
+      (click)="onSort()"
+      [disabled]="!itemsCountLabel()"
+    >
       <mat-icon class="!text-lg">
         {{ !isAsc ? "arrow_upward" : "arrow_downward" }}
       </mat-icon>

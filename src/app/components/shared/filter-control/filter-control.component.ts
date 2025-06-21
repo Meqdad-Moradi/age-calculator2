@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -20,6 +21,7 @@ import { map, startWith } from 'rxjs/operators';
     MatSelectModule,
     MatButtonModule,
     MatIconModule,
+    MatTooltipModule,
     FormsModule,
     ReactiveFormsModule,
     NgxMatSelectSearchModule,

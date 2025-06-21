@@ -7,6 +7,7 @@ import { Country } from '../../models/country';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { compare } from '../../../helpers/utils';
 import { CustomSearchComponent } from '../../shared/custom-search/custom-search.component';
+import { NothingFoundComponent } from '../../shared/nothing-found/nothing-found.component';
 
 @Component({
   selector: 'app-countries',
@@ -15,6 +16,7 @@ import { CustomSearchComponent } from '../../shared/custom-search/custom-search.
     CountryCardComponent,
     MatProgressSpinnerModule,
     CustomSearchComponent,
+    NothingFoundComponent,
   ],
   templateUrl: './countries.component.html',
   styleUrl: './countries.component.scss',
@@ -68,6 +70,15 @@ export class CountriesComponent {
       const matchesRegion = region.includes(filterQuery);
       return matchesSearch && matchesRegion;
     });
+  });
+
+  /**
+   * handleCountryCount
+   * display the count of countries.
+   */
+  public handleCountryCount = computed(() => {
+    const count = this.countriesSignal().length;
+    return count > 0 ? count + ' | Countries' : 0;
   });
 
   /**

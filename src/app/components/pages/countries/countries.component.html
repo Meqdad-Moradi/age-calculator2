@@ -6,10 +6,11 @@
     [filterOptions]="filterOptions"
     [sortOptions]="sortOptions"
     (sortControlChange)="sortControlChange($event!)"
-    [itemsCountLabel]="countriesSignal().length + ' | Countries'"
+    [itemsCountLabel]="handleCountryCount()"
     (isAscOutput)="onSort()"
   ></app-filter-control>
 
+  @if(handleCountryCount()){
   <article class="grid grid-cols-(--grid-cols-auto-fill) gap-8 mt-8">
     @for (c of countries(); track $index) {
     <app-country-card
@@ -17,9 +18,13 @@
       (countryClick)="displayCountryDetails($event)"
     ></app-country-card>
     }@empty(){
-    <div class="mx-auto">
-      <mat-spinner mode="indeterminate" diameter="36"></mat-spinner>
-    </div>
+    <app-nothing-found
+      class="col-span-full"
+      message="No item is matching your filter or search..."
+    />
     }
   </article>
+  }@else {
+  <app-nothing-found />
+  }
 </section>
