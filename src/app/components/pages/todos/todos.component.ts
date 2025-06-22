@@ -1,4 +1,9 @@
 import {
+  CdkDragDrop,
+  CdkDropList,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
+import {
   Component,
   computed,
   DestroyRef,
@@ -33,6 +38,7 @@ import { TodoComponent } from './todo/todo.component';
     NothingFoundComponent,
     TodoComponent,
     FilterControlComponent,
+    CdkDropList,
   ],
   templateUrl: './todos.component.html',
   styleUrl: './todos.component.scss',
@@ -208,5 +214,19 @@ export class TodosComponent {
         map(() => void 0)
       )
       .subscribe();
+  }
+
+  /**
+   * drop
+   * @param event CdkDragDrop<string[]>
+   * This method handles the drop event for dragging and dropping todos.
+   * It updates the order of todos in the local todos array based on the drag-and-drop operation.
+   */
+  public drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(
+      this.todosSignal(),
+      event.previousIndex,
+      event.currentIndex
+    );
   }
 }

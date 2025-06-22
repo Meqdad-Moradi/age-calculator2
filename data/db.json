@@ -8333,6 +8333,20 @@
       "id": "fa108940-f895-4b2a-8ad3-b6602e983223",
       "title": "delete all completed todos",
       "desc": "there should be a button in a menu and click on it should check all completed todos. if exist, than we should be able to delete all of them one by one.",
+      "status": "done",
+      "boardId": "7069ca93-d60c-4fd7-a458-115992511f26"
+    },
+    {
+      "id": "28caf2b6-0640-4d37-8677-bd4b1dbd8a34",
+      "title": "general bugs fixing",
+      "desc": "specially on task manager",
+      "status": "todo",
+      "boardId": "7069ca93-d60c-4fd7-a458-115992511f26"
+    },
+    {
+      "id": "41d8e985-91e5-49e5-abf8-708e31d43286",
+      "title": "implement drag and drop",
+      "desc": "drag and drop should be added to the tasks and todos.",
       "status": "todo",
       "boardId": "7069ca93-d60c-4fd7-a458-115992511f26"
     }

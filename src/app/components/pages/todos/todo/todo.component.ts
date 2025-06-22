@@ -1,14 +1,20 @@
 import { DatePipe, NgClass } from '@angular/common';
 import { Component, input, output } from '@angular/core';
+
+import {
+  CdkDrag,
+  CdkDragHandle,
+  CdkDragPlaceholder,
+} from '@angular/cdk/drag-drop';
+import { MatButtonModule } from '@angular/material/button';
 import {
   MatCheckboxChange,
   MatCheckboxModule,
 } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
-import { Todo } from '../../../models/todos';
-import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { Todo } from '../../../models/todos';
 
 @Component({
   selector: 'app-todo',
@@ -20,6 +26,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTooltipModule,
     DatePipe,
     NgClass,
+    CdkDrag,
+    CdkDragPlaceholder,
+    CdkDragHandle,
   ],
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.scss',

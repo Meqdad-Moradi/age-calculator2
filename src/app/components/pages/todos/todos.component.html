@@ -50,7 +50,9 @@
         </button>
       </mat-menu>
     </div>
-    <mat-accordion multi>
+
+    <!-- todos list -->
+    <mat-accordion multi cdkDropList (cdkDropListDropped)="drop($event)">
       @for (todo of todosSignal(); track todo.id) {
       <app-todo
         [todo]="todo"
