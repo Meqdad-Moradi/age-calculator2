@@ -45,6 +45,7 @@
   } @else {
   <!-- content -->
   <div class="grid grid-cols-(--grid-cols-auto-fit) justify-between gap-8 mt-4">
+    <!-- todo tasks -->
     <article>
       <ng-container
         *ngTemplateOutlet="
@@ -53,11 +54,22 @@
         "
       ></ng-container>
 
-      @for (item of tasksGroup.todo; track $index) {
-      <div class="mt-4">
-        <app-task [task]="item" (updateTask)="onUpdateTask($event)"></app-task>
+      <div
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="tasksGroup.todo"
+        [cdkDropListConnectedTo]="[doingList]"
+        (cdkDropListDropped)="drop($event)"
+      >
+        @for (item of tasksGroup.todo; track $index) {
+        <div class="mt-4">
+          <app-task
+            [task]="item"
+            (updateTask)="onUpdateTask($event)"
+          ></app-task>
+        </div>
+        }
       </div>
-      }
     </article>
 
     <!-- doing tasks -->
@@ -69,11 +81,22 @@
         "
       ></ng-container>
 
-      @for (item of tasksGroup.doing; track $index) {
-      <div class="mt-4">
-        <app-task [task]="item" (updateTask)="onUpdateTask($event)"></app-task>
+      <div
+        cdkDropList
+        #doingList="cdkDropList"
+        [cdkDropListData]="tasksGroup.doing"
+        [cdkDropListConnectedTo]="[doneList, todoList]"
+        (cdkDropListDropped)="drop($event)"
+      >
+        @for (item of tasksGroup.doing; track $index) {
+        <div class="mt-4">
+          <app-task
+            [task]="item"
+            (updateTask)="onUpdateTask($event)"
+          ></app-task>
+        </div>
+        }
       </div>
-      }
     </article>
 
     <!-- done tasks -->
@@ -85,11 +108,22 @@
         "
       ></ng-container>
 
-      @for (item of tasksGroup.done; track $index) {
-      <div class="mt-4">
-        <app-task [task]="item" (updateTask)="onUpdateTask($event)"></app-task>
+      <div
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="tasksGroup.done"
+        [cdkDropListConnectedTo]="[todoList]"
+        (cdkDropListDropped)="drop($event)"
+      >
+        @for (item of tasksGroup.done; track $index) {
+        <div class="mt-4">
+          <app-task
+            [task]="item"
+            (updateTask)="onUpdateTask($event)"
+          ></app-task>
+        </div>
+        }
       </div>
-      }
     </article>
   </div>
   } }@else {

@@ -1,3 +1,9 @@
+import {
+  CdkDragDrop,
+  CdkDropList,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,6 +30,7 @@ import { SidenavService } from '../../../../services/sidenav.service';
 import { AddTaskDialogComponent } from '../../../dialogs/add-task-dialog/add-task-dialog.component';
 import { ConfirmationDialogComponent } from '../../../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ViewTaskDialogComponent } from '../../../dialogs/view-task-dialog/view-task-dialog.component';
+import { ErrorResponse } from '../../../models/error-response.model';
 import {
   Board,
   Task,
@@ -33,7 +40,6 @@ import {
 import { CustomSearchComponent } from '../../../shared/custom-search/custom-search.component';
 import { NothingFoundComponent } from '../../../shared/nothing-found/nothing-found.component';
 import { TaskComponent } from '../task/task.component';
-import { ErrorResponse } from '../../../models/error-response.model';
 
 @Component({
   selector: 'app-tasks',
@@ -48,6 +54,7 @@ import { ErrorResponse } from '../../../models/error-response.model';
     AsyncPipe,
     CustomSearchComponent,
     NothingFoundComponent,
+    CdkDropList,
   ],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.scss',
@@ -276,5 +283,27 @@ export class TasksComponent implements OnInit, OnDestroy {
           dialogRef.unsubscribe();
         },
       });
+  }
+
+  /**
+   * drop
+   * this method will handle drag and drop
+   * @param event CdkDragDrop<string[]>
+   */
+  public drop(event: CdkDragDrop<Task[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
   }
 }
