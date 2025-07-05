@@ -1,0 +1,44 @@
+<ng-container [formGroup]="form">
+  <section class="flex items-center">
+    <!-- select country calling code -->
+    <mat-select class="max-w-max" formControlName="code" #phoneSelect>
+      <mat-select-trigger class="select-trigger">
+        @if (formControls['code'].value) {
+        <span>{{ formControls["code"].value.alpha2Code }}</span
+        >&nbsp;
+        <span>{{ formControls["code"].value.callingCode }}</span>
+        }
+      </mat-select-trigger>
+
+      <mat-option class="search-box">
+        <ngx-mat-select-search
+          placeholderLabel="Suche..."
+          noEntriesFoundLabel=""
+          [formControl]="searchControl"
+        ></ngx-mat-select-search>
+      </mat-option>
+
+      @for (option of filteredOptions | async; track $index) {
+      <mat-option [value]="option">
+        <span>{{ option.name }}</span
+        >&nbsp;
+        <span>{{ option.callingCode }}</span>
+      </mat-option>
+      }
+    </mat-select>
+
+    <mat-divider
+      class="h-[20px] text-gray-500 px-2"
+      [vertical]="true"
+    ></mat-divider>
+
+    <!-- phone number input -->
+    <input
+      class="!pl-4 w-full"
+      type="tel"
+      matInput
+      formControlName="number"
+      (blur)="onTouched()"
+    />
+  </section>
+</ng-container>

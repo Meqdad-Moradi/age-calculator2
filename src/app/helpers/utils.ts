@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { allCountries } from '../components/models/country';
+import { Phone } from '../components/models/phone';
+
 export const matDateFormat = {
   parse: {
     dateInput: 'DD.MM.YYYY',
@@ -57,4 +60,15 @@ export function compare(propertyPath: string, order: 'asc' | 'desc' = 'asc') {
     }
     return 0;
   };
+}
+
+/**
+ * getCountryByAlpha2Code
+ * @param value string -> alpha2Code
+ * @returns Phone
+ */
+export function getCountryByAlpha2Code(value: string): Phone {
+  return allCountries.find(
+    (c) => c.alpha2Code.toLocaleLowerCase() === value.toLocaleLowerCase()
+  )!;
 }

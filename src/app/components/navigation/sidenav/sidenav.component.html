@@ -54,6 +54,17 @@
 
       <mat-list-item
         class="!cursor-pointer"
+        [routerLink]="['/phone']"
+        routerLinkActive="active"
+        onclick="this.blur()"
+        (click)="onExpandTaskManager(false)"
+      >
+        <mat-icon matListItemIcon>phone</mat-icon>
+        <span matListItemTitle>Tel input</span>
+      </mat-list-item>
+
+      <mat-list-item
+        class="!cursor-pointer"
         [routerLink]="['/task-manager']"
         routerLinkActive="active"
         onclick="this.blur()"

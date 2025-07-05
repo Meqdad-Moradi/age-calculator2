@@ -1,0 +1,23 @@
+<section>
+  <form [formGroup]="phoneform" (ngSubmit)="onSubmit($event)">
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Your phone number</mat-label>
+      <app-tel-input formControlName="phone"></app-tel-input>
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        (click)="phoneform.get('phone')?.reset()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Your Country</mat-label>
+      <app-select-search formControlName="country"></app-select-search>
+    </mat-form-field>
+
+    <button mat-raised-button type="submit">Submit</button>
+  </form>
+</section>

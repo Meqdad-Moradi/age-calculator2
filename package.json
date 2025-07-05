@@ -30,6 +30,7 @@
     "ngx-mat-select-search": "^8.0.1",
     "postcss": "^8.5.2",
     "rxjs": "~7.8.0",
+    "svg-country-flags": "^1.2.10",
     "tailwindcss": "^4.0.6",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
