@@ -1,7 +1,7 @@
 <ng-container [formGroup]="form">
   <section class="flex items-center">
     <!-- select country calling code -->
-    <mat-select class="max-w-max" formControlName="code" #phoneSelect>
+    <mat-select #phoneSelect class="max-w-max" formControlName="code">
       <mat-select-trigger class="select-trigger">
         @if (formControls['code'].value) {
         <span>{{ formControls["code"].value.alpha2Code }}</span
@@ -34,6 +34,7 @@
 
     <!-- phone number input -->
     <input
+      #numberInput
       class="!pl-4 w-full"
       type="tel"
       matInput

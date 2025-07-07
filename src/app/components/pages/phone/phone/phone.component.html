@@ -11,13 +11,22 @@
       >
         <mat-icon>close</mat-icon>
       </button>
+
+      <!-- error -->
+      @if(formControls['phone'].errors?.['errorMsg']){
+      <mat-error>{{ formControls["phone"].errors?.["errorMsg"] }}</mat-error>
+      } @if(formControls['phone'].errors?.['maxLength']){
+      <mat-error>Max length is 14...</mat-error>
+      }
     </mat-form-field>
 
-    <mat-form-field class="w-full" appearance="outline">
-      <mat-label>Your Country</mat-label>
-      <app-select-search formControlName="country"></app-select-search>
-    </mat-form-field>
+    <app-select-search
+      formControlName="country"
+      label="Your country"
+    ></app-select-search>
 
-    <button mat-raised-button type="submit">Submit</button>
+    <button mat-raised-button type="submit" [disabled]="phoneform.invalid">
+      Submit
+    </button>
   </form>
 </section>

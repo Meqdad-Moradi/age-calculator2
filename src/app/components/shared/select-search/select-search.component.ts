@@ -1,10 +1,23 @@
-import { Component, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef, input, OnDestroy, OnInit } from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormControl,
+  FormsModule,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-select-search',
-  imports: [MatInputModule],
+  imports: [
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './select-search.component.html',
   styleUrl: './select-search.component.scss',
   providers: [
@@ -15,10 +28,21 @@ import { MatInputModule } from '@angular/material/input';
     },
   ],
 })
-export class SelectSearchComponent implements ControlValueAccessor {
-  value = '';
-  disabled = false;
+export class SelectSearchComponent
+  implements OnInit, ControlValueAccessor, OnDestroy
+{
+  // inputs
+  public label = input.required<string>();
 
+  // public properties
+  public value = '';
+  public disabled = false;
+  public control = new FormControl<string>('');
+
+  // private properties
+  private onDestroy = new Subject();
+
+  // control value accessor
   onChange!: (value: string) => void;
   onTouched!: () => void;
 
@@ -31,7 +55,19 @@ export class SelectSearchComponent implements ControlValueAccessor {
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
-  setDisabledState?(isDisabled: boolean): void {
+  setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
+  }
+
+  ngOnInit(): void {
+    this.control.valueChanges.pipe(takeUntil(this.onDestroy)).subscribe((v) => {
+      if (!v) return;
+      this.onChange(v);
+      this.onTouched();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.onDestroy.complete();
   }
 }

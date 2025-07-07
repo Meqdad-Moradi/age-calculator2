@@ -23,21 +23,21 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { MatDividerModule } from '@angular/material/divider';
 import {
   MatFormFieldControl,
   MatFormFieldModule,
 } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatSelect, MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { ReplaySubject, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
+import { getCountryByAlpha2Code } from '../../../helpers/utils';
 import { allCountries } from '../../models/country';
 import { Phone } from '../../models/phone';
-import { getCountryByAlpha2Code } from '../../../helpers/utils';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDividerModule } from '@angular/material/divider';
 
 class CustomErrorMatcher implements ErrorStateMatcher {
   isErrorState(control: AbstractControl | null): boolean {
@@ -144,6 +144,7 @@ export class TelInputComponent
 
   @ViewChild('phoneSelect', { static: true }) phoneSelect!: MatSelect;
   @ViewChild(MatInput, { read: ElementRef, static: true }) input!: ElementRef;
+  @ViewChild('numberInput') numberInput!: ElementRef<HTMLInputElement>;
   protected onDestroy = new Subject<void>();
 
   public onChange!: (value: string) => void;
@@ -189,9 +190,10 @@ export class TelInputComponent
     this.monitorFocus();
 
     // propagate internal form changes to parent
-    this.form.valueChanges
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(() => this.onChange(this.value));
+    this.form.valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(() => {
+      this.onChange(this.value);
+      this.stateChanges.next();
+    });
 
     // initialize and filter country list
     this.filteredOptions.next(this.countries.slice());
@@ -253,6 +255,7 @@ export class TelInputComponent
    * sets the initial value after the filteredOptions are loaded initially
    */
   private setInitialValue() {
+    this.numberInput.nativeElement.focus();
     this.filteredOptions
       .pipe(take(1), takeUntil(this.onDestroy))
       .subscribe(() => {
