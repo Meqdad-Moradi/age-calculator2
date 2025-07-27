@@ -1,4 +1,8 @@
-<mat-form-field class="w-full" appearance="outline">
-  <mat-label>{{ label() }}</mat-label>
-  <input type="text" matInput [formControl]="control" />
-</mat-form-field>
+<input
+  class="w-full h-full px-4 border-0 outline-none"
+  type="text"
+  [formControl]="control"
+  (keydown)="onClick($event)"
+  (keyup)="onClick($event)"
+  (click)="onClick($event)"
+/>

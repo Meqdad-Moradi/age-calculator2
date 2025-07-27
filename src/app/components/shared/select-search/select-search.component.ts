@@ -1,4 +1,4 @@
-import { Component, forwardRef, input, OnDestroy, OnInit } from '@angular/core';
+import { Component, forwardRef, OnDestroy, OnInit } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -6,18 +6,12 @@ import {
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-select-search',
-  imports: [
-    MatInputModule,
-    MatFormFieldModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
+  imports: [MatInputModule, FormsModule, ReactiveFormsModule],
   templateUrl: './select-search.component.html',
   styleUrl: './select-search.component.scss',
   providers: [
@@ -31,9 +25,6 @@ import { Subject, takeUntil } from 'rxjs';
 export class SelectSearchComponent
   implements OnInit, ControlValueAccessor, OnDestroy
 {
-  // inputs
-  public label = input.required<string>();
-
   // public properties
   public value = '';
   public disabled = false;
@@ -69,5 +60,9 @@ export class SelectSearchComponent
 
   ngOnDestroy(): void {
     this.onDestroy.complete();
+  }
+
+  public onClick(e: Event): void {
+    e.stopPropagation();
   }
 }

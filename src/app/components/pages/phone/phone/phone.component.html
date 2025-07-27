@@ -20,10 +20,14 @@
       }
     </mat-form-field>
 
-    <app-select-search
-      formControlName="country"
-      label="Your country"
-    ></app-select-search>
+    <mat-form-field class="w-full country" appearance="outline">
+      <mat-label>Coutnry</mat-label>
+      <mat-select formControlName="country" panelWidth="auto">
+        <mat-option class="h-full !p-0">
+          <app-select-search></app-select-search>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
     <button mat-raised-button type="submit" [disabled]="phoneform.invalid">
       Submit
