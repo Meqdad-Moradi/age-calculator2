@@ -38,6 +38,7 @@ import { take, takeUntil } from 'rxjs/operators';
 import { getCountryByAlpha2Code } from '../../../helpers/utils';
 import { allCountries } from '../../models/country';
 import { Phone } from '../../models/phone';
+import { SelectSearchComponent } from '../select-search/select-search.component';
 
 class CustomErrorMatcher implements ErrorStateMatcher {
   isErrorState(control: AbstractControl | null): boolean {
@@ -57,6 +58,7 @@ class CustomErrorMatcher implements ErrorStateMatcher {
     MatTooltipModule,
     MatIconModule,
     MatDividerModule,
+    SelectSearchComponent,
   ],
   templateUrl: './tel-input.component.html',
   styleUrl: './tel-input.component.scss',
@@ -194,6 +196,17 @@ export class TelInputComponent
       this.onChange(this.value);
       this.stateChanges.next();
     });
+
+    // handle select open/close events
+    // when the select is closed, focus the number input
+    this.phoneSelect.openedChange
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe((opened) => {
+        if (!opened) {
+          // focus the number input when the select is closed
+          this.numberInput.nativeElement.focus();
+        }
+      });
 
     // initialize and filter country list
     this.filteredOptions.next(this.countries.slice());

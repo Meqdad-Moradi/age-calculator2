@@ -10,12 +10,16 @@
         }
       </mat-select-trigger>
 
-      <mat-option class="search-box">
-        <ngx-mat-select-search
+      <mat-option class="p-0 border-b">
+        <!-- <ngx-mat-select-search
           placeholderLabel="Suche..."
           noEntriesFoundLabel=""
           [formControl]="searchControl"
-        ></ngx-mat-select-search>
+        ></ngx-mat-select-search> -->
+        <app-select-search
+          [formControl]="searchControl"
+          placeholderLabel="Search..."
+        ></app-select-search>
       </mat-option>
 
       @for (option of filteredOptions | async; track $index) {

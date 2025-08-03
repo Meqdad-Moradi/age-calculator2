@@ -1,8 +1,11 @@
 <input
-  class="w-full h-full px-4 border-0 outline-none"
+  #searchInput
+  class="w-full !h-full absolute inset-px !px-4"
   type="text"
+  matInput
+  [placeholder]="placeholder"
   [formControl]="control"
-  (keydown)="onClick($event)"
-  (keyup)="onClick($event)"
-  (click)="onClick($event)"
+  (keydown)="onSearchClick($event)"
+  (keyup)="onSearchClick($event)"
+  (click)="onSearchClick($event)"
 />
