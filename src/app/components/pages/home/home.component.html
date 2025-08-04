@@ -39,56 +39,59 @@
   </form>
 
   <!-- display result -->
-  @if (age) { @let isNewBornBaby = age.years === 0 && age.months === 0 &&
-  age.days === 0;
-  <div class="mt-8">
-    @if(isNewBornBaby){
-    <p class="text-gray-500 dark:text-gray-400 mt-8">
-      You were just born today 😊
-    </p>
-    }@else {
-    <p class="text-gray-500 dark:text-gray-400">Your age is:</p>
-    <div class="mt-4">
-      <div class="flex flex-col justify-between">
-        <!-- display years -->
-        @if (age.years) {
-        <ng-container
-          *ngTemplateOutlet="
-            result;
-            context: {
-              value: age.years,
-              label: age.years > 1 ? 'Years' : 'Year'
+  @if (age) {
+    @let isNewBornBaby = age.years === 0 && age.months === 0 && age.days === 0;
+    <div class="mt-8">
+      @if (isNewBornBaby) {
+        <p class="text-gray-500 dark:text-gray-400 mt-8">
+          You were just born today 😊
+        </p>
+      } @else {
+        <p class="text-gray-500 dark:text-gray-400">Your age is:</p>
+        <div class="mt-4">
+          <div class="flex flex-col justify-between">
+            <!-- display years -->
+            @if (age.years) {
+              <ng-container
+                *ngTemplateOutlet="
+                  result;
+                  context: {
+                    value: age.years,
+                    label: age.years > 1 ? 'Years' : 'Year',
+                  }
+                "
+              ></ng-container>
             }
-          "
-        ></ng-container>
-        }
 
-        <!-- display months -->
-        @if (age.months) {
-        <ng-container
-          *ngTemplateOutlet="
-            result;
-            context: {
-              value: age.months,
-              label: age.months > 1 ? 'Months' : 'Month'
+            <!-- display months -->
+            @if (age.months) {
+              <ng-container
+                *ngTemplateOutlet="
+                  result;
+                  context: {
+                    value: age.months,
+                    label: age.months > 1 ? 'Months' : 'Month',
+                  }
+                "
+              ></ng-container>
             }
-          "
-        ></ng-container>
-        }
 
-        <!-- display days -->
-        @if (age.days) {
-        <ng-container
-          *ngTemplateOutlet="
-            result;
-            context: { value: age.days, label: age.days > 1 ? 'Days' : 'Day' }
-          "
-        ></ng-container>
-        }
-      </div>
+            <!-- display days -->
+            @if (age.days) {
+              <ng-container
+                *ngTemplateOutlet="
+                  result;
+                  context: {
+                    value: age.days,
+                    label: age.days > 1 ? 'Days' : 'Day',
+                  }
+                "
+              ></ng-container>
+            }
+          </div>
+        </div>
+      }
     </div>
-    }
-  </div>
   }
 </section>
 

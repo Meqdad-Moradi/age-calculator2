@@ -1,24 +1,24 @@
 <div class="flex items-start justify-between pt-4 pr-2 pl-6">
   @if (isTitleEditing) {
-  <input
-    id="titleInput"
-    class="text-lg font-semibold font-pop text-gray-600 dark:text-gray-300 first-letter:uppercase mt-1 w-full border rounded"
-    [formControl]="titleControl"
-    type="text"
-    (blur)="onBlure()"
-    (keydown.enter)="onBlure()"
-  />
+    <input
+      id="titleInput"
+      class="text-lg font-semibold font-pop text-gray-600 dark:text-gray-300 first-letter:uppercase mt-1 w-full border rounded"
+      [formControl]="titleControl"
+      type="text"
+      (blur)="onBlure()"
+      (keydown.enter)="onBlure()"
+    />
   } @else {
-  <h2
-    class="text-lg font-semibold font-pop text-gray-600 dark:text-gray-300 first-letter:uppercase mt-1"
-    role="button"
-    (click)="onTitleClick()"
-    (keydown.enter)="onTitleClick()"
-    (keydown.escape)="onTitleClick()"
-    tabindex="0"
-  >
-    {{ task.title }}
-  </h2>
+    <h2
+      class="text-lg font-semibold font-pop text-gray-600 dark:text-gray-300 first-letter:uppercase mt-1"
+      role="button"
+      (click)="onTitleClick()"
+      (keydown.enter)="onTitleClick()"
+      (keydown.escape)="onTitleClick()"
+      tabindex="0"
+    >
+      {{ task.title }}
+    </h2>
   }
 
   <button mat-icon-button [matMenuTriggerFor]="menu">
@@ -38,29 +38,29 @@
 
 <mat-dialog-content class="!pt-2">
   <!-- content -->
-  @if(isDescEditing) {
-  <textarea
-    id="descInput"
-    class="mb-4 text-gray-500 dark:text-gray-400 w-full border border-gray-500 p-2 rounded"
-    name="desc"
-    id="descInput"
-    cols="3"
-    rows="1"
-    [formControl]="descControl"
-    (blur)="onBlure()"
-    (keydown.control.enter)="onBlure()"
-  ></textarea>
+  @if (isDescEditing) {
+    <textarea
+      id="descInput"
+      class="mb-4 text-gray-500 dark:text-gray-400 w-full border border-gray-500 p-2 rounded"
+      name="desc"
+      id="descInput"
+      cols="3"
+      rows="1"
+      [formControl]="descControl"
+      (blur)="onBlure()"
+      (keydown.control.enter)="onBlure()"
+    ></textarea>
   } @else {
-  <p
-    class="mb-4 text-gray-500 dark:text-gray-400"
-    role="button"
-    (click)="onDescClick()"
-    (keydown.enter)="onDescClick()"
-    (keydown.space)="onDescClick()"
-    tabindex="0"
-  >
-    {{ task.desc }}
-  </p>
+    <p
+      class="mb-4 text-gray-500 dark:text-gray-400"
+      role="button"
+      (click)="onDescClick()"
+      (keydown.enter)="onDescClick()"
+      (keydown.space)="onDescClick()"
+      tabindex="0"
+    >
+      {{ task.desc }}
+    </p>
   }
 
   <!-- status -->
@@ -72,7 +72,7 @@
       [formControl]="statusControl"
     >
       @for (status of statusArr; track $index) {
-      <mat-option [value]="status">{{ status }}</mat-option>
+        <mat-option [value]="status">{{ status }}</mat-option>
       }
     </mat-select>
   </mat-form-field>

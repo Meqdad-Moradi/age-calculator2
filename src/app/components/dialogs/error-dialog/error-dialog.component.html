@@ -3,13 +3,14 @@
 <mat-dialog-content class="!pt-4 !grid !gap-4 !min-w-[500px]">
   <p class="first-letter:uppercase">{{ data.message }}</p>
 
-  @if(data.details){ @if (isDetailsShowing()) {
-  <p>{{ data.details }}</p>
-  }
+  @if (data.details) {
+    @if (isDetailsShowing()) {
+      <p>{{ data.details }}</p>
+    }
 
-  <button class="mr-auto" mat-button (click)="onShowDetails()">
-    {{ btnLabel() }}
-  </button>
+    <button class="mr-auto" mat-button (click)="onShowDetails()">
+      {{ btnLabel() }}
+    </button>
   }
 </mat-dialog-content>
 

@@ -20,7 +20,7 @@
       <mat-label>Status</mat-label>
       <mat-select class="w-full" panelClass="w-auto" formControlName="status">
         @for (status of statusArr(); track $index) {
-        <mat-option [value]="status">{{ status }}</mat-option>
+          <mat-option [value]="status">{{ status }}</mat-option>
         }
       </mat-select>
     </mat-form-field>

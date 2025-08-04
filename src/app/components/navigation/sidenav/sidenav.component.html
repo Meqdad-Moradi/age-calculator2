@@ -85,16 +85,16 @@
       <div class="boards" [ngClass]="{ expanded: isExpanded }">
         <div>
           @for (item of boards$ | async; track $index) {
-          <mat-list-item
-            class="!cursor-pointer"
-            [routerLink]="['/task-manager/', item.id]"
-            routerLinkActive="active"
-            onclick="this.blur()"
-            (click)="sendIndex($index)"
-          >
-            <mat-icon matListItemIcon>space_dashboard</mat-icon>
-            <span matListItemTitle>{{ item.name }}</span>
-          </mat-list-item>
+            <mat-list-item
+              class="!cursor-pointer"
+              [routerLink]="['/task-manager/', item.id]"
+              routerLinkActive="active"
+              onclick="this.blur()"
+              (click)="sendIndex($index)"
+            >
+              <mat-icon matListItemIcon>space_dashboard</mat-icon>
+              <span matListItemTitle>{{ item.name }}</span>
+            </mat-list-item>
           }
           <!-- create new board -->
           <button

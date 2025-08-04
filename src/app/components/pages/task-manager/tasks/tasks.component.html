@@ -38,96 +38,103 @@
     class="flex items-center justify-between bg-gray-200 dark:bg-(--forground-color) mt-2 border-b border-b-gray-500 py-3"
   ></header>
 
-  @if (tasksGroup$ | async) { @let tasksGroup = (tasksGroup$ | async)!; @if (
-  !tasksGroup.todo.length && !tasksGroup.doing.length &&
-  !tasksGroup.done.length) {
-  <app-nothing-found></app-nothing-found>
+  @if (tasksGroup$ | async) {
+    @let tasksGroup = (tasksGroup$ | async)!;
+    @if (
+      !tasksGroup.todo.length &&
+      !tasksGroup.doing.length &&
+      !tasksGroup.done.length
+    ) {
+      <app-nothing-found></app-nothing-found>
+    } @else {
+      <!-- content -->
+      <div
+        class="grid grid-cols-(--grid-cols-auto-fit) justify-between gap-8 mt-4"
+      >
+        <!-- todo tasks -->
+        <article>
+          <ng-container
+            *ngTemplateOutlet="
+              header;
+              context: { text: 'todo', color: 'bg-teal-400' }
+            "
+          ></ng-container>
+
+          <div
+            cdkDropList
+            #todoList="cdkDropList"
+            [cdkDropListData]="tasksGroup.todo"
+            [cdkDropListConnectedTo]="[doingList]"
+            (cdkDropListDropped)="drop($event)"
+          >
+            @for (item of tasksGroup.todo; track $index) {
+              <div class="mt-4">
+                <app-task
+                  [task]="item"
+                  (updateTask)="onUpdateTask($event)"
+                ></app-task>
+              </div>
+            }
+          </div>
+        </article>
+
+        <!-- doing tasks -->
+        <article>
+          <ng-container
+            *ngTemplateOutlet="
+              header;
+              context: { text: 'doing', color: 'bg-violet-500' }
+            "
+          ></ng-container>
+
+          <div
+            cdkDropList
+            #doingList="cdkDropList"
+            [cdkDropListData]="tasksGroup.doing"
+            [cdkDropListConnectedTo]="[doneList, todoList]"
+            (cdkDropListDropped)="drop($event)"
+          >
+            @for (item of tasksGroup.doing; track $index) {
+              <div class="mt-4">
+                <app-task
+                  [task]="item"
+                  (updateTask)="onUpdateTask($event)"
+                ></app-task>
+              </div>
+            }
+          </div>
+        </article>
+
+        <!-- done tasks -->
+        <article>
+          <ng-container
+            *ngTemplateOutlet="
+              header;
+              context: { text: 'done', color: 'bg-green-600' }
+            "
+          ></ng-container>
+
+          <div
+            cdkDropList
+            #doneList="cdkDropList"
+            [cdkDropListData]="tasksGroup.done"
+            [cdkDropListConnectedTo]="[todoList]"
+            (cdkDropListDropped)="drop($event)"
+          >
+            @for (item of tasksGroup.done; track $index) {
+              <div class="mt-4">
+                <app-task
+                  [task]="item"
+                  (updateTask)="onUpdateTask($event)"
+                ></app-task>
+              </div>
+            }
+          </div>
+        </article>
+      </div>
+    }
   } @else {
-  <!-- content -->
-  <div class="grid grid-cols-(--grid-cols-auto-fit) justify-between gap-8 mt-4">
-    <!-- todo tasks -->
-    <article>
-      <ng-container
-        *ngTemplateOutlet="
-          header;
-          context: { text: 'todo', color: 'bg-teal-400' }
-        "
-      ></ng-container>
-
-      <div
-        cdkDropList
-        #todoList="cdkDropList"
-        [cdkDropListData]="tasksGroup.todo"
-        [cdkDropListConnectedTo]="[doingList]"
-        (cdkDropListDropped)="drop($event)"
-      >
-        @for (item of tasksGroup.todo; track $index) {
-        <div class="mt-4">
-          <app-task
-            [task]="item"
-            (updateTask)="onUpdateTask($event)"
-          ></app-task>
-        </div>
-        }
-      </div>
-    </article>
-
-    <!-- doing tasks -->
-    <article>
-      <ng-container
-        *ngTemplateOutlet="
-          header;
-          context: { text: 'doing', color: 'bg-violet-500' }
-        "
-      ></ng-container>
-
-      <div
-        cdkDropList
-        #doingList="cdkDropList"
-        [cdkDropListData]="tasksGroup.doing"
-        [cdkDropListConnectedTo]="[doneList, todoList]"
-        (cdkDropListDropped)="drop($event)"
-      >
-        @for (item of tasksGroup.doing; track $index) {
-        <div class="mt-4">
-          <app-task
-            [task]="item"
-            (updateTask)="onUpdateTask($event)"
-          ></app-task>
-        </div>
-        }
-      </div>
-    </article>
-
-    <!-- done tasks -->
-    <article>
-      <ng-container
-        *ngTemplateOutlet="
-          header;
-          context: { text: 'done', color: 'bg-green-600' }
-        "
-      ></ng-container>
-
-      <div
-        cdkDropList
-        #doneList="cdkDropList"
-        [cdkDropListData]="tasksGroup.done"
-        [cdkDropListConnectedTo]="[todoList]"
-        (cdkDropListDropped)="drop($event)"
-      >
-        @for (item of tasksGroup.done; track $index) {
-        <div class="mt-4">
-          <app-task
-            [task]="item"
-            (updateTask)="onUpdateTask($event)"
-          ></app-task>
-        </div>
-        }
-      </div>
-    </article>
-  </div>
-  } }@else {
-  <app-nothing-found></app-nothing-found>
+    <app-nothing-found></app-nothing-found>
   }
 </section>
 

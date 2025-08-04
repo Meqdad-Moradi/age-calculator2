@@ -29,6 +29,7 @@
     "moment": "^2.30.1",
     "ngx-mat-select-search": "^8.0.1",
     "postcss": "^8.5.2",
+    "prettier": "^3.6.2",
     "rxjs": "~7.8.0",
     "svg-country-flags": "^1.2.10",
     "tailwindcss": "^4.0.6",

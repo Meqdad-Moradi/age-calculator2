@@ -20,7 +20,7 @@
           [ngClass]="{
             'text-red-500 dark:text-red-400 font-medium':
               filterQuery() !== 'All',
-            'text-gray-400 dark:text-gray-500': !itemsCountLabel()
+            'text-gray-400 dark:text-gray-500': !itemsCountLabel(),
           }"
         >
           {{ filterQuery() }}
@@ -29,65 +29,67 @@
 
         <!-- filter options -->
         @if (isSearchBoxVisible()) {
-        <mat-option>
-          <ngx-mat-select-search
-            [formControl]="searchControl"
-            placeholderLabel="Search..."
-            noEntriesFoundLabel="No entries found!"
-          ></ngx-mat-select-search>
-        </mat-option>
-        } @for (option of filteredOptions | async; track $index) {
-        <mat-option [value]="option">
-          @if (filterQuery() === option) {
-          <div class="flex items-center justify-between gap-3 min-w-24">
-            <span class="text-right">{{ option }}</span>
-          </div>
-          } @else {
-          <span>{{ option }}</span>
-          }
-        </mat-option>
+          <mat-option>
+            <ngx-mat-select-search
+              [formControl]="searchControl"
+              placeholderLabel="Search..."
+              noEntriesFoundLabel="No entries found!"
+            ></ngx-mat-select-search>
+          </mat-option>
+        }
+        @for (option of filteredOptions | async; track $index) {
+          <mat-option [value]="option">
+            @if (filterQuery() === option) {
+              <div class="flex items-center justify-between gap-3 min-w-24">
+                <span class="text-right">{{ option }}</span>
+              </div>
+            } @else {
+              <span>{{ option }}</span>
+            }
+          </mat-option>
         }
       </mat-select>
     </mat-form-field>
 
     @if (sortOptions()?.length) {
-    <!-- seprate line -->
-    <span class="pl-2 pr-4 text-gray-400">|</span>
+      <!-- seprate line -->
+      <span class="pl-2 pr-4 text-gray-400">|</span>
 
-    <!-- sort controls -->
-    <mat-form-field
-      class="no-arrow no-hover-effect no-hint no-underline match-height match-width"
-    >
-      <mat-select
-        panelClass="no-checkbox"
-        [(value)]="sortControl"
-        [disabled]="!itemsCountLabel()"
+      <!-- sort controls -->
+      <mat-form-field
+        class="no-arrow no-hover-effect no-hint no-underline match-height match-width"
       >
-        <mat-select-trigger
-          class="flex items-center justify-between gap-1 truncate text-(--primary)"
-          [ngClass]="{
-            'text-red-500 dark:text-red-400 font-medium': sortControl() !== sortOptions()?.[0],
-            'text-gray-400 dark:text-gray-500': !itemsCountLabel()
-          }"
+        <mat-select
+          panelClass="no-checkbox"
+          [(value)]="sortControl"
+          [disabled]="!itemsCountLabel()"
         >
-          {{ sortControl() }}
-          <mat-icon class="!text-base text-(--primary)">sort</mat-icon>
-        </mat-select-trigger>
+          <mat-select-trigger
+            class="flex items-center justify-between gap-1 truncate text-(--primary)"
+            [ngClass]="{
+              'text-red-500 dark:text-red-400 font-medium':
+                sortControl() !== sortOptions()?.[0],
+              'text-gray-400 dark:text-gray-500': !itemsCountLabel(),
+            }"
+          >
+            {{ sortControl() }}
+            <mat-icon class="!text-base text-(--primary)">sort</mat-icon>
+          </mat-select-trigger>
 
-        @for (option of sortOptions(); track $index) {
-        <mat-option [value]="option">
-          @if (sortControl() === option) {
-          <div class="flex items-center justify-between gap-3 min-w-24">
-            <span class="text-right">{{ option }}</span>
-            <mat-icon class="!mr-0">sort</mat-icon>
-          </div>
-          } @else {
-          <span>{{ option }}</span>
+          @for (option of sortOptions(); track $index) {
+            <mat-option [value]="option">
+              @if (sortControl() === option) {
+                <div class="flex items-center justify-between gap-3 min-w-24">
+                  <span class="text-right">{{ option }}</span>
+                  <mat-icon class="!mr-0">sort</mat-icon>
+                </div>
+              } @else {
+                <span>{{ option }}</span>
+              }
+            </mat-option>
           }
-        </mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
+        </mat-select>
+      </mat-form-field>
     }
 
     <!-- seprate line -->

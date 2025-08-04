@@ -10,21 +10,21 @@
     (isAscOutput)="onSort()"
   ></app-filter-control>
 
-  @if(handleCountryCount()){
-  <article class="grid grid-cols-(--grid-cols-auto-fill) gap-8 mt-8">
-    @for (c of countries(); track $index) {
-    <app-country-card
-      [countryInput]="c"
-      (countryClick)="displayCountryDetails($event)"
-    ></app-country-card>
-    }@empty(){
-    <app-nothing-found
-      class="col-span-full"
-      message="No item is matching your filter or search..."
-    />
-    }
-  </article>
-  }@else {
-  <app-nothing-found />
+  @if (handleCountryCount()) {
+    <article class="grid grid-cols-(--grid-cols-auto-fill) gap-8 mt-8">
+      @for (c of countries(); track $index) {
+        <app-country-card
+          [countryInput]="c"
+          (countryClick)="displayCountryDetails($event)"
+        ></app-country-card>
+      } @empty {
+        <app-nothing-found
+          class="col-span-full"
+          message="No item is matching your filter or search..."
+        />
+      }
+    </article>
+  } @else {
+    <app-nothing-found />
   }
 </section>

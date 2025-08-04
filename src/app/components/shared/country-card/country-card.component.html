@@ -1,52 +1,53 @@
-@if (countryInput()) { @let country = countryInput()!;
-<section
-  class="bg-(--forground-color) shadow-lg rounded-2xl overflow-hidden cursor-pointer"
-  (click)="displayCountryDetails()"
-  tabindex="0"
-  (keydown.enter)="displayCountryDetails()"
->
-  <div>
-    <img
-      class="w-full h-full object-cover aspect-video"
-      src="{{ country.flags.png }}"
-      alt="{{ country.flags.alt }}"
-    />
-  </div>
-
-  <!-- content -->
-  <div class="p-8">
-    <h2
-      class="font-bold font-pop text-2xl mb-4 truncate"
-      matTooltip="{{ country.name.common }}"
-    >
-      {{ country.name.common }}
-    </h2>
-
-    <div class="flex flex-col gap-2">
-      <div>
-        <span class="text-gray-600 dark:text-gray-300 font-semibold"
-          >Population:
-        </span>
-        <span class="text-gray-400 ml-1">
-          {{ country.population | number }}
-        </span>
-      </div>
-      <div>
-        <span class="text-gray-600 dark:text-gray-300 font-semibold"
-          >Region:
-        </span>
-        <span class="text-gray-400 ml-1">{{ country.region }}</span>
-      </div>
-
-      @for (capital of country.capital; track $index) {
-      <div>
-        <span class="text-gray-600 dark:text-gray-300 font-semibold"
-          >Capital:
-        </span>
-        <span class="text-gray-400 ml-1">{{ capital }}</span>
-      </div>
-      }
+@if (countryInput()) {
+  @let country = countryInput()!;
+  <section
+    class="bg-(--forground-color) shadow-lg rounded-2xl overflow-hidden cursor-pointer"
+    (click)="displayCountryDetails()"
+    tabindex="0"
+    (keydown.enter)="displayCountryDetails()"
+  >
+    <div>
+      <img
+        class="w-full h-full object-cover aspect-video"
+        src="{{ country.flags.png }}"
+        alt="{{ country.flags.alt }}"
+      />
     </div>
-  </div>
-</section>
+
+    <!-- content -->
+    <div class="p-8">
+      <h2
+        class="font-bold font-pop text-2xl mb-4 truncate"
+        matTooltip="{{ country.name.common }}"
+      >
+        {{ country.name.common }}
+      </h2>
+
+      <div class="flex flex-col gap-2">
+        <div>
+          <span class="text-gray-600 dark:text-gray-300 font-semibold"
+            >Population:
+          </span>
+          <span class="text-gray-400 ml-1">
+            {{ country.population | number }}
+          </span>
+        </div>
+        <div>
+          <span class="text-gray-600 dark:text-gray-300 font-semibold"
+            >Region:
+          </span>
+          <span class="text-gray-400 ml-1">{{ country.region }}</span>
+        </div>
+
+        @for (capital of country.capital; track $index) {
+          <div>
+            <span class="text-gray-600 dark:text-gray-300 font-semibold"
+              >Capital:
+            </span>
+            <span class="text-gray-400 ml-1">{{ capital }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
 }

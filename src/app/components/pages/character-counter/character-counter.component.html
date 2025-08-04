@@ -40,7 +40,7 @@
         context: {
           result: totalCharacters,
           text: 'Total Characters',
-          color: 'bg-violet-400'
+          color: 'bg-violet-400',
         }
       "
     ></ng-container>
@@ -50,7 +50,7 @@
         context: {
           result: totalWords,
           text: 'Word Count',
-          color: 'bg-amber-500'
+          color: 'bg-amber-500',
         }
       "
     ></ng-container>
@@ -60,7 +60,7 @@
         context: {
           result: totalSentence,
           text: 'Sentence Count',
-          color: 'bg-red-400'
+          color: 'bg-red-400',
         }
       "
     ></ng-container>
@@ -68,44 +68,48 @@
 
   <!-- display density -->
   @if (characterStats().length) {
-  <div class="mt-6">
-    <h1 class="font-pop font-semibold text-xl tracking-wide mb-2">
-      Letter Density
-    </h1>
+    <div class="mt-6">
+      <h1 class="font-pop font-semibold text-xl tracking-wide mb-2">
+        Letter Density
+      </h1>
 
-    @for (item of (!isExpanded ? characterStats() : characterStats() |
-    slice:0:4); track $index) {
-    <div class="flex items-center gap-4 mt-2">
-      @if(item.char===' '){
-      <mat-icon class="!text-base" matTooltip="Spaces in the text">
-        space_bar
-      </mat-icon>
-      }@else {
-      <span class="basis-[1em]">{{ item.char.toUpperCase() }}</span>
+      @for (
+        item of !isExpanded
+          ? characterStats()
+          : (characterStats() | slice: 0 : 4);
+        track $index
+      ) {
+        <div class="flex items-center gap-4 mt-2">
+          @if (item.char === " ") {
+            <mat-icon class="!text-base" matTooltip="Spaces in the text">
+              space_bar
+            </mat-icon>
+          } @else {
+            <span class="basis-[1em]">{{ item.char.toUpperCase() }}</span>
+          }
+          <mat-progress-bar
+            mode="determinate"
+            [value]="item.count"
+          ></mat-progress-bar>
+          <span class="text-xs">
+            {{ item.count }}({{ item.percentage.toFixed(2) }})%
+          </span>
+        </div>
       }
-      <mat-progress-bar
-        mode="determinate"
-        [value]="item.count"
-      ></mat-progress-bar>
-      <span class="text-xs">
-        {{ item.count }}({{ item.percentage.toFixed(2) }})%
-      </span>
-    </div>
-    }
 
-    <!-- display "See more" button -->
-    @if (characterStats().length > 4) {
-    <button
-      class="flex items-center cursor-pointer mt-4"
-      (click)="onShowMore()"
-    >
-      {{ isExpanded ? "See more" : "See less" }}
-      <mat-icon>
-        {{ isExpanded ? "keyboard_arrow_down" : "keyboard_arrow_up" }}
-      </mat-icon>
-    </button>
-    }
-  </div>
+      <!-- display "See more" button -->
+      @if (characterStats().length > 4) {
+        <button
+          class="flex items-center cursor-pointer mt-4"
+          (click)="onShowMore()"
+        >
+          {{ isExpanded ? "See more" : "See less" }}
+          <mat-icon>
+            {{ isExpanded ? "keyboard_arrow_down" : "keyboard_arrow_up" }}
+          </mat-icon>
+        </button>
+      }
+    </div>
   }
 </section>
 

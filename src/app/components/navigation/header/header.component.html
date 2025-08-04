@@ -15,16 +15,16 @@
   <app-switch-theme />
 
   <!-- menu -->
-  @if(!isDownloading()){
-  <button
-    class="!text-(--white-color)"
-    mat-icon-button
-    [matMenuTriggerFor]="menu"
-  >
-    <mat-icon>more_vert</mat-icon>
-  </button>
+  @if (!isDownloading()) {
+    <button
+      class="!text-(--white-color)"
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
   } @else {
-  <mat-spinner diameter="24" mode="indeterminate" color="white"></mat-spinner>
+    <mat-spinner diameter="24" mode="indeterminate" color="white"></mat-spinner>
   }
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="onPrint()">

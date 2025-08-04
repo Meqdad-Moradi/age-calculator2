@@ -1,77 +1,77 @@
 @if (country) {
-<section class="flex flex-wrap gap-8">
-  <div class="overflow-hidden">
-    <img
-      class="w-full object-cover aspect-video"
-      src="{{ country.flags.png }}"
-      alt="{{ country.flags.alt }}"
-    />
-  </div>
+  <section class="flex flex-wrap gap-8">
+    <div class="overflow-hidden">
+      <img
+        class="w-full object-cover aspect-video"
+        src="{{ country.flags.png }}"
+        alt="{{ country.flags.alt }}"
+      />
+    </div>
 
-  <!-- content -->
-  <div>
-    <h2
-      class="font-bold font-pop text-2xl mb-4 truncate"
-      matTooltip="{{ country.name.common }}"
-    >
-      {{ country.name.common }}
-    </h2>
-    <div class="flex justify-between gap-8">
-      <div class="flex flex-col gap-2">
-        <div>
-          <span class="text-gray-600 dark:text-gray-300 font-semibold"
-            >Official name:
-          </span>
-          <span class="text-gray-400 ml-1">{{ country.name.official }}</span>
-        </div>
-        <div>
-          <span class="text-gray-600 dark:text-gray-300 font-semibold"
-            >Population:
-          </span>
-          <span class="text-gray-400 ml-1">{{
-            country.population | number
-          }}</span>
-        </div>
-        <div>
-          <span class="text-gray-600 dark:text-gray-300 font-semibold"
-            >Region:
-          </span>
-          <span class="text-gray-400 ml-1">{{ country.region }}</span>
-        </div>
-
-        @for (capital of country.capital; track $index) {
-        <div>
-          <span class="text-gray-600 dark:text-gray-300 font-semibold"
-            >Capital:
-          </span>
-          <span class="text-gray-400 ml-1">{{ capital }}</span>
-        </div>
-        }
-      </div>
-
-      <!-- content third column -->
-      <div>
+    <!-- content -->
+    <div>
+      <h2
+        class="font-bold font-pop text-2xl mb-4 truncate"
+        matTooltip="{{ country.name.common }}"
+      >
+        {{ country.name.common }}
+      </h2>
+      <div class="flex justify-between gap-8">
         <div class="flex flex-col gap-2">
           <div>
             <span class="text-gray-600 dark:text-gray-300 font-semibold"
-              >Languages:
+              >Official name:
             </span>
-            <span class="text-gray-400 ml-1">{{ displayLanguages }}</span>
+            <span class="text-gray-400 ml-1">{{ country.name.official }}</span>
+          </div>
+          <div>
+            <span class="text-gray-600 dark:text-gray-300 font-semibold"
+              >Population:
+            </span>
+            <span class="text-gray-400 ml-1">{{
+              country.population | number
+            }}</span>
+          </div>
+          <div>
+            <span class="text-gray-600 dark:text-gray-300 font-semibold"
+              >Region:
+            </span>
+            <span class="text-gray-400 ml-1">{{ country.region }}</span>
           </div>
 
           @for (capital of country.capital; track $index) {
-          <div>
-            <span class="text-gray-600 dark:text-gray-300 font-semibold"
-              >Capital:
-            </span>
-            <span class="text-gray-400 ml-1">{{ capital }}</span>
-          </div>
+            <div>
+              <span class="text-gray-600 dark:text-gray-300 font-semibold"
+                >Capital:
+              </span>
+              <span class="text-gray-400 ml-1">{{ capital }}</span>
+            </div>
           }
+        </div>
+
+        <!-- content third column -->
+        <div>
+          <div class="flex flex-col gap-2">
+            <div>
+              <span class="text-gray-600 dark:text-gray-300 font-semibold"
+                >Languages:
+              </span>
+              <span class="text-gray-400 ml-1">{{ displayLanguages }}</span>
+            </div>
+
+            @for (capital of country.capital; track $index) {
+              <div>
+                <span class="text-gray-600 dark:text-gray-300 font-semibold"
+                  >Capital:
+                </span>
+                <span class="text-gray-400 ml-1">{{ capital }}</span>
+              </div>
+            }
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-}@else {
-<h1 class="text-xl text-gray-500">No data yet...</h1>
+  </section>
+} @else {
+  <h1 class="text-xl text-gray-500">No data yet...</h1>
 }

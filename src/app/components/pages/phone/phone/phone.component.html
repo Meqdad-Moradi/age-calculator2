@@ -13,10 +13,11 @@
       </button>
 
       <!-- error -->
-      @if(formControls['phone'].errors?.['errorMsg']){
-      <mat-error>{{ formControls["phone"].errors?.["errorMsg"] }}</mat-error>
-      } @if(formControls['phone'].errors?.['maxLength']){
-      <mat-error>Max length is 14...</mat-error>
+      @if (formControls["phone"].errors?.["errorMsg"]) {
+        <mat-error>{{ formControls["phone"].errors?.["errorMsg"] }}</mat-error>
+      }
+      @if (formControls["phone"].errors?.["maxLength"]) {
+        <mat-error>Max length is 14...</mat-error>
       }
     </mat-form-field>
 

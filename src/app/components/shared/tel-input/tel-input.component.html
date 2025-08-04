@@ -3,10 +3,10 @@
     <!-- select country calling code -->
     <mat-select #phoneSelect class="max-w-max" formControlName="code">
       <mat-select-trigger class="select-trigger">
-        @if (formControls['code'].value) {
-        <span>{{ formControls["code"].value.alpha2Code }}</span
-        >&nbsp;
-        <span>{{ formControls["code"].value.callingCode }}</span>
+        @if (formControls["code"].value) {
+          <span>{{ formControls["code"].value.alpha2Code }}</span
+          >&nbsp;
+          <span>{{ formControls["code"].value.callingCode }}</span>
         }
       </mat-select-trigger>
 
@@ -23,11 +23,11 @@
       </mat-option>
 
       @for (option of filteredOptions | async; track $index) {
-      <mat-option [value]="option">
-        <span>{{ option.name }}</span
-        >&nbsp;
-        <span>{{ option.callingCode }}</span>
-      </mat-option>
+        <mat-option [value]="option">
+          <span>{{ option.name }}</span
+          >&nbsp;
+          <span>{{ option.callingCode }}</span>
+        </mat-option>
       }
     </mat-select>
 
