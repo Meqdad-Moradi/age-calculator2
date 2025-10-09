@@ -1,0 +1,26 @@
+<section>
+  <mat-form-field class="w-full" appearance="outline">
+    <mat-label>Search Post Code</mat-label>
+    <input
+      type="text"
+      matInput
+      [matAutocomplete]="auto"
+      [formControl]="regionControl"
+    />
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      @for (option of regions(); track $index) {
+        <mat-option [value]="option.gemeinde">
+          <div class="flex flex-col">
+            <span class="">
+              {{ option.firstLine }}&nbsp;
+              @if (option.mainGemeinde !== option.gemeinde) {
+                ({{ option.mainGemeinde }})
+              }
+            </span>
+            <span class="">{{ option.secondLine }}</span>
+          </div>
+        </mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+</section>

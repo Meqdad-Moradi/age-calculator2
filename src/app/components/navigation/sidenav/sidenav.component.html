@@ -65,6 +65,17 @@
 
       <mat-list-item
         class="!cursor-pointer"
+        [routerLink]="['/search-region']"
+        routerLinkActive="active"
+        onclick="this.blur()"
+        (click)="onExpandTaskManager(false)"
+      >
+        <mat-icon matListItemIcon>location_searching</mat-icon>
+        <span matListItemTitle>Search region</span>
+      </mat-list-item>
+
+      <mat-list-item
+        class="!cursor-pointer"
         [routerLink]="['/task-manager']"
         routerLinkActive="active"
         onclick="this.blur()"

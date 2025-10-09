@@ -8,6 +8,7 @@ import { PhoneComponent } from './components/pages/phone/phone/phone.component';
 import { TaskManagerComponent } from './components/pages/task-manager/task-manager.component';
 import { TasksComponent } from './components/pages/task-manager/tasks/tasks.component';
 import { TodosComponent } from './components/pages/todos/todos.component';
+import { SearchRegionComponent } from './components/pages/search-region/search-region.component';
 
 export const routes: Routes = [
   {
@@ -42,6 +43,11 @@ export const routes: Routes = [
       },
       { path: 'todos', component: TodosComponent, pathMatch: 'full' },
       { path: 'phone', component: PhoneComponent, pathMatch: 'full' },
+      {
+        path: 'search-region',
+        component: SearchRegionComponent,
+        pathMatch: 'full',
+      },
     ],
   },
   {
