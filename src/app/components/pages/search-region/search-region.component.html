@@ -39,7 +39,7 @@
         <mat-option [value]="option.plz">
           <div class="flex flex-col">
             <span class="">
-              {{ option.firstLine }}&nbsp;
+              {{ option.firstLine }}
               @if (option.mainGemeinde !== option.gemeinde) {
                 ({{ option.mainGemeinde }})
               }
@@ -62,11 +62,11 @@
     />
     <mat-autocomplete autoActiveFirstOption #auto3="matAutocomplete">
       @for (option of cities(); track $index) {
-        <mat-option [value]="option.ort || option.gemeinde">
+        <mat-option [value]="option.gemeinde">
           <div class="flex flex-col">
             <span class="">
-              {{ option.firstLine }}&nbsp;
-              @if (option.mainGemeinde !== option.gemeinde) {
+              {{ option.firstLine }}
+              @if (option.gemeinde !== option.mainGemeinde) {
                 ({{ option.mainGemeinde }})
               }
             </span>

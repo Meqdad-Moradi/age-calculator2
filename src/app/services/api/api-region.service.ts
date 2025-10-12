@@ -3,8 +3,9 @@ import { inject, Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ErrorResponse } from '../../components/models/error-response.model';
-import { LandItem } from '../../components/models/land';
+import { LandItem } from '../../components/models/regions';
 import {
+  EnSearchMode,
   RegionItem,
   SearchRegionResult,
   SearchSuggestionDisplayType,
@@ -141,7 +142,10 @@ export class ApiRegionService {
    * @param region RegionItem
    * @returns string
    */
-  private getFirstLine(region: RegionItem): string {
+  private getFirstLine(
+    region: RegionItem,
+    searchMode = EnSearchMode.Region,
+  ): string {
     const {
       type,
       land = '',
@@ -161,13 +165,21 @@ export class ApiRegionService {
         return `${bezirk}`;
 
       case SearchSuggestionDisplayType.Gemeinde:
-        return plz ? `${plz} ${gemeinde}` : gemeinde;
+        return searchMode !== EnSearchMode.Ortschaft
+          ? plz
+            ? `${plz} ${gemeinde}`
+            : gemeinde
+          : gemeinde;
 
       case SearchSuggestionDisplayType.KatastralGemeindeName:
         return plz ? `${plz} ${kgName} KG ${kgNummer} (${gemeinde})` : kgName;
 
       case SearchSuggestionDisplayType.Ortschaft:
-        return plz ? `${plz} ${ortschaft}` : ortschaft;
+        return searchMode !== EnSearchMode.Ortschaft
+          ? plz
+            ? `${plz} ${ortschaft}`
+            : ortschaft
+          : ortschaft;
 
       default:
         return '';
@@ -180,22 +192,34 @@ export class ApiRegionService {
    * @param region RegionItem
    * @returns string
    */
-  private getSecondLine(region: RegionItem): string {
-    const { type, land = '', bezirk = '' } = region;
+  private getSecondLine(
+    region: RegionItem,
+    searchMode: EnSearchMode = EnSearchMode.Region,
+  ): string {
+    const { type, land = '', bezirk = '', plzs = [] } = region;
+    if (searchMode !== EnSearchMode.Ortschaft) {
+      // For Land type
+      if (type === SearchSuggestionDisplayType.Land) {
+        return `Land ${land}`;
+      }
 
-    // For Land type
-    if (type === SearchSuggestionDisplayType.Land) {
-      return `Land ${land}`;
+      // For Bezirk type
+      if (type === SearchSuggestionDisplayType.Bezirk) {
+        return `Bezirk ${bezirk}`;
+      }
+
+      // For all other types (Gemeinde, KatastralGemeindeName, Ortschaft)
+      // They share the same format: "Bezirk [bezirk], [land]"
+      return `Bezirk ${bezirk}, ${land}`;
+    } else {
+      return plzs.join(', ');
     }
+  }
 
-    // For Bezirk type
-    if (type === SearchSuggestionDisplayType.Bezirk) {
-      return `Bezirk ${bezirk}`;
-    }
-
-    // For all other types (Gemeinde, KatastralGemeindeName, Ortschaft)
-    // They share the same format: "Bezirk [bezirk], [land]"
-    return `Bezirk ${bezirk}, ${land}`;
+  private getGemeindeName(region: RegionItem): string {
+    return region.type === SearchSuggestionDisplayType.Ortschaft
+      ? region.ortschaft || ''
+      : region.gemeinde || '';
   }
 
   /**
@@ -206,16 +230,16 @@ export class ApiRegionService {
    */
   private createSearchRegionResult(
     regionItem: RegionItem[],
+    searchMode: EnSearchMode = EnSearchMode.Region,
   ): SearchRegionResult[] {
     return regionItem.map((region) => {
       return {
         land: region.land || '',
         bezirk: region.bezirk || '',
         mainGemeinde: region.gemeinde || '',
-        gemeinde: region.gemeinde || '',
-        ort: region.ortschaft || '',
-        firstLine: this.getFirstLine(region),
-        secondLine: this.getSecondLine(region),
+        gemeinde: this.getGemeindeName(region) || '',
+        firstLine: this.getFirstLine(region, searchMode),
+        secondLine: this.getSecondLine(region, searchMode),
         plz: region.plz || '',
         okz: region.okz,
       };
@@ -347,7 +371,7 @@ export class ApiRegionService {
       .sort(this.sortByGemeindeName(searchQuery));
 
     // create SearchRegionResult from filtered regions
-    const res = this.createSearchRegionResult(regions);
+    const res = this.createSearchRegionResult(regions, EnSearchMode.Ortschaft);
     // set the filtered regions
     this.filteredCities.set(res);
   }
