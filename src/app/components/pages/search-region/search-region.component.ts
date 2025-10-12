@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { startWith } from 'rxjs';
 import { ApiRegionService } from '../../../services/api/api-region.service';
 import { ErrorResponse } from '../../models/error-response.model';
+import { HighlightPipe } from "../../../pipes/highlight.pipe";
 
 @Component({
   selector: 'app-search-region',
@@ -16,7 +17,8 @@ import { ErrorResponse } from '../../models/error-response.model';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-  ],
+    HighlightPipe
+],
   templateUrl: './search-region.component.html',
   styleUrl: './search-region.component.scss',
 })

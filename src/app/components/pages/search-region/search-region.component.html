@@ -64,11 +64,9 @@
       @for (option of cities(); track $index) {
         <mat-option [value]="option.gemeinde">
           <div class="flex flex-col">
-            <span class="">
-              {{ option.firstLine }}
-              @if (option.gemeinde !== option.mainGemeinde) {
-                ({{ option.mainGemeinde }})
-              }
+            <span
+              [innerHTML]="option.firstLine | highlight: cityControl.value!"
+            >
             </span>
             <span class="">{{ option.secondLine }}</span>
           </div>
