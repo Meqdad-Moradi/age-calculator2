@@ -5,6 +5,7 @@ import { ApiRegionService } from '../../../services/api/api-region.service';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { startWith } from 'rxjs';
+import { ErrorResponse } from '../../models/error-response.model';
 
 @Component({
   selector: 'app-search-region',
@@ -25,10 +26,23 @@ export class SearchRegionComponent implements OnInit {
   public regionControl = new FormControl<string>('');
 
   ngOnInit(): void {
+    this.getRegions();
+
+    // subscribe to changes in the input field for searching regions
     this.regionControl.valueChanges.pipe(startWith('')).subscribe((value) => {
       if (!value) return;
       // search for plz
       this.apiRegionService.searchGemeinde(value);
+    });
+  }
+
+  private getRegions(): void {
+    this.apiRegionService.getRegions().subscribe((response) => {
+      if (response instanceof ErrorResponse) {
+        return;
+      }
+      // flatten the regions for easier searching
+      this.apiRegionService.flatRegions(response);
     });
   }
 }

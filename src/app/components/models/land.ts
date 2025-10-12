@@ -25,6 +25,6 @@ export interface OrtItem {
 }
 
 export interface KatastralgemeindeItem {
-  name: string;
-  kgNummer: string;
+  kgName: string;
+  kgNummer: number;
 }

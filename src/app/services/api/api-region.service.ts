@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { ErrorResponse } from '../../components/models/error-response.model';
 import { LandItem } from '../../components/models/land';
 import {
@@ -22,52 +21,33 @@ export class ApiRegionService {
 
   public filteredRegions = signal<SearchRegionResult[]>([]);
 
-  private allRegions = signal<LandItem[]>([]);
   private regions = signal<RegionItem[]>([]);
-
-  /**
-   * regionsSignal
-   * This signal fetches the list of regions from the API and handles errors.
-   * It initializes with an empty array if the API call fails.
-   * @returns Signal<LandItem[]>
-   */
-  private regionsSignal = toSignal(
-    this.getRegions().pipe(
-      map((values) => (values instanceof ErrorResponse ? [] : values)),
-      tap((regions) => {
-        this.allRegions.set(regions);
-        this.flatRegions();
-      }),
-    ),
-    { initialValue: [] as LandItem[] },
-  );
 
   /**
    * getRegions
    * fetches the list of regions from the API.
    * @returns Observable<LandItem[] | ErrorResponse<string>>
    */
-  private getRegions(): Observable<LandItem[] | ErrorResponse<string>> {
-    if (this.allRegions().length > 0) {
-      return of(this.allRegions());
-    } else {
-      return this.http
-        .get<LandItem[]>(this.baseUrl)
-        .pipe(
-          catchError(
-            this.errorService.handleError<LandItem[]>(
-              'api-region.service::getRegions',
-              { showInDialog: true },
-            ),
+  public getRegions(): Observable<LandItem[] | ErrorResponse<string>> {
+    return this.http
+      .get<LandItem[]>(this.baseUrl)
+      .pipe(
+        catchError(
+          this.errorService.handleError<LandItem[]>(
+            'api-region.service::getRegions',
+            { showInDialog: true },
           ),
-        );
-    }
+        ),
+      );
   }
 
-  private flatRegions(): void {
+  public flatRegions(allRegions: LandItem[]): void {
+    // do nothing if regions are empty
+    if (!allRegions.length) return;
+
     const regionsList: RegionItem[] = [];
 
-    for (const land of this.allRegions()) {
+    for (const land of allRegions) {
       if (land.land === '...') continue; // skip placeholder
       regionsList.push({
         nummer: land.nummer,
@@ -86,13 +66,13 @@ export class ApiRegionService {
         for (const gemeinde of bezirk.gemeinden || []) {
           for (const kG of gemeinde.kGs || []) {
             regionsList.push({
-              nummer: +kG.kgNummer,
+              nummer: gemeinde.nummer,
               land: land.land,
               bezirk: bezirk.bezirk,
-              gemeinde: kG.name,
+              gemeinde: gemeinde.gemeinde,
               plz: gemeinde.plz,
-              kgName: kG.name,
-              kgNummer: +kG.kgNummer,
+              kgName: kG.kgName,
+              kgNummer: kG.kgNummer,
               type: SearchSuggestionDisplayType.KatastralGemeindeName,
             });
           }
@@ -107,19 +87,19 @@ export class ApiRegionService {
           }
 
           // add all ortschaften / gemeinden with all possible plz
-          for (const plz of plzs || []) {
+          for (const plz of Array.from(plzs) || []) {
             for (const ort of gemeinde.ortschaften || []) {
-              const ortLower = ort.name.toLocaleLowerCase();
-              const gemeindeLower = gemeinde.gemeinde.toLocaleLowerCase();
-
               // add ortschaft with all possible plz only if the name of the ortschaft is different than the name of the gemeinde
-              if (ortLower !== gemeindeLower) {
+              if (
+                ort.name.toLocaleLowerCase() !==
+                gemeinde.gemeinde.toLocaleLowerCase()
+              ) {
                 regionsList.push({
                   nummer: gemeinde.nummer,
                   land: land.land,
                   bezirk: bezirk.bezirk,
                   gemeinde: gemeinde.gemeinde,
-                  plz: plz,
+                  plz: plz, // plz,
                   plzs: Array.from(plzs),
                   okz: ort.okz,
                   ortschaft: ort.name,
@@ -148,6 +128,75 @@ export class ApiRegionService {
   }
 
   /**
+   * getFirstLine
+   * Returns the formatted first line of the search suggestion based on the region type.
+   * Format varies by type:
+   * - Land: [land name]
+   * - Bezirk: [bezirk name]
+   * - Gemeinde: [PLZ] [gemeinde name]
+   * - KatastralGemeindeName: [PLZ] [KG name] KG [KG number] ([gemeinde name])
+   * - Ortschaft: [PLZ] [ortschaft name]
+   * @param region RegionItem
+   * @returns string
+   */
+  private getFirstLine(region: RegionItem): string {
+    const {
+      type,
+      land = '',
+      bezirk = '',
+      gemeinde = '',
+      kgName = '',
+      ortschaft = '',
+      plz = '',
+      kgNummer = '',
+    } = region;
+
+    switch (type) {
+      case SearchSuggestionDisplayType.Land:
+        return `${land}`;
+
+      case SearchSuggestionDisplayType.Bezirk:
+        return `${bezirk}`;
+
+      case SearchSuggestionDisplayType.Gemeinde:
+        return plz ? `${plz} ${gemeinde}` : gemeinde;
+
+      case SearchSuggestionDisplayType.KatastralGemeindeName:
+        return plz ? `${plz} ${kgName} KG ${kgNummer} (${gemeinde})` : kgName;
+
+      case SearchSuggestionDisplayType.Ortschaft:
+        return plz ? `${plz} ${ortschaft}` : ortschaft;
+
+      default:
+        return '';
+    }
+  }
+
+  /**
+   * getSecondLine
+   * Returns the formatted second line of the search suggestion based on the region type.
+   * @param region RegionItem
+   * @returns string
+   */
+  private getSecondLine(region: RegionItem): string {
+    const { type, land = '', bezirk = '' } = region;
+
+    // For Land type
+    if (type === SearchSuggestionDisplayType.Land) {
+      return `Land ${land}`;
+    }
+
+    // For Bezirk type
+    if (type === SearchSuggestionDisplayType.Bezirk) {
+      return `Bezirk ${bezirk}`;
+    }
+
+    // For all other types (Gemeinde, KatastralGemeindeName, Ortschaft)
+    // They share the same format: "Bezirk [bezirk], [land]"
+    return `Bezirk ${bezirk}, ${land}`;
+  }
+
+  /**
    * createSearchRegionResult
    * Creates a SearchRegionResult from a RegionItem.
    * @param regionItem RegionItem
@@ -162,8 +211,8 @@ export class ApiRegionService {
         bezirk: region.bezirk || '',
         mainGemeinde: region.gemeinde || '',
         gemeinde: region.gemeinde || '',
-        firstLine: region.plz + ' ' + region.gemeinde,
-        secondLine: 'Bezirk ' + region.bezirk + ', ' + region.land,
+        firstLine: this.getFirstLine(region),
+        secondLine: this.getSecondLine(region),
         plz: region.plz || '',
         okz: region.okz,
       };
@@ -194,28 +243,28 @@ export class ApiRegionService {
 
     // if the search query is a number, search for plz, otherwise search for gemeinde name
     if (!isNaN(+searchQuery)) {
-      regions = regions.filter((region) =>
-        searchQueries.every(
-          (query) =>
-            region.plz?.startsWith(query.toLowerCase()) ||
-            region.nummer === +query ||
-            region.kgNummer === +query,
-        ),
-      );
+      regions = regions
+        .filter((region) =>
+          searchQueries.every(
+            (query) =>
+              region.plz?.startsWith(query.toLowerCase()) ||
+              region.nummer === +query ||
+              region.kgNummer === +query,
+          ),
+        )
+        .sort(this.sortByGemeindeName(searchQuery));
     } else {
-      regions = regions.filter((region) =>
-        searchQueries.every((query) =>
-          region.gemeinde?.toLowerCase().includes(query.toLowerCase()),
-        ),
-      );
+      regions = regions
+        .filter((region) =>
+          searchQueries.every((query) =>
+            region.gemeinde?.toLowerCase().includes(query.toLowerCase()),
+          ),
+        )
+        .sort(this.sortByGemeindeName(searchQuery));
     }
 
-    // sort regions by gemeinde name, prioritizing those that start with the search query
-    regions.sort(this.sortByGemeindeName(searchQuery));
     // create SearchRegionResult from filtered regions
     const res = this.createSearchRegionResult(regions);
-    console.log(res);
-
     // set the filtered regions
     this.filteredRegions.set(res);
   }
