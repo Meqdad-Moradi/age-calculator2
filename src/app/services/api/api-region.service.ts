@@ -20,6 +20,8 @@ export class ApiRegionService {
   private readonly baseUrl = 'http://localhost:3000/gemeinde';
 
   public filteredRegions = signal<SearchRegionResult[]>([]);
+  public filteredCities = signal<SearchRegionResult[]>([]);
+  public filteredZips = signal<SearchRegionResult[]>([]);
 
   private regions = signal<RegionItem[]>([]);
 
@@ -211,6 +213,7 @@ export class ApiRegionService {
         bezirk: region.bezirk || '',
         mainGemeinde: region.gemeinde || '',
         gemeinde: region.gemeinde || '',
+        ort: region.ortschaft || '',
         firstLine: this.getFirstLine(region),
         secondLine: this.getSecondLine(region),
         plz: region.plz || '',
@@ -220,48 +223,42 @@ export class ApiRegionService {
   }
 
   /**
-   * searchGemeinde
+   * searchRegions
    * Searches for regions by postal code (PLZ) and updates the filteredRegions signal.
    * @param searchQuery string
    */
-  public searchGemeinde(searchQuery: string): void {
-    if (!searchQuery || searchQuery.length < 3) {
+  public searchRegions(searchQuery: string): void {
+    if (!searchQuery || searchQuery.length < 3 || !this.regions().length) {
       this.filteredRegions.set([]);
       return;
     }
+
     // split search query into individual queries
     const searchQueries = searchQuery.trim().split(' ');
-    // return if regions are not loaded yet
-    if (!this.regions().length) return;
+    const isNumberSearch = !isNaN(+searchQuery);
 
     // filter regions by gemeinde name containing all search queries
-    let regions = this.regions().filter(
-      (region) =>
-        region.type !== SearchSuggestionDisplayType.WeiterePlz &&
-        region.type !== SearchSuggestionDisplayType.Ortschaft,
-    );
-
-    // if the search query is a number, search for plz, otherwise search for gemeinde name
-    if (!isNaN(+searchQuery)) {
-      regions = regions
-        .filter((region) =>
-          searchQueries.every(
+    const regions = this.regions()
+      .filter(
+        (region) =>
+          region.type !== SearchSuggestionDisplayType.WeiterePlz &&
+          region.type !== SearchSuggestionDisplayType.Ortschaft,
+      )
+      .filter((region) => {
+        if (isNumberSearch) {
+          return searchQueries.every(
             (query) =>
-              region.plz?.startsWith(query.toLowerCase()) ||
+              region.plz?.startsWith(query) ||
               region.nummer === +query ||
               region.kgNummer === +query,
-          ),
-        )
-        .sort(this.sortByGemeindeName(searchQuery));
-    } else {
-      regions = regions
-        .filter((region) =>
-          searchQueries.every((query) =>
+          );
+        } else {
+          return searchQueries.every((query) =>
             region.gemeinde?.toLowerCase().includes(query.toLowerCase()),
-          ),
-        )
-        .sort(this.sortByGemeindeName(searchQuery));
-    }
+          );
+        }
+      })
+      .sort(this.sortByGemeindeName(searchQuery));
 
     // create SearchRegionResult from filtered regions
     const res = this.createSearchRegionResult(regions);
@@ -270,23 +267,135 @@ export class ApiRegionService {
   }
 
   /**
-   * sortByGemeindeName
-   * Sorts GemeindeItem by name, prioritizing those that start with the search query.
+   * searchPlz
+   * Searches for regions by postal code (PLZ) and updates the filteredRegions signal.
    * @param searchQuery string
-   * @returns number
+   * @returns void
+   */
+  public searchPlz(searchQuery: string): void {
+    if (!searchQuery || searchQuery.length < 3 || !this.regions().length) {
+      this.filteredRegions.set([]);
+      return;
+    }
+
+    // split search query into individual queries
+    const searchQueries = searchQuery.trim().split(' ');
+    const isNumberSearch = !isNaN(+searchQuery);
+
+    // filter regions by gemeinde name containing all search queries
+    const regions = this.regions()
+      .filter(
+        (region) =>
+          region.type === SearchSuggestionDisplayType.WeiterePlz ||
+          region.type === SearchSuggestionDisplayType.Ortschaft ||
+          region.type === SearchSuggestionDisplayType.Gemeinde,
+      )
+      .filter((region) => {
+        if (isNumberSearch) {
+          return searchQueries.every((query) => region.plz?.startsWith(query));
+        } else {
+          return searchQueries.every(
+            (query) =>
+              region.gemeinde?.toLowerCase().includes(query.toLowerCase()) ||
+              region.ortschaft?.toLowerCase().includes(query.toLowerCase()),
+          );
+        }
+      })
+      .sort(this.sortByGemeindeName(searchQuery));
+
+    // create SearchRegionResult from filtered regions
+    const res = this.createSearchRegionResult(regions);
+    // set the filtered regions
+    this.filteredZips.set(res);
+  }
+
+  /**
+   * searchOrtschaft
+   * Searches for ortschaften (localities) by name and updates the filteredRegions signal.
+   * @param searchQuery string
+   * @returns void
+   */
+  public searchOrtschaft(searchQuery: string): void {
+    if (!searchQuery || searchQuery.length < 3 || !this.regions().length) {
+      this.filteredRegions.set([]);
+      return;
+    }
+
+    // split search query into individual queries
+    const searchQueries = searchQuery.trim().split(' ');
+    const isNumberSearch = !isNaN(+searchQuery);
+
+    // filter regions by gemeinde name containing all search queries
+    const regions = this.regions()
+      .filter(
+        (region) =>
+          region.type === SearchSuggestionDisplayType.Ortschaft ||
+          region.type === SearchSuggestionDisplayType.Gemeinde ||
+          region.type === SearchSuggestionDisplayType.WeiterePlz,
+      )
+      .filter((region) => {
+        if (isNumberSearch) {
+          return searchQueries.every((query) => region.plz?.startsWith(query));
+        } else {
+          return searchQueries.every(
+            (query) =>
+              region.ortschaft?.toLowerCase().includes(query.toLowerCase()) ||
+              region.gemeinde?.toLowerCase().includes(query.toLowerCase()),
+          );
+        }
+      })
+      .sort(this.sortByGemeindeName(searchQuery));
+
+    // create SearchRegionResult from filtered regions
+    const res = this.createSearchRegionResult(regions);
+    // set the filtered regions
+    this.filteredCities.set(res);
+  }
+
+  /**
+   * sortByGemeindeName
+   * Sorts regions by name, prioritizing Gemeinde over Ortschaft and matches by relevance.
+   * Sort priority:
+   * 1. Gemeinde before Ortschaft
+   * 2. Exact matches
+   * 3. Starts with matches
+   * 4. Alphabetical order
+   * @param searchQuery string
+   * @returns comparison function for sorting
    */
   private sortByGemeindeName(searchQuery: string) {
     const query = searchQuery.toLowerCase();
 
     return (a: RegionItem, b: RegionItem) => {
-      // sort those first that start with the query
-      if (
-        a.gemeinde?.toLowerCase().startsWith(query) ||
-        b.gemeinde?.toLowerCase().startsWith(query)
-      )
-        return -1;
-      // just sort alphabetically
-      return a.gemeinde?.localeCompare(b.gemeinde || '') || 0;
+      // First prioritize by type (Gemeinde before Ortschaft)
+      if (a.type !== b.type) {
+        return a.type === SearchSuggestionDisplayType.Gemeinde ? -1 : 1;
+      }
+
+      // Get the appropriate names for comparison
+      const aName =
+        (a.type === SearchSuggestionDisplayType.Ortschaft
+          ? a.ortschaft
+          : a.gemeinde
+        )?.toLowerCase() || '';
+      const bName =
+        (b.type === SearchSuggestionDisplayType.Ortschaft
+          ? b.ortschaft
+          : b.gemeinde
+        )?.toLowerCase() || '';
+
+      // Exact matches first
+      if (aName === query && bName !== query) return -1;
+      if (bName === query && aName !== query) return 1;
+
+      // Then starts-with matches
+      const aStarts = aName.startsWith(query);
+      const bStarts = bName.startsWith(query);
+      if (aStarts && !bStarts) return -1;
+      if (!aStarts && bStarts) return 1;
+
+      // Finally alphabetical order
+      return aName.localeCompare(bName);
     };
   }
 }

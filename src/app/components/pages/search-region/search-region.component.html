@@ -1,15 +1,68 @@
-<section>
+<section class="flex flex-col gap-8">
+  <!-- search region -->
+  <mat-form-field class="w-full" appearance="outline">
+    <mat-label>Search Regions</mat-label>
+    <input
+      type="text"
+      matInput
+      [matAutocomplete]="auto1"
+      [formControl]="regionControl"
+    />
+    <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete">
+      @for (option of regions(); track $index) {
+        <mat-option [value]="option.gemeinde">
+          <div class="flex flex-col">
+            <span class="">
+              {{ option.firstLine }}&nbsp;
+              @if (option.mainGemeinde !== option.gemeinde) {
+                ({{ option.mainGemeinde }})
+              }
+            </span>
+            <span class="">{{ option.secondLine }}</span>
+          </div>
+        </mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <!-- search post code -->
   <mat-form-field class="w-full" appearance="outline">
     <mat-label>Search Post Code</mat-label>
     <input
       type="text"
       matInput
-      [matAutocomplete]="auto"
-      [formControl]="regionControl"
+      [matAutocomplete]="auto2"
+      [formControl]="zipControl"
     />
-    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-      @for (option of regions(); track $index) {
-        <mat-option [value]="option.gemeinde">
+    <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
+      @for (option of zips(); track $index) {
+        <mat-option [value]="option.plz">
+          <div class="flex flex-col">
+            <span class="">
+              {{ option.firstLine }}&nbsp;
+              @if (option.mainGemeinde !== option.gemeinde) {
+                ({{ option.mainGemeinde }})
+              }
+            </span>
+            <span class="">{{ option.secondLine }}</span>
+          </div>
+        </mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <!-- search city -->
+  <mat-form-field class="w-full" appearance="outline">
+    <mat-label>Search City</mat-label>
+    <input
+      type="text"
+      matInput
+      [matAutocomplete]="auto3"
+      [formControl]="cityControl"
+    />
+    <mat-autocomplete autoActiveFirstOption #auto3="matAutocomplete">
+      @for (option of cities(); track $index) {
+        <mat-option [value]="option.ort || option.gemeinde">
           <div class="flex flex-col">
             <span class="">
               {{ option.firstLine }}&nbsp;

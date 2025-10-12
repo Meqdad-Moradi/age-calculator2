@@ -28,6 +28,7 @@ export interface SearchRegionResult {
   bezirk: string;
   mainGemeinde: string;
   gemeinde: string;
+  ort: string;
   firstLine: string;
   secondLine: string;
   plz: string;
