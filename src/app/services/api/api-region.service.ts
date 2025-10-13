@@ -179,7 +179,7 @@ export class ApiRegionService {
           ? plz
             ? `${plz} ${ortschaft}`
             : ortschaft
-          : `${ortschaft} (${gemeinde !== ortschaft ? gemeinde : ''})`;
+          : ortschaft;
 
       default:
         return '';

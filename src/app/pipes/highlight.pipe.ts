@@ -6,25 +6,32 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class HighlightPipe implements PipeTransform {
   transform(value: string, searchQuery: string): string {
-    // Return original value if inputs are invalid
     if (!value || !searchQuery?.trim()) {
       return value;
     }
 
     try {
-      // Create a regex that matches the search query, case-insensitive
-      const regex = new RegExp(`(${searchQuery})`, 'gi');
-      const splitIndex = value.indexOf('(');
-      const beforeParenthesis = value[splitIndex - 1];
-      const values = value.split(beforeParenthesis);
-      const firstPart = values[0].replace(
+      // Escape regex special characters in the search query
+      const escapedQuery = searchQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(`(${escapedQuery})`, 'gi');
+
+      // // Split around the first parenthesis if present
+      // const splitIndex = value.indexOf('(');
+      // let mainText = value;
+      // let suffix = '';
+
+      // if (splitIndex !== -1) {
+      //   mainText = value.substring(0, splitIndex).trimEnd();
+      //   suffix = value.substring(splitIndex);
+      // }
+
+      // Highlight matches in the main text
+      return value.replace(
         regex,
-        '<span class="font-semibold text-teal-500">$1</span>',
+        '<span class="font-semibold text-green-700 dark:text-green-300">$1</span>',
       );
-      return `${firstPart} ${values[1] || ''}`;
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
-      // In case of invalid regex characters in searchQuery
+    } catch {
+      // Fallback in case of regex issues
       return value;
     }
   }
