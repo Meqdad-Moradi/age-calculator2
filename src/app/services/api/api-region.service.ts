@@ -247,40 +247,37 @@ export class ApiRegionService {
   }
 
   /**
-   * searchRegions
-   * Searches for regions by postal code (PLZ) and updates the filteredRegions signal.
+   * filterPlzs
+   * Filters regions for plzs (postal codes) by name and updates the filteredRegions signal.
    * @param searchQuery string
    */
-  public searchRegions(searchQuery: string): void {
-    if (!searchQuery || searchQuery.length < 3 || !this.regions().length) {
-      this.filteredRegions.set([]);
-      return;
-    }
-
+  private filterRegions(searchQuery: string): void {
     // split search query into individual queries
     const searchQueries = searchQuery.trim().split(' ');
     const isNumberSearch = !isNaN(+searchQuery);
 
     // filter regions by gemeinde name containing all search queries
     const regions = this.regions()
-      .filter(
-        (region) =>
-          region.type !== SearchSuggestionDisplayType.WeiterePlz &&
-          region.type !== SearchSuggestionDisplayType.Ortschaft,
-      )
       .filter((region) => {
-        if (isNumberSearch) {
-          return searchQueries.every(
-            (query) =>
-              region.plz?.startsWith(query) ||
-              region.nummer === +query ||
-              region.kgNummer === +query,
-          );
-        } else {
-          return searchQueries.every((query) =>
-            region.gemeinde?.toLowerCase().includes(query.toLowerCase()),
-          );
+        if (
+          region.type !== SearchSuggestionDisplayType.WeiterePlz &&
+          region.type !== SearchSuggestionDisplayType.Ortschaft
+        ) {
+          return searchQueries.every((query) => {
+            if (isNumberSearch) {
+              return (
+                region.plz?.startsWith(query) ||
+                region.nummer === +query ||
+                region.kgNummer === +query
+              );
+            } else {
+              return region.gemeinde
+                ?.toLowerCase()
+                .includes(query.toLowerCase());
+            }
+          });
         }
+        return false;
       })
       .sort(this.sortByGemeindeName(searchQuery));
 
@@ -291,39 +288,35 @@ export class ApiRegionService {
   }
 
   /**
-   * searchPlz
-   * Searches for regions by postal code (PLZ) and updates the filteredRegions signal.
+   * filterPlzs
+   * Filters regions for plzs (postal codes) by name and updates the filteredRegions signal.
    * @param searchQuery string
-   * @returns void
    */
-  public searchPlz(searchQuery: string): void {
-    if (!searchQuery || searchQuery.length < 3 || !this.regions().length) {
-      this.filteredRegions.set([]);
-      return;
-    }
-
+  private filterPlzs(searchQuery: string): void {
     // split search query into individual queries
     const searchQueries = searchQuery.trim().split(' ');
     const isNumberSearch = !isNaN(+searchQuery);
 
     // filter regions by gemeinde name containing all search queries
     const regions = this.regions()
-      .filter(
-        (region) =>
+      .filter((region) => {
+        if (
           region.type === SearchSuggestionDisplayType.WeiterePlz ||
           region.type === SearchSuggestionDisplayType.Ortschaft ||
-          region.type === SearchSuggestionDisplayType.Gemeinde,
-      )
-      .filter((region) => {
-        if (isNumberSearch) {
-          return searchQueries.every((query) => region.plz?.startsWith(query));
-        } else {
-          return searchQueries.every(
-            (query) =>
-              region.gemeinde?.toLowerCase().includes(query.toLowerCase()) ||
-              region.ortschaft?.toLowerCase().includes(query.toLowerCase()),
-          );
+          region.type === SearchSuggestionDisplayType.Gemeinde
+        ) {
+          return searchQueries.every((query) => {
+            if (isNumberSearch) {
+              return region.plz?.startsWith(query);
+            } else {
+              return (
+                region.gemeinde?.toLowerCase().includes(query.toLowerCase()) ||
+                region.ortschaft?.toLowerCase().includes(query.toLowerCase())
+              );
+            }
+          });
         }
+        return false;
       })
       .sort(this.sortByGemeindeName(searchQuery));
 
@@ -334,39 +327,38 @@ export class ApiRegionService {
   }
 
   /**
-   * searchOrtschaft
-   * Searches for ortschaften (localities) by name and updates the filteredRegions signal.
+   * filterCiteis
+   * Filters regions for ortschaften (localities) by name and updates the filteredCities signal.
    * @param searchQuery string
-   * @returns void
    */
-  public searchOrtschaft(searchQuery: string): void {
-    if (!searchQuery || searchQuery.length < 3 || !this.regions().length) {
-      this.filteredRegions.set([]);
-      return;
-    }
-
+  private filterCiteis(searchQuery: string): void {
     // split search query into individual queries
     const searchQueries = searchQuery.trim().split(' ');
     const isNumberSearch = !isNaN(+searchQuery);
 
     // filter regions by gemeinde name containing all search queries
     const regions = this.regions()
-      .filter(
-        (region) =>
+      .filter((region) => {
+        if (
           region.type === SearchSuggestionDisplayType.Ortschaft ||
           region.type === SearchSuggestionDisplayType.Gemeinde ||
-          region.type === SearchSuggestionDisplayType.WeiterePlz,
-      )
-      .filter((region) => {
-        if (isNumberSearch) {
-          return searchQueries.every((query) => region.plz?.startsWith(query));
-        } else {
-          return searchQueries.every(
-            (query) =>
-              region.ortschaft?.toLowerCase().includes(query.toLowerCase()) ||
-              region.gemeinde?.toLowerCase().includes(query.toLowerCase()),
-          );
+          region.type === SearchSuggestionDisplayType.WeiterePlz
+        ) {
+          return searchQueries.every((query) => {
+            if (isNumberSearch) {
+              return region.plz?.startsWith(query);
+            } else {
+              return (
+                region.isMainPlz &&
+                (region.ortschaft
+                  ?.toLowerCase()
+                  .includes(query.toLowerCase()) ||
+                  region.gemeinde?.toLowerCase().includes(query.toLowerCase()))
+              );
+            }
+          });
         }
+        return false;
       })
       .sort(this.sortByGemeindeName(searchQuery));
 
@@ -374,6 +366,47 @@ export class ApiRegionService {
     const res = this.createSearchRegionResult(regions, EnSearchMode.Ortschaft);
     // set the filtered regions
     this.filteredCities.set(res);
+  }
+
+  /**
+   * searchRegions
+   * Searches for regions by postal code (PLZ) and updates the filteredRegions signal.
+   * @param searchQuery string
+   */
+  public searchRegions(searchQuery: string): void {
+    if (!searchQuery || searchQuery.length < 3 || !this.regions().length) {
+      this.filteredRegions.set([]);
+      return;
+    }
+    this.filterRegions(searchQuery);
+  }
+
+  /**
+   * searchPlz
+   * Searches for regions by postal code (PLZ) and updates the filteredRegions signal.
+   * @param searchQuery string
+   * @returns void
+   */
+  public searchPlz(searchQuery: string): void {
+    if (!searchQuery || searchQuery.length < 3 || !this.regions().length) {
+      this.filteredZips.set([]);
+      return;
+    }
+    this.filterPlzs(searchQuery);
+  }
+
+  /**
+   * searchOrtschaft
+   * Searches for ortschaften (localities) by name and updates the filteredRegions signal.
+   * @param searchQuery string
+   * @returns void
+   */
+  public searchOrtschaft(searchQuery: string): void {
+    if (!searchQuery || searchQuery.length < 3 || !this.regions().length) {
+      this.filteredCities.set([]);
+      return;
+    }
+    this.filterCiteis(searchQuery);
   }
 
   /**

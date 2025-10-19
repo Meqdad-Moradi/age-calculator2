@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { startWith } from 'rxjs';
 import { ApiRegionService } from '../../../services/api/api-region.service';
 import { ErrorResponse } from '../../models/error-response.model';
-import { HighlightPipe } from "../../../pipes/highlight.pipe";
+import { HighlightPipe } from '../../../pipes/highlight.pipe';
 
 @Component({
   selector: 'app-search-region',
@@ -17,8 +17,8 @@ import { HighlightPipe } from "../../../pipes/highlight.pipe";
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    HighlightPipe
-],
+    HighlightPipe,
+  ],
   templateUrl: './search-region.component.html',
   styleUrl: './search-region.component.scss',
 })
@@ -45,25 +45,17 @@ export class SearchRegionComponent implements OnInit {
     // Region search subscription
     this.regionControl.valueChanges
       .pipe(startWith(''), takeUntilDestroyed(this.destroyRef))
-      .subscribe((value) => {
-        this.apiRegionService.searchRegions(value || '');
-      });
+      .subscribe((value) => this.apiRegionService.searchRegions(value || ''));
 
     // ZIP code search subscription
     this.zipControl.valueChanges
       .pipe(startWith(''), takeUntilDestroyed(this.destroyRef))
-      .subscribe((value) => {
-        if (value) {
-          this.apiRegionService.searchPlz(value);
-        }
-      });
+      .subscribe((value) => this.apiRegionService.searchPlz(value || ''));
 
     // City search subscription
     this.cityControl.valueChanges
       .pipe(startWith(''), takeUntilDestroyed(this.destroyRef))
-      .subscribe((value) => {
-        this.apiRegionService.searchOrtschaft(value || '');
-      });
+      .subscribe((value) => this.apiRegionService.searchOrtschaft(value || ''));
   }
 
   /**
