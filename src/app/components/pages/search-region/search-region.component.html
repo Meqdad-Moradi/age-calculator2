@@ -29,63 +29,71 @@
     </mat-autocomplete>
   </mat-form-field>
 
-  <!-- search post code -->
-  <mat-form-field class="w-full" appearance="outline">
-    <mat-label>Search Post Code</mat-label>
-    <input
-      type="text"
-      matInput
-      [matAutocomplete]="auto2"
-      [formControl]="zipControl"
-    />
-    <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
-      @for (option of zips(); track $index) {
-        <mat-option [value]="option.plz">
-          <div class="flex flex-col">
-            <span
-              [innerHTML]="
-                (option.firstLine | highlight: zipControl.value!) +
-                ' ' +
-                (option.mainGemeinde !== option.gemeinde
-                  ? '(' + option.mainGemeinde + ')'
-                  : '')
-              "
-            >
-            </span>
-            <span>{{ option.secondLine }}</span>
-          </div>
-        </mat-option>
-      }
-    </mat-autocomplete>
-  </mat-form-field>
+  <div class="flex gap-8">
+    <!-- search post code -->
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Post Code</mat-label>
+      <input
+        #zipInput
+        type="text"
+        matInput
+        [matAutocomplete]="auto2"
+        [formControl]="zipControl"
+      />
+      <mat-autocomplete
+        autoActiveFirstOption
+        #auto2="matAutocomplete"
+        (optionSelected)="onZipSelected()"
+      >
+        @for (option of createSearchResult(zips(), 1); track $index) {
+          <mat-option [value]="option.plz">
+            <div class="flex flex-col">
+              <span
+                [innerHTML]="
+                  (option.firstLine | highlight: zipControl.value!) +
+                  ' ' +
+                  (option.mainGemeinde !== option.gemeinde
+                    ? '(' + option.mainGemeinde + ')'
+                    : '')
+                "
+              >
+              </span>
+              <span>{{ option.secondLine }}</span>
+            </div>
+          </mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
 
-  <!-- search city -->
-  <mat-form-field class="w-full" appearance="outline">
-    <mat-label>Search City</mat-label>
-    <input
-      type="text"
-      matInput
-      [matAutocomplete]="auto3"
-      [formControl]="cityControl"
-    />
-    <mat-autocomplete autoActiveFirstOption #auto3="matAutocomplete">
-      @for (option of cities(); track $index) {
-        <mat-option [value]="option.gemeinde">
-          <div class="flex flex-col">
-            <span
-              [innerHTML]="
-                (option.firstLine | highlight: cityControl.value!) +
-                ' ' +
-                (option.mainGemeinde !== option.gemeinde
-                  ? '(' + option.mainGemeinde + ')'
-                  : '')
-              "
-            >
-            </span>
-            <span>{{ option.secondLine }}</span>
-          </div>
-        </mat-option>
-      }
-    </mat-autocomplete>
-  </mat-form-field>
+    <!-- search city -->
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Search City</mat-label>
+      <input
+        #cityInput
+        type="text"
+        matInput
+        [matAutocomplete]="auto3"
+        [formControl]="cityControl"
+      />
+      <mat-autocomplete autoActiveFirstOption #auto3="matAutocomplete">
+        @for (option of createSearchResult(cities(), 2); track $index) {
+          <mat-option [value]="option.gemeinde">
+            <div class="flex flex-col">
+              <span
+                [innerHTML]="
+                  (option.firstLine | highlight: cityControl.value!) +
+                  ' ' +
+                  (option.mainGemeinde !== option.gemeinde
+                    ? '(' + option.mainGemeinde + ')'
+                    : '')
+                "
+              >
+              </span>
+              <span>{{ option.secondLine }}</span>
+            </div>
+          </mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
 </section>

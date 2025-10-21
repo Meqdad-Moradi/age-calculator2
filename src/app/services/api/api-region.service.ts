@@ -21,8 +21,8 @@ export class ApiRegionService {
   private readonly baseUrl = 'http://localhost:3000/gemeinde';
 
   public filteredRegions = signal<SearchRegionResult[]>([]);
-  public filteredCities = signal<SearchRegionResult[]>([]);
-  public filteredZips = signal<SearchRegionResult[]>([]);
+  public filteredCities = signal<RegionItem[]>([]);
+  public filteredZips = signal<RegionItem[]>([]);
 
   private regions = signal<RegionItem[]>([]);
 
@@ -228,7 +228,7 @@ export class ApiRegionService {
    * @param regionItem RegionItem
    * @returns SearchRegionResult
    */
-  private createSearchRegionResult(
+  public createSearchRegionResult(
     regionItem: RegionItem[],
     searchMode: EnSearchMode = EnSearchMode.Region,
   ): SearchRegionResult[] {
@@ -271,9 +271,7 @@ export class ApiRegionService {
                 region.kgNummer === +query
               );
             } else {
-              return region.gemeinde
-                ?.toLowerCase()
-                .includes(query.toLowerCase());
+              return region.kgName?.toLowerCase().includes(query.toLowerCase());
             }
           });
         }
@@ -292,13 +290,13 @@ export class ApiRegionService {
    * Filters regions for plzs (postal codes) by name and updates the filteredRegions signal.
    * @param searchQuery string
    */
-  private filterPlzs(searchQuery: string): void {
+  private filterPlzs(searchQuery: string): RegionItem[] {
     // split search query into individual queries
     const searchQueries = searchQuery.trim().split(' ');
     const isNumberSearch = !isNaN(+searchQuery);
 
     // filter regions by gemeinde name containing all search queries
-    const regions = this.regions()
+    return this.regions()
       .filter((region) => {
         if (
           region.type === SearchSuggestionDisplayType.WeiterePlz ||
@@ -319,11 +317,6 @@ export class ApiRegionService {
         return false;
       })
       .sort(this.sortByGemeindeName(searchQuery));
-
-    // create SearchRegionResult from filtered regions
-    const res = this.createSearchRegionResult(regions);
-    // set the filtered regions
-    this.filteredZips.set(res);
   }
 
   /**
@@ -331,13 +324,13 @@ export class ApiRegionService {
    * Filters regions for ortschaften (localities) by name and updates the filteredCities signal.
    * @param searchQuery string
    */
-  private filterCiteis(searchQuery: string): void {
+  private filterCiteis(searchQuery: string): RegionItem[] {
     // split search query into individual queries
     const searchQueries = searchQuery.trim().split(' ');
     const isNumberSearch = !isNaN(+searchQuery);
 
     // filter regions by gemeinde name containing all search queries
-    const regions = this.regions()
+    return this.regions()
       .filter((region) => {
         if (
           region.type === SearchSuggestionDisplayType.Ortschaft ||
@@ -361,11 +354,6 @@ export class ApiRegionService {
         return false;
       })
       .sort(this.sortByGemeindeName(searchQuery));
-
-    // create SearchRegionResult from filtered regions
-    const res = this.createSearchRegionResult(regions, EnSearchMode.Ortschaft);
-    // set the filtered regions
-    this.filteredCities.set(res);
   }
 
   /**
@@ -387,12 +375,12 @@ export class ApiRegionService {
    * @param searchQuery string
    * @returns void
    */
-  public searchPlz(searchQuery: string): void {
+  public searchPlz(searchQuery: string): RegionItem[] {
     if (!searchQuery || searchQuery.length < 3 || !this.regions().length) {
       this.filteredZips.set([]);
-      return;
+      return [];
     }
-    this.filterPlzs(searchQuery);
+    return this.filterPlzs(searchQuery);
   }
 
   /**
@@ -401,12 +389,12 @@ export class ApiRegionService {
    * @param searchQuery string
    * @returns void
    */
-  public searchOrtschaft(searchQuery: string): void {
+  public searchOrtschaft(searchQuery: string): RegionItem[] {
     if (!searchQuery || searchQuery.length < 3 || !this.regions().length) {
       this.filteredCities.set([]);
-      return;
+      return [];
     }
-    this.filterCiteis(searchQuery);
+    return this.filterCiteis(searchQuery);
   }
 
   /**
@@ -424,9 +412,18 @@ export class ApiRegionService {
     const query = searchQuery.toLowerCase();
 
     return (a: RegionItem, b: RegionItem) => {
-      // First prioritize by type (Gemeinde before Ortschaft)
+      // First prioritize by type according to hierarchy
       if (a.type !== b.type) {
-        return a.type === SearchSuggestionDisplayType.Gemeinde ? -1 : 1;
+        const typeOrder = [
+          SearchSuggestionDisplayType.Land,
+          SearchSuggestionDisplayType.Bezirk,
+          SearchSuggestionDisplayType.Gemeinde,
+          SearchSuggestionDisplayType.KatastralGemeindeName,
+          SearchSuggestionDisplayType.Ortschaft,
+          SearchSuggestionDisplayType.WeiterePlz,
+        ];
+
+        return typeOrder.indexOf(a.type) - typeOrder.indexOf(b.type);
       }
 
       // Get the appropriate names for comparison
@@ -435,6 +432,7 @@ export class ApiRegionService {
           ? a.ortschaft
           : a.gemeinde
         )?.toLowerCase() || '';
+
       const bName =
         (b.type === SearchSuggestionDisplayType.Ortschaft
           ? b.ortschaft
