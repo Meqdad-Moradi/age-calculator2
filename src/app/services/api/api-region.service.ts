@@ -409,47 +409,52 @@ export class ApiRegionService {
    * @returns comparison function for sorting
    */
   private sortByGemeindeName(searchQuery: string) {
-    const query = searchQuery.toLowerCase();
-
     return (a: RegionItem, b: RegionItem) => {
-      // First prioritize by type according to hierarchy
-      if (a.type !== b.type) {
-        const typeOrder = [
-          SearchSuggestionDisplayType.Land,
-          SearchSuggestionDisplayType.Bezirk,
-          SearchSuggestionDisplayType.Gemeinde,
-          SearchSuggestionDisplayType.KatastralGemeindeName,
-          SearchSuggestionDisplayType.Ortschaft,
-          SearchSuggestionDisplayType.WeiterePlz,
-        ];
+      const query = searchQuery.toLowerCase();
+      const aName =
+        (isNaN(+searchQuery)
+          ? a.gemeinde || a.ortschaft
+          : a.plz
+        )?.toLowerCase() || '';
+      const bName =
+        (isNaN(+searchQuery)
+          ? b.gemeinde || b.ortschaft
+          : b.plz
+        )?.toLowerCase() || '';
 
-        return typeOrder.indexOf(a.type) - typeOrder.indexOf(b.type);
+      // 1. First sort by type hierarchy (Land -> Bezirk -> Others)
+      if (a.type !== b.type) {
+        // Land items on top
+        if (a.type === SearchSuggestionDisplayType.Land) return -1;
+        if (b.type === SearchSuggestionDisplayType.Land) return 1;
+
+        // Bezirk comes after Land
+        if (a.type === SearchSuggestionDisplayType.Bezirk) return -1;
+        if (b.type === SearchSuggestionDisplayType.Bezirk) return 1;
       }
 
-      // Get the appropriate names for comparison
-      const aName =
-        (a.type === SearchSuggestionDisplayType.Ortschaft
-          ? a.ortschaft
-          : a.gemeinde
-        )?.toLowerCase() || '';
+      // 2. Exact matches go to the top
+      const aExactMatch = aName === query;
+      const bExactMatch = bName === query;
+      if (aExactMatch && !bExactMatch) return -1;
+      if (!aExactMatch && bExactMatch) return 1;
 
-      const bName =
-        (b.type === SearchSuggestionDisplayType.Ortschaft
-          ? b.ortschaft
-          : b.gemeinde
-        )?.toLowerCase() || '';
+      // 3. If same gemeinde, sort main gemeinde first, then ortschaften alphabetically
+      if (a.gemeinde === b.gemeinde) {
+        // Main gemeinde (where gemeinde name equals ortschaft or no ortschaft) comes first
+        const aIsMain = !a.ortschaft || a.gemeinde === a.ortschaft;
+        const bIsMain = !b.ortschaft || b.gemeinde === b.ortschaft;
 
-      // Exact matches first
-      if (aName === query && bName !== query) return -1;
-      if (bName === query && aName !== query) return 1;
+        if (aIsMain && !bIsMain) return -1;
+        if (!aIsMain && bIsMain) return 1;
 
-      // Then starts-with matches
-      const aStarts = aName.startsWith(query);
-      const bStarts = bName.startsWith(query);
-      if (aStarts && !bStarts) return -1;
-      if (!aStarts && bStarts) return 1;
+        // If both are ortschaften, sort them alphabetically
+        if (a.ortschaft && b.ortschaft) {
+          return a.ortschaft.localeCompare(b.ortschaft);
+        }
+      }
 
-      // Finally alphabetical order
+      // 4. Sort the rest alphabetically by gemeinde name
       return aName.localeCompare(bName);
     };
   }
