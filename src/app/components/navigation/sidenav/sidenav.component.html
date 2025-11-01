@@ -76,6 +76,17 @@
 
       <mat-list-item
         class="!cursor-pointer"
+        [routerLink]="['/pampers']"
+        routerLinkActive="active"
+        onclick="this.blur()"
+        (click)="onExpandTaskManager(false)"
+      >
+        <mat-icon matListItemIcon>calculate</mat-icon>
+        <span matListItemTitle>Calculate Pampers</span>
+      </mat-list-item>
+
+      <mat-list-item
+        class="!cursor-pointer"
         [routerLink]="['/task-manager']"
         routerLinkActive="active"
         onclick="this.blur()"

@@ -1,0 +1,37 @@
+<section>
+  <app-section-title
+    title="Calculation Page"
+    slogan="Welcome to the calculation page. Here you can perform various calculations."
+  ></app-section-title>
+
+  <button class="mt-8" mat-raised-button (click)="addNewItem()">
+    Add new Item
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <div class="mt-8 mb-2">
+    <span>{{ totalItems() }} Items</span>
+    <span class="px-3 text-gray-400">|</span>
+    <span class="font-medium">Total Price: </span>
+    <span>{{ totalPrice() | currency: "EUR" : "symbol" : "1.2-2" }}</span>
+  </div>
+
+  <div
+    class="mb-4 px-4 py-1 bg-(--forground-color) grid grid-cols-5 gap-4 justify-around items-center font-medium text-gray-700 dark:text-gray-200 border-b border-b-gray-300 dark:border-b-gray-700"
+  >
+    <span class="truncate">No.</span>
+    <span class="truncate">Date</span>
+    <span class="truncate">Price</span>
+    <span class="truncate">Description</span>
+    <span class="truncate">Quantity</span>
+  </div>
+
+  <article>
+    @for (item of pampers(); track item.id) {
+      <app-calculation-item
+        [pamper]="item"
+        [index]="$index"
+      ></app-calculation-item>
+    }
+  </article>
+</section>

@@ -9,6 +9,7 @@ import { TaskManagerComponent } from './components/pages/task-manager/task-manag
 import { TasksComponent } from './components/pages/task-manager/tasks/tasks.component';
 import { TodosComponent } from './components/pages/todos/todos.component';
 import { SearchRegionComponent } from './components/pages/search-region/search-region.component';
+import { CalculationComponent } from './components/pages/calculation/calculation.component';
 
 export const routes: Routes = [
   {
@@ -48,6 +49,7 @@ export const routes: Routes = [
         component: SearchRegionComponent,
         pathMatch: 'full',
       },
+      { path: 'pampers', component: CalculationComponent, pathMatch: 'full' },
     ],
   },
   {
