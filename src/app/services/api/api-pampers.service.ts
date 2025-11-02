@@ -12,14 +12,14 @@ import { ErrorService } from '../error.service';
 export class ApiPampersService {
   private readonly http = inject(HttpClient);
   private readonly errorService = inject(ErrorService);
-  private readonly useUrl = 'http://localhost:3000/pampers';
+  private readonly baseUrl = 'http://localhost:3000/pampers';
 
   /**
    * getPampers
    * @returns Observable<Pampers[] | ErrorResponse<string>>
    */
   public getPampers(): Observable<Pampers[] | ErrorResponse<string>> {
-    return this.http.get<Pampers[]>(this.useUrl).pipe(
+    return this.http.get<Pampers[]>(this.baseUrl).pipe(
       catchError(
         this.errorService.handleError<Pampers[]>(
           'api-pampers.service::getTasks',
@@ -39,7 +39,7 @@ export class ApiPampersService {
   public addNewItem(
     pampers: Pampers,
   ): Observable<Pampers | ErrorResponse<string>> {
-    return this.http.post<Pampers>(this.useUrl, pampers).pipe(
+    return this.http.post<Pampers>(this.baseUrl, pampers).pipe(
       catchError(
         this.errorService.handleError<Pampers>(
           'api-pampers.service::addNewItem',
