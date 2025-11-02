@@ -11,6 +11,11 @@
         @if (pampersForm.get("name")?.hasError("required")) {
           <mat-error>Name is required</mat-error>
         }
+        @if (pampersForm.get("name")?.hasError("errorMsg")) {
+          <mat-error>
+            {{ pampersForm.get("name")?.getError("errorMsg") }}
+          </mat-error>
+        }
       </mat-form-field>
 
       <!-- Date input field: Purchase date with datepicker -->
@@ -38,13 +43,15 @@
           formControlName="price"
           required
           min="0"
-          step="0.10"
+          step="0.01"
         />
         @if (pampersForm.get("price")?.hasError("required")) {
           <mat-error>Price is required</mat-error>
         }
-        @if (pampersForm.get("price")?.hasError("min")) {
-          <mat-error>Price must be greater than 0€</mat-error>
+        @if (pampersForm.get("price")?.hasError("errorMsg")) {
+          <mat-error>{{
+            pampersForm.get("price")?.getError("errorMsg")
+          }}</mat-error>
         }
       </mat-form-field>
 

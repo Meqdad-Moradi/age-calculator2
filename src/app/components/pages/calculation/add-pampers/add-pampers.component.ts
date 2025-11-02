@@ -1,8 +1,11 @@
 import { Component, inject, output } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormsModule,
   ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -35,11 +38,52 @@ export class AddPampersComponent {
   public addNewItem = output<Pampers>();
 
   public pampersForm = this.fb.group({
-    name: ['', [Validators.required]],
-    price: ['', [Validators.required]],
+    name: [
+      '',
+      {
+        validators: [Validators.required, this.validateName()],
+        updateOn: 'change',
+      },
+    ],
+    price: ['', [Validators.required, this.validatePrice()]],
     date: ['', [Validators.required]],
     quantity: [1, [Validators.required, Validators.min(1)]],
   });
+
+  /**
+   * validateName
+   * @returns ValidatorFn
+   */
+  private validateName(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      if (!value) return null;
+
+      if (!/^[a-zA-Z]+$/.test(value)) {
+        return { errorMsg: 'Name can only contain letters.' };
+      }
+      if (value.length < 3) {
+        return { errorMsg: 'Name must be at least 3 characters long.' };
+      }
+
+      return null;
+    };
+  }
+
+  /**
+   * validatePrice
+   * @returns ValidatorFn
+   */
+  private validatePrice(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as number;
+      if (value == null) return null;
+      if (+value < 0.01) {
+        return { errorMsg: 'Price must be a valid number greater than €0' };
+      }
+      return null;
+    };
+  }
 
   /**
    * onSubmit

@@ -4,7 +4,7 @@
     slogan="Welcome to the calculation page. Here you can perform various calculations."
   ></app-section-title>
 
-  <app-add-pampers></app-add-pampers>
+  <app-add-pampers (addNewItem)="addNewItem($event)"></app-add-pampers>
 
   <div class="mt-8 mb-2">
     <span>{{ totalItems() }} Items</span>
