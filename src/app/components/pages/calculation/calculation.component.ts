@@ -7,6 +7,7 @@ import { Pampers } from '../../models/pampers';
 import { SectionTitleComponent } from '../../shared/section-title/section-title.component';
 import { CalculationItemComponent } from './calculation-item/calculation-item.component';
 import { CurrencyPipe } from '@angular/common';
+import { AddPampersComponent } from './add-pampers/add-pampers.component';
 
 @Component({
   selector: 'app-calculation',
@@ -16,6 +17,7 @@ import { CurrencyPipe } from '@angular/common';
     MatIconModule,
     CalculationItemComponent,
     CurrencyPipe,
+    AddPampersComponent,
   ],
   templateUrl: './calculation.component.html',
   styleUrl: './calculation.component.scss',
@@ -28,7 +30,7 @@ export class CalculationComponent implements OnInit {
 
   public totalPrice = computed(() => {
     return this.pampers()
-      .reduce((acc, item) => acc + item.price * item.quantity, 0)
+      .reduce((acc, item) => acc + +item.price * item.quantity, 0)
       .toFixed(2);
   });
 
@@ -56,13 +58,10 @@ export class CalculationComponent implements OnInit {
   /**
    * addNewItem
    */
-  public addNewItem(): void {
+  public addNewItem(formValue: Pampers): void {
     const newItem: Pampers = {
       id: crypto.randomUUID(),
-      description: 'New Pampers Item',
-      quantity: 1,
-      price: 8.45,
-      date: new Date().toISOString(),
+      ...formValue,
     };
 
     this.apiPampersService.addNewItem(newItem).subscribe((response) => {

@@ -10,11 +10,11 @@
     "
   >
     <span>{{ index()! + 1 }}</span>
+    <span class="truncate">{{ item.name }}</span>
     <span class="truncate">{{ item.date | date: "dd.MM.yyyy" }}</span>
     <span class="truncate">{{
       item.price | currency: "EUR" : "symbol" : "1.2-2" : "de-DE"
     }}</span>
-    <span class="truncate">{{ item.description }}</span>
     <span>{{ item.quantity }}</span>
   </div>
 }

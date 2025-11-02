@@ -1,7 +1,7 @@
 export interface Pampers {
-  id: string;
-  date?: string;
+  id?: string;
+  name: string;
+  date: string;
   quantity: number;
-  price: number;
-  description?: string;
+  price: string;
 }
