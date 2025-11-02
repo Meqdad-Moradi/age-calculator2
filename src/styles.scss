@@ -63,6 +63,19 @@ button:where([mat-raised-button], [color="primary"]) {
     align-self: flex-end;
     padding-bottom: 0.2em;
   }
+
+  // centerize the input suffix icon
+  .mat-mdc-icon-button {
+    display: grid;
+    place-items: center;
+  }
+
+  // make the suffix icon smaller
+  .mat-mdc-icon-button img,
+  .mat-mdc-icon-button svg {
+    width: 18px;
+    height: 18px;
+  }
   //------ end default reset ---------//
 
   &.no-hint {

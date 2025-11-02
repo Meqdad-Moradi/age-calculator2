@@ -50,4 +50,44 @@ export class ApiPampersService {
       ),
     );
   }
+
+  /**
+   *
+   * @param id string -> item id
+   * @returns Observable<Pampers | ErrorResponse<string>>
+   */
+  public deleteItem(id: string): Observable<Pampers | ErrorResponse<string>> {
+    const url = `${this.baseUrl}/${id}`;
+    return this.http.delete<Pampers>(url).pipe(
+      catchError(
+        this.errorService.handleError<Pampers>(
+          'api-pampers.service::deleteItem',
+          {
+            showInDialog: true,
+          },
+        ),
+      ),
+    );
+  }
+
+  /**
+   * editItem
+   * @param pampers Pampers
+   * @returns Observable<Pampers | ErrorResponse<string>>
+   */
+  public editItem(
+    pampers: Pampers,
+  ): Observable<Pampers | ErrorResponse<string>> {
+    const url = `${this.baseUrl}/${pampers.id}`;
+    return this.http.put<Pampers>(url, pampers).pipe(
+      catchError(
+        this.errorService.handleError<Pampers>(
+          'api-pampers.service::editItem',
+          {
+            showInDialog: true,
+          },
+        ),
+      ),
+    );
+  }
 }

@@ -4,8 +4,6 @@
     slogan="Welcome to the calculation page. Here you can perform various calculations."
   ></app-section-title>
 
-  <app-add-pampers (addNewItem)="addNewItem($event)"></app-add-pampers>
-
   <div class="mt-8 mb-2">
     <span>{{ totalItems() }} Items</span>
     <span class="px-3 text-gray-400">|</span>
@@ -14,21 +12,84 @@
   </div>
 
   <div
-    class="mb-4 px-4 py-1 bg-(--forground-color) grid grid-cols-5 gap-4 justify-around items-center font-medium text-gray-700 dark:text-gray-200 border-b border-b-gray-300 dark:border-b-gray-700"
+    class="table-header mb-4 pl-4 py-1 bg-(--forground-color) font-medium text-gray-700 dark:text-gray-200 border-b border-b-gray-300 dark:border-b-gray-700"
   >
     <span class="truncate">No.</span>
+    <span class="truncate">Name</span>
     <span class="truncate">Date</span>
     <span class="truncate">Price</span>
-    <span class="truncate">Description</span>
     <span class="truncate">Quantity</span>
+    <span>&nbsp;</span>
   </div>
 
   <article>
-    @for (item of pampers(); track item.id) {
-      <app-calculation-item
-        [pamper]="item"
-        [index]="$index"
-      ></app-calculation-item>
+    @for (item of pampers(); track item?.id) {
+      <form
+        #formRef="ngForm"
+        [class]="
+          'add-form pl-4 border-b border-b-gray-300 dark:border-b-gray-700' +
+          ($index === 0
+            ? ' border-t border-t-gray-300 dark:border-t-gray-700'
+            : '')
+        "
+        (ngSubmit)="onSubmit(formRef)"
+      >
+        <span>{{ $index + 1 }}</span>
+
+        <input
+          class="py-2 w-full placeholder:text-gray-400 placeholder:text-sm"
+          type="text"
+          name="name"
+          [(ngModel)]="item.name"
+          pattern="[a-zA-Z ]*"
+          minlength="3"
+          required
+          placeholder="Article Name..."
+        />
+
+        <mat-form-field
+          class="w-full no-hint no-underline no-arrow match-height match-width"
+        >
+          <input
+            class="!mt-2.5 !placeholder:text-gray-400 placeholder:text-sm"
+            matInput
+            [matDatepicker]="picker"
+            name="date"
+            [(ngModel)]="item.date"
+            placeholder="Choose a date..."
+            required
+            (focus)="picker.open()"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <input
+          class="py-2 w-full placeholder:text-gray-400 placeholder:text-sm"
+          type="text"
+          name="price"
+          [ngModel]="item.price | currency: 'EUR' : 'symbol' : '1.2-2'"
+          (ngModelChange)="item.price = $event"
+          placeholder="Price..."
+        />
+
+        <input
+          class="py-2 w-full placeholder:text-gray-400 placeholder:text-sm"
+          type="text"
+          name="quantity"
+          [(ngModel)]="item.quantity"
+          [value]="item?.quantity"
+          placeholder="Quantity..."
+          required
+        />
+
+        <button mat-icon-button type="submit" [disabled]="formRef.invalid">
+          <mat-icon>check</mat-icon>
+        </button>
+      </form>
     }
   </article>
 </section>

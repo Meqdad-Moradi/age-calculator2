@@ -1,9 +1,10 @@
-import { Component, input, viewChild } from '@angular/core';
-import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
-import { Pampers } from '../../../models/pampers';
-import { MatIconModule } from '@angular/material/icon';
 import { CurrencyPipe, DatePipe } from '@angular/common';
+import { Component, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { Pampers } from '../../../models/pampers';
 
 @Component({
   selector: 'app-calculation-item',
@@ -12,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatExpansionModule,
     MatIconModule,
     MatButtonModule,
+    MatMenuModule,
     DatePipe,
     CurrencyPipe,
   ],
@@ -22,5 +24,6 @@ export class CalculationItemComponent {
   public pamper = input<Pampers>();
   public index = input<number>();
 
-  accordion = viewChild.required(MatAccordion);
+  public editItem = output<Pampers>();
+  public deleteItem = output<string>();
 }
