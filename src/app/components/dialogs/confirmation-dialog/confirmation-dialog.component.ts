@@ -26,9 +26,13 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class ConfirmationDialogComponent {
   private readonly dialogRef = inject(
-    MatDialogRef<ConfirmationDialogComponent>
+    MatDialogRef<ConfirmationDialogComponent>,
   );
   public data = inject<ConfirmMessage>(MAT_DIALOG_DATA);
+
+  constructor() {
+    this.dialogRef.disableClose = true;
+  }
 
   /**
    * onNoClick
