@@ -71,18 +71,18 @@ export class ApiPampersService {
   }
 
   /**
-   * editItem
+   * updateItem
    * @param pampers Pampers
    * @returns Observable<Pampers | ErrorResponse<string>>
    */
-  public editItem(
+  public updateItem(
     pampers: Pampers,
   ): Observable<Pampers | ErrorResponse<string>> {
     const url = `${this.baseUrl}/${pampers.id}`;
     return this.http.put<Pampers>(url, pampers).pipe(
       catchError(
         this.errorService.handleError<Pampers>(
-          'api-pampers.service::editItem',
+          'api-pampers.service::updateItem',
           {
             showInDialog: true,
           },

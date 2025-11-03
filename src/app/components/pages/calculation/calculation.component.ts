@@ -67,42 +67,57 @@ export class CalculationComponent implements OnInit {
         price: null,
       };
 
-      this.pampers.update(() => [initialValue, ...response]);
+      this.pampers.update(() => [initialValue, ...response.reverse()]);
     });
+  }
+
+  /**
+   * onSubmit
+   * Handles form submission for Pampers items.
+   * @param form NgForm - Angular form instance
+   * @param item Pampers
+   * @returns void
+   */
+  public onSubmit(form: NgForm, item: Pampers): void {
+    if (form.invalid) return;
+
+    const value: Pampers = {
+      ...item,
+      date: new Date(item.date!).toISOString(),
+      id: item.id ?? crypto.randomUUID(),
+    };
+
+    if (item.id) {
+      this.updateItem(value);
+    } else {
+      this.addNewItem(value);
+    }
+
+    form.reset();
   }
 
   /**
    * addNewItem
    */
-  public addNewItem(formValue: Pampers): void {
-    const newItem: Pampers = {
-      id: crypto.randomUUID(),
-      ...formValue,
-    };
-
-    this.apiPampersService.addNewItem(newItem).subscribe((response) => {
+  public addNewItem(value: Pampers): void {
+    this.apiPampersService.addNewItem(value).subscribe((response) => {
       if (response instanceof ErrorResponse) {
         return;
       }
 
-      this.pampers.update((items) => [...items, response]);
+      this.pampers.update((items) => {
+        items.splice(1, 0, response);
+        return items;
+      });
     });
   }
 
-  public onSubmit(form: NgForm) {
-    const value = {
-      ...form.value,
-      date: new Date(form.controls['date'].value).toISOString(),
-    };
-    console.log(value);
-  }
-
   /**
-   * editItem
+   * updateItem
    * @param editedItem Pampers
    */
-  public editItem(editedItem: Pampers): void {
-    this.apiPampersService.editItem(editedItem).subscribe((response) => {
+  public updateItem(editedItem: Pampers): void {
+    this.apiPampersService.updateItem(editedItem).subscribe((response) => {
       if (response instanceof ErrorResponse) {
         return;
       }

@@ -3,5 +3,5 @@ export interface Pampers {
   name: string | null;
   date: string | null;
   quantity: number | null;
-  price: string | null;
+  price: number | null;
 }

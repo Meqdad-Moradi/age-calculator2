@@ -19,11 +19,10 @@
     <span class="truncate">Date</span>
     <span class="truncate">Price</span>
     <span class="truncate">Quantity</span>
-    <span>&nbsp;</span>
   </div>
 
   <article>
-    @for (item of pampers(); track item?.id) {
+    @for (item of pampers(); track $index) {
       <form
         #formRef="ngForm"
         [class]="
@@ -32,7 +31,7 @@
             ? ' border-t border-t-gray-300 dark:border-t-gray-700'
             : '')
         "
-        (ngSubmit)="onSubmit(formRef)"
+        (ngSubmit)="onSubmit(formRef, item)"
       >
         <span>{{ $index + 1 }}</span>
 
@@ -56,7 +55,7 @@
             [matDatepicker]="picker"
             name="date"
             [(ngModel)]="item.date"
-            placeholder="Choose a date..."
+            placeholder="Select Date..."
             required
             (focus)="picker.open()"
           />
@@ -67,18 +66,22 @@
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
-        <input
-          class="py-2 w-full placeholder:text-gray-400 placeholder:text-sm"
-          type="text"
-          name="price"
-          [ngModel]="item.price | currency: 'EUR' : 'symbol' : '1.2-2'"
-          (ngModelChange)="item.price = $event"
-          placeholder="Price..."
-        />
+        <div class="flex items-center gap-1">
+          @if (item.id) {
+            <span>€</span>
+          }
+          <input
+            class="py-2 w-full placeholder:text-gray-400 placeholder:text-sm"
+            type="text"
+            name="price"
+            [(ngModel)]="item.price"
+            placeholder="Price..."
+          />
+        </div>
 
         <input
           class="py-2 w-full placeholder:text-gray-400 placeholder:text-sm"
-          type="text"
+          type="number"
           name="quantity"
           [(ngModel)]="item.quantity"
           [value]="item?.quantity"
@@ -86,9 +89,23 @@
           required
         />
 
-        <button mat-icon-button type="submit" [disabled]="formRef.invalid">
-          <mat-icon>check</mat-icon>
-        </button>
+        <div class="flex items-center justify-end">
+          @if (item.id) {
+            <button
+              mat-icon-button
+              type="button"
+              (click)="deleteItem(item.id!)"
+            >
+              <mat-icon class="!text-[18px] !text-red-300 !leading-[1.3]"
+                >delete</mat-icon
+              >
+            </button>
+          }
+
+          <button mat-icon-button type="submit" [disabled]="formRef.invalid">
+            <mat-icon>{{ item.id ? "done_all" : "check_small" }}</mat-icon>
+          </button>
+        </div>
       </form>
     }
   </article>
