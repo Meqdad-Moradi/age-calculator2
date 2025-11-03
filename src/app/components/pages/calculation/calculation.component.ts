@@ -1,15 +1,24 @@
 import { CommonModule, CurrencyPipe } from '@angular/common';
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  OnInit,
+  signal
+} from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialog } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { filter, switchMap, take } from 'rxjs/operators';
 import { ApiPampersService } from '../../../services/api/api-pampers.service';
+import { ConfirmationDialogComponent } from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ErrorResponse } from '../../models/error-response.model';
 import { Pampers } from '../../models/pampers';
 import { SectionTitleComponent } from '../../shared/section-title/section-title.component';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-calculation',
@@ -29,10 +38,15 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class CalculationComponent implements OnInit {
   private readonly apiPampersService = inject(ApiPampersService);
+  private readonly dialog = inject(MatDialog);
 
+  // properties
   public pampers = signal<Pampers[]>([]);
   public isDataLoaded = false;
 
+  /**
+   * totalPrice
+   */
   public totalPrice = computed(() => {
     return this.pampers()
       .reduce(
@@ -42,6 +56,9 @@ export class CalculationComponent implements OnInit {
       .toFixed(2);
   });
 
+  /**
+   * totalItems
+   */
   public totalItems = computed(() => {
     return this.pampers().length;
   });
@@ -135,14 +152,28 @@ export class CalculationComponent implements OnInit {
    * @param id string -> item id
    */
   public deleteItem(id: string): void {
-    this.apiPampersService.deleteItem(id).subscribe((response) => {
-      if (response instanceof ErrorResponse) {
-        return;
-      }
+    this.dialog
+      .open(ConfirmationDialogComponent, {
+        data: {
+          title: 'Delete Current Item',
+          description: 'Are you sure you want to delete this item?',
+        },
+        maxWidth: '400px',
+      })
+      .afterClosed()
+      .pipe(
+        filter(Boolean),
+        switchMap(() => this.apiPampersService.deleteItem(id)),
+        take(1),
+      )
+      .subscribe((response) => {
+        if (response instanceof ErrorResponse) {
+          return;
+        }
 
-      this.pampers.update((items) =>
-        items.filter((item) => item && item.id !== id),
-      );
-    });
+        this.pampers.update((items) =>
+          items.filter((item) => item && item.id !== id),
+        );
+      });
   }
 }
