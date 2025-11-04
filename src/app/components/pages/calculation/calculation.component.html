@@ -4,13 +4,26 @@
     slogan="Welcome to the calculation page. Here you can perform various calculations."
   ></app-section-title>
 
-  <div class="mt-8 mb-2">
-    <span>{{ totalItems() }} Items</span>
-    <span class="px-3 text-gray-400">|</span>
+  <!-- display total price -->
+  <div
+    class="my-8 mb-2 underline underline-offset-4 decoration-dotted decoration-(--primary)"
+  >
     <span class="font-medium">Total Price: </span>
     <span>{{ totalPrice() | currency: "EUR" : "symbol" : "1.2-2" }}</span>
   </div>
 
+  <!-- filter controls -->
+  <app-filter-control
+    [(filterQuery)]="filterQuery"
+    [filterOptions]="filterOptions"
+    [sortOptions]="sortOptions"
+    [isSearchBoxVisible]="false"
+    [itemsCountLabel]="totalItems() + ' Items'"
+    [sortControl]="sortQuery()"
+    (sortControlChange)="onSort($event!)"
+  ></app-filter-control>
+
+  <!-- table header -->
   <div
     class="table-header mb-4 pl-4 py-1 bg-(--forground-color) font-medium text-gray-700 dark:text-gray-200 border-b border-b-gray-300 dark:border-b-gray-700"
   >
@@ -21,8 +34,9 @@
     <span class="truncate">Quantity</span>
   </div>
 
+  <!-- table -->
   <article>
-    @for (item of pampers(); track $index) {
+    @for (item of filteredPampers(); track $index) {
       <form
         #formRef="ngForm"
         [class]="
@@ -104,11 +118,7 @@
             </button>
           }
 
-          <button
-            mat-icon-button
-            type="submit"
-            [disabled]="formRef.invalid"
-          >
+          <button mat-icon-button type="submit" [disabled]="formRef.invalid">
             <mat-icon>check_small</mat-icon>
           </button>
         </div>

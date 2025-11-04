@@ -11,8 +11,10 @@ import { filter, switchMap, take } from 'rxjs/operators';
 import { ApiPampersService } from '../../../services/api/api-pampers.service';
 import { ConfirmationDialogComponent } from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ErrorResponse } from '../../models/error-response.model';
-import { Pampers } from '../../models/pampers';
+import { EnPampersItemType, Pampers } from '../../models/pampers';
 import { SectionTitleComponent } from '../../shared/section-title/section-title.component';
+import { FilterControlComponent } from '../../shared/filter-control/filter-control.component';
+import { compare } from '../../../helpers/utils';
 
 @Component({
   selector: 'app-calculation',
@@ -26,6 +28,7 @@ import { SectionTitleComponent } from '../../shared/section-title/section-title.
     CurrencyPipe,
     CommonModule,
     FormsModule,
+    FilterControlComponent,
   ],
   templateUrl: './calculation.component.html',
   styleUrl: './calculation.component.scss',
@@ -36,13 +39,31 @@ export class CalculationComponent implements OnInit {
 
   // properties
   public pampers = signal<Pampers[]>([]);
+  public filterOptions: string[] = [
+    'All',
+    EnPampersItemType.Pamper,
+    EnPampersItemType.DastmalTar,
+    EnPampersItemType.DastmalKhoshk,
+    EnPampersItemType.Shir,
+  ];
+  public sortOptions: string[] = ['Name', 'Type', 'Date'];
+  public sortQuery = signal<string>('Name');
+  public filterQuery = signal<string>(this.filterOptions[0]);
   public isDataLoaded = false;
+
+  /**
+   * filteredPampers
+   */
+  public filteredPampers = computed(() => {
+    if (this.filterQuery() === 'All') return this.pampers();
+    return this.pampers().filter((item) => item.type === this.filterQuery());
+  });
 
   /**
    * totalPrice
    */
   public totalPrice = computed(() => {
-    return this.pampers()
+    return this.filteredPampers()
       .reduce(
         (acc, item) => (!item ? acc : acc + +item.price! * item.quantity!),
         0,
@@ -54,7 +75,8 @@ export class CalculationComponent implements OnInit {
    * totalItems
    */
   public totalItems = computed(() => {
-    return this.pampers().length;
+    // - 1, because the first item is always empty
+    return this.pampers().length - 1;
   });
 
   ngOnInit(): void {
@@ -76,6 +98,7 @@ export class CalculationComponent implements OnInit {
         date: null,
         quantity: null,
         price: null,
+        type: null,
       };
 
       this.pampers.update(() => [initialValue, ...response.reverse()]);
@@ -169,5 +192,13 @@ export class CalculationComponent implements OnInit {
           items.filter((item) => item && item.id !== id),
         );
       });
+  }
+
+  /**
+   * onSort
+   * @param option string - pamper option
+   */
+  public onSort(option: string): void {
+    this.filteredPampers().sort(compare(option.toLocaleLowerCase()));
   }
 }

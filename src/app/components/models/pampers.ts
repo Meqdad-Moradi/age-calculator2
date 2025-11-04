@@ -4,4 +4,12 @@ export interface Pampers {
   date: string | null;
   quantity: number | null;
   price: number | null;
+  type: EnPampersItemType | null;
+}
+
+export enum EnPampersItemType {
+  Pamper = 'Pamper',
+  DastmalTar = 'Dastmal tar',
+  DastmalKhoshk = 'Dastmal khoshk',
+  Shir = 'Shir',
 }
