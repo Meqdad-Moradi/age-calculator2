@@ -213,4 +213,27 @@ export class CalculationComponent implements OnInit {
   public onSort(option: string): void {
     this.filteredPampers().sort(compare(option.toLocaleLowerCase()));
   }
+
+  /**
+   * onSortAscOrDesc
+   */
+  public onSortAscOrDesc(): void {
+    this.reverseArrWithoutFirstElement(this.filteredPampers());
+  }
+
+  /**
+   * reverseArrWithoutFirstElement
+   * @param arr T[]
+   */
+  private reverseArrWithoutFirstElement<T>(arr: T[]): void {
+    let left = 1; // start after the first element
+    let right = arr.length - 1; // last element
+
+    while (left < right) {
+      // swap elements
+      [arr[left], arr[right]] = [arr[right], arr[left]];
+      left++;
+      right--;
+    }
+  }
 }

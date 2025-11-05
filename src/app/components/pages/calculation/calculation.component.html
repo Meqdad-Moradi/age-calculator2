@@ -21,6 +21,7 @@
     [itemsCountLabel]="totalItems() + ' Items'"
     [sortControl]="sortQuery()"
     (sortControlChange)="onSort($event!)"
+    (isAscOutput)="onSortAscOrDesc()"
   ></app-filter-control>
 
   <!-- table header -->
