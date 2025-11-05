@@ -7,14 +7,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { filter, switchMap, take } from 'rxjs/operators';
+import { compare } from '../../../helpers/utils';
 import { ApiPampersService } from '../../../services/api/api-pampers.service';
 import { ConfirmationDialogComponent } from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ErrorResponse } from '../../models/error-response.model';
 import { EnPampersItemType, Pampers } from '../../models/pampers';
-import { SectionTitleComponent } from '../../shared/section-title/section-title.component';
 import { FilterControlComponent } from '../../shared/filter-control/filter-control.component';
-import { compare } from '../../../helpers/utils';
+import { SectionTitleComponent } from '../../shared/section-title/section-title.component';
 
 @Component({
   selector: 'app-calculation',
@@ -29,6 +30,7 @@ import { compare } from '../../../helpers/utils';
     CommonModule,
     FormsModule,
     FilterControlComponent,
+    MatSelectModule,
   ],
   templateUrl: './calculation.component.html',
   styleUrl: './calculation.component.scss',
@@ -45,6 +47,7 @@ export class CalculationComponent implements OnInit {
     EnPampersItemType.DastmalTar,
     EnPampersItemType.DastmalKhoshk,
     EnPampersItemType.Shir,
+    EnPampersItemType.Other,
   ];
   public sortOptions: string[] = ['Name', 'Type', 'Date'];
   public sortQuery = signal<string>('Name');
@@ -65,7 +68,7 @@ export class CalculationComponent implements OnInit {
   public totalPrice = computed(() => {
     return this.filteredPampers()
       .reduce(
-        (acc, item) => (!item ? acc : acc + +item.price! * item.quantity!),
+        (acc, item) => (!item ? acc : acc + item.price! * item.quantity!),
         0,
       )
       .toFixed(2);
@@ -84,6 +87,21 @@ export class CalculationComponent implements OnInit {
   }
 
   /**
+   * createInitialFormValue
+   * @returns Pampers
+   */
+  private createInitialFormValue(): Pampers {
+    return {
+      id: null,
+      name: null,
+      date: null,
+      quantity: null,
+      price: null,
+      type: null,
+    };
+  }
+
+  /**
    * getPampers
    */
   public getPampers(): void {
@@ -91,17 +109,11 @@ export class CalculationComponent implements OnInit {
       if (response instanceof ErrorResponse) {
         return;
       }
-
-      const initialValue = {
-        id: null,
-        name: null,
-        date: null,
-        quantity: null,
-        price: null,
-        type: null,
-      };
-
-      this.pampers.update(() => [initialValue, ...response.reverse()]);
+      // update pampers
+      this.pampers.update(() => [
+        this.createInitialFormValue(),
+        ...response.reverse(),
+      ]);
     });
   }
 
@@ -119,6 +131,7 @@ export class CalculationComponent implements OnInit {
       ...item,
       date: new Date(item.date!).toISOString(),
       id: item.id ?? crypto.randomUUID(),
+      price: +item.price!,
     };
 
     if (item.id) {
@@ -139,10 +152,9 @@ export class CalculationComponent implements OnInit {
         return;
       }
 
-      this.pampers.update((items) => {
-        items.splice(1, 0, response);
-        return items;
-      });
+      const pampers = this.pampers();
+      pampers.splice(1, 0, response);
+      this.pampers.update(() => [...pampers]);
     });
   }
 

@@ -32,6 +32,7 @@
     <span class="truncate">Date</span>
     <span class="truncate">Price</span>
     <span class="truncate">Quantity</span>
+    <span class="truncate">Article Type</span>
   </div>
 
   <!-- table -->
@@ -64,7 +65,7 @@
           class="w-full no-hint no-underline no-arrow match-height match-width"
         >
           <input
-            class="!mt-2.5 !placeholder:text-gray-400 placeholder:text-sm"
+            class="!w-full !mt-2.5 !placeholder:text-gray-400 placeholder:text-sm"
             matInput
             [matDatepicker]="picker"
             name="date"
@@ -105,8 +106,26 @@
           required
         />
 
+        <mat-form-field
+          class="w-full no-hint no-underline match-height match-width"
+        >
+          <mat-select
+            name="type"
+            [(ngModel)]="item.type"
+            placeholder="Choose a type..."
+          >
+            @for (item of filterOptions; track $index) {
+              <mat-option [value]="item">{{ item }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
         <div class="flex items-center justify-end">
-          @if (item.id) {
+          @if (!item.id || formRef.dirty) {
+            <button mat-icon-button type="submit" [disabled]="formRef.invalid">
+              <mat-icon>check_small</mat-icon>
+            </button>
+          } @else {
             <button
               mat-icon-button
               type="button"
@@ -117,10 +136,6 @@
               >
             </button>
           }
-
-          <button mat-icon-button type="submit" [disabled]="formRef.invalid">
-            <mat-icon>check_small</mat-icon>
-          </button>
         </div>
       </form>
     }

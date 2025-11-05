@@ -12,4 +12,5 @@ export enum EnPampersItemType {
   DastmalTar = 'Dastmal tar',
   DastmalKhoshk = 'Dastmal khoshk',
   Shir = 'Shir',
+  Other = 'Other',
 }
