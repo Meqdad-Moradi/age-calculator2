@@ -48,6 +48,7 @@ export class CalculationComponent implements OnInit {
     EnPampersItemType.DastmalKhoshk,
     EnPampersItemType.Shir,
     EnPampersItemType.Other,
+    'Select time period',
   ];
   public sortOptions: string[] = ['Name', 'Type', 'Date'];
   public sortQuery = signal<string>('Name');

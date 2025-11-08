@@ -1,0 +1,61 @@
+<h2 class="!font-pop !font-semibold !pb-0" mat-dialog-title>{{ data.title }}</h2>
+
+<form [formGroup]="dateForm" (ngSubmit)="onConfirm($event)">
+  <mat-dialog-content>
+    <p class="mb-4">
+      Pick the FROM & TO dates to display items within that period.
+    </p>
+    <section
+      class="w-full grid grid-cols-1 md:grid-cols-2 items-center justify-between gap-y-2 gap-x-8"
+    >
+      <!-- start tsp -->
+      <mat-form-field class="w-full" appearance="outline">
+        <mat-label>FROM date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="from"
+          (focus)="picker.open()"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="w-full mt-3 md:mt-0" appearance="outline">
+        <mat-label>TO date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          formControlName="to"
+          (focus)="picker2.open()"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+
+      <!-- Show group-level error under FROM field -->
+      @if (dateForm.hasError("dateRangeError")) {
+        <mat-error>{{ dateForm.getError("dateRangeError") }}</mat-error>
+      }
+    </section>
+  </mat-dialog-content>
+
+  <!-- dialog action -->
+  <mat-dialog-actions>
+    <button matButton (click)="onNoClick()" type="button">Cancel</button>
+    <button
+      mat-raised-button
+      cdkFocusInitial
+      type="submit"
+      [disabled]="dateForm.invalid"
+    >
+      Ok
+    </button>
+  </mat-dialog-actions>
+</form>
