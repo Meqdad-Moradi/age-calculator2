@@ -31,6 +31,7 @@ export class ConfirmationDialogComponent {
   public data = inject<ConfirmMessage>(MAT_DIALOG_DATA);
 
   constructor() {
+    // prevent click event on backdrop section
     this.dialogRef.disableClose = true;
   }
 
