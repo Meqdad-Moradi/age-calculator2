@@ -14,3 +14,7 @@ export enum EnPampersItemType {
   Shir = 'Shir',
   Other = 'Other',
 }
+
+export enum EnTimePeriod {
+  SelectTimePeriod = 'Select time period',
+}

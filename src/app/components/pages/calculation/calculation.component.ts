@@ -13,9 +13,10 @@ import { compare } from '../../../helpers/utils';
 import { ApiPampersService } from '../../../services/api/api-pampers.service';
 import { ConfirmationDialogComponent } from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ErrorResponse } from '../../models/error-response.model';
-import { EnPampersItemType, Pampers } from '../../models/pampers';
+import { EnPampersItemType, Pampers, EnTimePeriod } from '../../models/pampers';
 import { FilterControlComponent } from '../../shared/filter-control/filter-control.component';
 import { SectionTitleComponent } from '../../shared/section-title/section-title.component';
+import { DateRangeDialogComponent } from '../../dialogs/date-range-dialog/date-range-dialog.component';
 
 @Component({
   selector: 'app-calculation',
@@ -48,7 +49,7 @@ export class CalculationComponent implements OnInit {
     EnPampersItemType.DastmalKhoshk,
     EnPampersItemType.Shir,
     EnPampersItemType.Other,
-    'Select time period',
+    EnTimePeriod.SelectTimePeriod,
   ];
   public sortOptions: string[] = ['Name', 'Type', 'Date'];
   public sortQuery = signal<string>('Name');
@@ -59,6 +60,7 @@ export class CalculationComponent implements OnInit {
    * filteredPampers
    */
   public filteredPampers = computed(() => {
+    // if (this.filterQuery() === EnTimePeriod.SelectTimePeriod) return;
     if (this.filterQuery() === 'All') return this.pampers();
     return this.pampers().filter((item) => item.type === this.filterQuery());
   });
@@ -236,5 +238,13 @@ export class CalculationComponent implements OnInit {
       left++;
       right--;
     }
+  }
+
+  public onSelectTimePeriod(): void {
+    this.dialog.open(DateRangeDialogComponent, {
+      data: {
+        title: 'foo',
+      },
+    });
   }
 }

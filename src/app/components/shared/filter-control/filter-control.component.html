@@ -38,7 +38,7 @@
           </mat-option>
         }
         @for (option of filteredOptions | async; track $index) {
-          <mat-option [value]="option">
+          <mat-option [value]="option" (click)="onSelectTimePeriod()">
             @if (filterQuery() === option) {
               <div class="flex items-center justify-between gap-3 min-w-24">
                 <span class="text-right">{{ option }}</span>
