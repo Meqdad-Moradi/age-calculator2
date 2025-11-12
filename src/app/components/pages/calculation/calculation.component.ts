@@ -1,5 +1,12 @@
 import { CommonModule, CurrencyPipe } from '@angular/common';
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -18,6 +25,8 @@ import { FilterControlComponent } from '../../shared/filter-control/filter-contr
 import { SectionTitleComponent } from '../../shared/section-title/section-title.component';
 import { DateRangeDialogComponent } from '../../dialogs/date-range-dialog/date-range-dialog.component';
 import { SelectDateRange } from '../../models/date-range';
+import { DownloadService } from '../../../services/download.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-calculation',
@@ -39,7 +48,9 @@ import { SelectDateRange } from '../../models/date-range';
 })
 export class CalculationComponent implements OnInit {
   private readonly apiPampersService = inject(ApiPampersService);
+  private readonly downloadService = inject(DownloadService);
   private readonly dialog = inject(MatDialog);
+  private readonly destroyRef = inject(DestroyRef);
 
   // properties
   public pampers = signal<Pampers[]>([]);
@@ -80,6 +91,7 @@ export class CalculationComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPampers();
+    this.downloadDataAsJson();
   }
 
   /**
@@ -274,5 +286,16 @@ export class CalculationComponent implements OnInit {
           );
         });
     }
+  }
+
+  /**
+   * downloadDataAsJson
+   */
+  private downloadDataAsJson(): void {
+    this.downloadService.downloadJson
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.downloadService.downloadDataAsJson(this.pampers());
+      });
   }
 }

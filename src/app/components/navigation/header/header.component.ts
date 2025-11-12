@@ -8,6 +8,7 @@ import { SwitchThemeComponent } from '../../shared/switch-theme/switch-theme.com
 import { MatMenuModule } from '@angular/material/menu';
 import { PdfService } from '../../../services/pdf.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DownloadService } from '../../../services/download.service';
 
 @Component({
   selector: 'app-header',
@@ -26,6 +27,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 export class HeaderComponent {
   private readonly sideNavService = inject(SidenavService);
   private readonly pdfService = inject(PdfService);
+  private readonly downloadService = inject(DownloadService);
 
   public title = signal<string>('Age Calculator');
   public isSideNaveOpen = true;
@@ -51,5 +53,12 @@ export class HeaderComponent {
    */
   public downloadPDF(): void {
     this.pdfService.generatePDF();
+  }
+
+  /**
+   * downloadData
+   */
+  public downloadData(): void {
+    this.downloadService.triggerDownloadSubject(true);
   }
 }
