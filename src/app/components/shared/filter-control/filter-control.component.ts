@@ -12,7 +12,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { EnTimePeriod } from '../../models/pampers';
 
 @Component({
   selector: 'app-filter-control',
@@ -42,7 +41,7 @@ export class FilterControlComponent implements OnInit {
   public isSearchBoxVisible = input<boolean>(true);
   // output
   public readonly isAscOutput = output<boolean>();
-  public readonly selectTimePeriod = output<void>();
+  public readonly filterChange = output<string>();
 
   public isAsc = true;
   public filteredOptions!: Observable<string[]>;
@@ -83,10 +82,6 @@ export class FilterControlComponent implements OnInit {
    * @param e string - filter value
    */
   public onSelectTimePeriod(): void {
-    if (this.filterQuery() !== EnTimePeriod.SelectTimePeriod) {
-      return;
-    }
-
-    this.selectTimePeriod.emit();
+    this.filterChange.emit(this.filterQuery()!);
   }
 }

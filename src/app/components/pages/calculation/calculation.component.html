@@ -6,7 +6,7 @@
 
   <!-- display total price -->
   <div
-    class="my-8 mb-2 underline underline-offset-4 decoration-dotted decoration-(--primary)"
+    class="text-lg my-8 mb-2 underline underline-offset-4 decoration-dotted decoration-(--primary)"
   >
     <span class="font-medium">Total Price: </span>
     <span>{{ totalPrice() | currency: "EUR" : "symbol" : "1.2-2" }}</span>
@@ -14,7 +14,7 @@
 
   <!-- filter controls -->
   <app-filter-control
-    [(filterQuery)]="filterQuery"
+    [filterQuery]="filterQuery()"
     [filterOptions]="filterOptions"
     [sortOptions]="sortOptions"
     [isSearchBoxVisible]="false"
@@ -22,7 +22,7 @@
     [sortControl]="sortQuery()"
     (sortControlChange)="onSort($event!)"
     (isAscOutput)="onSortAscOrDesc()"
-    (selectTimePeriod)="onSelectTimePeriod()"
+    (filterChange)="onFilter($event)"
   ></app-filter-control>
 
   <!-- table header -->

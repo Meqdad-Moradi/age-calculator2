@@ -1,4 +1,6 @@
-<h2 class="!font-pop !font-semibold !pb-0" mat-dialog-title>{{ data.title }}</h2>
+<h2 class="!font-pop !font-semibold !pb-0" mat-dialog-title>
+  {{ data.title }}
+</h2>
 
 <form [formGroup]="dateForm" (ngSubmit)="onConfirm($event)">
   <mat-dialog-content>
@@ -48,13 +50,10 @@
 
   <!-- dialog action -->
   <mat-dialog-actions>
-    <button matButton (click)="onNoClick()" type="button">Cancel</button>
-    <button
-      mat-raised-button
-      cdkFocusInitial
-      type="submit"
-      [disabled]="dateForm.invalid"
-    >
+    <button matButton cdkFocusInitial (click)="onNoClick()" type="button">
+      Cancel
+    </button>
+    <button mat-raised-button type="submit" [disabled]="dateForm.invalid">
       Ok
     </button>
   </mat-dialog-actions>

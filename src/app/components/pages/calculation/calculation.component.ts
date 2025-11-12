@@ -17,6 +17,7 @@ import { EnPampersItemType, Pampers, EnTimePeriod } from '../../models/pampers';
 import { FilterControlComponent } from '../../shared/filter-control/filter-control.component';
 import { SectionTitleComponent } from '../../shared/section-title/section-title.component';
 import { DateRangeDialogComponent } from '../../dialogs/date-range-dialog/date-range-dialog.component';
+import { SelectDateRange } from '../../models/date-range';
 
 @Component({
   selector: 'app-calculation',
@@ -42,6 +43,7 @@ export class CalculationComponent implements OnInit {
 
   // properties
   public pampers = signal<Pampers[]>([]);
+  public filteredPampers = signal<Pampers[]>([]);
   public filterOptions: string[] = [
     'All',
     EnPampersItemType.Pamper,
@@ -55,15 +57,6 @@ export class CalculationComponent implements OnInit {
   public sortQuery = signal<string>('Name');
   public filterQuery = signal<string>(this.filterOptions[0]);
   public isDataLoaded = false;
-
-  /**
-   * filteredPampers
-   */
-  public filteredPampers = computed(() => {
-    // if (this.filterQuery() === EnTimePeriod.SelectTimePeriod) return;
-    if (this.filterQuery() === 'All') return this.pampers();
-    return this.pampers().filter((item) => item.type === this.filterQuery());
-  });
 
   /**
    * totalPrice
@@ -117,6 +110,7 @@ export class CalculationComponent implements OnInit {
         this.createInitialFormValue(),
         ...response.reverse(),
       ]);
+      this.filteredPampers.set(this.pampers());
     });
   }
 
@@ -240,11 +234,45 @@ export class CalculationComponent implements OnInit {
     }
   }
 
-  public onSelectTimePeriod(): void {
-    this.dialog.open(DateRangeDialogComponent, {
-      data: {
-        title: 'foo',
-      },
-    });
+  /**
+   * onFilter
+   * filter out the list based on filter option and also date range
+   * @param filterValue string
+   * @returns void
+   */
+  public onFilter(filterValue: string): void {
+    if (filterValue !== EnTimePeriod.SelectTimePeriod) {
+      // if filter value === all, display all data
+      if (filterValue === this.filterOptions[0]) {
+        this.filteredPampers.set(this.pampers());
+        return;
+      }
+
+      // filter the list based on selected filter option
+      this.filteredPampers.update(() =>
+        this.pampers().filter((item) => item.type === filterValue),
+      );
+    } else {
+      this.dialog
+        .open(DateRangeDialogComponent, {
+          data: {
+            title: 'Choose Date Range',
+          },
+        })
+        .afterClosed()
+        .pipe(filter(Boolean), take(1))
+        .subscribe((tsp: SelectDateRange) => {
+          const fromDate: Date = new Date(tsp.fromDate);
+          const toDate: Date = new Date(tsp.toDate);
+
+          this.filteredPampers.update(() =>
+            this.pampers().filter(
+              (item) =>
+                new Date(item.date!) >= fromDate &&
+                new Date(item.date!) <= toDate,
+            ),
+          );
+        });
+    }
   }
 }
