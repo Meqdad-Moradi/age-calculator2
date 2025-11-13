@@ -4,142 +4,154 @@
     slogan="Welcome to the calculation page. Here you can perform various calculations."
   ></app-section-title>
 
-  <!-- display total price -->
-  <div
-    class="text-lg my-8 mb-2 underline underline-offset-4 decoration-dotted decoration-(--primary)"
-  >
-    <span class="font-medium">Total Price: </span>
-    <span>{{ totalPrice() | currency: "EUR" : "symbol" : "1.2-2" }}</span>
-  </div>
+  @if (!isDataLoaded) {
+    <!-- display total price -->
+    <div
+      class="text-lg my-8 mb-2 underline underline-offset-4 decoration-dotted decoration-(--primary)"
+    >
+      <span class="font-medium">Total Price: </span>
+      <span>{{ totalPrice() | currency: "EUR" : "symbol" : "1.2-2" }}</span>
+    </div>
 
-  <!-- filter controls -->
-  <app-filter-control
-    [filterQuery]="filterQuery()"
-    [filterOptions]="filterOptions"
-    [sortOptions]="sortOptions"
-    [isSearchBoxVisible]="false"
-    [itemsCountLabel]="totalItems() + ' Items'"
-    [sortControl]="sortQuery()"
-    (sortControlChange)="onSort($event!)"
-    (isAscOutput)="onSortAscOrDesc()"
-    (filterChange)="onFilter($event)"
-  ></app-filter-control>
+    <!-- filter controls -->
+    <app-filter-control
+      [filterQuery]="filterQuery()"
+      [filterOptions]="filterOptions"
+      [sortOptions]="sortOptions"
+      [isSearchBoxVisible]="false"
+      [itemsCountLabel]="totalItems() + ' Items'"
+      [sortControl]="sortQuery()"
+      (sortControlChange)="onSort($event!)"
+      (isAscOutput)="onSortAscOrDesc()"
+      (filterChange)="onFilter($event)"
+    ></app-filter-control>
 
-  <!-- table header -->
-  <div
-    class="table-header mb-4 pl-4 py-1 bg-(--forground-color) font-medium text-gray-700 dark:text-gray-200 border-b border-b-gray-300 dark:border-b-gray-700"
-  >
-    <span class="truncate">No.</span>
-    <span class="truncate">Name</span>
-    <span class="truncate">Date</span>
-    <span class="truncate">Price</span>
-    <span class="truncate">Quantity</span>
-    <span class="truncate">Article Type</span>
-  </div>
+    <!-- table header -->
+    <div
+      class="table-header mb-4 pl-4 py-1 bg-(--forground-color) font-medium text-gray-700 dark:text-gray-200 border-b border-b-gray-300 dark:border-b-gray-700"
+    >
+      <span class="truncate">No.</span>
+      <span class="truncate">Name</span>
+      <span class="truncate">Date</span>
+      <span class="truncate">Price</span>
+      <span class="truncate">Quantity</span>
+      <span class="truncate">Article Type</span>
+    </div>
 
-  <!-- table -->
-  <article>
-    @for (item of filteredPampers(); track $index) {
-      <form
-        #formRef="ngForm"
-        [class]="
-          'add-form pl-4 border-b border-b-gray-300 dark:border-b-gray-700' +
-          ($index === 0
-            ? ' border-t border-t-gray-300 dark:border-t-gray-700'
-            : '')
-        "
-        (ngSubmit)="onSubmit(formRef, item)"
-      >
-        <span>{{ $index + 1 }}</span>
-
-        <input
-          class="py-2 w-full placeholder:text-gray-400 placeholder:text-sm"
-          type="text"
-          name="name"
-          [(ngModel)]="item.name"
-          pattern="[a-zA-Z ]*"
-          minlength="3"
-          required
-          placeholder="Article Name..."
-        />
-
-        <mat-form-field
-          class="w-full no-hint no-underline no-arrow match-height match-width"
+    <!-- table -->
+    <article>
+      @for (item of filteredPampers(); track $index) {
+        <form
+          #formRef="ngForm"
+          [class]="
+            'add-form pl-4 border-b border-b-gray-300 dark:border-b-gray-700' +
+            ($index === 0
+              ? ' border-t border-t-gray-300 dark:border-t-gray-700'
+              : '')
+          "
+          (ngSubmit)="onSubmit(formRef, item)"
         >
-          <input
-            class="!w-full !mt-2.5 !placeholder:text-gray-400 placeholder:text-sm"
-            matInput
-            [matDatepicker]="picker"
-            name="date"
-            [(ngModel)]="item.date"
-            placeholder="Select Date..."
-            required
-            (focus)="picker.open()"
-            tabindex="-1"
-          />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+          <span>{{ $index + 1 }}</span>
 
-        <div class="flex items-center gap-1">
-          @if (item.id) {
-            <span>€</span>
-          }
           <input
             class="py-2 w-full placeholder:text-gray-400 placeholder:text-sm"
             type="text"
-            name="price"
-            [(ngModel)]="item.price"
-            placeholder="Price..."
-            pattern="^[0-9.]+$"
+            name="name"
+            [(ngModel)]="item.name"
+            pattern="[a-zA-Z ]*"
+            minlength="3"
+            required
+            placeholder="Article Name..."
           />
-        </div>
 
-        <input
-          class="py-2 w-full placeholder:text-gray-400 placeholder:text-sm"
-          type="number"
-          name="quantity"
-          [(ngModel)]="item.quantity"
-          [value]="item?.quantity"
-          placeholder="Quantity..."
-          required
-        />
-
-        <mat-form-field
-          class="w-full no-hint no-underline match-height match-width"
-        >
-          <mat-select
-            name="type"
-            [(ngModel)]="item.type"
-            placeholder="Choose a type..."
+          <mat-form-field
+            class="w-full no-hint no-underline no-arrow match-height match-width"
           >
-            @for (item of filterOptions; track $index) {
-              <mat-option [value]="item">{{ item }}</mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
+            <input
+              class="!w-full !mt-2.5 !placeholder:text-gray-400 placeholder:text-sm"
+              matInput
+              [matDatepicker]="picker"
+              name="date"
+              [(ngModel)]="item.date"
+              placeholder="Select Date..."
+              required
+              (focus)="picker.open()"
+              tabindex="-1"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
 
-        <div class="flex items-center justify-end">
-          @if (!item.id || formRef.dirty) {
-            <button mat-icon-button type="submit" [disabled]="formRef.invalid">
-              <mat-icon>check_small</mat-icon>
-            </button>
-          } @else {
-            <button
-              mat-icon-button
-              type="button"
-              (click)="deleteItem(item.id!)"
+          <div class="flex items-center gap-1">
+            @if (item.id) {
+              <span>€</span>
+            }
+            <input
+              class="py-2 w-full placeholder:text-gray-400 placeholder:text-sm"
+              type="text"
+              name="price"
+              [(ngModel)]="item.price"
+              placeholder="Price..."
+              pattern="^[0-9.]+$"
+            />
+          </div>
+
+          <input
+            class="py-2 w-full placeholder:text-gray-400 placeholder:text-sm"
+            type="number"
+            name="quantity"
+            [(ngModel)]="item.quantity"
+            [value]="item?.quantity"
+            placeholder="Quantity..."
+            required
+          />
+
+          <mat-form-field
+            class="w-full no-hint no-underline match-height match-width"
+          >
+            <mat-select
+              name="type"
+              [(ngModel)]="item.type"
+              placeholder="Choose a type..."
             >
-              <mat-icon class="!text-[18px] !text-red-300 !leading-[1.3]"
-                >delete</mat-icon
+              @for (item of filterOptions; track $index) {
+                <mat-option [value]="item">{{ item }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <div class="flex items-center justify-end">
+            @if (!item.id || formRef.dirty) {
+              <button
+                mat-icon-button
+                type="submit"
+                [disabled]="formRef.invalid"
               >
-            </button>
-          }
-        </div>
-      </form>
-    }
-  </article>
+                <mat-icon>check_small</mat-icon>
+              </button>
+            } @else {
+              <button
+                mat-icon-button
+                type="button"
+                (click)="deleteItem(item.id!)"
+              >
+                <mat-icon class="!text-[18px] !text-red-300 !leading-[1.3]"
+                  >delete</mat-icon
+                >
+              </button>
+            }
+          </div>
+        </form>
+      }
+    </article>
+  } @else {
+    <mat-progress-spinner
+      class="mx-auto mt-9"
+      diameter="30"
+      mode="indeterminate"
+    ></mat-progress-spinner>
+  }
 </section>

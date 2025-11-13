@@ -27,6 +27,7 @@ import { DateRangeDialogComponent } from '../../dialogs/date-range-dialog/date-r
 import { SelectDateRange } from '../../models/date-range';
 import { DownloadService } from '../../../services/download.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-calculation',
@@ -37,6 +38,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
+    MatProgressSpinner,
     CurrencyPipe,
     CommonModule,
     FormsModule,
@@ -113,7 +115,10 @@ export class CalculationComponent implements OnInit {
    * getPampers
    */
   public getPampers(): void {
+    this.isDataLoaded = true;
+
     this.apiPampersService.getPampers().subscribe((response) => {
+      this.isDataLoaded = false;
       if (response instanceof ErrorResponse) {
         return;
       }
