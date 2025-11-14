@@ -28,6 +28,7 @@ import { SelectDateRange } from '../../models/date-range';
 import { DownloadService } from '../../../services/download.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatTooltip } from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-calculation',
@@ -44,7 +45,8 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
     FormsModule,
     FilterControlComponent,
     MatSelectModule,
-  ],
+    MatTooltip
+],
   templateUrl: './calculation.component.html',
   styleUrl: './calculation.component.scss',
 })

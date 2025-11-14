@@ -85,7 +85,7 @@
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
 
-          <div class="flex items-center gap-1">
+          <div class="relative flex items-center gap-1">
             @if (item.id) {
               <span>€</span>
             }
@@ -94,20 +94,45 @@
               type="text"
               name="price"
               [(ngModel)]="item.price"
+              #price="ngModel"
               placeholder="Price..."
               pattern="^[0-9.]+$"
+              maxlength="7"
             />
+
+            <!-- price error message -->
+            @if (price.invalid && (price.dirty || price.touched)) {
+              <div
+                class="absolute left-0 top-[60%] text-red-500 dark:text-red-400"
+                matTooltip="Invalid price format. Enter a valid amount using numbers (e.g., 12 or 12.50)."
+              >
+                <mat-icon class="!text-sm leading-30px">warning_amber</mat-icon>
+              </div>
+            }
           </div>
 
-          <input
-            class="py-2 w-full placeholder:text-gray-400 placeholder:text-sm"
-            type="number"
-            name="quantity"
-            [(ngModel)]="item.quantity"
-            [value]="item?.quantity"
-            placeholder="Quantity..."
-            required
-          />
+          <div class="relative">
+            <input
+              class="py-2 w-full placeholder:text-gray-400 placeholder:text-sm"
+              type="text"
+              name="quantity"
+              [(ngModel)]="item.quantity"
+              #qty="ngModel"
+              placeholder="Quantity..."
+              pattern="^[0-9]+$"
+              required
+            />
+
+            <!-- quantity error message -->
+            @if (qty.invalid && (qty.dirty || qty.touched)) {
+              <div
+                class="absolute left-0 top-[60%] text-red-500 dark:text-red-400"
+                matTooltip="Numbers only please..."
+              >
+                <mat-icon class="!text-sm leading-30px">warning_amber</mat-icon>
+              </div>
+            }
+          </div>
 
           <mat-form-field
             class="w-full no-hint no-underline match-height match-width"
@@ -138,7 +163,8 @@
                 type="button"
                 (click)="deleteItem(item.id!)"
               >
-                <mat-icon class="!text-[18px] !text-red-300 !leading-[1.3]"
+                <mat-icon
+                  class="!text-[18px] !text-red-500 dark:!text-red-400 !leading-[1.3]"
                   >delete</mat-icon
                 >
               </button>
