@@ -168,7 +168,7 @@ export class CalculationComponent implements OnInit {
 
       const pampers = this.pampers();
       pampers.splice(1, 0, response);
-      this.pampers.update(() => [...pampers]);
+      this.filteredPampers.update(() => [...pampers]);
     });
   }
 
@@ -182,7 +182,7 @@ export class CalculationComponent implements OnInit {
         return;
       }
 
-      this.pampers.update((items) =>
+      this.filteredPampers.update((items) =>
         items.map((item) =>
           item && item.id === response.id ? response : item,
         ),
@@ -214,7 +214,7 @@ export class CalculationComponent implements OnInit {
           return;
         }
 
-        this.pampers.update((items) =>
+        this.filteredPampers.update((items) =>
           items.filter((item) => item && item.id !== id),
         );
       });
