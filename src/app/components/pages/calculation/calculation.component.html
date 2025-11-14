@@ -65,10 +65,10 @@
           />
 
           <mat-form-field
-            class="w-full no-hint no-underline no-arrow match-height match-width"
+            class="w-full no-hint no-underline no-arrow no-hover-effect match-height match-width"
           >
             <input
-              class="!w-full !mt-2.5 !placeholder:text-gray-400 placeholder:text-sm"
+              class="!w-full !mt-2.5 placeholder:!text-gray-400 placeholder:text-sm"
               matInput
               [matDatepicker]="picker"
               name="date"
@@ -135,14 +135,17 @@
           </div>
 
           <mat-form-field
-            class="w-full no-hint no-underline match-height match-width"
+            class="w-full no-hint no-underline no-hover-effect match-height match-width"
           >
             <mat-select
               name="type"
               [(ngModel)]="item.type"
               placeholder="Choose a type..."
             >
-              @for (item of filterOptions; track $index) {
+              @for (
+                item of filterOptions | slice: 1 : filterOptions.length - 1;
+                track $index
+              ) {
                 <mat-option [value]="item">{{ item }}</mat-option>
               }
             </mat-select>

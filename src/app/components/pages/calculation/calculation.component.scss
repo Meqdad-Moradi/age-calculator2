@@ -11,3 +11,12 @@
     border: none;
   }
 }
+
+::ng-deep {
+  .mat-mdc-select-placeholder {
+    --mat-select-placeholder-text-color: #99a1af;
+    --mat-sys-on-surface-variant: #99a1af;
+
+    font-size: 0.875rem;
+  }
+}
