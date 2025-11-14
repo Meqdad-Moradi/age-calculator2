@@ -166,7 +166,7 @@ export class CalculationComponent implements OnInit {
         return;
       }
 
-      const pampers = this.pampers();
+      const pampers = this.filteredPampers();
       pampers.splice(1, 0, response);
       this.filteredPampers.update(() => [...pampers]);
     });
