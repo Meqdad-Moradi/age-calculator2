@@ -34,8 +34,8 @@
       <span class="truncate">Name</span>
       <span class="truncate">Date</span>
       <span class="truncate">Price</span>
-      <span class="truncate">Quantity</span>
       <span class="truncate">Article Type</span>
+      <span class="truncate">Quantity</span>
     </div>
 
     <!-- table -->
@@ -54,10 +54,11 @@
           <span>{{ $index + 1 }}</span>
 
           <input
-            class="py-2 w-full placeholder:text-gray-400 placeholder:text-sm"
+            class="py-2 w-full placeholder:text-gray-400 placeholder:text-sm truncate"
             type="text"
             name="name"
             [(ngModel)]="item.name"
+            [matTooltip]="item.name"
             pattern="[a-zA-Z ]*"
             minlength="3"
             required
@@ -65,10 +66,10 @@
           />
 
           <mat-form-field
-            class="w-full no-hint no-underline no-arrow no-hover-effect match-height match-width"
+            class="w-full no-hint no-underline no-arrow no-hover-effect match-height match-width truncate"
           >
             <input
-              class="!w-full !mt-2.5 placeholder:!text-gray-400 placeholder:text-sm"
+              class="!w-full !mt-2.5 placeholder:!text-gray-400 placeholder:text-sm truncate"
               matInput
               [matDatepicker]="picker"
               name="date"
@@ -90,7 +91,7 @@
               <span>€</span>
             }
             <input
-              class="py-2 w-full placeholder:text-gray-400 placeholder:text-sm"
+              class="py-2 w-full placeholder:text-gray-400 placeholder:text-sm truncate"
               type="text"
               name="price"
               [(ngModel)]="item.price"
@@ -110,6 +111,23 @@
               </div>
             }
           </div>
+
+          <mat-form-field
+            class="w-full no-hint no-underline no-hover-effect match-height match-width"
+          >
+            <mat-select
+              name="type"
+              [(ngModel)]="item.type"
+              placeholder="Choose a type..."
+            >
+              @for (
+                item of filterOptions | slice: 1 : filterOptions.length - 1;
+                track $index
+              ) {
+                <mat-option [value]="item">{{ item }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
 
           <div class="relative">
             <input
@@ -133,23 +151,6 @@
               </div>
             }
           </div>
-
-          <mat-form-field
-            class="w-full no-hint no-underline no-hover-effect match-height match-width"
-          >
-            <mat-select
-              name="type"
-              [(ngModel)]="item.type"
-              placeholder="Choose a type..."
-            >
-              @for (
-                item of filterOptions | slice: 1 : filterOptions.length - 1;
-                track $index
-              ) {
-                <mat-option [value]="item">{{ item }}</mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
 
           <div class="flex items-center justify-end">
             @if (!item.id || formRef.dirty) {
