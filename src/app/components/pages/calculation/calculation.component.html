@@ -51,7 +51,7 @@
           "
           (ngSubmit)="onSubmit(formRef, item)"
         >
-          <span>{{ $index + 1 }}</span>
+          <span>{{ item.id ? $index : "" }}</span>
 
           <input
             class="py-2 w-full placeholder:text-gray-400 placeholder:text-sm truncate"
