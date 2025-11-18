@@ -7,6 +7,7 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -14,39 +15,40 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTooltip } from '@angular/material/tooltip';
 import { filter, switchMap, take } from 'rxjs/operators';
 import { compare } from '../../../helpers/utils';
 import { ApiPampersService } from '../../../services/api/api-pampers.service';
+import { DownloadService } from '../../../services/download.service';
 import { ConfirmationDialogComponent } from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
-import { ErrorResponse } from '../../models/error-response.model';
-import { EnPampersItemType, Pampers, EnTimePeriod } from '../../models/pampers';
-import { FilterControlComponent } from '../../shared/filter-control/filter-control.component';
-import { SectionTitleComponent } from '../../shared/section-title/section-title.component';
 import { DateRangeDialogComponent } from '../../dialogs/date-range-dialog/date-range-dialog.component';
 import { SelectDateRange } from '../../models/date-range';
-import { DownloadService } from '../../../services/download.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { MatTooltip } from "@angular/material/tooltip";
+import { ErrorResponse } from '../../models/error-response.model';
+import { EnPampersItemType, EnTimePeriod, Pampers } from '../../models/pampers';
+import { CustomSearchComponent } from '../../shared/custom-search/custom-search.component';
+import { FilterControlComponent } from '../../shared/filter-control/filter-control.component';
+import { SectionTitleComponent } from '../../shared/section-title/section-title.component';
 
 @Component({
   selector: 'app-calculation',
   imports: [
-    SectionTitleComponent,
     MatButtonModule,
     MatIconModule,
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinner,
+    MatSelectModule,
+    MatTooltip,
     CurrencyPipe,
+    SectionTitleComponent,
     CommonModule,
     FormsModule,
     FilterControlComponent,
-    MatSelectModule,
-    MatTooltip
-],
+    CustomSearchComponent,
+  ],
   templateUrl: './calculation.component.html',
   styleUrl: './calculation.component.scss',
 })
@@ -261,15 +263,28 @@ export class CalculationComponent implements OnInit {
    */
   public onFilter(filterValue: string): void {
     if (filterValue !== EnTimePeriod.SelectTimePeriod) {
-      // if filter value === all, display all data
-      if (filterValue === this.filterOptions[0]) {
+      // if filter value === all, or search input has not value, display all data
+      if (filterValue === this.filterOptions[0] || !filterValue) {
         this.filteredPampers.set(this.pampers());
         return;
       }
 
+      // split search query into words
+      const searchQuery = filterValue.trim().toLocaleLowerCase().split(' ');
+
       // filter the list based on selected filter option
       this.filteredPampers.update(() =>
-        this.pampers().filter((item) => item.type === filterValue),
+        this.pampers().filter((item) => {
+          // filter option
+          if (this.filterOptions.includes(filterValue)) {
+            return item.type === filterValue;
+          } else {
+            // search value
+            return searchQuery.every((query) =>
+              item.name?.toLocaleLowerCase().includes(query),
+            );
+          }
+        }),
       );
     } else {
       this.dialog
