@@ -10,6 +10,8 @@ import { TasksComponent } from './components/pages/task-manager/tasks/tasks.comp
 import { TodosComponent } from './components/pages/todos/todos.component';
 import { SearchRegionComponent } from './components/pages/search-region/search-region.component';
 import { CalculationComponent } from './components/pages/calculation/calculation.component';
+import { ProductsPageComponent } from './components/pages/products-page/products-page.component';
+import { ProductsComponent } from './components/pages/products-page/products/products.component';
 
 export const routes: Routes = [
   {
@@ -50,6 +52,11 @@ export const routes: Routes = [
         pathMatch: 'full',
       },
       { path: 'pampers', component: CalculationComponent, pathMatch: 'full' },
+      {
+        path: 'products-page',
+        component: ProductsPageComponent,
+        children: [{ path: 'products', component: ProductsComponent }],
+      },
     ],
   },
   {

@@ -87,6 +87,17 @@
 
       <mat-list-item
         class="!cursor-pointer"
+        [routerLink]="['/products-page']"
+        routerLinkActive="active"
+        onclick="this.blur()"
+        (click)="onExpandTaskManager(false)"
+      >
+        <mat-icon matListItemIcon>storefront</mat-icon>
+        <span matListItemTitle>Products Page</span>
+      </mat-list-item>
+
+      <mat-list-item
+        class="!cursor-pointer"
         [routerLink]="['/task-manager']"
         routerLinkActive="active"
         onclick="this.blur()"

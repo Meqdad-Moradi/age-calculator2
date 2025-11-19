@@ -1,0 +1,23 @@
+<header
+  class="flex flex-nowrap justify-between items-center pb-4 bg-(--forground-color) shadow-md"
+>
+  <div class="flex items-center gap-8">
+    <div class="flex items-center gap-2">
+      <mat-icon class="!text-(--primary) !text-3xl leading-[23px]">
+        generating_tokens
+      </mat-icon>
+      <h1 class="font-semibold truncate">Products to Buy</h1>
+    </div>
+
+    <span
+      class="cursor-pointer"
+      [routerLink]="['/', 'products-page', 'products']"
+    >
+      Products
+    </span>
+  </div>
+
+  <button matIconButton aria-label="Shopping cart">
+    <mat-icon>shopping_cart</mat-icon>
+  </button>
+</header>
