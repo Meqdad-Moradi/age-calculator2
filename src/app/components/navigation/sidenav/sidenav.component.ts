@@ -49,6 +49,7 @@ export class SidenavComponent implements OnInit {
   public drawerMode: MatDrawerMode = 'side';
   public boards$!: Observable<Board[]>;
   public isExpanded = false;
+  public isProductsPage = this.router.url.includes('products-page');
 
   ngOnInit(): void {
     // if a board's page is open, the boards menus should also be expanded
@@ -57,6 +58,7 @@ export class SidenavComponent implements OnInit {
     }
 
     this.getBoards();
+    this.handlePagePadding();
   }
 
   /**
@@ -75,8 +77,8 @@ export class SidenavComponent implements OnInit {
       switchMap(() =>
         this.apiBoardService
           .getBoards()
-          .pipe(map((res) => (res instanceof ErrorResponse ? [] : res)))
-      )
+          .pipe(map((res) => (res instanceof ErrorResponse ? [] : res))),
+      ),
     );
   }
 
@@ -127,7 +129,7 @@ export class SidenavComponent implements OnInit {
           return newBoard;
         }),
         concatMap((value) => this.apiBoardService.createNewBoard(value!)),
-        tap(() => this.getBoards())
+        tap(() => this.getBoards()),
       )
       .subscribe();
   }
@@ -139,5 +141,17 @@ export class SidenavComponent implements OnInit {
     this.sidenavService.getSysName().subscribe((value) => {
       console.log(value);
     });
+  }
+
+  /**
+   * handlePagePadding
+   * to remove the padding-top on products page
+   */
+  private handlePagePadding(): void {
+    this.subscriptions.push(
+      this.router.events.subscribe(() => {
+        this.isProductsPage = this.router.url.includes('products-page');
+      }),
+    );
   }
 }

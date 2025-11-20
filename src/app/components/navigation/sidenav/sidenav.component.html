@@ -144,7 +144,10 @@
     </mat-list>
   </mat-drawer>
 
-  <mat-drawer-content class="p-8 dark:bg-(--background-color) print:bg-white">
+  <mat-drawer-content
+    class="p-8 dark:bg-(--background-color) print:bg-white"
+    [ngClass]="isProductsPage ? '!pt-0' : ''"
+  >
     <div class="w-full max-w-[90%] mx-auto" id="pdf-content">
       <router-outlet></router-outlet>
     </div>
