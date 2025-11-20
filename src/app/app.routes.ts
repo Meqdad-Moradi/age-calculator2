@@ -12,6 +12,7 @@ import { SearchRegionComponent } from './components/pages/search-region/search-r
 import { CalculationComponent } from './components/pages/calculation/calculation.component';
 import { ProductsPageComponent } from './components/pages/products-page/products-page.component';
 import { ProductsComponent } from './components/pages/products-page/products/products.component';
+import { ProductsCartComponent } from './components/pages/products-page/products-cart/products-cart.component';
 
 export const routes: Routes = [
   {
@@ -55,7 +56,14 @@ export const routes: Routes = [
       {
         path: 'products-page',
         component: ProductsPageComponent,
-        children: [{ path: 'products', component: ProductsComponent }],
+        children: [
+          { path: 'products', component: ProductsComponent, pathMatch: 'full' },
+          {
+            path: 'cart',
+            component: ProductsCartComponent,
+            pathMatch: 'full',
+          },
+        ],
       },
     ],
   },

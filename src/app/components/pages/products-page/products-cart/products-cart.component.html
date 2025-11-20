@@ -1,0 +1,19 @@
+<section class="mt-8">
+  @if (!cart().length) {
+    <div class="grid place-content-center gap-4">
+      <p class="text-center text-lg text-(--text-color)">Your cart is empty.</p>
+      <button
+        matButton="filled"
+        [routerLink]="['/', 'products-page', 'products']"
+      >
+        Go to Products
+      </button>
+    </div>
+  } @else {
+    <div class="grid gap-8">
+      @for (product of cart(); track $index) {
+        <app-product-cart-item [cartItem]="product" />
+      }
+    </div>
+  }
+</section>
