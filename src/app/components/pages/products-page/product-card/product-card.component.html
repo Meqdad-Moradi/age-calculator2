@@ -18,11 +18,11 @@
     </p>
   </div>
 
-  <div class="w-full flex items-center justify-between gap-8 mt-4">
+  <div class="flex items-center justify-between gap-8 mt-4">
     <p class="text-(--text-color) text-2xl">
       {{ product()?.price | currency: "EUR" : "symbol" : "1.2-2" }}
     </p>
-    <button mat-raised-button>
+    <button matButton="outlined">
       <mat-icon>add_shopping_cart</mat-icon>
       Add to Cart
     </button>
