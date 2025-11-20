@@ -10,10 +10,19 @@
   </div>
 
   <div class="flex flex-col gap-4 mt-4">
-    <h2 class="text-2xl text-(--text-color) font-semibold line-clamp-1">
+    <h2
+      class="text-2xl text-(--text-color) font-semibold line-clamp-1"
+      matTooltip="{{ product()?.title }}"
+    >
       {{ product()?.title }}
     </h2>
-    <p class="line-clamp-2 text-gray-500 dark:text-gray-400">
+    <p
+      class="text-gray-500 dark:text-gray-400 cursor-pointer"
+      [ngClass]="isLineClamping ? 'line-clamp-2' : ''"
+      (click)="toggleLineClamping()"
+      (keydown.enter)="toggleLineClamping()"
+      tabindex="0"
+    >
       {{ product()?.description }}
     </p>
   </div>
