@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { MatBadgeModule } from '@angular/material/badge';
+import { ApiProductsService } from '../../../../services/api/api-products.service';
 
 @Component({
   selector: 'app-products-header',
@@ -10,4 +11,9 @@ import { MatBadgeModule } from '@angular/material/badge';
   templateUrl: './products-header.component.html',
   styleUrl: './products-header.component.scss',
 })
-export class ProductsHeaderComponent {}
+export class ProductsHeaderComponent {
+  private readonly productsService = inject(ApiProductsService);
+
+  public cart = this.productsService.cart;
+  public cartItemsCount = computed(() => this.cart().length);
+}

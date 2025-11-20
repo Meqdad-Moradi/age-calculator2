@@ -17,7 +17,13 @@
     </span>
   </div>
 
-  <button matIconButton aria-label="Shopping cart">
-    <mat-icon matBadge="4" matBadgeOverlap="true">shopping_cart</mat-icon>
+  <button matIconButton>
+    <mat-icon
+      matBadge="{{ cartItemsCount() }}"
+      matBadgeOverlap="true"
+      [matBadgeHidden]="cartItemsCount() === 0"
+      aria-hidden="false"
+      >shopping_cart</mat-icon
+    >
   </button>
 </header>

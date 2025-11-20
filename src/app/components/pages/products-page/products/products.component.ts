@@ -3,6 +3,7 @@ import { ApiProductsService } from '../../../../services/api/api-products.servic
 import { ErrorResponse } from '../../../models/error-response.model';
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Product } from '../../../models/products';
 
 @Component({
   selector: 'app-products',
@@ -14,8 +15,7 @@ export class ProductsComponent implements OnInit {
   private readonly apiProductsService = inject(ApiProductsService);
 
   public products = this.apiProductsService.products;
-
-  private isLoading = false;
+  public isLoading = false;
 
   ngOnInit(): void {
     this.getAllProducts();
@@ -32,8 +32,29 @@ export class ProductsComponent implements OnInit {
       if (response instanceof ErrorResponse) {
         return;
       }
-      console.log(response);
+
       this.apiProductsService.products.set(response);
+    });
+  }
+
+  /**
+   * addtoProduct
+   * Adds product to cart
+   * @param product Product
+   */
+  public addToProduct(product: Product) {
+    this.apiProductsService.cart.update((cart) => {
+      // Check if product already in cart
+      const existingProduct = cart.find((p) => p.id === product.id);
+      if (existingProduct) {
+        // Increase quantity
+        existingProduct.quantity += 1;
+      } else {
+        // Add new product to cart
+        cart.push({ ...product, quantity: 1 });
+      }
+      // Return updated cart
+      return [...cart];
     });
   }
 }

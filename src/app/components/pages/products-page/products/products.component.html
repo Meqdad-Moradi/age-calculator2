@@ -1,14 +1,18 @@
 <section class="py-8">
-  @if (products().length) {
-    <div
-      class="grid grid-cols-1 md:grid-cols-2 justify-between gap-8"
-    >
-      @for (item of products(); track $index) {
-        <app-product-card [product]="item"></app-product-card>
-      }
-    </div>
+  @if (!isLoading) {
+    @if (products().length) {
+      <div class="grid grid-cols-1 md:grid-cols-2 justify-between gap-8">
+        @for (item of products(); track $index) {
+          <app-product-card
+            [product]="item"
+            (addProductToCart)="addToProduct($event)"
+          ></app-product-card>
+        }
+      </div>
+    }
   } @else {
     <mat-progress-spinner
+      class="mx-auto"
       diameter="30"
       mode="indeterminate"
     ></mat-progress-spinner>
