@@ -1,0 +1,30 @@
+<div
+  class="flex flex-col items-center gap-4 p-8 text-center rounded-2xl shadow-md bg-(--forground-color)"
+>
+  <div class="relative h-[10em] w-full overflow-hidden">
+    <img
+      class="w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover"
+      src="{{ product()?.image }}"
+      alt="{{ product()?.title }}"
+    />
+  </div>
+
+  <div class="flex flex-col gap-4 mt-4">
+    <h2 class="text-2xl text-(--text-color) font-semibold line-clamp-1">
+      {{ product()?.title }}
+    </h2>
+    <p class="line-clamp-2 text-gray-500 dark:text-gray-400">
+      {{ product()?.description }}
+    </p>
+  </div>
+
+  <div class="w-full flex items-center justify-between gap-8 mt-4">
+    <p class="text-(--text-color) text-2xl">
+      {{ product()?.price | currency: "EUR" : "symbol" : "1.2-2" }}
+    </p>
+    <button mat-raised-button>
+      <mat-icon>add_shopping_cart</mat-icon>
+      Add to Cart
+    </button>
+  </div>
+</div>
