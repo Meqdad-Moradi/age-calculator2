@@ -9,7 +9,8 @@ import { ErrorResponse } from '../../components/models/error-response.model';
   providedIn: 'root',
 })
 export class ApiProductsService {
-  private readonly baseUrl = 'http://localhost:3000/products';
+  private readonly productUrl = 'http://localhost:3000/products';
+  private readonly cartUrl = 'http://localhost:3000/cart';
   private readonly http = inject(HttpClient);
   private readonly errorService = inject(ErrorService);
 
@@ -22,7 +23,7 @@ export class ApiProductsService {
    */
   public getAllProducts(): Observable<Product[] | ErrorResponse<string>> {
     return this.http
-      .get<Product[]>(this.baseUrl)
+      .get<Product[]>(this.productUrl)
       .pipe(
         catchError(
           this.errorService.handleError<Product[]>(
@@ -34,19 +35,16 @@ export class ApiProductsService {
   }
 
   /**
-   * addNewProduct
-   * @param product Product
-   * @returns Observable<Product | ErrorResponse<string>>
+   * getCartItems
+   * @returns Observable<CartItem[] | ErrorResponse<string>>
    */
-  public addNewProduct(
-    product: Product,
-  ): Observable<Product | ErrorResponse<string>> {
+  public getCartItems(): Observable<CartItem[] | ErrorResponse<string>> {
     return this.http
-      .post<Product>(this.baseUrl, product)
+      .get<CartItem[]>(this.cartUrl)
       .pipe(
         catchError(
-          this.errorService.handleError<Product>(
-            'api-products.service::addNewProduct',
+          this.errorService.handleError<CartItem[]>(
+            'api-products.service::getCartItems',
             { showInDialog: true },
           ),
         ),
@@ -54,17 +52,37 @@ export class ApiProductsService {
   }
 
   /**
-   * deleteProduct
+   * addToCart
+   * @param product Product
+   * @returns Observable<Product | ErrorResponse<string>>
    */
-  public deleteProduct(
-    id: string,
+  public addToCart(
+    product: Product,
   ): Observable<Product | ErrorResponse<string>> {
     return this.http
-      .delete<Product>(`${this.baseUrl}/${id}`)
+      .post<Product>(this.productUrl, product)
       .pipe(
         catchError(
           this.errorService.handleError<Product>(
-            'api-products.service::deleteProduct',
+            'api-products.service::addToCart',
+            { showInDialog: true },
+          ),
+        ),
+      );
+  }
+
+  /**
+   * deleteCartItem
+   */
+  public deleteCartItem(
+    id: string,
+  ): Observable<Product | ErrorResponse<string>> {
+    return this.http
+      .delete<Product>(`${this.productUrl}/${id}`)
+      .pipe(
+        catchError(
+          this.errorService.handleError<Product>(
+            'api-products.service::deleteCartItem',
             { showInDialog: true },
           ),
         ),
