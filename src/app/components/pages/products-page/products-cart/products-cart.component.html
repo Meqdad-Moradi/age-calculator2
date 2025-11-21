@@ -11,7 +11,7 @@
     </div>
   } @else {
     <div class="grid gap-8">
-      @for (product of cart(); track $index) {
+      @for (product of cart().reverse(); track $index) {
         <app-product-cart-item [cartItem]="product" />
       }
     </div>
