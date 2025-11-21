@@ -15,5 +15,16 @@
         <app-product-cart-item [cartItem]="product" />
       }
     </div>
+
+    <!-- total price section -->
+    <div
+      class="flex flex-col md:flex-row items-center justify-between gap-4 mt-8 p-4 rounded-2xl shadow-md bg-(--forground-color)"
+    >
+      <p class="text-(--text-color) text-lg font-semibold">
+        Total Price:&nbsp;
+        {{ totalPrice() | currency: "EUR" : "symbol" : "1.2-2" }}
+      </p>
+      <button mat-raised-button (click)="checkout()">Checkout</button>
+    </div>
   }
 </section>
