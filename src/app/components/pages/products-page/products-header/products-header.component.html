@@ -17,12 +17,11 @@
     </span>
   </div>
 
-  <button matIconButton>
+  <button matIconButton [routerLink]="['cart']">
     <mat-icon
       matBadge="{{ cartItemsCount() }}"
       matBadgeOverlap="true"
       [matBadgeHidden]="cartItemsCount() === 0"
-      [routerLink]="['cart']"
       aria-hidden="false"
       >shopping_cart</mat-icon
     >
