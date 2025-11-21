@@ -32,4 +32,42 @@ export class ApiProductsService {
         ),
       );
   }
+
+  /**
+   * addNewProduct
+   * @param product Product
+   * @returns Observable<Product | ErrorResponse<string>>
+   */
+  public addNewProduct(
+    product: Product,
+  ): Observable<Product | ErrorResponse<string>> {
+    return this.http
+      .post<Product>(this.baseUrl, product)
+      .pipe(
+        catchError(
+          this.errorService.handleError<Product>(
+            'api-products.service::addNewProduct',
+            { showInDialog: true },
+          ),
+        ),
+      );
+  }
+
+  /**
+   * deleteProduct
+   */
+  public deleteProduct(
+    id: string,
+  ): Observable<Product | ErrorResponse<string>> {
+    return this.http
+      .delete<Product>(`${this.baseUrl}/${id}`)
+      .pipe(
+        catchError(
+          this.errorService.handleError<Product>(
+            'api-products.service::deleteProduct',
+            { showInDialog: true },
+          ),
+        ),
+      );
+  }
 }
