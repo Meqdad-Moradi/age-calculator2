@@ -17,13 +17,26 @@
     </span>
   </div>
 
-  <button matIconButton [routerLink]="['cart']">
-    <mat-icon
-      matBadge="{{ cartItemsCount() }}"
-      matBadgeOverlap="true"
-      [matBadgeHidden]="cartItemsCount() === 0"
-      aria-hidden="false"
-      >shopping_cart</mat-icon
-    >
-  </button>
+  <div>
+    <button matIconButton [routerLink]="['cart']">
+      <mat-icon
+        matBadge="{{ cartItemsCount() }}"
+        matBadgeOverlap="true"
+        [matBadgeHidden]="cartItemsCount() === 0"
+        aria-hidden="false"
+        >shopping_cart</mat-icon
+      >
+    </button>
+
+    <button matIconButton [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu" xPosition="before">
+      <button mat-menu-item [disabled]="!cart().length" (click)="clearCart()">
+        <mat-icon>clear_all</mat-icon>
+        Clear Cart
+      </button>
+    </mat-menu>
+  </div>
 </header>

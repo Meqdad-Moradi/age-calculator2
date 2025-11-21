@@ -4,10 +4,17 @@ import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { MatBadgeModule } from '@angular/material/badge';
 import { ApiProductsService } from '../../../../services/api/api-products.service';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-products-header',
-  imports: [MatIcon, MatButtonModule, MatBadgeModule, RouterLink],
+  imports: [
+    MatIcon,
+    MatButtonModule,
+    MatBadgeModule,
+    RouterLink,
+    MatMenuModule,
+  ],
   templateUrl: './products-header.component.html',
   styleUrl: './products-header.component.scss',
 })
@@ -16,4 +23,11 @@ export class ProductsHeaderComponent {
 
   public cart = this.productsService.cart;
   public cartItemsCount = computed(() => this.cart().length);
+
+  /**
+   * clearCart
+   */
+  public clearCart() {
+    this.productsService.cart.set([]);
+  }
 }
