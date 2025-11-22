@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatDrawerMode, MatSidenavModule } from '@angular/material/sidenav';
 import {
+  NavigationEnd,
   Router,
   RouterLink,
   RouterLinkActive,
@@ -149,9 +150,11 @@ export class SidenavComponent implements OnInit {
    */
   private handlePagePadding(): void {
     this.subscriptions.push(
-      this.router.events.subscribe(() => {
-        this.isProductsPage = this.router.url.includes('products-page');
-      }),
+      this.router.events
+        .pipe(filter((event) => event instanceof NavigationEnd))
+        .subscribe((e: NavigationEnd) => {
+          this.isProductsPage = e.url.includes('products-page');
+        }),
     );
   }
 }
