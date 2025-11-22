@@ -13,6 +13,7 @@ import { CalculationComponent } from './components/pages/calculation/calculation
 import { ProductsPageComponent } from './components/pages/products-page/products-page.component';
 import { ProductsComponent } from './components/pages/products-page/products/products.component';
 import { ProductsCartComponent } from './components/pages/products-page/products-cart/products-cart.component';
+import { ProductsHomeComponent } from './components/pages/products-page/products-home/products-home.component';
 
 export const routes: Routes = [
   {
@@ -57,6 +58,7 @@ export const routes: Routes = [
         path: 'products-page',
         component: ProductsPageComponent,
         children: [
+          { path: '', component: ProductsHomeComponent, pathMatch: 'full' },
           { path: 'products', component: ProductsComponent, pathMatch: 'full' },
           {
             path: 'cart',
