@@ -57,14 +57,36 @@ export class ApiProductsService {
    * @returns Observable<Product | ErrorResponse<string>>
    */
   public addToCart(
-    product: Product,
-  ): Observable<Product | ErrorResponse<string>> {
+    product: CartItem,
+  ): Observable<CartItem | ErrorResponse<string>> {
     return this.http
-      .post<Product>(this.productUrl, product)
+      .post<CartItem>(this.cartUrl, product)
       .pipe(
         catchError(
-          this.errorService.handleError<Product>(
+          this.errorService.handleError<CartItem>(
             'api-products.service::addToCart',
+            { showInDialog: true },
+          ),
+        ),
+      );
+  }
+
+  /**
+   * updateCartItem
+   * @param product CartItem
+   * @returns Observable<Product | ErrorResponse<string>>
+   */
+  public updateCartItem(
+    id: number,
+    changes: Partial<CartItem>,
+  ): Observable<CartItem | ErrorResponse<string>> {
+    const url = `${this.cartUrl}/${id}`;
+    return this.http
+      .patch<CartItem>(url, changes)
+      .pipe(
+        catchError(
+          this.errorService.handleError<CartItem>(
+            'api-products.service::updateCartItem',
             { showInDialog: true },
           ),
         ),
@@ -76,12 +98,12 @@ export class ApiProductsService {
    */
   public deleteCartItem(
     id: string,
-  ): Observable<Product | ErrorResponse<string>> {
+  ): Observable<CartItem | ErrorResponse<string>> {
     return this.http
-      .delete<Product>(`${this.productUrl}/${id}`)
+      .delete<CartItem>(`${this.cartUrl}/${id}`)
       .pipe(
         catchError(
-          this.errorService.handleError<Product>(
+          this.errorService.handleError<CartItem>(
             'api-products.service::deleteCartItem',
             { showInDialog: true },
           ),
