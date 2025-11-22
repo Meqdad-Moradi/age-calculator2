@@ -1,11 +1,9 @@
-import { Component, computed, DestroyRef, inject, OnInit } from '@angular/core';
-import { ApiProductsService } from '../../../../services/api/api-products.service';
-import { ProductCartItemComponent } from './product-cart-item/product-cart-item.component';
+import { CurrencyPipe } from '@angular/common';
+import { Component, computed, inject } from '@angular/core';
 import { MatAnchor } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
-import { CurrencyPipe } from '@angular/common';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ErrorResponse } from '../../../models/error-response.model';
+import { ApiProductsService } from '../../../../services/api/api-products.service';
+import { ProductCartItemComponent } from './product-cart-item/product-cart-item.component';
 
 @Component({
   selector: 'app-products-cart',
@@ -13,9 +11,8 @@ import { ErrorResponse } from '../../../models/error-response.model';
   templateUrl: './products-cart.component.html',
   styleUrl: './products-cart.component.scss',
 })
-export class ProductsCartComponent implements OnInit {
+export class ProductsCartComponent {
   private readonly apiProductsService = inject(ApiProductsService);
-  private readonly destroyRef = inject(DestroyRef);
 
   public cart = this.apiProductsService.cart;
 
@@ -29,25 +26,6 @@ export class ProductsCartComponent implements OnInit {
       0,
     ),
   );
-
-  ngOnInit(): void {
-    this.fetchCartItems();
-  }
-
-  /**
-   * fetchCartItems
-   * Fetches the cart items from the API and updates the cart signal.
-   */
-  private fetchCartItems(): void {
-    this.apiProductsService
-      .getCartItems()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((response) => {
-        if (response instanceof ErrorResponse) return;
-
-        this.apiProductsService.cart.set(response);
-      });
-  }
 
   /**
    * checkout

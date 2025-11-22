@@ -28,15 +28,17 @@
       >
     </button>
 
-    <button matIconButton [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-
-    <mat-menu #menu="matMenu" xPosition="before">
-      <button mat-menu-item [disabled]="!cart().length" (click)="clearCart()">
-        <mat-icon>clear_all</mat-icon>
-        Clear Cart
+    @if (isClearCartButtonVisible) {
+      <button matIconButton [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
       </button>
-    </mat-menu>
+
+      <mat-menu #menu="matMenu" xPosition="before">
+        <button mat-menu-item [disabled]="!cart().length" (click)="clearCart()">
+          <mat-icon>clear_all</mat-icon>
+          Clear Cart
+        </button>
+      </mat-menu>
+    }
   </div>
 </header>
