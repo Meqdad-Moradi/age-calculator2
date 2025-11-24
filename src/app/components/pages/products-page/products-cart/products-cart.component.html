@@ -10,6 +10,13 @@
       </button>
     </div>
   } @else {
+    <!-- shopping cart title added -->
+    <div class="flex items-center justify-between gap-8 pb-1 pr-4">
+      <h1 class="font-bold text-2xl">Shopping Cart</h1>
+      <span class="text-lg">Price</span>
+    </div>
+
+    <!-- cart items -->
     <div class="grid gap-8">
       @for (product of cart().reverse(); track $index) {
         <app-product-cart-item [cartItem]="product" />
