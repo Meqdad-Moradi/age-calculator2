@@ -1,39 +1,64 @@
-<div class="flex gap-16 bg-(--forground-color) p-4 rounded-2xl shadow-md">
-  <div class="flex gap-8">
-    <div class="w-32 flex-shrink-0">
-      <img
-        class="w-full object-cover rounded-md mb-4"
-        src="{{ cartItem()?.image }}"
-        alt="{{ cartItem()?.title }}"
-      />
-    </div>
+<section class="bg-(--forground-color) p-4 rounded-2xl shadow-md">
+  <div class="flex gap-16">
+    <div class="flex gap-8">
+      <div class="w-32 flex-shrink-0">
+        <img
+          class="w-full object-cover rounded-md mb-4"
+          src="{{ cartItem().image }}"
+          alt="{{ cartItem().title }}"
+        />
+      </div>
 
-    <div class="flex flex-col gap-4">
-      <h2 class="text-2xl text-(--text-color) font-semibold">
-        {{ cartItem()?.title }}
-      </h2>
-      <p class="text-gray-500 dark:text-gray-400">
-        {{ cartItem()?.description }}
-      </p>
+      <div class="flex flex-col gap-4">
+        <h2 class="text-2xl text-(--text-color) font-semibold">
+          {{ cartItem().title }}
+        </h2>
+        <p class="text-gray-500 dark:text-gray-400">
+          {{ cartItem().description }}
+        </p>
 
-      <div class="flex gap-8">
-        <span class="text-(--text-color)">
-          Qty: {{ cartItem()?.quantity }}
-        </span>
-        <span class="text-(--text-color)">
-          Total:
-          {{
-            cartItem()?.price! * cartItem()?.quantity!
-              | currency: "EUR" : "symbol" : "1.2-2"
-          }}
-        </span>
+        <div class="flex items-center gap-2">
+          <!-- quantity controler -->
+          <div
+            class="flex items-center gap-3 border border-gray-400 dark:border-gray-500 rounded-full px-2 py-1"
+          >
+            <button
+              class="grid place-items-center cursor-pointer text-(--primary) dark:text-blue-300 hover:text-(--primary) active:text-blue-300 rounded-full"
+            >
+              <mat-icon>remove</mat-icon>
+            </button>
+            <span>{{ customQuantity() }}</span>
+            <button
+              class="grid place-items-center cursor-pointer text-(--primary) dark:text-blue-300 hover:text-(--primary) active:text-blue-300 rounded-full"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+
+          <!-- delete quantity -->
+          <button matButton>Delete</button>
+        </div>
       </div>
     </div>
+
+    <div class="flex flex-col items-center justify-between whitespace-nowrap">
+      <span class="text-(--text-color) text-xl font-bold">
+        {{ cartItem().price | currency: "EUR" : "symbol" : "1.2-2" }}
+      </span>
+    </div>
   </div>
 
-  <div class="flex flex-col items-center justify-between whitespace-nowrap">
-    <span class="text-(--text-color) text-xl">
-      Price: {{ cartItem()?.price | currency: "EUR" : "symbol" : "1.2-2" }}
+  <div
+    class="w-full flex justify-end border-t border-gray-300 dark:border-(--disable-color) mt-6 pt-3"
+  >
+    <span class="text-(--text-color)">
+      Subtotal ({{ cartItem().quantity }}):&nbsp;
+      <span class="text-xl font-bold">
+        {{
+          cartItem().price! * cartItem().quantity!
+            | currency: "EUR" : "symbol" : "1.2-2"
+        }}
+      </span>
     </span>
   </div>
-</div>
+</section>
