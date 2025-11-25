@@ -97,7 +97,7 @@ export class ApiProductsService {
    * deleteCartItem
    */
   public deleteCartItem(
-    id: string,
+    id: number,
   ): Observable<CartItem | ErrorResponse<string>> {
     return this.http
       .delete<CartItem>(`${this.cartUrl}/${id}`)

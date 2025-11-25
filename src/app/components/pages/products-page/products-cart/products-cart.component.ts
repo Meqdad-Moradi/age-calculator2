@@ -55,13 +55,11 @@ export class ProductsCartComponent {
         if (updatedItem instanceof ErrorResponse) return;
 
         // update cart signal after item is saved in db
-        this.apiProductsService.cart.update((items) => {
-          return [
-            ...items.map((item) =>
-              item.id === updatedItem.id ? updatedItem : item,
-            ),
-          ];
-        });
+        this.apiProductsService.cart.update((items) =>
+          items.map((item) =>
+            item.id === updatedItem.id ? updatedItem : item,
+          ),
+        );
       });
   }
 
@@ -70,6 +68,12 @@ export class ProductsCartComponent {
    * @param cartItem CartItem
    */
   public onDelete(cartItem: CartItem) {
-    console.log(cartItem);
+    this.apiProductsService.deleteCartItem(cartItem.id).subscribe((res) => {
+      if (res instanceof ErrorResponse) return;
+
+      this.apiProductsService.cart.update((items) =>
+        items.filter((item) => item.id !== cartItem.id),
+      );
+    });
   }
 }
