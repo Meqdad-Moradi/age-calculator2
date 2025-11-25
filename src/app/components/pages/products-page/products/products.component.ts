@@ -19,7 +19,7 @@ import { ProductCardComponent } from '../product-card/product-card.component';
 export class ProductsComponent implements OnInit {
   private readonly apiProductsService = inject(ApiProductsService);
   private readonly dialog = inject(MatDialog);
-  private readonly s = inject(MatSnackBar);
+  private readonly snackbar = inject(MatSnackBar);
 
   public products = this.apiProductsService.products;
   public isLoading = false;
@@ -113,7 +113,7 @@ export class ProductsComponent implements OnInit {
    * @param msg string
    */
   private displaySnackbar(msg: string): void {
-    this.s.open(msg, 'OK', {
+    this.snackbar.open(msg, 'OK', {
       duration: 3000,
     });
   }

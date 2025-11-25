@@ -6,6 +6,10 @@ import { ApiProductsService } from '../../../../services/api/api-products.servic
 import { ErrorResponse } from '../../../models/error-response.model';
 import { CartItem } from '../../../models/products';
 import { ProductCartItemComponent } from './product-cart-item/product-cart-item.component';
+import { filter, switchMap, take } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../../../dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-products-cart',
@@ -15,9 +19,10 @@ import { ProductCartItemComponent } from './product-cart-item/product-cart-item.
 })
 export class ProductsCartComponent {
   private readonly apiProductsService = inject(ApiProductsService);
+  private readonly snackbar = inject(MatSnackBar);
+  private readonly dialog = inject(MatDialog);
 
   public cart = this.apiProductsService.cart;
-  public reversedCart = computed(() => this.cart().reverse());
 
   public isUpdating = false;
 
@@ -50,6 +55,7 @@ export class ProductsCartComponent {
     // update cart item in db
     this.apiProductsService
       .updateCartItem(cartItem.id, { quantity: cartItem.quantity })
+      .pipe(take(1))
       .subscribe((updatedItem) => {
         this.isUpdating = false;
 
@@ -61,6 +67,8 @@ export class ProductsCartComponent {
             item.id === updatedItem.id ? updatedItem : item,
           ),
         );
+
+        this.displaySnackbar('Your item successfully updated.');
       });
   }
 
@@ -69,12 +77,38 @@ export class ProductsCartComponent {
    * @param cartItem CartItem
    */
   public onDelete(cartItem: CartItem) {
-    this.apiProductsService.deleteCartItem(cartItem.id).subscribe((res) => {
-      if (res instanceof ErrorResponse) return;
+    this.dialog
+      .open(ConfirmationDialogComponent, {
+        data: {
+          title: 'Delete Cart Item',
+          description: 'Do you want to delete this item?',
+        },
+        width: '450px',
+      })
+      .afterClosed()
+      .pipe(
+        take(1),
+        filter(Boolean),
+        switchMap(() => this.apiProductsService.deleteCartItem(cartItem.id)),
+      )
+      .subscribe((res) => {
+        if (res instanceof ErrorResponse) return;
 
-      this.apiProductsService.cart.update((items) =>
-        items.filter((item) => item.id !== cartItem.id),
-      );
+        this.apiProductsService.cart.update((items) =>
+          items.filter((item) => item.id !== cartItem.id),
+        );
+
+        this.displaySnackbar('Your item successfully deleted.');
+      });
+  }
+
+  /**
+   * displaySnackbar
+   * @param msg string
+   */
+  private displaySnackbar(msg: string): void {
+    this.snackbar.open(msg, 'OK', {
+      duration: 3000,
     });
   }
 }
