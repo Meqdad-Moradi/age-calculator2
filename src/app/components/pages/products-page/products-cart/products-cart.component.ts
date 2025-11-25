@@ -3,6 +3,8 @@ import { Component, computed, inject } from '@angular/core';
 import { MatAnchor } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { ApiProductsService } from '../../../../services/api/api-products.service';
+import { ErrorResponse } from '../../../models/error-response.model';
+import { CartItem } from '../../../models/products';
 import { ProductCartItemComponent } from './product-cart-item/product-cart-item.component';
 
 @Component({
@@ -15,6 +17,8 @@ export class ProductsCartComponent {
   private readonly apiProductsService = inject(ApiProductsService);
 
   public cart = this.apiProductsService.cart;
+
+  public isUpdating = false;
 
   /**
    * totalPrice
@@ -33,5 +37,39 @@ export class ProductsCartComponent {
    */
   public checkout(): void {
     console.log('Checking out...');
+  }
+
+  /**
+   * onUpdateQuantity
+   * @param cartItem CartItem - updated cart item quantity
+   */
+  public onUpdateQuantity(cartItem: CartItem): void {
+    this.isUpdating = true;
+
+    // update cart item in db
+    this.apiProductsService
+      .updateCartItem(cartItem.id, { quantity: cartItem.quantity })
+      .subscribe((updatedItem) => {
+        this.isUpdating = false;
+
+        if (updatedItem instanceof ErrorResponse) return;
+
+        // update cart signal after item is saved in db
+        this.apiProductsService.cart.update((items) => {
+          return [
+            ...items.map((item) =>
+              item.id === updatedItem.id ? updatedItem : item,
+            ),
+          ];
+        });
+      });
+  }
+
+  /**
+   * onDelete
+   * @param cartItem CartItem
+   */
+  public onDelete(cartItem: CartItem) {
+    console.log(cartItem);
   }
 }

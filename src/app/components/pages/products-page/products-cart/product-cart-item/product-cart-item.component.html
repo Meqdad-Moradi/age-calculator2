@@ -18,25 +18,44 @@
         </p>
 
         <div class="flex items-center gap-2">
-          <!-- quantity controler -->
-          <div
-            class="flex items-center gap-3 border border-gray-400 dark:border-gray-500 rounded-full px-2 py-1"
-          >
-            <button
-              class="grid place-items-center cursor-pointer text-(--primary) dark:text-blue-300 hover:text-(--primary) active:text-blue-300 rounded-full"
+          <!-- display loader on update -->
+          @if (isUpdating()) {
+            <mat-progress-spinner
+              diameter="18"
+              mode="indeterminate"
+            ></mat-progress-spinner>
+          } @else {
+            <!-- quantity controler -->
+            <div
+              class="flex items-center gap-3 border border-gray-400 dark:border-gray-500 rounded-full px-2 py-1"
             >
-              <mat-icon>remove</mat-icon>
-            </button>
-            <span>{{ customQuantity() }}</span>
-            <button
-              class="grid place-items-center cursor-pointer text-(--primary) dark:text-blue-300 hover:text-(--primary) active:text-blue-300 rounded-full"
-            >
-              <mat-icon>add</mat-icon>
-            </button>
-          </div>
+              @if (customQuantity() < 2) {
+                <button
+                  class="grid place-items-center cursor-pointer text-gray-600 dark:text-gray-400 hover:text-red-300 active:text-blue-300 rounded-full"
+                  (click)="onDelete()"
+                >
+                  <mat-icon class="!text-lg leading-[23px]">delete</mat-icon>
+                </button>
+              } @else {
+                <button
+                  class="grid place-items-center cursor-pointer text-(--primary) dark:text-blue-300 hover:text-(--primary) active:text-blue-300 rounded-full"
+                  (click)="decrementQuantity()"
+                >
+                  <mat-icon>remove</mat-icon>
+                </button>
+              }
+              <span>{{ customQuantity() }}</span>
+              <button
+                class="grid place-items-center cursor-pointer text-(--primary) dark:text-blue-300 hover:text-(--primary) active:text-blue-300 rounded-full"
+                (click)="incrementQuantity()"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          }
 
           <!-- delete quantity -->
-          <button matButton>Delete</button>
+          <button matButton (click)="onDelete()">Delete</button>
         </div>
       </div>
     </div>
