@@ -1,6 +1,7 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { of } from 'rxjs';
 import { switchMap, take, tap } from 'rxjs/operators';
 import { ApiProductsService } from '../../../../services/api/api-products.service';
@@ -18,7 +19,7 @@ import { ProductCardComponent } from '../product-card/product-card.component';
 export class ProductsComponent implements OnInit {
   private readonly apiProductsService = inject(ApiProductsService);
   private readonly dialog = inject(MatDialog);
-  private readonly destroyRef = inject(DestroyRef);
+  private readonly s = inject(MatSnackBar);
 
   public products = this.apiProductsService.products;
   public isLoading = false;
@@ -100,8 +101,20 @@ export class ProductsComponent implements OnInit {
               ? cart.map((item) => (item.id === result.id ? result : item))
               : [...cart, result];
           });
+
+          this.displaySnackbar('Your item added to cart!');
         }),
       )
       .subscribe();
+  }
+
+  /**
+   * displaySnackbar
+   * @param msg string
+   */
+  private displaySnackbar(msg: string): void {
+    this.s.open(msg, 'OK', {
+      duration: 3000,
+    });
   }
 }
