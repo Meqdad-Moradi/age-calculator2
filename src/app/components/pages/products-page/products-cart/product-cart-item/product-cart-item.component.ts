@@ -1,4 +1,4 @@
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, NgClass } from '@angular/common';
 import { Component, input, OnInit, output, signal } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,7 +20,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgClass,
   ],
   templateUrl: './product-cart-item.component.html',
   styleUrl: './product-cart-item.component.scss',
@@ -34,6 +35,7 @@ export class ProductCartItemComponent implements OnInit {
   public deleteItem = output<CartItem>();
   // public properties
   public customQuantity = signal<number>(1);
+  public isDescExpanded = false;
 
   ngOnInit(): void {
     this.customQuantity.set(this.cartItem().quantity);
@@ -62,5 +64,9 @@ export class ProductCartItemComponent implements OnInit {
    */
   public onDelete(): void {
     this.deleteItem.emit(this.cartItem());
+  }
+
+  public toggleExpandDescription(): void {
+    this.isDescExpanded = !this.isDescExpanded;
   }
 }

@@ -1,66 +1,70 @@
 <section class="bg-(--forground-color) p-4 rounded-2xl shadow-md">
-  <div class="flex gap-16">
-    <div class="flex gap-8">
-      <div class="w-32 flex-shrink-0">
-        <img
-          class="w-full object-cover rounded-md mb-4"
-          src="{{ cartItem().image }}"
-          alt="{{ cartItem().title }}"
-        />
-      </div>
+  <div class="wrapper">
+    <div class="img-container w-32 flex-shrink-0">
+      <img
+        class="w-full object-cover rounded-md mb-4"
+        src="{{ cartItem().image }}"
+        alt="{{ cartItem().title }}"
+      />
+    </div>
 
-      <div class="flex flex-col gap-4">
-        <h2 class="text-2xl text-(--text-color) font-semibold">
-          {{ cartItem().title }}
-        </h2>
-        <p class="text-gray-500 dark:text-gray-400">
-          {{ cartItem().description }}
-        </p>
+    <div class="info flex flex-col gap-4">
+      <h2 class="text-2xl text-(--text-color) font-semibold">
+        {{ cartItem().title }}
+      </h2>
+      <p
+        class="text-gray-500 dark:text-gray-400 cursor-pointer"
+        [ngClass]="!isDescExpanded ? 'line-clamp-2' : ''"
+        (click)="toggleExpandDescription()"
+        (keydown.enter)="toggleExpandDescription()"
+        tabindex="0"
+      >
+        {{ cartItem().description }}
+      </p>
 
-        <div class="flex items-center gap-2">
-          <!-- display loader on update -->
-          @if (isUpdating()) {
-            <mat-progress-spinner
-              diameter="18"
-              mode="indeterminate"
-            ></mat-progress-spinner>
-          } @else {
-            <!-- quantity controler -->
-            <div
-              class="flex items-center gap-3 border border-gray-400 dark:border-gray-500 rounded-full px-2 py-1"
-            >
-              @if (customQuantity() < 2) {
-                <button
-                  class="grid place-items-center cursor-pointer text-gray-600 dark:text-gray-400 hover:text-red-300 active:text-blue-300 rounded-full"
-                  (click)="onDelete()"
-                >
-                  <mat-icon class="!text-lg leading-[23px]">delete</mat-icon>
-                </button>
-              } @else {
-                <button
-                  class="grid place-items-center cursor-pointer text-(--primary) dark:text-blue-300 hover:text-(--primary) active:text-blue-300 rounded-full"
-                  (click)="decrementQuantity()"
-                >
-                  <mat-icon>remove</mat-icon>
-                </button>
-              }
-              <span>{{ customQuantity() }}</span>
+      <div class="flex items-center gap-2">
+        <!-- display loader on update -->
+        @if (isUpdating()) {
+          <mat-progress-spinner
+            diameter="18"
+            mode="indeterminate"
+          ></mat-progress-spinner>
+        } @else {
+          <!-- quantity controler -->
+          <div
+            class="flex items-center gap-3 border border-gray-400 dark:border-gray-500 rounded-full px-2 py-1"
+          >
+            @if (customQuantity() < 2) {
+              <button
+                class="grid place-items-center cursor-pointer text-gray-600 dark:text-gray-400 hover:text-red-300 active:text-blue-300 rounded-full"
+                (click)="onDelete()"
+              >
+                <mat-icon class="!text-lg leading-[23px]">delete</mat-icon>
+              </button>
+            } @else {
               <button
                 class="grid place-items-center cursor-pointer text-(--primary) dark:text-blue-300 hover:text-(--primary) active:text-blue-300 rounded-full"
-                (click)="incrementQuantity()"
+                (click)="decrementQuantity()"
               >
-                <mat-icon>add</mat-icon>
+                <mat-icon>remove</mat-icon>
               </button>
-            </div>
-          }
+            }
+            <span>{{ customQuantity() }}</span>
+            <button
+              class="grid place-items-center cursor-pointer text-(--primary) dark:text-blue-300 hover:text-(--primary) active:text-blue-300 rounded-full"
+              (click)="incrementQuantity()"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        }
 
-          <!-- delete quantity -->
-          <button matButton (click)="onDelete()">Delete</button>
-        </div>
+        <!-- delete quantity -->
+        <button matButton (click)="onDelete()">Delete</button>
       </div>
     </div>
 
-    <div class="flex flex-col items-center justify-between whitespace-nowrap">
+    <div class="price whitespace-nowrap">
       <span class="text-(--text-color) text-xl font-bold">
         {{ cartItem().price | currency: "EUR" : "symbol" : "1.2-2" }}
       </span>

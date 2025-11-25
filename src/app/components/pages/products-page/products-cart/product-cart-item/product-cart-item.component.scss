@@ -1,0 +1,29 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "img info price";
+  justify-content: space-between;
+  gap: 2em;
+
+  .img-container {
+    grid-area: img;
+  }
+
+  .info {
+    grid-area: info;
+  }
+
+  .price {
+    grid-area: price;
+  }
+}
+
+@media (max-width: 865px) {
+  .wrapper {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "img price"
+      "info info";
+    row-gap: 1em;
+  }
+}
