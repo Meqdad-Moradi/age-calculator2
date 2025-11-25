@@ -18,7 +18,7 @@
 
     <!-- cart items -->
     <div class="grid gap-8">
-      @for (product of cart().reverse(); track $index) {
+      @for (product of reversedCart(); track $index) {
         <app-product-cart-item
           [cartItem]="product"
           [isUpdating]="isUpdating"

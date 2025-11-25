@@ -28,7 +28,7 @@ export class ProductsHeaderComponent implements OnInit {
 
   public cart = this.productsService.cart;
   public cartItemsCount = computed(() => this.cart().length);
-  public isClearCartButtonVisible = false;
+  public isClearCartButtonVisible = this.router.url.includes('/cart');
 
   ngOnInit(): void {
     this.fetchCartItems();

@@ -17,6 +17,7 @@ export class ProductsCartComponent {
   private readonly apiProductsService = inject(ApiProductsService);
 
   public cart = this.apiProductsService.cart;
+  public reversedCart = computed(() => this.cart().reverse());
 
   public isUpdating = false;
 
