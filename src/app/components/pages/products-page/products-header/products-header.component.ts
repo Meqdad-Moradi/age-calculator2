@@ -47,7 +47,7 @@ export class ProductsHeaderComponent implements OnInit {
           return;
         }
 
-        this.productsService.cart.set(response);
+        this.productsService.cart.set(response.reverse());
       });
   }
 

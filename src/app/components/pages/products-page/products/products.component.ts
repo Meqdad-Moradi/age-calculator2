@@ -99,7 +99,7 @@ export class ProductsComponent implements OnInit {
 
             return exists
               ? cart.map((item) => (item.id === result.id ? result : item))
-              : [...cart, result];
+              : [result, ...cart];
           });
 
           this.displaySnackbar('Your item added to cart!');
