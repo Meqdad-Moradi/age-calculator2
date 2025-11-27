@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { ErrorService } from '../error.service';
-import { catchError, Observable } from 'rxjs';
+import { catchError, Observable, Subject } from 'rxjs';
 import { CartItem, Product } from '../../components/models/products';
 import { ErrorResponse } from '../../components/models/error-response.model';
 
@@ -16,6 +16,8 @@ export class ApiProductsService {
 
   public products = signal<Product[]>([]);
   public cart = signal<CartItem[]>([]);
+  public clearCartSubject = new Subject<void>();
+  public clearCartSubjectObservable = this.clearCartSubject.asObservable();
 
   /**
    * getAllProducts
