@@ -32,7 +32,9 @@
     </p>
   </div>
 
-  <div class="flex items-center justify-between gap-8 mt-4">
+  <div
+    class="w-full xl:w-auto flex flex-col xl:flex-row xl:items-center justify-between gap-4 xl:gap-8 mt-4"
+  >
     <p class="text-(--text-color) text-2xl">
       {{ product()?.price | currency: "EUR" : "symbol" : "1.2-2" }}
     </p>
