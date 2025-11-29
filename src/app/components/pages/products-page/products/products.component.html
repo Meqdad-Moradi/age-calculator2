@@ -1,8 +1,26 @@
 <section class="py-8">
   @if (!isLoading) {
     @if (products().length) {
+      <!-- custom search -->
+      <app-custom-search
+        searchLabel="Search product..."
+        (searchQuery)="searchProducts($event)"
+      ></app-custom-search>
+
+      <!-- filter section -->
+      <div class="mb-8">
+        <app-filter-control
+          [filterOptions]="filterOptions"
+          [filterQuery]="filterOptions[0]"
+          [itemsCountLabel]="products().length + ' Items'"
+          [isSearchBoxVisible]="false"
+          (filterChange)="filterProducts($event!)"
+        ></app-filter-control>
+      </div>
+
+      <!-- products -->
       <div class="grid grid-cols-1 lg:grid-cols-2 justify-between gap-8">
-        @for (item of products(); track $index) {
+        @for (item of filteredProducts(); track $index) {
           <app-product-card
             [product]="item"
             (addProductToCart)="addToCart($event)"

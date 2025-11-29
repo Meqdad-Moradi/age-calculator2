@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -9,10 +9,17 @@ import { ConfirmationDialogComponent } from '../../../dialogs/confirmation-dialo
 import { ErrorResponse } from '../../../models/error-response.model';
 import { CartItem, Product } from '../../../models/products';
 import { ProductCardComponent } from '../product-card/product-card.component';
+import { FilterControlComponent } from '../../../shared/filter-control/filter-control.component';
+import { CustomSearchComponent } from '../../../shared/custom-search/custom-search.component';
 
 @Component({
   selector: 'app-products',
-  imports: [MatProgressSpinnerModule, ProductCardComponent],
+  imports: [
+    MatProgressSpinnerModule,
+    ProductCardComponent,
+    FilterControlComponent,
+    CustomSearchComponent,
+  ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
@@ -22,7 +29,18 @@ export class ProductsComponent implements OnInit {
   private readonly snackbar = inject(MatSnackBar);
 
   public products = this.apiProductsService.products;
+  public filteredProducts = signal<Product[]>([]);
   public isLoading = false;
+  public filterOptions = [
+    'All',
+    "Men's clothing",
+    'Jewelery',
+    'Electronics',
+    "Women's clothing",
+  ];
+
+  private selectedFilterOption = '';
+  private searchQuery = '';
 
   ngOnInit(): void {
     this.getAllProducts();
@@ -41,6 +59,7 @@ export class ProductsComponent implements OnInit {
       }
 
       this.apiProductsService.products.set(response);
+      this.filterProducts();
     });
   }
 
@@ -115,6 +134,56 @@ export class ProductsComponent implements OnInit {
   private displaySnackbar(msg: string): void {
     this.snackbar.open(msg, 'OK', {
       duration: 3000,
+    });
+  }
+
+  /**
+   * filterProducts
+   * @param filterQuery string
+   */
+  public filterProducts(filterQuery = 'All'): void {
+    this.selectedFilterOption = filterQuery;
+
+    if (!this.searchQuery && (filterQuery === 'All' || !filterQuery)) {
+      this.filteredProducts.set(this.products());
+      return;
+    }
+
+    this.filteredProducts.update(() => {
+      return this.products().filter((item) =>
+        filterQuery === 'All' && this.searchQuery.length
+          ? item.title
+              .toLocaleLowerCase()
+              .includes(this.searchQuery.toLocaleLowerCase())
+          : item.category.toLocaleLowerCase() ===
+              filterQuery.toLocaleLowerCase() &&
+            item.title
+              .toLocaleLowerCase()
+              .includes(this.searchQuery.toLocaleLowerCase()),
+      );
+    });
+  }
+
+  /**
+   * searchProducts
+   * @param searchQuery string
+   */
+  public searchProducts(searchQuery: string): void {
+    this.searchQuery = searchQuery;
+
+    this.filteredProducts.update(() => {
+      return this.products().filter((item) => {
+        return this.selectedFilterOption.length &&
+          this.selectedFilterOption !== 'All'
+          ? item.category.toLocaleLowerCase() ===
+              this.selectedFilterOption.toLocaleLowerCase() &&
+              item.title
+                .toLocaleLowerCase()
+                .includes(searchQuery.toLocaleLowerCase())
+          : item.title
+              .toLocaleLowerCase()
+              .includes(searchQuery.toLocaleLowerCase());
+      });
     });
   }
 }
