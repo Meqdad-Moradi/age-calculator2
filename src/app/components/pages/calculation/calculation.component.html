@@ -13,7 +13,10 @@
       <span>{{ totalPrice() | currency: "EUR" : "symbol" : "1.2-2" }}</span>
     </div>
 
-    <app-custom-search (searchQuery)="onFilter($event)"></app-custom-search>
+    <app-custom-search
+      searchLabel="Search pampers..."
+      (searchQuery)="onFilter($event)"
+    ></app-custom-search>
 
     <!-- filter controls -->
     <app-filter-control
