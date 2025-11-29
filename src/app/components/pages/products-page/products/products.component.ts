@@ -138,52 +138,41 @@ export class ProductsComponent implements OnInit {
   }
 
   /**
-   * filterProducts
+   * applyFilters
+   * apply filters based on selected category and search query
+   */
+  private applyFilters(): void {
+    const products = this.products();
+    const filter = this.selectedFilterOption?.toLocaleLowerCase() || 'all';
+    const search = this.searchQuery?.toLocaleLowerCase() || '';
+
+    this.filteredProducts.set(
+      products.filter((item) => {
+        const matchesCategory =
+          filter === 'all' || item.category.toLocaleLowerCase() === filter;
+        const matchesSearch =
+          !search || item.title.toLocaleLowerCase().includes(search);
+
+        return matchesCategory && matchesSearch;
+      }),
+    );
+  }
+
+  /**
+   * Filter products by category
    * @param filterQuery string
    */
   public filterProducts(filterQuery = 'All'): void {
     this.selectedFilterOption = filterQuery;
-
-    if (!this.searchQuery && (filterQuery === 'All' || !filterQuery)) {
-      this.filteredProducts.set(this.products());
-      return;
-    }
-
-    this.filteredProducts.update(() => {
-      return this.products().filter((item) =>
-        filterQuery === 'All' && this.searchQuery.length
-          ? item.title
-              .toLocaleLowerCase()
-              .includes(this.searchQuery.toLocaleLowerCase())
-          : item.category.toLocaleLowerCase() ===
-              filterQuery.toLocaleLowerCase() &&
-            item.title
-              .toLocaleLowerCase()
-              .includes(this.searchQuery.toLocaleLowerCase()),
-      );
-    });
+    this.applyFilters();
   }
 
   /**
-   * searchProducts
+   * Search products by query
    * @param searchQuery string
    */
   public searchProducts(searchQuery: string): void {
     this.searchQuery = searchQuery;
-
-    this.filteredProducts.update(() => {
-      return this.products().filter((item) => {
-        return this.selectedFilterOption.length &&
-          this.selectedFilterOption !== 'All'
-          ? item.category.toLocaleLowerCase() ===
-              this.selectedFilterOption.toLocaleLowerCase() &&
-              item.title
-                .toLocaleLowerCase()
-                .includes(searchQuery.toLocaleLowerCase())
-          : item.title
-              .toLocaleLowerCase()
-              .includes(searchQuery.toLocaleLowerCase());
-      });
-    });
+    this.applyFilters();
   }
 }
