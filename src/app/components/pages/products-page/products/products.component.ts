@@ -144,14 +144,16 @@ export class ProductsComponent implements OnInit {
   private applyFilters(): void {
     const products = this.products();
     const filter = this.selectedFilterOption?.toLocaleLowerCase() || 'all';
-    const search = this.searchQuery?.toLocaleLowerCase() || '';
+    const search =
+      this.searchQuery?.toLocaleLowerCase().trim().split(' ') || '';
 
     this.filteredProducts.set(
       products.filter((item) => {
         const matchesCategory =
           filter === 'all' || item.category.toLocaleLowerCase() === filter;
         const matchesSearch =
-          !search || item.title.toLocaleLowerCase().includes(search);
+          !search ||
+          search.every((x) => item.title.toLocaleLowerCase().includes(x));
 
         return matchesCategory && matchesSearch;
       }),
