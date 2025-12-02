@@ -75,6 +75,9 @@ export class CalculationComponent implements OnInit {
   public filterQuery = signal<string>(this.filterOptions[0]);
   public isDataLoaded = false;
 
+  private selectedFilterOption = '';
+  private searchQuery = '';
+
   /**
    * totalPrice
    */
@@ -258,32 +261,35 @@ export class CalculationComponent implements OnInit {
   /**
    * onFilter
    * filter out the list based on filter option and also date range
-   * @param filterValue string
    * @returns void
    */
-  public onFilter(filterValue: string): void {
-    if (filterValue !== EnTimePeriod.SelectTimePeriod) {
+  private filterPamper(): void {
+    if (this.selectedFilterOption !== EnTimePeriod.SelectTimePeriod) {
       // if filter value === all, or search input has not value, display all data
-      if (filterValue === this.filterOptions[0] || !filterValue) {
+      if (
+        this.selectedFilterOption === this.filterOptions[0] &&
+        !this.searchQuery.length
+      ) {
         this.filteredPampers.set(this.pampers());
         return;
       }
 
-      // split search query into words
-      const searchQuery = filterValue.trim().toLocaleLowerCase().split(' ');
+      // split search query into words and create filter option
+      const search =
+        this.searchQuery.trim().toLocaleLowerCase().split(' ') || '';
+      const filter = this.selectedFilterOption || this.filterOptions[0];
 
       // filter the list based on selected filter option
-      this.filteredPampers.update(() =>
+      this.filteredPampers.set(
         this.pampers().filter((item) => {
-          // filter option
-          if (this.filterOptions.includes(filterValue)) {
-            return item.type === filterValue;
-          } else {
-            // search value
-            return searchQuery.every((query) =>
-              item.name?.toLocaleLowerCase().includes(query),
-            );
-          }
+          const matchFilter =
+            filter === this.filterOptions[0] ||
+            item.type?.toString() === filter;
+          const matchSearch =
+            !search ||
+            search.every((x) => item.name?.toLocaleLowerCase().includes(x));
+
+          return matchFilter && matchSearch;
         }),
       );
     } else {
@@ -308,6 +314,24 @@ export class CalculationComponent implements OnInit {
           );
         });
     }
+  }
+
+  /**
+   *
+   * @param searchQuery string
+   */
+  public onSearchPamper(searchQuery: string): void {
+    this.searchQuery = searchQuery;
+    this.filterPamper();
+  }
+
+  /**
+   * onFilter
+   * @param filterQuery strin
+   */
+  public onFilter(filterQuery: string) {
+    this.selectedFilterOption = filterQuery;
+    this.filterPamper();
   }
 
   /**
