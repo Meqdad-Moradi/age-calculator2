@@ -2,7 +2,7 @@
 <mat-drawer-container class="drawer-container" autosize>
   <mat-drawer
     #drawer
-    class="!rounded-none dark:!bg-(--background-color) !shadow-lg !w-[290px]"
+    class="!rounded-none !shadow-lg !w-[290px]"
     [mode]="drawerMode"
     [opened]="isSideNavOpen()"
   >
@@ -145,7 +145,7 @@
   </mat-drawer>
 
   <mat-drawer-content
-    class="p-8 dark:bg-(--background-color) print:bg-white"
+    class="p-8 print:bg-white"
     [ngClass]="isProductsPage ? '!pt-0' : ''"
   >
     <div class="w-full max-w-[90%] mx-auto" id="pdf-content">
