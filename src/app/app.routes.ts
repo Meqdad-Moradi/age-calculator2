@@ -14,11 +14,14 @@ import { ProductsPageComponent } from './components/pages/products-page/products
 import { ProductsComponent } from './components/pages/products-page/products/products.component';
 import { ProductsCartComponent } from './components/pages/products-page/products-cart/products-cart.component';
 import { ProductsHomeComponent } from './components/pages/products-page/products-home/products-home.component';
+import { authGuard } from './guards/auth.guard';
+import { LoginComponent } from './components/pages/login/login.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: SidenavComponent,
+    canActivate: [authGuard],
     children: [
       { path: '', component: HomeComponent },
       {
@@ -68,6 +71,11 @@ export const routes: Routes = [
         ],
       },
     ],
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    pathMatch: 'full',
   },
   {
     path: '**',

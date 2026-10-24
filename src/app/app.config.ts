@@ -19,6 +19,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { routes } from './app.routes';
 import { matDateFormat } from './helpers/utils';
 import { httpErrorsInterceptor } from './interceptors/http-errors.interceptor';
+import { provideOAuthClient } from 'angular-oauth2-oidc';
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 const matTooltipDefaultOptions = MAT_TOOLTIP_DEFAULT_OPTIONS_FACTORY();
@@ -29,6 +30,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([httpErrorsInterceptor])),
+    provideOAuthClient(),
 
     // Use MomentDateAdapter instead of NativeDateAdapter
     {
