@@ -1,0 +1,304 @@
+<!-- Login page layout -->
+<main
+  class="grid min-h-screen place-items-center bg-(--background-color) p-0 font-pop text-(--text-color) sm:p-5 lg:p-7"
+>
+  <!-- Centered login card -->
+  <section
+    class="grid min-h-screen w-full overflow-hidden bg-(--forground-color) sm:min-h-[650px] sm:max-w-[1100px] sm:rounded-3xl sm:border sm:border-(--gray) sm:shadow-2xl lg:grid-cols-2"
+    aria-label="Sign in to Agewise"
+  >
+    <!-- Welcome panel and time illustration, shown on large screens -->
+    <aside
+      class="relative hidden min-h-[700px] flex-col overflow-hidden bg-(--tertiary) p-11 text-(--white-color) lg:flex"
+    >
+      <!-- Brand -->
+      <a
+        [routerLink]="['/']"
+        aria-label="Agewise home"
+        class="relative z-10 inline-flex w-fit items-center gap-2.5 font-bold tracking-tight"
+      >
+        <span
+          class="grid size-8 place-items-center rounded-xl border border-(--white-color) bg-(--primary)"
+        >
+          <svg
+            class="size-5"
+            viewBox="0 0 32 32"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path d="M16 3.5 28.5 10.75v10.5L16 28.5 3.5 21.25v-10.5L16 3.5Z" />
+            <path d="M16 10v12M10 16h12" />
+          </svg>
+        </span>
+        <span>agewise</span>
+      </a>
+
+      <!-- Welcome message -->
+      <div class="relative z-10 mt-20 max-w-sm">
+        <span
+          class="text-xs font-bold uppercase tracking-[0.2em] text-(--secondary)"
+          >A little perspective</span
+        >
+        <h1
+          class="mb-4 mt-4 font-serif text-6xl font-normal leading-[1.05] tracking-tight"
+        >
+          Make every<br />moment <em class="text-(--secondary)">count.</em>
+        </h1>
+        <p class="max-w-xs text-sm leading-7 text-(--white-color)">
+          Your story is made up of moments. Find your age, track the little
+          things, and make more of the time you have.
+        </p>
+      </div>
+
+      <!-- Time reminder card -->
+      <div
+        class="relative z-10 ml-auto mt-10 w-full max-w-sm rounded-2xl border border-(--gray) bg-(--background-color) p-5 text-(--text-color) shadow-lg"
+      >
+        <!-- Time card heading and status -->
+        <div
+          class="flex items-center gap-2 text-[10px] font-bold tracking-[0.15em] text-(--gray)"
+        >
+          <span class="size-1.5 rounded-full bg-(--secondary)"></span>
+          <span>YOUR TIME, YOUR WAY</span>
+          <svg
+            class="ml-auto size-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path d="M7 17 17 7M8 7h9v9" />
+          </svg>
+        </div>
+        <div class="my-3 flex items-center gap-3">
+          <span class="font-serif text-5xl tracking-tight">24</span>
+          <span class="text-xs leading-4 text-(--gray)"
+            >hours<br />in today</span
+          >
+        </div>
+        <div class="h-1 overflow-hidden rounded-full bg-(--disable-color)">
+          <span class="block h-full w-[68%] rounded-full bg-(--primary)"></span>
+        </div>
+        <div class="mt-2.5 flex justify-between text-[10px] text-(--gray)">
+          <span>Make room for what matters.</span>
+          <span>01 / 01</span>
+        </div>
+      </div>
+
+      <!-- Welcome panel footer -->
+      <div class="relative z-10 mt-auto pt-8 text-[10px] text-(--white-color)">
+        Thoughtfully made for your everyday.
+      </div>
+      <!-- Decorative background rings -->
+      <div
+        class="pointer-events-none absolute -right-28 top-48 size-72 rounded-full border border-(--gray)"
+      ></div>
+      <div
+        class="pointer-events-none absolute -right-16 top-56 size-72 rounded-full border border-(--gray)"
+      ></div>
+    </aside>
+
+    <!-- Sign-in panel -->
+    <div
+      class="flex min-h-screen flex-col p-6 sm:p-8 lg:min-h-[700px] lg:px-12 lg:py-9"
+    >
+      <!-- Account creation prompt -->
+      <div
+        class="flex min-h-8 items-center justify-end gap-2 text-[10px] text-(--gray)"
+      >
+        <span>Already have an account?</span>
+        <button
+          class="font-bold text-(--primary) hover:underline"
+          type="button"
+        >
+          Create account <span aria-hidden="true">↗</span>
+        </button>
+      </div>
+
+      <!-- Sign-in content -->
+      <div class="mx-auto my-auto w-full max-w-sm py-8 sm:py-10">
+        <!-- Compact brand shown on small screens -->
+        <a
+          href="/"
+          aria-label="Agewise home"
+          class="mb-10 inline-flex items-center gap-2.5 font-bold tracking-tight text-(--tertiary) lg:hidden"
+        >
+          <span
+            class="grid size-8 place-items-center rounded-xl bg-(--primary) text-(--white-color)"
+          >
+            <svg
+              class="size-5"
+              viewBox="0 0 32 32"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M16 3.5 28.5 10.75v10.5L16 28.5 3.5 21.25v-10.5L16 3.5Z"
+              />
+              <path d="M16 10v12M10 16h12" />
+            </svg>
+          </span>
+          <span>agewise</span>
+        </a>
+        <!-- Sign-in heading -->
+        <span
+          class="text-[10px] font-bold uppercase tracking-[0.2em] text-(--primary)"
+          >Welcome back</span
+        >
+        <h2 class="mb-1 mt-2 font-serif text-4xl font-normal tracking-tight">
+          Good to see you.
+        </h2>
+        <p class="text-xs text-(--gray)">
+          Sign in to pick up right where you left off.
+        </p>
+
+        <!-- Google sign-in option -->
+        <button
+          class="mt-7 flex h-11 w-full items-center justify-center gap-2.5 rounded-lg border border-(--disable-color) bg-(--forground-color) text-xs font-bold text-(--text-color) transition hover:border-(--primary) cursor-pointer"
+          type="button"
+          (click)="loginWithGoogle()"
+        >
+          <svg class="size-4" viewBox="0 0 20 20" aria-hidden="true">
+            <path
+              fill="#4285F4"
+              d="M19.6 10.23c0-.68-.06-1.36-.18-2.03H10v3.84h5.38a4.6 4.6 0 0 1-1.99 3.02v2.48h3.22c1.89-1.74 2.99-4.3 2.99-7.31Z"
+            />
+            <path
+              fill="#34A853"
+              d="M10 20c2.7 0 4.97-.9 6.62-2.46l-3.23-2.48c-.9.6-2.05.96-3.39.96-2.6 0-4.8-1.75-5.59-4.1H1.08v2.56A10 10 0 0 0 10 20Z"
+            />
+            <path
+              fill="#FBBC05"
+              d="M4.41 11.92a6.02 6.02 0 0 1 0-3.84V5.52H1.08a10 10 0 0 0 0 8.96l3.33-2.56Z"
+            />
+            <path
+              fill="#EA4335"
+              d="M10 3.98c1.47 0 2.79.5 3.82 1.5l2.87-2.87C14.96.96 12.7 0 10 0a10 10 0 0 0-8.92 5.52l3.33 2.56C5.2 5.73 7.4 3.98 10 3.98Z"
+            />
+          </svg>
+          Continue with Google
+        </button>
+
+        <!-- Email sign-in divider -->
+        <div
+          class="my-5 flex items-center gap-3 text-[9px] text-(--gray) before:h-px before:flex-1 before:bg-(--disable-color) after:h-px after:flex-1 after:bg-(--disable-color)"
+        >
+          <span>or continue with email</span>
+        </div>
+
+        <!-- Email and password form -->
+        <form class="flex flex-col" (submit)="$event.preventDefault()">
+          <!-- Email field -->
+          <label for="email" class="text-[10px] font-bold">Email address</label>
+          <div
+            class="mt-2 mb-4 flex h-11 items-center gap-2.5 rounded-lg border border-(--disable-color) bg-(--forground-color) px-3 transition focus-within:border-(--primary) focus-within:ring-2 focus-within:ring-(--primary)"
+          >
+            <svg
+              class="size-4 shrink-0 text-(--gray)"
+              viewBox="0 0 20 20"
+              fill="none"
+              aria-hidden="true"
+            >
+              <rect x="2.5" y="4" width="15" height="12" rx="2.5" />
+              <path d="m3.5 5.5 6.5 5 6.5-5" />
+            </svg>
+            <input
+              id="email"
+              class="h-full min-w-0 flex-1 bg-transparent text-xs outline-none placeholder:text-(--gray)"
+              type="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+            />
+          </div>
+
+          <!-- Password field and recovery link -->
+          <div class="flex items-center justify-between">
+            <label for="password" class="text-[10px] font-bold">Password</label>
+            <button
+              class="text-[9px] font-bold text-(--primary) hover:underline"
+              type="button"
+            >
+              Forgot password?
+            </button>
+          </div>
+          <div
+            class="mt-2 mb-3 flex h-11 items-center gap-2.5 rounded-lg border border-(--disable-color) bg-(--forground-color) px-3 transition focus-within:border-(--primary) focus-within:ring-2 focus-within:ring-(--primary)"
+          >
+            <svg
+              class="size-4 shrink-0 text-(--gray)"
+              viewBox="0 0 20 20"
+              fill="none"
+              aria-hidden="true"
+            >
+              <rect x="3.5" y="8.5" width="13" height="9" rx="2" />
+              <path d="M6.5 8.5V6a3.5 3.5 0 0 1 7 0v2.5M10 12v2" />
+            </svg>
+            <input
+              id="password"
+              class="h-full min-w-0 flex-1 bg-transparent text-xs outline-none placeholder:text-(--gray)"
+              type="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+            />
+            <button
+              class="grid size-7 shrink-0 place-items-center text-(--gray)"
+              type="button"
+              aria-label="Show password"
+            >
+              <svg
+                class="size-4"
+                viewBox="0 0 20 20"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path d="M2 10s2.9-5 8-5 8 5 8 5-2.9 5-8 5-8-5-8-5Z" />
+                <circle cx="10" cy="10" r="2.2" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Keep-signed-in option -->
+          <label
+            class="inline-flex w-fit cursor-pointer items-center gap-2 text-[10px] text-(--gray)"
+          >
+            <input class="size-3.5 accent-(--primary)" type="checkbox" />
+            <span>Keep me signed in</span>
+          </label>
+
+          <button
+            class="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-(--primary) text-xs font-bold text-(--white-color) shadow-md transition hover:brightness-90"
+            type="submit"
+          >
+            Sign in <span aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        <!-- Terms and privacy notice -->
+        <p class="mt-5 text-center text-[9px] leading-relaxed text-(--gray)">
+          By continuing, you agree to our
+          <button
+            type="button"
+            class="font-bold text-(--primary) hover:underline"
+          >
+            Terms
+          </button>
+          and
+          <button
+            type="button"
+            class="font-bold text-(--primary) hover:underline"
+          >
+            Privacy Policy</button
+          >.
+        </p>
+      </div>
+
+      <!-- Sign-in panel footer -->
+      <div class="flex justify-between text-[9px] text-(--gray)">
+        <span>© 2025 Agewise</span>
+        <span
+          ><span class="text-(--secondary)" aria-hidden="true">✳</span> Your
+          data stays yours</span
+        >
+      </div>
+    </div>
+  </section>
+</main>
