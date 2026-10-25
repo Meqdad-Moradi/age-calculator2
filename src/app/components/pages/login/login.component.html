@@ -60,20 +60,15 @@
         >
           <span class="size-1.5 rounded-full bg-(--secondary)"></span>
           <span>YOUR TIME, YOUR WAY</span>
-          <svg
-            class="ml-auto size-4"
-            viewBox="0 0 24 24"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path d="M7 17 17 7M8 7h9v9" />
-          </svg>
+          <mat-icon class="ml-auto !size-4 !text-base" aria-hidden="true">
+            north_east
+          </mat-icon>
         </div>
         <div class="my-3 flex items-center gap-3">
           <span class="font-serif text-5xl tracking-tight">24</span>
-          <span class="text-xs leading-4 text-(--gray)"
-            >hours<br />in today</span
-          >
+          <span class="text-xs leading-4 text-(--gray)">
+            hours<br />in today
+          </span>
         </div>
         <div class="h-1 overflow-hidden rounded-full bg-(--disable-color)">
           <span class="block h-full w-[68%] rounded-full bg-(--primary)"></span>
@@ -106,11 +101,11 @@
         class="flex min-h-8 items-center justify-end gap-2 text-[10px] text-(--gray)"
       >
         <span>Already have an account?</span>
-        <button
-          class="font-bold text-(--primary) hover:underline"
-          type="button"
-        >
-          Create account <span aria-hidden="true">↗</span>
+        <button mat-button>
+          Create account
+          <mat-icon class="!size-4 !text-base" aria-hidden="true">
+            north_east
+          </mat-icon>
         </button>
       </div>
 
@@ -153,29 +148,33 @@
 
         <!-- Google sign-in option -->
         <button
-          class="mt-7 flex h-11 w-full items-center justify-center gap-2.5 rounded-lg border border-(--disable-color) bg-(--forground-color) text-xs font-bold text-(--text-color) transition hover:border-(--primary) cursor-pointer"
-          type="button"
+          mat-stroked-button
+          class="mt-7 w-full"
           (click)="loginWithGoogle()"
         >
-          <svg class="size-4" viewBox="0 0 20 20" aria-hidden="true">
-            <path
-              fill="#4285F4"
-              d="M19.6 10.23c0-.68-.06-1.36-.18-2.03H10v3.84h5.38a4.6 4.6 0 0 1-1.99 3.02v2.48h3.22c1.89-1.74 2.99-4.3 2.99-7.31Z"
-            />
-            <path
-              fill="#34A853"
-              d="M10 20c2.7 0 4.97-.9 6.62-2.46l-3.23-2.48c-.9.6-2.05.96-3.39.96-2.6 0-4.8-1.75-5.59-4.1H1.08v2.56A10 10 0 0 0 10 20Z"
-            />
-            <path
-              fill="#FBBC05"
-              d="M4.41 11.92a6.02 6.02 0 0 1 0-3.84V5.52H1.08a10 10 0 0 0 0 8.96l3.33-2.56Z"
-            />
-            <path
-              fill="#EA4335"
-              d="M10 3.98c1.47 0 2.79.5 3.82 1.5l2.87-2.87C14.96.96 12.7 0 10 0a10 10 0 0 0-8.92 5.52l3.33 2.56C5.2 5.73 7.4 3.98 10 3.98Z"
-            />
-          </svg>
-          Continue with Google
+          <div class="flex items=center gap-2">
+            <div class="grid place-content-center">
+              <svg class="size-4" viewBox="0 0 20 20" aria-hidden="true">
+                <path
+                  fill="#4285F4"
+                  d="M19.6 10.23c0-.68-.06-1.36-.18-2.03H10v3.84h5.38a4.6 4.6 0 0 1-1.99 3.02v2.48h3.22c1.89-1.74 2.99-4.3 2.99-7.31Z"
+                />
+                <path
+                  fill="#34A853"
+                  d="M10 20c2.7 0 4.97-.9 6.62-2.46l-3.23-2.48c-.9.6-2.05.96-3.39.96-2.6 0-4.8-1.75-5.59-4.1H1.08v2.56A10 10 0 0 0 10 20Z"
+                />
+                <path
+                  fill="#FBBC05"
+                  d="M4.41 11.92a6.02 6.02 0 0 1 0-3.84V5.52H1.08a10 10 0 0 0 0 8.96l3.33-2.56Z"
+                />
+                <path
+                  fill="#EA4335"
+                  d="M10 3.98c1.47 0 2.79.5 3.82 1.5l2.87-2.87C14.96.96 12.7 0 10 0a10 10 0 0 0-8.92 5.52l3.33 2.56C5.2 5.73 7.4 3.98 10 3.98Z"
+                />
+              </svg>
+            </div>
+            <span>Continue with Google</span>
+          </div>
         </button>
 
         <!-- Email sign-in divider -->
@@ -188,19 +187,13 @@
         <!-- Email and password form -->
         <form class="flex flex-col" (submit)="$event.preventDefault()">
           <!-- Email field -->
-          <label for="email" class="text-[10px] font-bold">Email address</label>
+          <label for="email" class="text-[11px] font-bold">Email address</label>
           <div
             class="mt-2 mb-4 flex h-11 items-center gap-2.5 rounded-lg border border-(--disable-color) bg-(--forground-color) px-3 transition focus-within:border-(--primary) focus-within:ring-2 focus-within:ring-(--primary)"
           >
-            <svg
-              class="size-4 shrink-0 text-(--gray)"
-              viewBox="0 0 20 20"
-              fill="none"
-              aria-hidden="true"
+            <mat-icon class="text-base! text-(--gray)" aria-hidden="true"
+              >mail</mat-icon
             >
-              <rect x="2.5" y="4" width="15" height="12" rx="2.5" />
-              <path d="m3.5 5.5 6.5 5 6.5-5" />
-            </svg>
             <input
               id="email"
               class="h-full min-w-0 flex-1 bg-transparent text-xs outline-none placeholder:text-(--gray)"
@@ -212,9 +205,9 @@
 
           <!-- Password field and recovery link -->
           <div class="flex items-center justify-between">
-            <label for="password" class="text-[10px] font-bold">Password</label>
+            <label for="password" class="text-[11px] font-bold">Password</label>
             <button
-              class="text-[9px] font-bold text-(--primary) hover:underline"
+              class="text-[11px] font-bold text-(--primary) cursor-pointer"
               type="button"
             >
               Forgot password?
@@ -223,15 +216,9 @@
           <div
             class="mt-2 mb-3 flex h-11 items-center gap-2.5 rounded-lg border border-(--disable-color) bg-(--forground-color) px-3 transition focus-within:border-(--primary) focus-within:ring-2 focus-within:ring-(--primary)"
           >
-            <svg
-              class="size-4 shrink-0 text-(--gray)"
-              viewBox="0 0 20 20"
-              fill="none"
-              aria-hidden="true"
+            <mat-icon class="text-base! text-(--gray)" aria-hidden="true"
+              >lock</mat-icon
             >
-              <rect x="3.5" y="8.5" width="13" height="9" rx="2" />
-              <path d="M6.5 8.5V6a3.5 3.5 0 0 1 7 0v2.5M10 12v2" />
-            </svg>
             <input
               id="password"
               class="h-full min-w-0 flex-1 bg-transparent text-xs outline-none placeholder:text-(--gray)"
@@ -240,19 +227,14 @@
               autocomplete="current-password"
             />
             <button
-              class="grid size-7 shrink-0 place-items-center text-(--gray)"
+              mat-icon-button
+              class="!size-7 !min-w-0 !p-0 text-(--gray)"
               type="button"
               aria-label="Show password"
             >
-              <svg
-                class="size-4"
-                viewBox="0 0 20 20"
-                fill="none"
-                aria-hidden="true"
+              <mat-icon class="!size-4 !text-base" aria-hidden="true"
+                >visibility</mat-icon
               >
-                <path d="M2 10s2.9-5 8-5 8 5 8 5-2.9 5-8 5-8-5-8-5Z" />
-                <circle cx="10" cy="10" r="2.2" />
-              </svg>
             </button>
           </div>
 
@@ -265,38 +247,50 @@
           </label>
 
           <button
-            class="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-(--primary) text-xs font-bold text-(--white-color) shadow-md transition hover:brightness-90"
+            mat-flat-button
+            class="mt-5 !h-12 w-full !gap-2 !rounded-lg !bg-(--primary) text-xs font-bold !text-(--white-color) shadow-md transition hover:brightness-90"
             type="submit"
           >
-            Sign in <span aria-hidden="true">→</span>
+            Sign in
+            <mat-icon class="!size-4 !text-base" aria-hidden="true"
+              >arrow_forward</mat-icon
+            >
           </button>
         </form>
 
         <!-- Terms and privacy notice -->
         <p class="mt-5 text-center text-[9px] leading-relaxed text-(--gray)">
           By continuing, you agree to our
-          <button
-            type="button"
-            class="font-bold text-(--primary) hover:underline"
+          <a
+            class="font-semibold text-(--primary) text-xs"
+            href="http://www.google.com"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Terms
-          </button>
+          </a>
           and
-          <button
-            type="button"
-            class="font-bold text-(--primary) hover:underline"
+          <a
+            class="font-semibold text-(--primary) text-xs"
+            href="http://www.google.com"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Privacy Policy</button
+            Privacy Policy </a
           >.
         </p>
       </div>
 
       <!-- Sign-in panel footer -->
       <div class="flex justify-between text-[9px] text-(--gray)">
-        <span>© 2025 Agewise</span>
-        <span
-          ><span class="text-(--secondary)" aria-hidden="true">✳</span> Your
-          data stays yours</span
+        <span>© 2026 Agewise</span>
+        <span class="inline-flex items-center"
+          ><mat-icon
+            class="!size-3 !text-xs text-(--secondary)"
+            aria-hidden="true"
+            >auto_awesome</mat-icon
+          >
+          Your data stays yours</span
         >
       </div>
     </div>
