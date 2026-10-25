@@ -5,7 +5,6 @@
   <!-- Centered login card -->
   <section
     class="grid min-h-screen w-full overflow-hidden bg-(--forground-color) sm:min-h-[650px] sm:max-w-[1100px] sm:rounded-3xl sm:border sm:border-(--gray) sm:shadow-2xl lg:grid-cols-2"
-    aria-label="Sign in to Agewise"
   >
     <!-- Welcome panel and time illustration, shown on large screens -->
     <aside
@@ -14,7 +13,6 @@
       <!-- Brand -->
       <a
         [routerLink]="['/']"
-        aria-label="Agewise home"
         class="relative z-10 inline-flex w-fit items-center gap-2.5 font-bold tracking-tight"
       >
         <span
@@ -114,7 +112,6 @@
         <!-- Compact brand shown on small screens -->
         <a
           href="/"
-          aria-label="Agewise home"
           class="mb-10 inline-flex items-center gap-2.5 font-bold tracking-tight text-(--tertiary) lg:hidden"
         >
           <span
@@ -222,7 +219,7 @@
             <input
               id="password"
               class="h-full min-w-0 flex-1 bg-transparent text-xs outline-none placeholder:text-(--gray)"
-              type="password"
+              [type]="passwordType()"
               placeholder="Enter your password"
               autocomplete="current-password"
             />
@@ -230,11 +227,15 @@
               mat-icon-button
               class="!size-7 !min-w-0 !p-0 text-(--gray)"
               type="button"
-              aria-label="Show password"
+              (click)="changePasswordType()"
             >
-              <mat-icon class="!size-4 !text-base" aria-hidden="true"
-                >visibility</mat-icon
-              >
+              <mat-icon class="!size-4 !text-base" aria-hidden="true">
+                {{
+                  passwordType() === "password"
+                    ? "visibility_off"
+                    : "visibility"
+                }}
+              </mat-icon>
             </button>
           </div>
 
