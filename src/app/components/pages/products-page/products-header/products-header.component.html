@@ -15,6 +15,8 @@
     <span
       class="cursor-pointer"
       [routerLink]="['/', 'products-page', 'products']"
+      [routerLinkActiveOptions]="{ exact: true }"
+      routerLinkActive="text-(--primary)"
     >
       Products
     </span>

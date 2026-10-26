@@ -1,7 +1,7 @@
 import { Component, computed, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatBadgeModule } from '@angular/material/badge';
 import { ApiProductsService } from '../../../../services/api/api-products.service';
 import { MatMenuModule } from '@angular/material/menu';
@@ -15,7 +15,8 @@ import { filter } from 'rxjs';
     MatBadgeModule,
     RouterLink,
     MatMenuModule,
-  ],
+    RouterLinkActive
+],
   templateUrl: './products-header.component.html',
   styleUrl: './products-header.component.scss',
 })
