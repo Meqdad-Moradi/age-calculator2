@@ -23,14 +23,19 @@
   </div>
 
   <div>
-    <button matIconButton [routerLink]="['cart']">
+    <button
+      matIconButton
+      [routerLink]="['cart']"
+      [ngClass]="{ 'text-(--primary)!': isCartPageOn() }"
+    >
       <mat-icon
         matBadge="{{ cartItemsCount() }}"
         matBadgeOverlap="true"
         [matBadgeHidden]="cartItemsCount() === 0"
         aria-hidden="false"
-        >shopping_cart</mat-icon
       >
+        shopping_cart
+      </mat-icon>
     </button>
 
     @if (isClearCartButtonVisible) {

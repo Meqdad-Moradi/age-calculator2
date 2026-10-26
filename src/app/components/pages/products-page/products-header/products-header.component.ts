@@ -1,11 +1,18 @@
 import { Component, computed, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import {
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+} from '@angular/router';
 import { MatBadgeModule } from '@angular/material/badge';
 import { ApiProductsService } from '../../../../services/api/api-products.service';
 import { MatMenuModule } from '@angular/material/menu';
-import { filter } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-products-header',
@@ -15,8 +22,9 @@ import { filter } from 'rxjs';
     MatBadgeModule,
     RouterLink,
     MatMenuModule,
-    RouterLinkActive
-],
+    RouterLinkActive,
+    NgClass,
+  ],
   templateUrl: './products-header.component.html',
   styleUrl: './products-header.component.scss',
 })
@@ -28,6 +36,14 @@ export class ProductsHeaderComponent implements OnInit {
   public cartItemsCount = computed(() => this.cart().length);
   public isClearCartButtonVisible = this.router.url.includes('/cart');
   // public isCartCleaning = false;
+
+  protected isCartPageOn = toSignal(
+    this.router.events.pipe(
+      filter((e) => e instanceof NavigationEnd),
+      map((router) => router.url === '/products-page/cart'),
+    ),
+    { initialValue: false },
+  );
 
   ngOnInit(): void {
     this.checkUrl();
