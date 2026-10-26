@@ -17,6 +17,9 @@ export class ProductCardComponent {
 
   public isLineClamping = true;
   public transform = 'scale(1)';
+  public transformOrigin = '50% 50%';
+  public isImageZoomed = false;
+  public isImageZoomPinned = false;
 
   /**
    * toggleLineClamping
@@ -35,18 +38,33 @@ export class ProductCardComponent {
   }
 
   public onMouseMove(event: MouseEvent) {
-    const container = (event.target as HTMLElement).parentElement!;
-    const rect = container.getBoundingClientRect();
+    const rect = event.currentTarget instanceof HTMLElement
+      ? event.currentTarget.getBoundingClientRect()
+      : null;
 
-    // Calculate mouse position relative to image
+    if (!rect || rect.width === 0 || rect.height === 0) return;
+
     const x = ((event.clientX - rect.left) / rect.width) * 100;
     const y = ((event.clientY - rect.top) / rect.height) * 100;
 
-    // Apply zoom and move transform origin
-    this.transform = `scale(2) translate(-${x - 50}%, -${y - 50}%)`;
+    this.transformOrigin = `${x}% ${y}%`;
+    if (!this.isImageZoomPinned) {
+      this.transform = 'scale(1.8)';
+      this.isImageZoomed = true;
+    }
+  }
+
+  public toggleImageZoom() {
+    this.isImageZoomPinned = !this.isImageZoomPinned;
+    this.isImageZoomed = this.isImageZoomPinned;
+    this.transform = this.isImageZoomPinned ? 'scale(1.8)' : 'scale(1)';
   }
 
   public onMouseLeave() {
+    if (this.isImageZoomPinned) return;
+
     this.transform = 'scale(1)';
+    this.transformOrigin = '50% 50%';
+    this.isImageZoomed = false;
   }
 }

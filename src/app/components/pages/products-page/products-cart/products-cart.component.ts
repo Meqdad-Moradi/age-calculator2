@@ -2,6 +2,7 @@ import { CurrencyPipe } from '@angular/common';
 import { Component, computed, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatAnchor } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RouterLink } from '@angular/router';
@@ -15,7 +16,13 @@ import { ProductCartItemComponent } from './product-cart-item/product-cart-item.
 
 @Component({
   selector: 'app-products-cart',
-  imports: [ProductCartItemComponent, MatAnchor, RouterLink, CurrencyPipe],
+  imports: [
+    ProductCartItemComponent,
+    MatAnchor,
+    MatIconModule,
+    RouterLink,
+    CurrencyPipe,
+  ],
   templateUrl: './products-cart.component.html',
   styleUrl: './products-cart.component.scss',
 })

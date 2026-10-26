@@ -1,87 +1,125 @@
-<section class="bg-(--forground-color) p-4 rounded-2xl shadow-md">
-  <div class="wrapper">
-    <div class="img-container w-32 flex-shrink-0">
+<article
+  class="min-w-0 overflow-hidden rounded-2xl border border-(--disable-color) bg-(--forground-color) shadow-sm"
+>
+  <div
+    class="grid min-w-0 grid-cols-[5rem_minmax(0,1fr)] gap-3 p-3 sm:grid-cols-[7rem_minmax(0,1fr)_auto] sm:gap-4 sm:p-4"
+  >
+    <div
+      class="row-span-2 grid min-h-24 place-items-center overflow-hidden rounded-xl bg-(--background-color) sm:row-span-1 sm:min-h-32"
+    >
       <img
-        class="w-full object-cover rounded-md mb-4"
-        src="{{ cartItem().image }}"
-        alt="{{ cartItem().title }}"
+        class="h-20 w-[82%] object-contain sm:h-28"
+        [src]="cartItem().image"
+        [alt]="cartItem().title"
       />
     </div>
 
-    <div class="info flex flex-col gap-4">
-      <h2 class="text-2xl text-(--text-color) font-semibold">
+    <div class="min-w-0 py-0.5 sm:py-1">
+      <span
+        class="text-[0.65rem] font-semibold tracking-wide text-(--primary) uppercase"
+      >
+        {{ cartItem().category }}
+      </span>
+      <h3
+        class="mt-1 line-clamp-2 text-sm leading-snug font-semibold text-(--text-color) sm:text-base"
+      >
         {{ cartItem().title }}
-      </h2>
+      </h3>
       <p
-        class="text-gray-500 dark:text-gray-400 cursor-pointer"
+        class="mt-2 text-xs leading-relaxed text-(--gray) sm:text-sm"
         [ngClass]="!isDescExpanded ? 'line-clamp-2' : ''"
-        (click)="toggleExpandDescription()"
-        (keydown.enter)="toggleExpandDescription()"
-        tabindex="0"
       >
         {{ cartItem().description }}
       </p>
+      <button
+        class="mt-1 rounded-sm text-left text-xs cursor-pointer font-semibold text-(--primary) hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--primary)"
+        type="button"
+        (click)="toggleExpandDescription()"
+        [attr.aria-expanded]="isDescExpanded"
+      >
+        {{ isDescExpanded ? "Show less" : "Show more" }}
+      </button>
 
-      <div class="flex items-center gap-2">
-        <!-- display loader on update -->
-        @if (isUpdating()) {
-          <mat-progress-spinner
-            diameter="18"
-            mode="indeterminate"
-          ></mat-progress-spinner>
-        } @else {
-          <!-- quantity controler -->
-          <div
-            class="flex items-center gap-3 border border-gray-400 dark:border-gray-500 rounded-full px-2 py-1"
-          >
-            @if (customQuantity() < 2) {
-              <button
-                class="grid place-items-center cursor-pointer text-gray-600 dark:text-gray-400 hover:text-red-300 active:text-blue-300 rounded-full"
-                (click)="onDelete()"
-              >
-                <mat-icon class="!text-lg leading-[23px]">delete</mat-icon>
-              </button>
-            } @else {
-              <button
-                class="grid place-items-center cursor-pointer text-(--primary) dark:text-blue-300 hover:text-(--primary) active:text-blue-300 rounded-full"
-                (click)="decrementQuantity()"
-              >
-                <mat-icon>remove</mat-icon>
-              </button>
-            }
-            <span>{{ customQuantity() }}</span>
+      <div class="mt-3 flex flex-wrap items-center gap-2">
+        <div
+          class="inline-flex min-h-9 items-center gap-1 rounded-lg border border-(--disable-color) p-1"
+          [attr.aria-label]="'Quantity: ' + customQuantity()"
+        >
+          @if (customQuantity() < 2) {
             <button
-              class="grid place-items-center cursor-pointer text-(--primary) dark:text-blue-300 hover:text-(--primary) active:text-blue-300 rounded-full"
-              (click)="incrementQuantity()"
+              class="grid size-7 place-items-center rounded-md text-(--gray) transition-colors hover:bg-red-50 hover:text-red-600 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-(--primary)"
+              type="button"
+              aria-label="Remove item"
+              (click)="onDelete()"
             >
-              <mat-icon>add</mat-icon>
+              <mat-icon class="!size-[18px] !text-lg !leading-[18px]">
+                delete_outline
+              </mat-icon>
             </button>
-          </div>
-        }
+          } @else {
+            <button
+              class="grid size-7 place-items-center rounded-md cursor-pointer text-(--text-color) transition-colors hover:bg-(--background-color) focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-(--primary)"
+              type="button"
+              aria-label="Decrease quantity"
+              (click)="decrementQuantity()"
+            >
+              <mat-icon class="!size-[18px] !text-lg !leading-[18px]">
+                remove
+              </mat-icon>
+            </button>
+          }
+          <span
+            class="min-w-6 text-center text-sm font-semibold text-(--text-color)"
+          >
+            {{ customQuantity() }}
+          </span>
+          <button
+            class="grid size-7 place-items-center rounded-md cursor-pointer text-(--text-color) transition-colors hover:bg-(--background-color) focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-(--primary)"
+            type="button"
+            aria-label="Increase quantity"
+            (click)="incrementQuantity()"
+          >
+            <mat-icon class="!size-[18px] !text-lg !leading-[18px]">
+              add
+            </mat-icon>
+          </button>
+        </div>
 
-        <!-- delete quantity -->
-        <button matButton (click)="onDelete()">Delete</button>
+        <button
+          class="min-h-9 rounded-lg px-2 text-xs font-medium text-(--gray) transition-colors hover:bg-(--background-color) hover:text-red-600 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-(--primary)"
+          matButton
+          type="button"
+          (click)="onDelete()"
+        >
+          Remove
+        </button>
       </div>
     </div>
 
-    <div class="price whitespace-nowrap">
-      <span class="text-(--text-color) text-xl font-bold">
+    <div
+      class="col-start-2 flex items-center justify-between gap-2 sm:col-start-3 sm:row-start-1 sm:items-end sm:flex-col sm:justify-start"
+    >
+      <span class="text-xs text-(--gray)">Unit price</span>
+      <span
+        class="whitespace-nowrap text-sm font-semibold text-(--text-color) sm:text-base"
+      >
         {{ cartItem().price | currency: "EUR" : "symbol" : "1.2-2" }}
       </span>
     </div>
   </div>
 
-  <div
-    class="w-full flex justify-end border-t border-gray-300 dark:border-(--disable-color) mt-6 pt-3"
+  <footer
+    class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-t border-(--disable-color) px-3 py-3 sm:px-4"
   >
-    <span class="text-(--text-color)">
-      Subtotal ({{ cartItem().quantity }}):&nbsp;
-      <span class="text-xl font-bold">
-        {{
-          cartItem().price! * cartItem().quantity!
-            | currency: "EUR" : "symbol" : "1.2-2"
-        }}
-      </span>
+    <span class="text-xs text-(--gray)">
+      Subtotal · {{ cartItem().quantity }}
+      {{ cartItem().quantity === 1 ? "item" : "items" }}
     </span>
-  </div>
-</section>
+    <strong class="whitespace-nowrap text-sm font-bold text-(--text-color)">
+      {{
+        cartItem().price * cartItem().quantity
+          | currency: "EUR" : "symbol" : "1.2-2"
+      }}
+    </strong>
+  </footer>
+</article>
